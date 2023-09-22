@@ -1,0 +1,2 @@
+# utools_shortcut_keys
+查询WIndows平台和MAC OS平台系统快捷键和常用应用快捷键

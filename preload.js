@@ -1,25 +1,46 @@
-const numSymbols = require('./json/macos.js')
+saveRecent = () => {
+
+}
+
+loadRecent = () => {
+
+}
+
+utools.onPluginEnter(({code, type, payload, option}) => {
+  console.log('用户进入插件应用', code, type, payload)
+})
 
 window.exports = {
   'shortcuts': {
     mode: 'list',
     args: {
       enter: (action, callbackSetList) => {
-        return callbackSetList(numSymbols)
+        let recentShortcuts = window.utools.dbStorage.getItem('recentShortcuts') ?? []
+        return callbackSetList(recentShortcuts)
       },
       search: (action, searchWord, callbackSetList) => {
-        const shortcuts = []
-        const fileNames = fs.readdirSync(folderPath);
-        fileNames.forEach((fileName) => {
-          thisSet = require(fileName)
-          shortcuts = shortcuts.concat(thisSet)
+        const shortcuts = require('./shortcuts.js') ?? [] 
+        const words = searchWord.split(' ')
+        const selected = shortcuts.filter(x => {
+          let result = true
+          words.forEach(w => {
+            result = result && x.keyword.includes(w)
+          })
+          return result
         })
-        return callbackSetList(shortcuts.filter(x => x.keyword.includes(searchWord)))
+        return callbackSetList(selected)
       },
       select: (action, itemData) => {
         window.utools.hideMainWindow()
         const keys = itemData.keys
-        utools.simulateKeyboardTap(...keys)
+        if (Array.isArray(keys[0])) {
+          keys.forEach(keyPair => {
+            utools.simulateKeyboardTap(...keyPair)
+          });
+        }
+        else {
+          utools.simulateKeyboardTap(...keys)
+        }
       }
     }
   }

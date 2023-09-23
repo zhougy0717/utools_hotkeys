@@ -8,8 +8,8 @@
   "logo": "logo.png",
   "features": [
     {
-      "code": "symbols",
-      "explain": "特殊符号",
+      "code": "shortcuts",
+      "explain": "查找快捷键",
       "cmds": [
         "快捷键",
         "sc",

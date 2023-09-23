@@ -1,0 +1,20 @@
+{
+  "version": "0.0.1",
+  "pluginName": "查找快捷键",
+  "description": "查找快捷键",
+  "author": "Ben",
+  "homepage": "https://u.tools",
+  "preload": "preload.js",
+  "logo": "logo.png",
+  "features": [
+    {
+      "code": "symbols",
+      "explain": "特殊符号",
+      "cmds": [
+        "快捷键",
+        "sc",
+        "shortcuts"
+      ]
+    }
+  ]
+}

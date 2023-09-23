@@ -1,2 +1,5 @@
-# utools_shortcut_keys
-查询WIndows平台和MAC OS平台系统快捷键和常用应用快捷键
+- [ ] 支持MACOS系统常用快捷键
+- [ ] 支持Windows系统常用快捷键
+- [ ] 支持Welink常用快捷键
+- [ ] 支持VSCode常用快捷键
+- [ ] 支持Obsidian常用快捷键

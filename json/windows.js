@@ -1,9 +1,9 @@
 let shortcuts = [
     {
-        title: '代码格式化 option + shift + f',
-        description: '格式化代码',
-        keyword: 'macos 格式化 format vscode visual studio',
-        keys: ['f', 'shift', 'option'],
+        title: '锁定电脑 win + l',
+        description: '注意是字母l',
+        keyword: 'windows lock',
+        keys: ['l', 'windows'],
         icon: 'icons/vscode.png'
     }
 ]

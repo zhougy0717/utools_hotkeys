@@ -6,6 +6,24 @@ loadRecent = () => {
 
 }
 
+hitKeys = (keys) => {
+  utools.simulateKeyboardTap(...keys)
+}
+
+handleShortcut = (keys) => {
+  if (Array.isArray(keys[0])) {
+    keys.forEach(keyPair => {
+      hitKeys(keyPair)
+    });
+  }
+  else {
+    hitKeys(keys)
+  }
+}
+
+const g_shortcuts = require('./shortcuts.js') ?? []
+let g_hitTimeStamps = window.utools.dbStorage.getItem('hi t Ti me S ta m p') ?? {}
+
 utools.onPluginEnter(({code, type, payload, option}) => {
   console.log('用户进入插件应用', code, type, payload)
 })
@@ -15,13 +33,18 @@ window.exports = {
     mode: 'list',
     args: {
       enter: (action, callbackSetList) => {
-        let recentShortcuts = window.utools.dbStorage.getItem('recentShortcuts') ?? []
-        return callbackSetList(recentShortcuts)
+        const g_shortcuts = require('./shortcuts.js') ?? []
+        g_hitTimeStamps = window.utools.dbStorage.getItem('hitTimeStamp') ?? {}
+        g_shortcuts.forEach(x => {
+          x.keyword += x.title
+          x.hitTimeStamp = g_hitTimeStamps[x.title] ?? 0
+        })
+        g_shortcuts.sort((a, b) => b.hitTimeStamp - a.hitTimeStamp)
+        return callbackSetList(g_shortcuts)
       },
       search: (action, searchWord, callbackSetList) => {
-        const shortcuts = require('./shortcuts.js') ?? [] 
         const words = searchWord.split(' ')
-        const selected = shortcuts.filter(x => {
+        const selected = g_shortcuts.filter(x => {
           let result = true
           words.forEach(w => {
             result = result && x.keyword.includes(w)
@@ -32,15 +55,10 @@ window.exports = {
       },
       select: (action, itemData) => {
         window.utools.hideMainWindow()
-        const keys = itemData.keys
-        if (Array.isArray(keys[0])) {
-          keys.forEach(keyPair => {
-            utools.simulateKeyboardTap(...keyPair)
-          });
-        }
-        else {
-          utools.simulateKeyboardTap(...keys)
-        }
+        handleShortcut(itemData.keys)
+        itemData.hitTimeStamp = new Date().getTime()
+        g_hitTimeStamps[itemData.title] = itemData.hitTimeStamp
+        window.utools.dbStorage.setItem('hitTimeStamp', g_hitTimeStamps)
       }
     }
   }

@@ -64,16 +64,135 @@ let shortcuts = [
     },
     {
         title: '打开任务管理器 cmd + option + esc',
-        description: '打开任务管理器',
+        description: '打开任务管理器，无法自动触发，需要手动按下对应的按键',
         keyword: 'macos renwu guanli task manager',
         keys: ['esc', 'command', 'option'],
         icon: 'icons/macos.png'
     },
     {
         title: '强制退出App cmd + q',
-        description: '强制退出App，另一种方法是cmd + shift + esc',
+        description: '强制退出App',
         keyword: 'macos force qiangzhi quit tuichu',
         keys: ['q', 'command'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '锁定屏幕 cmd + ctrl + q',
+        description: '锁定屏幕',
+        keyword: 'macos lock suoding pingmu',
+        keys: ['q', 'command', 'ctrl'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '显示隐藏文件 cmd + shift + .',
+        description: '显示隐藏文件',
+        keyword: 'macos hide yincang wenjian',
+        keys: ['.', 'command', 'shift'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: 'App全屏 cmd + ctrl + f',
+        description: '如果App支持，全屏显示该App',
+        keyword: 'macos quanping',
+        keys: ['f', 'command', 'ctrl'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '显示调度中心 ctrl + ⬆',
+        description: '显示调度中心',
+        keyword: 'macos diaoduzhongxin schedule',
+        keys: ['up', 'ctrl'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '显示当前应用窗口 ctrl + ⬇',
+        description: '显示当前应用窗口',
+        keyword: 'macos dangqianchuangkou current focus window',
+        keys: ['down', 'ctrl'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '带样式拷贝 cmd + option + c',
+        description: '带样式拷贝',
+        keyword: 'macos yangshi style copy kaobei',
+        keys: ['c', 'command', 'option'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '带样式粘贴 cmd + option + v',
+        description: '带样式粘贴',
+        keyword: 'macos yangshi style paste zhantie niantie',
+        keys: ['v', 'command', 'option'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '直接强制退出当前软件 cmd + option + shift + esc',
+        description: '直接强制退出当前软件, 效果等同于cmd + q, 更野蛮',
+        keyword: 'macos force quit qiangzhi tuichu',
+        keys: ['esc', 'command', 'option', 'shift'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '隐藏当前软件 cmd + h',
+        description: '隐藏当前软件',
+        keyword: 'macos yincang hide',
+        keys: ['h', 'command'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '光标移动到全部文本开头 cmd + ⬆',
+        description: '光标移动到全部文本开头',
+        keyword: 'macos guangbiao cursor begin start',
+        keys: ['up', 'command'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '光标移动到全部文本结尾 cmd + ⬇',
+        description: '光标移动到全部文本结尾',
+        keyword: 'macos guangbiao cursor end',
+        keys: ['down', 'command'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '光标移动到当前行结尾 cmd + ⮕',
+        description: '光标移动到当前行结尾',
+        keyword: 'macos guangbiao cursor line end',
+        keys: ['right', 'command'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '光标移动到当前行开头 cmd + ⬅',
+        description: '光标移动到当前行开头',
+        keyword: 'macos guangbiao cursor line start',
+        keys: ['left', 'command'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '光标移动到当前段落开头 ctrl + a',
+        description: '光标移动到当前段落开头',
+        keyword: 'macos duanluo kaitou begin start block',
+        keys: ['a', 'ctrl'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '光标移动到当前段落结尾 ctrl + e',
+        description: '光标移动到当前段落结尾',
+        keyword: 'macos duanluo jiewei end block',
+        keys: ['e', 'ctrl'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '光标移动到当前单词的开头 option + ⬅',
+        description: '光标移动到当前单词的开头',
+        keyword: 'macos danci kaitou begin start word',
+        keys: ['left', 'option'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '光标移动到当前单词的结尾 option + ⮕',
+        description: '光标移动到当前单词的结尾',
+        keyword: 'macos danci jiewei end word',
+        keys: ['right', 'option'],
         icon: 'icons/macos.png'
     }
 ]

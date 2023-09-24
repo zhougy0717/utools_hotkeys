@@ -27,20 +27,40 @@ def generate_js_code(file_list):
 // Shy😓
 // Date {}
     '''.format(formatted_time)
-    cat_line = '''let shortcuts = []
-shortcuts = shortcuts'''
-    code_lines = []
-    export_line = "module.exports = shortcuts"
+    init_text = '''let shortcuts = []
+for (k in shortcutTable) {
+    if (utools.isMacOs()) {
+        if (k.includes('windows')) {
+            continue
+        }
+    }
+    else {
+        if (k.includes('macos')) {
+            continue
+        }
+    }
+    shortcuts = shortcuts.concat(shortcutTable[k])
+}
+module.exports = shortcuts'''
+    table_text = generate_shortcuts_table(file_list)
+    code_text = "{}\n\n{}\n\n{}".format(comment_head, table_text, init_text)
+    return code_text
+
+
+def generate_shortcuts_table(file_list):
+    var_lines = []
+    table_lines = ["let shortcutTable = {"]
     for f in file_list:
         filename, ext = os.path.splitext(os.path.basename(f))
         var_name = filename
         if f.startswith("../"):
             f = f.replace("../", "./")
-        code_lines.append("const {} = require('{}')".format(var_name, f))
-        cat_line = "{}.concat({})\n    ".format(cat_line, var_name)
-    code_text = "\n".join(code_lines)
-    code_text = "{}\n{}\n\n{}\n{}\n".format(comment_head, code_text, cat_line, export_line)
-    return code_text
+        var_lines.append("const {} = require('{}')".format(var_name, f))
+        table_lines.append("    {}: {},".format(var_name, var_name))
+    table_lines.append("}")
+    table_text = "\n".join(table_lines)
+    var_text = "\n".join(var_lines)
+    return "{}\n\n{}".format(var_text, table_text)
 
 
 if __name__ == '__main__':

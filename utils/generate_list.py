@@ -27,20 +27,17 @@ def generate_js_code(file_list):
 // Shy😓
 // Date {}
     '''.format(formatted_time)
-    cat_line = ""
+    cat_line = '''let shortcuts = []
+shortcuts = shortcuts'''
     code_lines = []
-    export_line = ""
+    export_line = "module.exports = shortcuts"
     for f in file_list:
         filename, ext = os.path.splitext(os.path.basename(f))
         var_name = filename
         if f.startswith("../"):
             f = f.replace("../", "./")
         code_lines.append("const {} = require('{}')".format(var_name, f))
-        if cat_line == "":
-            cat_line = var_name
-            export_line = "module.exports = {}".format(var_name)
-        else:
-            cat_line = "{}.concat({})\n    ".format(cat_line, var_name)
+        cat_line = "{}.concat({})\n    ".format(cat_line, var_name)
     code_text = "\n".join(code_lines)
     code_text = "{}\n{}\n\n{}\n{}\n".format(comment_head, code_text, cat_line, export_line)
     return code_text

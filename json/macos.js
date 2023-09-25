@@ -194,6 +194,34 @@ let shortcuts = [
         keyword: 'macos danci jiewei end word',
         keys: ['right', 'option'],
         icon: 'icons/macos.png'
+    },
+    {
+        title: 'Finder中复制文件夹路径 cmd + option + c',
+        description: 'Finder中复制文件夹路径',
+        keyword: 'macos lujing path fuzhi copy',
+        keys: ['c', 'command', 'option'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '显示简介 cmd + i',
+        description: '显示简介',
+        keyword: 'macos jianjie info finder',
+        keys: ['i', 'command'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '前往文件夹 cmd + shift + g',
+        description: '前往文件夹',
+        keyword: 'macos qianwang wenjianjia folder cd directory finder',
+        keys: ['g', 'command', 'shift'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '复制所选文件 cmd + d',
+        description: '复制所选文件',
+        keyword: 'macos fuzhi copy selected finder',
+        keys: ['d', 'command'],
+        icon: 'icons/macos.png'
     }
 ]
 module.exports = shortcuts

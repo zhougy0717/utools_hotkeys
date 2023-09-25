@@ -82,6 +82,27 @@ let shortcuts = [
         keyword: 'macos 控制台 console vscode',
         keys: ['p', 'command', 'shift'],
         icon: 'icons/vscode.png'
+    },
+    {
+        title: '界面放大 cmd + =',
+        description: '界面放大',
+        keyword: 'macos zoom in fangda vscode',
+        keys: ['=', 'command'],
+        icon: 'icons/vscode.png'
+    },
+    {
+        title: '界面缩小 cmd + -',
+        description: '界面缩小',
+        keyword: 'macos zoom out suoxiao vscode',
+        keys: ['-', 'command'],
+        icon: 'icons/vscode.png'
+    },
+    {
+        title: '全部保存 cmd + shift + s',
+        description: '全部保存',
+        keyword: 'macos quanbu baocun save all vscode',
+        keys: ['s', 'command', 'option'],
+        icon: 'icons/vscode.png'
     }
 ]
 

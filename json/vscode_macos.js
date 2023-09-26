@@ -103,6 +103,13 @@ let shortcuts = [
         keyword: 'macos quanbu baocun save all vscode',
         keys: ['s', 'command', 'option'],
         icon: 'icons/vscode.png'
+    },
+    {
+        title: '自动换行 option + z',
+        description: '自动换行',
+        keyword: 'macos hh huanhang line wrapper vscode',
+        keys: ['z', 'option'],
+        icon: 'icons/vscode.png'
     }
 ]
 

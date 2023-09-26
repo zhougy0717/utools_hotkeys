@@ -53,7 +53,7 @@ let shortcuts = [
         description: '在访达中创建一个新文件夹',
         keyword: 'macos system finder mulu 目录 wenjianjia create',
         keys: ['n', 'command', 'shift'],
-        icon: 'icons/macos.png'
+        icon: 'icons/finder.png'
     },
     {
         title: '打印 cmd + p',
@@ -196,11 +196,11 @@ let shortcuts = [
         icon: 'icons/macos.png'
     },
     {
-        title: 'Finder中复制文件夹路径 cmd + option + c',
-        description: 'Finder中复制文件夹路径',
+        title: '访达中复制文件夹路径 cmd + option + c',
+        description: '访达中复制文件夹路径',
         keyword: 'macos system lujing path fuzhi copy',
         keys: ['c', 'command', 'option'],
-        icon: 'icons/macos.png'
+        icon: 'icons/finder.png'
     },
     {
         title: '显示简介 cmd + i',
@@ -236,6 +236,41 @@ let shortcuts = [
         keyword: 'macos system feizhilou dustbin qingdao delete all finder',
         keys: ['backspace', 'command', 'shift'],
         icon: 'icons/macos.png'
+    },
+    {
+        title: '移动文件 cmd + option + v',
+        description: '将剪贴板中的文件从原始位置移动到当前位置',
+        keyword: 'macos system move yidong yd',
+        keys: ['v', 'command', 'option'],
+        icon: 'icons/macos.png'
+    },
+    {
+        title: '上一层目录 cmd + ⬆',
+        description: '访达中回到上一层目录',
+        keyword: 'macos system finder upper shangyiceng syc',
+        keys: ['up', 'command'],
+        icon: 'icons/finder.png'
+    },
+    {
+        title: '后退 cmd + [',
+        description: '访达返回之前的目录',
+        keyword: 'macos system finder back fanhui fh',
+        keys: ['[', 'command'],
+        icon: 'icons/finder.png'
+    },
+    {
+        title: '前进 cmd + ]',
+        description: '访达返回之前的目录',
+        keyword: 'macos system finder forward qianjin qj',
+        keys: [']', 'command'],
+        icon: 'icons/finder.png'
+    },
+    {
+        title: '重命名 enter',
+        description: '访达重命名选中文件或文件夹',
+        keyword: 'macos system finder rename chongmingming cmm',
+        keys: ['enter'],
+        icon: 'icons/finder.png'
     }
 ]
 module.exports = shortcuts

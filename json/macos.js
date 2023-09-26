@@ -64,7 +64,7 @@ let shortcuts = [
     },
     {
         title: '打开任务管理器 cmd + option + esc',
-        description: '打开任务管理器，无法自动触发，需要手动按下对应的按键',
+        description: '打开任务管理器，需要手动执行',
         keyword: 'macos system renwu guanli task manager',
         keys: ['esc', 'command', 'option'],
         icon: 'icons/macos.png'

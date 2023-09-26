@@ -59,7 +59,8 @@ window.exports = {
         itemData.hitTimeStamp = new Date().getTime()
         g_hitTimeStamps[itemData.title] = itemData.hitTimeStamp
         window.utools.dbStorage.setItem('hitTimeStamp', g_hitTimeStamps)
-      }
+      },
+      placeholder: "搜索快捷键，回车直接执行（部分需要手动执行）"
     }
   }
 }

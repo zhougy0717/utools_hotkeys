@@ -6,15 +6,15 @@
   "homepage": "https://u.tools",
   "preload": "preload.js",
   "logo": "logo.png",
-  "features": [
-    {
-      "code": "shortcuts",
-      "explain": "查找快捷键",
-      "cmds": [
-        "快捷键",
-        "hk",
-        "hotkey"
-      ]
-    }
-  ]
+  "platform": ["darwin", "win32"],
+  "features": [{
+    "platform": ["darwin", "win32"],
+    "code": "shortcuts",
+    "explain": "查找快捷键",
+    "cmds": [
+      "快捷键",
+      "hk",
+      "hotkey"
+    ]
+  }]
 }

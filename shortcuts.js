@@ -30,7 +30,7 @@ for (k in shortcutTable) {
             continue
         }
     }
-    else {
+    else if (utools.isWindows()) {
         if (k.includes('macos')) {
             continue
         }

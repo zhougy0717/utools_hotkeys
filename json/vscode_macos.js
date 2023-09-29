@@ -110,6 +110,27 @@ let shortcuts = [
         keyword: 'macos hh huanhang line wrapper vscode',
         keys: ['z', 'option'],
         icon: 'icons/vscode.png'
+    },
+    {
+        title: '在浏览器中显示快捷键参考 cmd + k cmd + r',
+        description: '在浏览器中显示快捷键参考',
+        keyword: 'macos kuaijiejian shortcuts hotkeys kjj vscode',
+        keys: [['k', 'command'], ['r', 'command']],
+        icon: 'icons/vscode.png'
+    },
+    {
+        title: '在VSCode窗口显示和设置快捷键 cmd + k cmd + s',
+        description: '在VSCode窗口显示和设置快捷键',
+        keyword: 'macos kuaijiejian shortcuts hotkeys kjj chuangkou ck window vscode',
+        keys: [['k', 'command'], ['s', 'command']],
+        icon: 'icons/vscode.png'
+    },
+    {
+        title: 'reset cmd + k cmd + s',
+        description: '在VSCode窗口显示和设置快捷键',
+        keyword: 'macos reset shortcuts hotkeys kjj chuangkou ck window vscode',
+        keys: ['numpad 0', 'command'],
+        icon: 'icons/vscode.png'
     }
 ]
 

@@ -21,6 +21,12 @@ handleShortcut = (keys) => {
   }
 }
 
+doAction = (action, keys) => {
+  if (action === 'copyCmd') {
+    utools.copyText(keys.join(' '));
+  }
+}
+
 const g_shortcuts = require('./shortcuts.js') ?? []
 let g_hitTimeStamps = window.utools.dbStorage.getItem('hi t Ti me S ta m p') ?? {}
 
@@ -47,7 +53,7 @@ window.exports = {
         const selected = g_shortcuts.filter(x => {
           let result = true
           words.forEach(w => {
-            result = result && x.keyword.includes(w)
+            result = result && (x.keyword.includes(w) || x.title.includes(w) || x.description.includes(w))
           })
           return result
         })
@@ -55,7 +61,12 @@ window.exports = {
       },
       select: (action, itemData) => {
         window.utools.hideMainWindow()
-        handleShortcut(itemData.keys)
+        if ('action' in itemData) {
+          doAction(itemData.action, itemData.keys)
+        }
+        else {
+          handleShortcut(itemData.keys)
+        }
         itemData.hitTimeStamp = new Date().getTime()
         g_hitTimeStamps[itemData.title] = itemData.hitTimeStamp
         window.utools.dbStorage.setItem('hitTimeStamp', g_hitTimeStamps)

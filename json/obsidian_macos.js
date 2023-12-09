@@ -124,6 +124,13 @@ let shortcuts = [
         keyword: 'macos obsidian open closed tab last',
         keys: ['t', 'command', 'shift'],
         icon: 'icons/obsidian.png'
+    },
+    {
+        title: '搜索库内文件 cmd + o',
+        description: '搜索库内文件',
+        keyword: 'macos obsidian sousuo search open',
+        keys: ['o', 'command'],
+        icon: 'icons/obsidian.png'
     }
 ]
 

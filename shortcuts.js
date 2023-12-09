@@ -12,6 +12,7 @@ const windows = require('./json/windows.js')
 const magnet_macos = require('./json/magnet_macos.js')
 const obsidian_macos = require('./json/obsidian_macos.js')
 const tmux = require('./json/tmux.js')
+const vim = require('./json/vim.js')
 
 let shortcutTable = {
     welink_windows: welink_windows,
@@ -23,6 +24,7 @@ let shortcutTable = {
     magnet_macos: magnet_macos,
     obsidian_macos: obsidian_macos,
     tmux: tmux,
+    vim: vim,
 }
 
 let shortcuts = []

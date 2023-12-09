@@ -6,37 +6,92 @@
 const welink_windows = require('./json/welink_windows.js')
 const vscode_macos = require('./json/vscode_macos.js')
 const macos = require('./json/macos.js')
-const obsidian_windows = require('./json/obsidian_windows.js')
 const vscode_windows = require('./json/vscode_windows.js')
 const windows = require('./json/windows.js')
 const magnet_macos = require('./json/magnet_macos.js')
-const obsidian_macos = require('./json/obsidian_macos.js')
 const tmux = require('./json/tmux.js')
 const vim = require('./json/vim.js')
+
+const template_obsidian = require('./json/macwin/obsidian.js')
+const template_vscode = require('./json/macwin/vscode.js')
+
+updatePlaceHolder = (val) => {
+    let newVal = val
+    if (val.includes('{cmd_or_ctrl}')) {
+        if (utools.isMacOs()) {
+            newVal = val.replace(/{cmd_or_ctrl}/g, 'command')
+        }
+        else if (utools.isWindows()) {
+            newVal = val.replace(/{cmd_or_ctrl}/g, 'ctrl')
+        }
+    }
+    val = newVal
+    if (val.includes('{opt_or_alt}')) {
+        if (utools.isMacOs()) {
+            newVal = val.replace(/{opt_or_alt}/g, 'option')
+        }
+        else if (utools.isWindows()) {
+            newVal = val.replace(/{opt_or_alt}/g, 'alt')
+        }
+    }
+    return newVal
+}
+
+function handleArr(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+            handleArr(arr[i]);
+        } else {
+            let val = arr[i]
+            arr[i] = updatePlaceHolder(val)
+        }
+    }
+}
+
+handleTemplate = (arr) => {
+    arr.forEach(x => {
+        for (key in x) {
+            if (Array.isArray(x[key])) {
+                handleArr(x[key])
+            }
+            else {
+                x[key] = updatePlaceHolder(x[key])
+            }
+        }
+    })
+}
 
 let shortcutTable = {
     welink_windows: welink_windows,
     vscode_macos: vscode_macos,
     macos: macos,
-    obsidian_windows: obsidian_windows,
     vscode_windows: vscode_windows,
     windows: windows,
     magnet_macos: magnet_macos,
-    obsidian_macos: obsidian_macos,
     tmux: tmux,
     vim: vim,
+    template_obsidian: template_obsidian,
+    template_vscode: template_vscode,
 }
 
 let shortcuts = []
 for (k in shortcutTable) {
-    if (utools.isMacOs()) {
-        if (k.includes('windows')) {
+    if (k.includes('template')) {
+        if (!utools.isMacOs() && !utools.isWindows()) {
             continue
         }
+        handleTemplate(shortcutTable[k])
     }
-    else if (utools.isWindows()) {
-        if (k.includes('macos')) {
-            continue
+    else {
+        if (utools.isMacOs()) {
+            if (k.includes('windows')) {
+                continue
+            }
+        }
+        else if (utools.isWindows()) {
+            if (k.includes('macos')) {
+                continue
+            }
         }
     }
     shortcuts = shortcuts.concat(shortcutTable[k])

@@ -46,6 +46,19 @@ window.exports = {
           x.hitTimeStamp = g_hitTimeStamps[x.title] ?? 0
         })
         g_shortcuts.sort((a, b) => b.hitTimeStamp - a.hitTimeStamp)
+
+        let appName = utools.getPath('exe')
+        g_shortcuts.sort((a, b) => {
+          if (a.keyword.includes(appName)) {
+            return 1
+          }
+          else if (b.keyword.includes(appName)) {
+            return -1
+          }
+          else {
+            return 0
+          }
+        })
         return callbackSetList(g_shortcuts)
       },
       search: (action, searchWord, callbackSetList) => {

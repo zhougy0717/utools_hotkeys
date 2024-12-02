@@ -74,6 +74,36 @@ let shortcutTable = {
     template_vscode: template_vscode,
 }
 
+
+const fs = require('fs');
+const path = require('path');
+
+let loaded = []
+function requireAll(directory) {
+    const files = fs.readdirSync(directory)
+    for(let file of files) {
+        const filePath = path.join(directory, file);
+        const stat = fs.statSync(filePath);
+
+        if (stat.isDirectory()) {
+            // 递归加载子目录
+            requireAll(filePath);
+        } else if (path.basename(file) === 'shortcuts.js') {
+            // 加载 .js 文件
+            const sc = require(filePath);
+            loaded = loaded.concat(sc)
+        }
+    }
+}
+
+// 调用函数，传入要加载的目录路径
+requireAll(`${__dirname}/shortcuts`);  // 替换成你的目录
+for(let k of loaded) {
+    const name = k.name()
+    console.log(`${name}`)
+    shortcutTable[name] = k.get()
+}
+
 let shortcuts = []
 for (k in shortcutTable) {
     if (k.includes('template')) {
@@ -96,4 +126,5 @@ for (k in shortcutTable) {
     }
     shortcuts = shortcuts.concat(shortcutTable[k])
 }
+
 module.exports = shortcuts

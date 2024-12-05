@@ -101,7 +101,10 @@ requireAll(`${__dirname}/shortcuts`);  // 替换成你的目录
 for(let k of loaded) {
     const name = k.name()
     console.log(`${name}`)
-    shortcutTable[name] = k.get()
+    var sc = k.get()
+    if (sc.length !== 0) {
+        shortcutTable[name] = sc
+    }
 }
 
 let shortcuts = []

@@ -11,7 +11,15 @@ class ShortcutList {
     get() {
         for (let sc of this._shortcutData) {
             sc['keyword'] += ' follow'
-            sc['keyword'] += ' mac'
+            if (utools.isWindows()) {
+                sc['keyword'] += ' win'
+            }
+            else if (utools.isMacOs()) {
+                sc['keyword'] += ' mac'
+            }
+            else {
+                return []
+            }
             sc['icon'] = `shortcuts/follow/icon.ico`
         }
         return this._shortcutData

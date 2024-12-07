@@ -17,7 +17,15 @@ class ShortcutList {
     get() {
         for (let sc of this._shortcutData) {
             sc['keyword'] += ` ${this._name}`
-            sc['keyword'] += ' win'
+            if (utools.isWindows()) {
+                sc['keyword'] += ' win'
+            }
+            else if (utools.isMacOs()) {
+                sc['keyword'] += ' mac'
+            }
+            else {
+                return []
+            }
             sc['icon'] = `shortcuts/${this._name}/updf.png`
         }
         return this._shortcutData

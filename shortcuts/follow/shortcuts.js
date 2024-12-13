@@ -3,7 +3,7 @@ class ShortcutList {
 
     constructor() {
         this._dir = __dirname
-        const template = new ShortcutTemplate('./template.js')
+        const template = new ShortcutTemplate('./shortcuts/follow/template.js')
         this._shortcutData = template.get()
         console.log(`${this._dir}`)
     }

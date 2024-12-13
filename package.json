@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "chai": "^5.1.2",
+    "electron": "^33.2.1",
     "mocha": "^10.8.2"
   },
   "scripts": {

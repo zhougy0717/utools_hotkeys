@@ -16,5 +16,24 @@
       "hk",
       "hotkey"
     ]
+  },
+  {
+    "platform": ["darwin", "win32"],
+    "code": "app_shortcuts",
+    "explain": "查找应用快捷键",
+    "cmds": [{
+        "type": "window",
+        "label": "查找应用快捷键",
+        "match": {
+            "app": [
+              "Microsoft Word.app",
+              "Follow.app",
+              "Visual Studio Code.app",
+              "Magnet.app",
+              "Obsidian.app",
+              "uTools.app",
+              "word.exe"]
+        }
+    }]
   }]
 }

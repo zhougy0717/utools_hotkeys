@@ -1,6 +1,6 @@
 class ShortcutTemplate {
     constructor (file) {
-        this._shortcutData = require('./shortcuts/follow/template.js')
+        this._shortcutData = require(file)
         handleTemplate(this._shortcutData)
     }
 

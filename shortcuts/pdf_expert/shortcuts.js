@@ -2,6 +2,7 @@ class ShortcutList {
 
     constructor() {
         this._name = 'pdf_expert'
+        this._appName = 'pdf expert'
         this._dir = __dirname
         this._shortcutData = [
             {
@@ -247,7 +248,7 @@ class ShortcutList {
             return []
         }
         for (let sc of this._shortcutData) {
-            sc['keyword'] += ` ${this._name}`
+            sc['keyword'] += ` ${this._name} ${this._appName}`
             sc['keyword'] += ' mac'
             sc['icon'] = `shortcuts/${this._name}/pdf_expert.png`
         }

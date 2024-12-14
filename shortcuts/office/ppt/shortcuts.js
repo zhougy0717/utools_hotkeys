@@ -1,9 +1,15 @@
 var ShortcutTemplate = require('../../../shortcut_template.js')
 
 class ShortcutList {
-
     constructor() {
         this._name = 'ppt'
+        this._appName = ''
+        if (utools.isMacOs()) {
+            this._appName = 'microsoft powerpoint'
+        }
+        else if (utools.isWindows()) {
+            this._appName = 'powerpnt'
+        }
         this._dir = __dirname
         const template = new ShortcutTemplate('./shortcuts/office/ppt/template.js')
         this._shortcutData = template.get()

@@ -2,6 +2,7 @@ class ShortcutList {
 
     constructor() {
         this._name = 'polybox'
+        this._appName = 'google chrome'
         this._dir = __dirname
         this._shortcutData = [
             // 窗口类热键

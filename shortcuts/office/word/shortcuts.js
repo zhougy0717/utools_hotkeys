@@ -4,6 +4,13 @@ class ShortcutList {
 
     constructor() {
         this._name = 'word'
+        this._appName = ''
+        if (utools.isMacOs()) {
+            this._appName = 'microsoft word'
+        }
+        else if (utools.isWindows()) {
+            this._appName = 'winword'
+        }
         this._dir = __dirname
         const template = new ShortcutTemplate('./shortcuts/office/word/template.js')
         this._shortcutData = template.get()

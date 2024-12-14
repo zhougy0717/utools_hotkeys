@@ -53,19 +53,6 @@ enter = () => {
     })
     shortcuts.sort((a, b) => b.hitTimeStamp - a.hitTimeStamp)
 
-    // let appName = utools.getPath('exe')
-    // shortcuts.sort((a, b) => {
-    //   if (a.keyword.includes(appName)) {
-    //     return 1
-    //   }
-    //   else if (b.keyword.includes(appName)) {
-    //     return -1
-    //   }
-    //   else {
-    //     return 0
-    //   }
-    // })
-    // console.log(`app name is ${appName}`)
     return [shortcuts, hitTimeStamps]
 }
 

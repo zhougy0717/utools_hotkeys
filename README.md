@@ -4,6 +4,7 @@
   - Obsidian
   - VSCode
   - Magnet（仅支持MAC OS）
+  - tmux
 
 # 项目地址
 [utools_hotkeys](https://github.com/zhougy0717/utools_hotkeys)

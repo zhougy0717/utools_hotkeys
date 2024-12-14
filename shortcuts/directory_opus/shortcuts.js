@@ -2,6 +2,7 @@ class ShortcutList {
 
     constructor() {
         this._name = 'directory_opus'
+        this._shortName = 'dopus'
         this._dir = __dirname
         this._shortcutData = [
             // 窗口类热键
@@ -479,7 +480,7 @@ class ShortcutList {
             return []
         }
         for (let sc of this._shortcutData) {
-            sc['keyword'] += ` ${this._name}`
+            sc['keyword'] += ` ${this._shortName}`
             sc['keyword'] += ' win'
             sc['icon'] = `shortcuts/${this._name}/icon.png`
         }

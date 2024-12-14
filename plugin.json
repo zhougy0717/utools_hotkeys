@@ -27,12 +27,30 @@
         "match": {
             "app": [
               "Microsoft Word.app",
+              "Microsoft Excel.app",
+              "Microsoft PowerPoint.app",
+              "PDF Expert.app",
               "Follow.app",
+              "UPDF.app",
               "Visual Studio Code.app",
               "Magnet.app",
               "Obsidian.app",
               "uTools.app",
-              "word.exe"]
+              "Foxit PDF Reader.app",
+              "Google Chrome.app",
+              "dopus.exe",
+              "FoxitPDFReader.exe",
+              "XYplorer.exe",
+              "WINWORD.EXE",
+              "POWERPNT.EXE",
+              "EXCEL.EXE",
+              "Obsidian.exe",
+              "chrome.exe",
+              "WeLinkPC.exe",
+              "Code.exe",
+              "uTools.exe",
+              "UPDF.exe",
+              "Follow.exe"]
         }
     }]
   }]

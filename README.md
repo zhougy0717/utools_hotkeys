@@ -14,7 +14,9 @@
   - UPDF（Mac & Win）
   - XYPlorer（Win）
   - PDF Expert（Mac）
+  - JetBrains IDE (Mac & Win)
 
+![](https://github.com/zhougy0717/utools_hotkeys/blob/main/icons/supported%20apps.png)
 # 项目地址
 [utools_hotkeys](https://github.com/zhougy0717/utools_hotkeys)
 欢迎PR

@@ -108,10 +108,10 @@ let shortcutTemplate = [
         "keys": ["p", "{cmd_or_ctrl}"]
     },
     {
-        "title": "进入全屏 Control + {cmd_or_ctrl} + F",
+        "title": "进入全屏 ctrl + {cmd_or_ctrl} + F",
         "description": "使应用进入全屏模式",
         "keyword": "enter full - screen jin ru quan ping mo shi",
-        "keys": ["f", "control", "{cmd_or_ctrl}"]
+        "keys": ["f", "ctrl", "{cmd_or_ctrl}"]
     },
     {
         "title": "退出 {cmd_or_ctrl} + Q",
@@ -228,10 +228,10 @@ let shortcutTemplate = [
         "keys": ["f7", "{cmd_or_ctrl}", "{opt_or_alt}"]
     },
     {
-        "title": "表情与符号 {cmd_or_ctrl} + Control + Space",
+        "title": "表情与符号 {cmd_or_ctrl} + ctrl + Space",
         "description": "插入表情与符号",
         "keyword": "emoji and symbols cha ru biao qing yu fu hao",
-        "keys": ["space", "control", "{cmd_or_ctrl}"]
+        "keys": ["space", "ctrl", "{cmd_or_ctrl}"]
     },
     {
         "title": "插入页码 {cmd_or_ctrl} + {opt_or_alt} + P",

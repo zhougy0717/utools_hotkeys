@@ -4,16 +4,13 @@
     
 
 const welink_windows = require('./json/welink_windows.js')
-const vscode_macos = require('./json/vscode_macos.js')
 const macos = require('./json/macos.js')
-const vscode_windows = require('./json/vscode_windows.js')
 const windows = require('./json/windows.js')
 const magnet_macos = require('./json/magnet_macos.js')
 const tmux = require('./json/tmux.js')
 const vim = require('./json/vim.js')
 
 const template_obsidian = require('./json/macwin/obsidian.js')
-const template_vscode = require('./json/macwin/vscode.js')
 
 updatePlaceHolder = (val) => {
     let newVal = val
@@ -63,15 +60,12 @@ handleTemplate = (arr) => {
 
 let shortcutTable = {
     welink_windows: welink_windows,
-    vscode_macos: vscode_macos,
     macos: macos,
-    vscode_windows: vscode_windows,
     windows: windows,
     magnet_macos: magnet_macos,
     tmux: tmux,
     vim: vim,
     template_obsidian: template_obsidian,
-    template_vscode: template_vscode,
 }
 
 

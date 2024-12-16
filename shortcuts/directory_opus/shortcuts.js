@@ -19,6 +19,18 @@ class ShortcutList {
                 keys: ['f3']
             },
             {
+                title: 'Everything（局部） -',
+                description: '使用Everything搜索本目录',
+                keyword: 'search sousuo everything local current',
+                keys: ['-']
+            },
+            {
+                title: 'Everything（全局） -',
+                description: '使用Everything搜索全局',
+                keyword: 'search sousuo everything global',
+                keys: ['=', "shift"]
+            },
+            {
                 title: '输入路径 ctrl + L',
                 description: '输入路径',
                 keyword: 'path lujing lj',
@@ -83,12 +95,6 @@ class ShortcutList {
                 description: '搜索时指定范围（不知道有什么用）',
                 keyword: 'scope search fanwei fw',
                 keys: ['3', 'shift']
-            },
-            {
-                title: '过滤器栏 shift + 8',
-                description: '打开过滤器栏，过滤当前目录',
-                keyword: 'filter search guolvqi gl',
-                keys: ['8', 'shift']
             },
             {
                 title: '过滤器栏 shift + 8',

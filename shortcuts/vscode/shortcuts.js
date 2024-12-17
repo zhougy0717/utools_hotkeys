@@ -4,7 +4,7 @@ class ShortcutList {
 
     constructor() {
         this._name = 'vscode'
-        this._appName = 'visual studio code'
+        this._appName = 'visual studio code vscode-huawei'
         this._dir = __dirname
         const template = new ShortcutTemplate('./shortcuts/vscode/template.js')
         const common = template.get()

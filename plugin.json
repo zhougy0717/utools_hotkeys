@@ -78,7 +78,10 @@
               "datagrip64.exe",
               "appcode64.exe",
               "datalore64.exe",
-              "rustrover64.exe"]
+              "rustrover64.exe",
+              "gvim.exe",
+              "nvim.exe",
+              "explorer.exe"]
         }
     }]
   }]

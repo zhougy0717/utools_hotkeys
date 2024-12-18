@@ -6,7 +6,7 @@ class ShortcutList {
         this._name = 'onenote'
         this._appName = 'microsoft onenote'
         this._dir = __dirname
-        const template = new ShortcutTemplate('./shortcuts/office/excel/template.js')
+        const template = new ShortcutTemplate('./shortcuts/office/onenote/template.js')
         const common = template.get()
         if (!utools.isWindows() && !utools.isMacOs()) {
             this._shortcutData = []

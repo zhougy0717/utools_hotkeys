@@ -18,7 +18,7 @@ class ShortcutList {
 
     get() {
         for (let sc of this._shortcutData) {
-            sc['keyword'] += ` ${this._name}`
+            sc['keyword'] += ` ${this._name} ${this._appName}`
             sc['keyword'] += ' office ppt'
             sc['icon'] = `shortcuts/office/${this._name}/ppt.png`
         }

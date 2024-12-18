@@ -54,6 +54,7 @@
               "RustRover.app",
               "QSpace Pro.app",
               "Commander One PRO.app",
+              "Snipaste.app",
               "dopus.exe",
               "FoxitPDFReader.exe",
               "XYplorer.exe",
@@ -67,7 +68,7 @@
               "uTools.exe",
               "UPDF.exe",
               "Follow.exe",
-              "IntelliJ IDEA.exe",
+              "intellij.exe",
               "pycharm64.exe",
               "webstorm64.exe",
               "phpstorm64.exe",
@@ -81,7 +82,9 @@
               "rustrover64.exe",
               "gvim.exe",
               "nvim.exe",
-              "explorer.exe"]
+              "explorer.exe",
+              "snipaste.exe",
+              "onenote.exe"]
         }
     }]
   }]

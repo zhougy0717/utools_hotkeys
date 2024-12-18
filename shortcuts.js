@@ -3,7 +3,6 @@
 // Date 2023-09-25 21:46:01
     
 
-const welink_windows = require('./json/welink_windows.js')
 const macos = require('./json/macos.js')
 const windows = require('./json/windows.js')
 const magnet_macos = require('./json/magnet_macos.js')
@@ -59,7 +58,6 @@ handleTemplate = (arr) => {
 }
 
 let shortcutTable = {
-    welink_windows: welink_windows,
     macos: macos,
     windows: windows,
     magnet_macos: magnet_macos,

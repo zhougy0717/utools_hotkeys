@@ -55,6 +55,7 @@
               "QSpace Pro.app",
               "Commander One PRO.app",
               "Snipaste.app",
+              "IINA.app",
               "dopus.exe",
               "FoxitPDFReader.exe",
               "XYplorer.exe",
@@ -84,7 +85,8 @@
               "nvim.exe",
               "explorer.exe",
               "snipaste.exe",
-              "onenote.exe"]
+              "onenote.exe",
+              "PotPlayerMini64.exe"]
         }
     }]
   }]

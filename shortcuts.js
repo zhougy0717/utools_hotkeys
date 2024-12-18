@@ -9,8 +9,6 @@ const magnet_macos = require('./json/magnet_macos.js')
 const tmux = require('./json/tmux.js')
 const vim = require('./json/vim.js')
 
-const template_obsidian = require('./json/macwin/obsidian.js')
-
 updatePlaceHolder = (val) => {
     let newVal = val
     if (val.includes('{cmd_or_ctrl}')) {
@@ -62,8 +60,7 @@ let shortcutTable = {
     windows: windows,
     magnet_macos: magnet_macos,
     tmux: tmux,
-    vim: vim,
-    template_obsidian: template_obsidian,
+    vim: vim
 }
 
 

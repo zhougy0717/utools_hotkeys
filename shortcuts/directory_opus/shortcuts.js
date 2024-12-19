@@ -79,6 +79,12 @@ class ShortcutList {
                 keys: ["'"]
             },
             {
+                title: "Windows查找 '",
+                description: '使用Windows查找',
+                keyword: 'windows search',
+                keys: ["="]
+            },
+            {
                 title: '输入路径 shift + enter',
                 description: '输入路径',
                 keyword: 'path lj',
@@ -449,6 +455,18 @@ class ShortcutList {
                 description: '关闭窗口',
                 keyword: 'close window guanbi chuangkou',
                 keys: ['f4', 'alt']
+            },
+            {
+                title: '上移 Backspace',
+                description: '上一层目录',
+                keyword: 'move up shangyi shangyiceng',
+                keys: ['backspace']
+            },
+            {
+                title: '打开tab列表 ctrl + tab',
+                description: '打开tab列表,快速切换',
+                keyword: 'tab list liebiao',
+                keys: ['tab', 'ctrl']
             },
             {
                 title: 'DOS命令 shift + /',

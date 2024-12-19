@@ -48,7 +48,7 @@ enter = () => {
     const shortcuts = require('./shortcuts.js') ?? []
     hitTimeStamps = window.utools.dbStorage.getItem('hitTimeStamp') ?? {}
     shortcuts.forEach(x => {
-        x.keyword += x.title
+        x.keyword += x.title.toLowerCase()
         x.hitTimeStamp = hitTimeStamps[x.title] ?? 0
     })
     shortcuts.sort((a, b) => b.hitTimeStamp - a.hitTimeStamp)

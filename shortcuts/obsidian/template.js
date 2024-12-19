@@ -171,25 +171,25 @@ let shortcuts = [
     {
         "title": "Templater: 从模板创建新笔记 {opt_or_alt} + N",
         "description": "Templater: 从模板创建新笔记",
-        "keyword": "Templater: create new note from template Templater: cong mo ban chuang jian xin bi ji",
+        "keyword": "templater: create new note from template cong mo ban chuang jian xin bi ji",
         "keys": ["n", "{opt_or_alt}"]
     },
     {
         "title": "Templater: 跳转到下一个光标位置 {opt_or_alt} + Tab",
         "description": "Templater: 跳转到下一个光标位置",
-        "keyword": "Templater: jump to next cursor location Templater: tiao zhuan dao xia yi ge guang biao wei zhi",
+        "keyword": "templater: jump to next cursor location tiao zhuan dao xia yi ge guang biao wei zhi",
         "keys": ["tab", "{opt_or_alt}"]
     },
     {
         "title": "Templater: 打开插入模板模式 {opt_or_alt} + E",
         "description": "Templater: 打开插入模板模式",
-        "keyword": "Templater: open Insert Template modal Templater: da kai cha ru mo ban mo shi",
+        "keyword": "templater: open Insert Template modal da kai cha ru mo ban mo shi",
         "keys": ["e", "{opt_or_alt}"]
     },
     {
         "title": "Templater: 替换活动文件中的模板 {opt_or_alt} + R",
         "description": "Templater: 替换活动文件中的模板",
-        "keyword": "Templater: replace templates in the active file Templater: ti huan huo dong wen jian zhong de mo ban",
+        "keyword": "templater: replace templates in the active file ti huan huo dong wen jian zhong de mo ban",
         "keys": ["r", "{opt_or_alt}"]
     }
 ]

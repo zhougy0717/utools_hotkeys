@@ -5,7 +5,7 @@ class ShortcutList {
         this._name = 'foxit_reader'
         this._appName = 'foxitpdfreader Foxit PDF Reader'
         this._dir = __dirname
-        const template = new ShortcutTemplate('./shortcuts/obsidian/template.js')
+        const template = new ShortcutTemplate(`./shortcuts/${this._name}/template.js`)
         this._shortcutData = template.get()
     }
 

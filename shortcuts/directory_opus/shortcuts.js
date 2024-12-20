@@ -459,7 +459,7 @@ class ShortcutList {
             {
                 title: '上移 Backspace',
                 description: '上一层目录',
-                keyword: 'move up shangyi shangyiceng',
+                keyword: 'move up shangyiji shangyiceng',
                 keys: ['backspace']
             },
             {
@@ -485,6 +485,18 @@ class ShortcutList {
                 description: 'WSL命令',
                 keyword: 'wsl cmd mingling',
                 keys: ['\\', 'shift']
+            },
+            {
+                title: '过滤文件夹 ]',
+                description: '搜索的文件夹范围可在选项->文件夹模式中设置',
+                keyword: 'filter folder guolv wenjianjia',
+                keys: [']']
+            },
+            {
+                title: '转到根目录 ctrl + backspace',
+                description: '转到根目录',
+                keyword: 'root gen mulu folder',
+                keys: ['backspace', 'ctrl']
             },
             // 系统范围热键
             {

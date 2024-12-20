@@ -153,6 +153,9 @@ class ShortcutList {
     }
 
     get() {
+        if (!utools.isWindows()) {
+            return []
+        }
         for (let sc of this._shortcutData) {
             sc['keyword'] += ` ${this._name} ${this._appName}`
             sc['icon'] = `shortcuts/${this._name}/potplayer.png`

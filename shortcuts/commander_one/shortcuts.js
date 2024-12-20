@@ -414,13 +414,12 @@ class ShortcutList {
                 "keys": ["right", "ctrl", "command"]
             }
         ];
-        if (!utools.isMacOs()) {
-            this._shortcutData[0]['keys'][1] = "alt";
-        }
-        console.log(`${this._dir}`)
     }
 
     get() {
+        if (!utools.isMacOs()) {
+            return []
+        }
         for (let sc of this._shortcutData) {
             sc['keyword'] += ` ${this._name} ${this._appName}`
             sc['icon'] = `shortcuts/${this._name}/commander_one.png`

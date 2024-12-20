@@ -355,6 +355,9 @@ class ShortcutList {
     }
 
     get() {
+        if (!utools.isMacOs()) {
+            return []
+        }
         for (let sc of this._shortcutData) {
             sc['keyword'] += ` ${this._name}`
             sc['icon'] = `shortcuts/${this._name}/iina.png`

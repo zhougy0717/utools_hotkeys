@@ -6,7 +6,7 @@ class ShortcutList {
         this._dir = __dirname
         this._shortcutData = [
             {
-                "title": "偏好设置 command +,",
+                "title": "偏好设置 command + ,",
                 "description": "偏好设置",
                 "keyword": "preference pianhao shezhi",
                 "keys": [",", "command"]
@@ -30,46 +30,34 @@ class ShortcutList {
                 "keys": ["q", "command"]
             },
             {
-                "title": "退出并保留窗口 option + command + Q",
-                "description": "退出并保留窗口",
-                "keyword": "quit and keep window tuichu bing baoliu chuangkou",
-                "keys": ["q", "option", "command"]
-            },
-            {
                 "title": "新建窗口 command + N",
                 "description": "新建窗口",
                 "keyword": "new window xinjian chuangkou",
                 "keys": ["n", "command"]
             },
             {
-                "title": "弹出 option + command + E",
-                "description": "弹出",
-                "keyword": "eject tan chu",
-                "keys": ["e", "option", "command"]
-            },
-            {
-                "title": "新文件 command + F4",
+                "title": "新文件 shift + F4",
                 "description": "新文件",
                 "keyword": "new file xinwen jian",
-                "keys": ["f4", "command"]
+                "keys": ["f4", "shift"]
             },
             {
-                "title": "制作替身 command + L",
-                "description": "制作替身",
-                "keyword": "make alias zhizuo tishen",
+                "title": "新文件夹 F7",
+                "description": "新文件夹",
+                "keyword": "new folder directory xin wenjianjia",
+                "keys": ["f7"]
+            },
+            {
+                "title": "创建符号链接 command + L",
+                "description": "创建符号链接",
+                "keyword": "make alias link zhizuo tishen lianjie",
                 "keys": ["l", "command"]
             },
             {
-                "title": "应用程序 Utilities option + command + U",
-                "description": "应用程序Utilities",
-                "keyword": "applications Utilities yingyongchengxu Utilities",
-                "keys": ["u", "option", "command"]
-            },
-            {
-                "title": "系统应用程序 option + command + G",
-                "description": "系统应用程序",
-                "keyword": "system applications xitong yingyongchengxu",
-                "keys": ["g", "option", "command"]
+                "title": "重复 command + D",
+                "description": "重复",
+                "keyword": "repeat chongfu",
+                "keys": ["d", "command"]
             },
             {
                 "title": "前往文件夹 command + shift + G",
@@ -84,16 +72,22 @@ class ShortcutList {
                 "keys": ["i", "command"]
             },
             {
-                "title": "编辑 command + E",
+                "title": "编辑 F4",
                 "description": "编辑",
                 "keyword": "edit bianji",
-                "keys": ["e", "command"]
+                "keys": ["f4"]
             },
             {
-                "title": "复制 command + C",
+                "title": "复制 F5",
                 "description": "复制",
                 "keyword": "copy kaobei",
-                "keys": ["c", "command"]
+                "keys": ["f5"]
+            },
+            {
+                "title": "复制路径 ctrl + command + C",
+                "description": "复制路径",
+                "keyword": "copy kaobei path lujing",
+                "keys": ["c", "ctrl", "command"]
             },
             {
                 "title": "粘贴 command + V",
@@ -108,10 +102,16 @@ class ShortcutList {
                 "keys": ["a", "command"]
             },
             {
-                "title": "查找 command + F",
+                "title": "查找 option + F7",
                 "description": "查找",
-                "keyword": "find zhaoxun",
-                "keys": ["f", "command"]
+                "keyword": "find search chazhao sousuo",
+                "keys": ["f7", "option"]
+            },
+            {
+                "title": "在Spotlight中搜索 ctrl + option + F7",
+                "description": "查找",
+                "keyword": "find spotlight search chazhao sousuo",
+                "keys": ["f7", "ctrl", "option"]
             },
             {
                 "title": "获取Finder信息 command + I",
@@ -120,16 +120,16 @@ class ShortcutList {
                 "keys": ["i", "command"]
             },
             {
-                "title": "快速查看 space + Y",
+                "title": "快速查看 command + Y",
                 "description": "快速查看",
                 "keyword": "quick look kuaisu chakan",
-                "keys": ["y", "space"]
+                "keys": ["y", "command"]
             },
             {
-                "title": "在Finder中显示 command + O",
+                "title": "在Finder中显示 command + option + O",
                 "description": "在Finder中显示",
                 "keyword": "show in Finder zai Finder zhong xianshi",
-                "keys": ["o", "command"]
+                "keys": ["o", "command", "option"]
             },
             {
                 "title": "连接服务器 command + K",
@@ -138,22 +138,34 @@ class ShortcutList {
                 "keys": ["k", "command"]
             },
             {
-                "title": "移动 command + shift + F6",
+                "title": "连接网盘 command + F",
+                "description": "连接网盘",
+                "keyword": "connect netdisk lianjie wangpan",
+                "keys": ["f", "command"]
+            },
+            {
+                "title": "查看 F3",
+                "description": "查看",
+                "keyword": "preview yulan chakan",
+                "keys": ["f3"]
+            },
+            {
+                "title": "移动 F6",
                 "description": "移动",
                 "keyword": "move yi dong",
-                "keys": ["f6", "shift", "command"]
+                "keys": ["f6"]
             },
             {
-                "title": "重命名 command + F6",
+                "title": "重命名 shift + F6",
                 "description": "重命名",
                 "keyword": "rename chongmingming",
-                "keys": ["f6", "command"]
+                "keys": ["f6", "shift"]
             },
             {
-                "title": "删除 command + delete",
+                "title": "删除 F8",
                 "description": "删除",
                 "keyword": "delete shanchu",
-                "keys": ["delete", "command"]
+                "keys": ["f8"]
             },
             {
                 "title": "永久删除 command + option + delete",
@@ -162,16 +174,16 @@ class ShortcutList {
                 "keys": ["delete", "option", "command"]
             },
             {
-                "title": "压缩 command + shift + F5",
+                "title": "压缩 ctrl + F5",
                 "description": "压缩",
                 "keyword": "compress yasuo",
-                "keys": ["f5", "shift", "command"]
+                "keys": ["f5", "ctrl"]
             },
             {
-                "title": "解压缩 command + F5",
+                "title": "解压缩 ctrl + F9",
                 "description": "解压缩",
                 "keyword": "decompress jieyasuo",
-                "keys": ["f5", "command"]
+                "keys": ["f9", "ctrl"]
             },
             {
                 "title": "新建标签 command + T",
@@ -412,6 +424,78 @@ class ShortcutList {
                 "description": "显示下一个标签页",
                 "keyword": "show next tab xianshi xiayige biaogeiye",
                 "keys": ["right", "ctrl", "command"]
+            },
+            {
+                "title": "源和目标交换 option + shift + E",
+                "description": "源和目标交换",
+                "keyword": "exchange jiaohuan",
+                "keys": ["e", "option", "shift"]
+            },
+            {
+                "title": "源和目标显示相同窗口 option + E",
+                "description": "源和目标显示相同窗口",
+                "keyword": "same xiangtong",
+                "keys": ["e", "option"]
+            },
+            {
+                "title": "显示所有标签页 shift + command + \\",
+                "description": "显示所有标签页",
+                "keyword": "all tab show xianshi suoyou biaoqian",
+                "keys": ["\\", "command", "shift"]
+            },
+            {
+                "title": "后退 command + [",
+                "description": "后退",
+                "keyword": "go back hou tui",
+                "keys": ["[", "command"]
+            },
+            {
+                "title": "前进 command + ]",
+                "description": "前进",
+                "keyword": "go forward qian jin",
+                "keys": ["]", "command"]
+            },
+            {
+                "title": "上层文件夹 command + ↑",
+                "description": "上层文件夹",
+                "keyword": "parent folder shang ceng wen jian jia",
+                "keys": ["command", "uparrow"]
+            },
+            {
+                "title": "主文件夹 command + shift + H",
+                "description": "主文件夹",
+                "keyword": "home folder zhu wen jian jia",
+                "keys": ["h", "shift", "command"]
+            },
+            {
+                "title": "桌面 command + shift + D",
+                "description": "桌面",
+                "keyword": "desktop zhuo mian",
+                "keys": ["d", "shift", "command"]
+            },
+            {
+                "title": "文稿 command + shift + O",
+                "description": "文稿",
+                "keyword": "document wen gao",
+                "keys": ["o", "shift", "command"]
+            },
+            {
+                "title": "下载 command + shift + L",
+                "description": "下载",
+                "keyword": "download xia zai",
+                "keys": ["l", "shift", "command"]
+            },
+            {
+                "title": "应用程序 command + shift + A",
+                "description": "应用程序",
+                "keyword": "applications ying yong cheng xu",
+                "keys": ["a", "shift", "command"]
+            },
+            {
+                "title": "实用工具 command + shift + U",
+                "description": "实用工具",
+                "keyword": "utilities shi yong gong ju",
+                "keys": ["u", "shift", "command"]
             }
         ];
     }

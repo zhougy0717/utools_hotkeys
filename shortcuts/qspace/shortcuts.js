@@ -30,16 +30,16 @@ class ShortcutList {
                 "keys": ["q", "command"]
             },
             {
-                "title": "新建文件夹 command + N",
+                "title": "新建文件夹 shift + command + N",
                 "description": "新建文件夹",
                 "keyword": "new folder xinjian wenjianjia",
-                "keys": ["n", "command"]
+                "keys": ["n", "command", "shift"]
             },
             {
-                "title": "用所选项目新建文件夹 option + command + N",
+                "title": "用所选项目新建文件夹 ctrl + command + N",
                 "description": "用所选项目新建文件夹",
                 "keyword": "new folder with selected item yongsuoxuanxiangmu xinjian wenjianjia",
-                "keys": ["n", "option", "command"]
+                "keys": ["n", "ctrl", "command"]
             },
             {
                 "title": "打开 command + O",
@@ -48,16 +48,10 @@ class ShortcutList {
                 "keys": ["o", "command"]
             },
             {
-                "title": "关闭窗口 command + W",
+                "title": "关闭窗口 shift + command + W",
                 "description": "关闭窗口",
                 "keyword": "close window guanbi chuangkou",
-                "keys": ["w", "command"]
-            },
-            {
-                "title": "全部关闭 option + command + W",
-                "description": "全部关闭",
-                "keyword": "close all guanbi quanbu",
-                "keys": ["w", "option", "command"]
+                "keys": ["w", "command", "shift"]
             },
             {
                 "title": "关闭标签页 command + W",
@@ -66,22 +60,16 @@ class ShortcutList {
                 "keys": ["w", "command"]
             },
             {
-                "title": "关闭其他标签页 option + command + W",
-                "description": "关闭其他标签页",
-                "keyword": "close other tabs guanbi qita biaogeiye",
-                "keys": ["w", "option", "command"]
-            },
-            {
                 "title": "保存 command + S",
                 "description": "保存",
                 "keyword": "save baocun",
                 "keys": ["s", "command"]
             },
             {
-                "title": "在编辑器打开 option + command + S",
+                "title": "在编辑器打开 command + D",
                 "description": "在编辑器打开",
                 "keyword": "open in editor zai bianjiqi daikai",
-                "keys": ["s", "option", "command"]
+                "keys": ["e", "command"]
             },
             {
                 "title": "显示简介 command + I",
@@ -102,16 +90,16 @@ class ShortcutList {
                 "keys": ["d", "command"]
             },
             {
-                "title": "快速查看 space + Y",
+                "title": "快速查看 command + Y",
                 "description": "快速查看",
                 "keyword": "quick look kuaisu chakan",
-                "keys": ["y", "space"]
+                "keys": ["y", "command"]
             },
             {
-                "title": "移到废纸篓 command + delete",
+                "title": "移到废纸篓 command + backspace",
                 "description": "移到废纸篓",
                 "keyword": "move to trash yi dao feizhilou",
-                "keys": ["delete", "command"]
+                "keys": ["backspace", "command"]
             },
             {
                 "title": "撤销 command + Z",
@@ -162,52 +150,58 @@ class ShortcutList {
                 "keys": ["l", "option", "command"]
             },
             {
-                "title": "个人 fn + E",
+                "title": "个人 shift + command + H",
                 "description": "个人",
                 "keyword": "personal geren",
-                "keys": ["e", "fn"]
+                "keys": ["h", "shift", "command"]
             },
             {
-                "title": "iCloud云盘 option + command + I",
+                "title": "iCloud云盘 shift + command + I",
                 "description": "iCloud云盘",
                 "keyword": "iCloud drive iCloud yunpan",
-                "keys": ["i", "option", "command"]
+                "keys": ["i", "shift", "command"]
             },
             {
-                "title": "应用程序 Utilities option + command + U",
+                "title": "应用程序 Utilities shift + command + A",
                 "description": "应用程序Utilities",
                 "keyword": "applications Utilities yingyongchengxu Utilities",
-                "keys": ["u", "option", "command"]
+                "keys": ["a", "shift", "command"]
             },
             {
-                "title": "前往位置 option + command + L",
+                "title": "前往位置 command + L",
                 "description": "前往位置",
                 "keyword": "go to location qianwang weizhi",
-                "keys": ["l", "option", "command"]
+                "keys": ["l", "command"]
             },
             {
-                "title": "显示为图标 fn + I",
+                "title": "显示为图标 command + 1",
                 "description": "显示为图标",
                 "keyword": "for icon wei tubiao",
-                "keys": ["i", "fn"]
+                "keys": ["1", "command"]
             },
             {
-                "title": "显示为列表 fn + L",
+                "title": "显示为列表 command + 2",
                 "description": "显示为列表",
                 "keyword": "for list wei liebiao",
-                "keys": ["l", "fn"]
+                "keys": ["2", "command"]
             },
             {
-                "title": "显示为分栏 fn + U",
+                "title": "显示为分栏 command + 3",
                 "description": "显示为分栏",
                 "keyword": "for column wei fenlan",
-                "keys": ["u", "fn"]
+                "keys": ["3", "command"]
             },
             {
-                "title": "显示工作区 shift + command + G",
+                "title": "显示预览 shift + command + P",
+                "description": "显示预览",
+                "keyword": "show preview xianshi yulan",
+                "keys": ["p", "shift", "command"]
+            },
+            {
+                "title": "显示工作区 option + command + G",
                 "description": "显示工作区",
                 "keyword": "show workspace xianshi gongzuoqu",
-                "keys": ["g", "shift", "command"]
+                "keys": ["g", "option", "command"]
             },
             {
                 "title": "显示预览 option + command + P",
@@ -216,16 +210,16 @@ class ShortcutList {
                 "keys": ["p", "option", "command"]
             },
             {
-                "title": "新建工作区 option + command + N",
+                "title": "新建工作区 command + N",
                 "description": "新建工作区",
                 "keyword": "new workspace xinjian gongzuoqu",
-                "keys": ["n", "option", "command"]
+                "keys": ["n", "command"]
             },
             {
-                "title": "新建工作区标签页 option + command + T",
+                "title": "新建工作区标签页 command + T",
                 "description": "新建工作区标签页",
                 "keyword": "new workspace tab xinjian gongzuoqu biaogeiye",
-                "keys": ["t", "option", "command"]
+                "keys": ["t", "command"]
             },
             {
                 "title": "显示状态栏 option + command + /",
@@ -258,22 +252,88 @@ class ShortcutList {
                 "keys": ["c", "fn"]
             },
             {
-                "title": "进入全屏 control + command + F",
+                "title": "进入全屏 ctrl + command + F",
                 "description": "进入全屏",
                 "keyword": "enter full - screen jinru quanping",
-                "keys": ["f", "control", "command"]
+                "keys": ["f", "ctrl", "command"]
             },
             {
-                "title": "显示上一个标签页 control + command + ←",
+                "title": "显示上一个标签页 ctrl + shift + tab",
                 "description": "显示上一个标签页",
                 "keyword": "show previous tab xianshi shangyige biaogeiye",
-                "keys": ["left", "control", "command"]
+                "keys": ["tab", "ctrl", "shift"]
             },
             {
-                "title": "显示下一个标签页 control + command + →",
+                "title": "显示下一个标签页 ctrl + tab",
                 "description": "显示下一个标签页",
                 "keyword": "show next tab xianshi xiayige biaogeiye",
-                "keys": ["right", "control", "command"]
+                "keys": ["tab", "ctrl"]
+            },
+            {
+                "title": "隐藏左侧栏 command + option + S",
+                "description": "隐藏左侧栏",
+                "keyword": "hide left sidebar yin cang zuo ce lan",
+                "keys": ["s", "option", "command"]
+            },
+            {
+                "title": "显示所有标签页 shift + command + \\",
+                "description": "显示所有标签页",
+                "keyword": "show all tabs xian shi suo you biao qian ye",
+                "keys": ["\\", "command", "shift"]
+            },
+            {
+                "title": "隐藏标签页栏 command + shift + T",
+                "description": "隐藏标签页栏",
+                "keyword": "hide tabs sidebar yin cang biao qian ye lan",
+                "keys": ["t", "shift", "command"]
+            },
+            {
+                "title": "显示状态栏 command + /",
+                "description": "显示状态栏",
+                "keyword": "show status bar xian shi zhuang tai lan",
+                "keys": ["/", "command"]
+            },
+            {
+                "title": "查看显示选项 command + J",
+                "description": "查看显示选项",
+                "keyword": "view display options cha kan xian shi xuan xiang",
+                "keys": ["j", "command"]
+            },
+            {
+                "title": "进入全屏 ctrl + command + F",
+                "description": "进入全屏",
+                "keyword": "enter full - screen jin ru quan ping",
+                "keys": ["f", "command", "ctrl"]
+            },
+            {
+                "title": "返回 command + [",
+                "description": "返回",
+                "keyword": "return fan hui",
+                "keys": ["[", "command"]
+            },
+            {
+                "title": "前进 command + ]",
+                "description": "前进",
+                "keyword": "forward qian jin",
+                "keys": ["]", "command"]
+            },
+            {
+                "title": "上层文件夹 command + ↑",
+                "description": "上层文件夹",
+                "keyword": "parent folder shang ceng wen jian jia",
+                "keys": ["up", "command"]
+            },
+            {
+                "title": "文稿 command + shift + O",
+                "description": "文稿",
+                "keyword": "document wen gao",
+                "keys": ["o", "shift", "command"]
+            },
+            {
+                "title": "桌面 command + shift + D",
+                "description": "桌面",
+                "keyword": "desktop zhuo mian",
+                "keys": ["d", "shift", "command"]
             }
         ];
     }

@@ -14,7 +14,7 @@ class ShortcutList {
         this._dir = __dirname
         const template = new ShortcutTemplate('./shortcuts/office/word/template.js')
         this._shortcutData = template.get()
-        console.log(`${this._dir}`)
+        console.log(`${this._dir}`) 
     }
 
     get() {

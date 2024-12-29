@@ -977,7 +977,21 @@ class ShortcutList {
                 "description": "关闭",
                 "keyword": "close guanbi",
                 "keys": ["w", "command"]
+            },
+            // 其他
+            {
+                "title": "在左侧显示目录 command + D command + D",
+                "description": "在左侧显示目录",
+                "keyword": "left content index mulu",
+                "keys": [["d", "command"], ["d", "command"]]
+            },
+            {
+                "title": "拖动脑图 space + 鼠标左键拖动",
+                "description": "拖动脑图，按住空格键不放，同时用鼠标拖动（手动）",
+                "keyword": "drag mindmap tuodong naotu",
+                "keys": []
             }
+
         ]
     }
 

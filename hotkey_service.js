@@ -207,64 +207,107 @@ class HotkeyDataLoader {
     }
   }
 
-  async fetchAndProcessAppHotkeys(id) {
+  async fetchAndProcessAppHotkeys(id, callbackSetList) {
     const lang = this.getLang();
     const baseUrl = lang ? `https://hotkeycheatsheet.com/${lang}/hotkey-cheatsheet/${id}` : `https://hotkeycheatsheet.com/hotkey-cheatsheet/${id}`;
     
     try {
+      if (callbackSetList) {
+        callbackSetList([{ title: '获取数据中...', description: '正在后台解析快捷键网络数据', icon: 'icons/loading.gif' }]);
+      }
       const response = await fetch(baseUrl);
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       const html = await response.text();
       
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      const nextDataEl = doc.getElementById('__NEXT_DATA__');
-      if (!nextDataEl) {
-          throw new Error('未找到 __NEXT_DATA__，无法解析快捷键数据。');
+      let appData = null;
+      let allHotkeys = [];
+
+      // Strategy 1: Regex parse from Next.js server components
+      const match = html.match(/\\"allHotkeys\\":(\[.*?\]),\\"(?:initialOs|initialSearchQuery)\\"/);
+      if (match) {
+        try {
+          const jsonString = JSON.parse('"' + match[1] + '"');
+          allHotkeys = JSON.parse(jsonString);
+        } catch (e) {
+          console.warn('Regex array parse fallback failed: ', e);
+        }
       }
 
-      const nextData = JSON.parse(nextDataEl.textContent);
-      
-      let appData = nextData.props?.pageProps?.app;
+      // Strategy 2: Legacy DOM parse
+      if (!allHotkeys || allHotkeys.length === 0) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const nextDataEl = doc.getElementById('__NEXT_DATA__');
+        if (nextDataEl) {
+            const nextData = JSON.parse(nextDataEl.textContent);
+            appData = nextData.props?.pageProps?.app;
+        }
+      }
 
-      if (!appData || !appData.categories) {
-          throw new Error('详情数据格式异常。');
+      if ((!appData || !appData.categories) && (!allHotkeys || allHotkeys.length === 0)) {
+          throw new Error('未找到快捷键数据，网页结构可能已更改。');
       }
 
       const isMac = utools.isMacOs();
       let compiledShortcuts = [];
-      const appName = appData.name || appData.title || id;
+      const appName = (appData && (appData.name || appData.title)) ? (appData.name || appData.title) : id;
 
-      for (const cat of appData.categories) {
-          const categoryName = cat.name || cat.title || '';
-          if (cat.hotkeys) {
-              for (const hk of cat.hotkeys) {
-                  const shortcutBinding = isMac ? hk.macShortcut : hk.windowsShortcut;
-                  if (!shortcutBinding || shortcutBinding.length === 0) continue;
+      const normalizeKey = (k) => {
+          let keyStr = String(k).toLowerCase().trim();
+          if (keyStr === 'cmd' || keyStr === '⌘' || keyStr === 'command') return 'command';
+          if (keyStr === 'opt' || keyStr === '⌥' || keyStr === 'alt' || keyStr === 'option') return isMac ? 'option' : 'alt';
+          if (keyStr === 'ctrl' || keyStr === '⌃' || keyStr === 'control') return 'ctrl';
+          if (keyStr === 'shift' || keyStr === '⇧') return 'shift';
+          if (keyStr === 'enter' || keyStr === 'return' || keyStr === '↩') return 'enter';
+          return keyStr;
+      };
 
-                  let rawKeys = Array.isArray(shortcutBinding) ? shortcutBinding : [shortcutBinding];
-                  const keys = rawKeys.map(k => {
-                      let keyStr = String(k).toLowerCase().trim();
-                      if (keyStr === 'cmd' || keyStr === '⌘' || keyStr === 'command') return 'command';
-                      if (keyStr === 'opt' || keyStr === '⌥' || keyStr === 'alt' || keyStr === 'option') return isMac ? 'option' : 'alt';
-                      if (keyStr === 'ctrl' || keyStr === '⌃' || keyStr === 'control') return 'ctrl';
-                      if (keyStr === 'shift' || keyStr === '⇧') return 'shift';
-                      if (keyStr === 'enter' || keyStr === 'return' || keyStr === '↩') return 'enter';
-                      return keyStr;
-                  });
+      if (allHotkeys && allHotkeys.length > 0) {
+          // New format
+          const targetOs = isMac ? 'MacOS' : 'Windows';
+          for (const hk of allHotkeys) {
+              if (hk.os !== targetOs) continue;
+              if (!hk.hotkeys || hk.hotkeys.length === 0 || !hk.hotkeys[0]) continue;
+              
+              const rawKeys = hk.hotkeys[0]; // pick first binding array
+              const keys = rawKeys.map(normalizeKey);
+              
+              const title = hk.action || '';
+              const categoryName = hk.category || '';
+              const keyword = `${appName} ${id} ${categoryName} ${title}`.toLowerCase();
+              
+              compiledShortcuts.push({
+                  title,
+                  description: '',
+                  keys,
+                  keyword,
+                  category: categoryName
+              });
+          }
+      } else if (appData && appData.categories) {
+          // Old format
+          for (const cat of appData.categories) {
+              const categoryName = cat.name || cat.title || '';
+              if (cat.hotkeys) {
+                  for (const hk of cat.hotkeys) {
+                      const shortcutBinding = isMac ? hk.macShortcut : hk.windowsShortcut;
+                      if (!shortcutBinding || shortcutBinding.length === 0) continue;
 
-                  const title = hk.title || '';
-                  const description = hk.description || '';
-                  
-                  const keyword = `${appName} ${id} ${categoryName} ${title} ${description}`.toLowerCase();
-                  
-                  compiledShortcuts.push({
-                      title,
-                      description,
-                      keys,
-                      keyword,
-                      category: categoryName
-                  });
+                      let rawKeys = Array.isArray(shortcutBinding) ? shortcutBinding : [shortcutBinding];
+                      const keys = rawKeys.map(normalizeKey);
+
+                      const title = hk.title || '';
+                      const description = hk.description || '';
+                      const keyword = `${appName} ${id} ${categoryName} ${title} ${description}`.toLowerCase();
+                      
+                      compiledShortcuts.push({
+                          title,
+                          description,
+                          keys,
+                          keyword,
+                          category: categoryName
+                      });
+                  }
               }
           }
       }

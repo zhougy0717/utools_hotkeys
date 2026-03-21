@@ -25,11 +25,10 @@ window.exports = {
           return itemData.command.execute(itemData.keyword, lastCallbackSetList)
         }
         if (itemData.action === 'download_app_hotkeys') {
-          utools.showNotification(`正在获取 [${itemData.title}] 的快捷键数据...`);
-          require('./hotkey_service.js').dataLoader.fetchAndProcessAppHotkeys(itemData.id)
-            .then(() => utools.showNotification(`[${itemData.title}] 下载成功！`))
-            .catch(e => utools.showNotification(`下载失败: ${e.message}`));
-          window.utools.hideMainWindow();
+          if (lastCallbackSetList) lastCallbackSetList([{ title: '正在获取数据...', description: `正在获取 [${itemData.title}] 的快捷键...`, icon: itemData.icon || 'logo.png' }]);
+          require('./hotkey_service.js').dataLoader.fetchAndProcessAppHotkeys(itemData.id, lastCallbackSetList)
+            .then(() => { if (lastCallbackSetList) lastCallbackSetList([{ title: '下载成功！', description: `[${itemData.title}] 下载完成，按回车返回或直接开始搜索。`, icon: itemData.icon || 'logo.png', action: 'noop' }]); })
+            .catch(e => { if (lastCallbackSetList) lastCallbackSetList([{ title: '下载失败', description: e.message, icon: itemData.icon || 'logo.png', action: 'noop' }]); });
           return;
         }
         select(itemData, g_hitTimeStamps)
@@ -55,11 +54,10 @@ window.exports = {
           return itemData.command.execute(itemData.keyword, lastCallbackSetList)
         }
         if (itemData.action === 'download_app_hotkeys') {
-          utools.showNotification(`正在获取 [${itemData.title}] 的快捷键数据...`);
-          require('./hotkey_service.js').dataLoader.fetchAndProcessAppHotkeys(itemData.id)
-            .then(() => utools.showNotification(`[${itemData.title}] 下载成功！`))
-            .catch(e => utools.showNotification(`下载失败: ${e.message}`));
-          window.utools.hideMainWindow();
+          if (lastCallbackSetList) lastCallbackSetList([{ title: '正在获取数据...', description: `正在获取 [${itemData.title}] 的快捷键...`, icon: itemData.icon || 'logo.png' }]);
+          require('./hotkey_service.js').dataLoader.fetchAndProcessAppHotkeys(itemData.id, lastCallbackSetList)
+            .then(() => { if (lastCallbackSetList) lastCallbackSetList([{ title: '下载成功！', description: `[${itemData.title}] 下载完成，按回车返回或直接开始搜索。`, icon: itemData.icon || 'logo.png', action: 'noop' }]); })
+            .catch(e => { if (lastCallbackSetList) lastCallbackSetList([{ title: '下载失败', description: e.message, icon: itemData.icon || 'logo.png', action: 'noop' }]); });
           return;
         }
         select(itemData, g_hitTimeStamps)

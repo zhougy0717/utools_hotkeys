@@ -4,7 +4,7 @@
   "description": "查找快捷键",
   "author": "Ben",
   "homepage": "https://u.tools",
-  "preload": "preload.js",
+  "preload": "src/adapter/preload.js",
   "logo": "logo.png",
   "platform": ["darwin", "win32"],
   "features": [{

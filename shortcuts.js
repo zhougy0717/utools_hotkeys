@@ -69,15 +69,26 @@ function loadAllShortcuts() {
     // 步骤 2: 优先查阅 DB 内已下载的快捷方式
     try {
         const dbDocs = utools.db.allDocs('hotkeys_app_');
+        console.log(`[ShortcutsLoader] Found ${dbDocs.length} custom docs using prefix 'hotkeys_app_'`);
         for (const rawDoc of dbDocs) {
-            const doc = rawDoc.value && rawDoc.value.shortcuts ? rawDoc.value : rawDoc;
-            if (doc.shortcuts) {
-                downloadedSet.add(doc.appId);
-                shortcuts = shortcuts.concat(doc.shortcuts);
+            // Log a sample of the document to see its structure
+            console.log(`[ShortcutsLoader] Processing doc: ${rawDoc._id || rawDoc.id || 'no-id'}`);
+            
+            // Try to find shortcuts in common formats
+            const doc = rawDoc.doc || rawDoc.value || rawDoc;
+            const appId = doc.appId || (doc._id ? doc._id.replace('hotkeys_app_', '') : 'unknown');
+            const data = doc.shortcuts || doc.data || [];
+            
+            if (Array.isArray(data) && data.length > 0) {
+                console.log(`[ShortcutsLoader] Successfully loaded ${data.length} shortcuts for ${appId}`);
+                downloadedSet.add(appId);
+                shortcuts = shortcuts.concat(data);
+            } else {
+                console.warn(`[ShortcutsLoader] Doc ${appId} has no shortcuts array`, doc);
             }
         }
     } catch (e) {
-        console.error('Failed to load DB shortcuts', e);
+        console.error('[ShortcutsLoader] Failed to load DB shortcuts', e);
     }
     
     let shortcutTable = {
@@ -145,6 +156,7 @@ function loadAllShortcuts() {
         shortcuts = shortcuts.concat(shortcutTable[k]);
     }
     
+    console.log(`[ShortcutsLoader] Total shortcuts loaded: ${shortcuts.length}`);
     return shortcuts;
 }
 

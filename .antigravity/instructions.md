@@ -1,3 +1,5 @@
+// turbo-all
+
 # AI 辅助开发原则 (Antigravity Instructions)
 
 作为该项目的辅助开发 AI，在处理任务时请严格遵循以下原则：
@@ -19,3 +21,10 @@
 ## 4. 代码质量
 - **鲁棒性**: 必须充分考虑网络请求失败、JSON 解析异常、uTools API 未定义等异常情况的处理。
 - **UI/UX 细节**: 所有的异步操作必须有 UI 提示（如 loading 或 error message）。
+
+## 5. 自动执行 (Turbo Mode)
+本项目的所有常规命令已获得全局授权。在处理以下安全任务时，AI 可自动执行相关命令而无需等待人工确认：
+1. **依赖与脚本 (npm/npx)**: 如 `npm install`, `npm test`, `npm run dev` 等。
+2. **版本管理 (git)**: 如 `git status`, `git commit`, `git add`, `git push`（仅根据进度管理触发）。
+3. **脚本执行 (node)**: 运行本地验证脚本或测试脚本。
+4. **外部连通性 (curl)**: 验证相关的在线资源（如 `hotkeycheatsheet.com`）的联通性。

@@ -58,7 +58,8 @@ select = (itemData, hitTimeStamps) => {
 }
 
 enter = () => {
-    const shortcuts = require('./shortcuts.js') ?? []
+    const loadAllShortcuts = require('./shortcuts.js');
+    const shortcuts = loadAllShortcuts() ?? [];
 
     hitTimeStamps = window.utools.dbStorage.getItem('hitTimeStamp') ?? {}
     shortcuts.forEach(x => {

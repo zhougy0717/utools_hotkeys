@@ -55,68 +55,96 @@ handleTemplate = (arr) => {
     })
 }
 
-let shortcutTable = {
-    macos: macos,
-    windows: windows,
-    magnet_macos: magnet_macos,
-    tmux: tmux,
-    vim: vim
-}
-
+const APP_ID_ALIASES = {
+    'jet_brains': 'intellij-idea'
+};
 
 const fs = require('fs');
 const path = require('path');
 
-let loaded = []
-function requireAll(directory) {
-    const files = fs.readdirSync(directory)
-    for(let file of files) {
-        const filePath = path.join(directory, file);
-        const stat = fs.statSync(filePath);
-
-        if (stat.isDirectory()) {
-            // 递归加载子目录
-            requireAll(filePath);
-        } else if (path.basename(file) === 'shortcuts.js') {
-            // 加载 .js 文件
-            const sc = require(filePath);
-            loaded = loaded.concat(sc)
-        }
-    }
-}
-
-// 调用函数，传入要加载的目录路径
-requireAll(`${__dirname}/shortcuts`);  // 替换成你的目录
-for(let k of loaded) {
-    const name = k.name()
-    console.log(`${name}`)
-    var sc = k.get()
-    if (sc.length !== 0) {
-        shortcutTable[name] = sc
-    }
-}
-
-let shortcuts = []
-for (k in shortcutTable) {
-    if (k.includes('template')) {
-        if (!utools.isMacOs() && !utools.isWindows()) {
-            continue
-        }
-        handleTemplate(shortcutTable[k])
-    }
-    else {
-        if (utools.isMacOs()) {
-            if (k.includes('windows')) {
-                continue
+function loadAllShortcuts() {
+    let shortcuts = [];
+    const downloadedSet = new Set();
+    
+    // 步骤 2: 优先查阅 DB 内已下载的快捷方式
+    try {
+        const dbDocs = utools.db.allDocs('hotkeys_app_');
+        for (const doc of dbDocs) {
+            if (doc.value && doc.value.shortcuts) {
+                downloadedSet.add(doc.value.appId);
+                shortcuts = shortcuts.concat(doc.value.shortcuts);
             }
         }
-        else if (utools.isWindows()) {
-            if (k.includes('macos')) {
-                continue
+    } catch (e) {
+        console.error('Failed to load DB shortcuts', e);
+    }
+    
+    let shortcutTable = {
+        macos: macos,
+        windows: windows,
+        magnet_macos: magnet_macos,
+        tmux: tmux,
+        vim: vim
+    };
+
+    let loaded = [];
+    function requireAll(directory) {
+        if (!fs.existsSync(directory)) return;
+        const files = fs.readdirSync(directory);
+        for(let file of files) {
+            const filePath = path.join(directory, file);
+            const stat = fs.statSync(filePath);
+
+            if (stat.isDirectory()) {
+                requireAll(filePath);
+            } else if (path.basename(file) === 'shortcuts.js') {
+                const sc = require(filePath);
+                loaded = loaded.concat(sc);
             }
         }
     }
-    shortcuts = shortcuts.concat(shortcutTable[k])
+
+    requireAll(`${__dirname}/shortcuts`);
+    
+    for(let k of loaded) {
+        const name = k.name();
+        
+        // 步骤 3: 避免与静态配置项相碰撞（拦截过滤）
+        const aliasId = APP_ID_ALIASES[name] || name;
+        if (downloadedSet.has(aliasId)) {
+            continue;
+        }
+        
+        var sc = k.get();
+        if (sc.length !== 0) {
+            shortcutTable[name] = sc;
+        }
+    }
+
+    for (let k in shortcutTable) {
+        // template processing and platform filtering
+        if (k.includes('template')) {
+            if (!utools.isMacOs() && !utools.isWindows()) {
+                continue;
+            }
+            handleTemplate(shortcutTable[k]);
+        }
+        else {
+            if (utools.isMacOs()) {
+                if (k.includes('windows')) {
+                    continue;
+                }
+            }
+            else if (utools.isWindows()) {
+                if (k.includes('macos')) {
+                    continue;
+                }
+            }
+        }
+        shortcuts = shortcuts.concat(shortcutTable[k]);
+    }
+    
+    return shortcuts;
 }
 
-module.exports = shortcuts
+module.exports = loadAllShortcuts;

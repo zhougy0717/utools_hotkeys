@@ -206,6 +206,96 @@ class HotkeyDataLoader {
       return null;
     }
   }
+
+  async fetchAndProcessAppHotkeys(id) {
+    const lang = this.getLang();
+    const baseUrl = lang ? `https://hotkeycheatsheet.com/${lang}/hotkey-cheatsheet/${id}` : `https://hotkeycheatsheet.com/hotkey-cheatsheet/${id}`;
+    
+    try {
+      const response = await fetch(baseUrl);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const html = await response.text();
+      
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const nextDataEl = doc.getElementById('__NEXT_DATA__');
+      if (!nextDataEl) {
+          throw new Error('未找到 __NEXT_DATA__，无法解析快捷键数据。');
+      }
+
+      const nextData = JSON.parse(nextDataEl.textContent);
+      
+      let appData = nextData.props?.pageProps?.app;
+
+      if (!appData || !appData.categories) {
+          throw new Error('详情数据格式异常。');
+      }
+
+      const isMac = utools.isMacOs();
+      let compiledShortcuts = [];
+      const appName = appData.name || appData.title || id;
+
+      for (const cat of appData.categories) {
+          const categoryName = cat.name || cat.title || '';
+          if (cat.hotkeys) {
+              for (const hk of cat.hotkeys) {
+                  const shortcutBinding = isMac ? hk.macShortcut : hk.windowsShortcut;
+                  if (!shortcutBinding || shortcutBinding.length === 0) continue;
+
+                  let rawKeys = Array.isArray(shortcutBinding) ? shortcutBinding : [shortcutBinding];
+                  const keys = rawKeys.map(k => {
+                      let keyStr = String(k).toLowerCase().trim();
+                      if (keyStr === 'cmd' || keyStr === '⌘' || keyStr === 'command') return 'command';
+                      if (keyStr === 'opt' || keyStr === '⌥' || keyStr === 'alt' || keyStr === 'option') return isMac ? 'option' : 'alt';
+                      if (keyStr === 'ctrl' || keyStr === '⌃' || keyStr === 'control') return 'ctrl';
+                      if (keyStr === 'shift' || keyStr === '⇧') return 'shift';
+                      if (keyStr === 'enter' || keyStr === 'return' || keyStr === '↩') return 'enter';
+                      return keyStr;
+                  });
+
+                  const title = hk.title || '';
+                  const description = hk.description || '';
+                  
+                  const keyword = `${appName} ${id} ${categoryName} ${title} ${description}`.toLowerCase();
+                  
+                  compiledShortcuts.push({
+                      title,
+                      description,
+                      keys,
+                      keyword,
+                      category: categoryName
+                  });
+              }
+          }
+      }
+
+      if (compiledShortcuts.length === 0) {
+          throw new Error('该应用没有当前平台的有效快捷键。');
+      }
+
+      const docToSave = {
+          _id: `hotkeys_app_${id}`,
+          appId: id,
+          name: appName,
+          shortcuts: compiledShortcuts,
+          updatedAt: Date.now()
+      };
+
+      const existing = utools.db.get(docToSave._id);
+      if (existing) {
+          utools.db.put({ ...docToSave, _rev: existing._rev });
+      } else {
+          utools.db.put(docToSave);
+      }
+
+      require('./common_method.js').enter();
+      return true;
+
+    } catch (e) {
+      console.error('Failed to fetch and process app hotkeys', e);
+      throw e;
+    }
+  }
 }
 
 const dataLoader = new HotkeyDataLoader();
@@ -240,7 +330,8 @@ class DownloadCommand {
         title: app.name,
         description: app.description,
         icon: app.icon || 'logo.png',
-        id: app.id
+        id: app.id,
+        action: 'download_app_hotkeys'
       }));
       callbackSetList(displayList);
     }

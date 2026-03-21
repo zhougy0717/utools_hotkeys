@@ -24,6 +24,14 @@ window.exports = {
         if (itemData.action === 'slash_command') {
           return itemData.command.execute(itemData.keyword, lastCallbackSetList)
         }
+        if (itemData.action === 'download_app_hotkeys') {
+          utools.showNotification(`正在获取 [${itemData.title}] 的快捷键数据...`);
+          require('./hotkey_service.js').dataLoader.fetchAndProcessAppHotkeys(itemData.id)
+            .then(() => utools.showNotification(`[${itemData.title}] 下载成功！`))
+            .catch(e => utools.showNotification(`下载失败: ${e.message}`));
+          window.utools.hideMainWindow();
+          return;
+        }
         select(itemData, g_hitTimeStamps)
       },
       placeholder: "搜索快捷键，回车直接执行（部分需要手动执行）"
@@ -45,6 +53,14 @@ window.exports = {
       select: (action, itemData) => {
         if (itemData.action === 'slash_command') {
           return itemData.command.execute(itemData.keyword, lastCallbackSetList)
+        }
+        if (itemData.action === 'download_app_hotkeys') {
+          utools.showNotification(`正在获取 [${itemData.title}] 的快捷键数据...`);
+          require('./hotkey_service.js').dataLoader.fetchAndProcessAppHotkeys(itemData.id)
+            .then(() => utools.showNotification(`[${itemData.title}] 下载成功！`))
+            .catch(e => utools.showNotification(`下载失败: ${e.message}`));
+          window.utools.hideMainWindow();
+          return;
         }
         select(itemData, g_hitTimeStamps)
       },

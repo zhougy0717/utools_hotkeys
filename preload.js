@@ -4,6 +4,9 @@ let g_hitTimeStamps = window.utools.dbStorage.getItem('hitTimeStamp') ?? {}
 
 const appShortcutMethod = require('./app_shortcuts.js')
 const {enter, search, select} = require('./common_method.js')
+require('./hotkey_service.js') // Load and register commands
+
+let lastCallbackSetList = null
 window.exports = {
   'shortcuts': {
     mode: 'list',
@@ -13,10 +16,14 @@ window.exports = {
         return callbackSetList(g_shortcuts)
       },
       search: (action, searchWord, callbackSetList) => {
-        const selected = search(searchWord, g_shortcuts)
+        lastCallbackSetList = callbackSetList
+        const selected = search(searchWord, g_shortcuts, callbackSetList)
         return callbackSetList(selected)
       },
       select: (action, itemData) => {
+        if (itemData.action === 'slash_command') {
+          return itemData.command.execute(itemData.keyword, lastCallbackSetList)
+        }
         select(itemData, g_hitTimeStamps)
       },
       placeholder: "搜索快捷键，回车直接执行（部分需要手动执行）"
@@ -31,10 +38,14 @@ window.exports = {
         callbackSetList(g_appShortcts)
       },
       search: (action, searchWord, callbackSetList) => {
-        const selected = search(searchWord, g_appShortcts)
+        lastCallbackSetList = callbackSetList
+        const selected = search(searchWord, g_appShortcts, callbackSetList)
         return callbackSetList(selected)
       },
       select: (action, itemData) => {
+        if (itemData.action === 'slash_command') {
+          return itemData.command.execute(itemData.keyword, lastCallbackSetList)
+        }
         select(itemData, g_hitTimeStamps)
       },
       placeholder: "搜索快捷键，回车直接执行（部分需要手动执行）"

@@ -1,4 +1,15 @@
+const slashCommandManager = require('./slash_command_manager.js')
+
 search = (searchWord, shortcuts) => {
+    // 优先处理斜线命令
+    if (searchWord.startsWith('/')) {
+        const matchedItems = slashCommandManager.getCommandItems()
+            .filter(item => item.keyword.startsWith(searchWord.toLowerCase()));
+        if (matchedItems.length > 0) {
+            return matchedItems;
+        }
+    }
+
     const words = searchWord.split(' ')
     const selected = shortcuts.filter(x => {
         let result = true
@@ -10,9 +21,11 @@ search = (searchWord, shortcuts) => {
     return selected
 }
 
-doAction = (action, keys) => {
+doAction = (action, data) => {
     if (action === 'copyCmd') {
-        utools.copyText(keys.join(' '));
+        utools.copyText(data.join(' '));
+    } else if (action === 'copyText') {
+        utools.copyText(data);
     }
 }
 
@@ -34,7 +47,7 @@ handleShortcut = (keys) => {
 select = (itemData, hitTimeStamps) => {
     window.utools.hideMainWindow()
     if ('action' in itemData) {
-        doAction(itemData.action, itemData.keys)
+        doAction(itemData.action, itemData.action === 'copyText' ? itemData.data : itemData.keys)
     }
     else {
         handleShortcut(itemData.keys)
@@ -46,6 +59,7 @@ select = (itemData, hitTimeStamps) => {
 
 enter = () => {
     const shortcuts = require('./shortcuts.js') ?? []
+
     hitTimeStamps = window.utools.dbStorage.getItem('hitTimeStamp') ?? {}
     shortcuts.forEach(x => {
         x.keyword += x.title.toLowerCase()

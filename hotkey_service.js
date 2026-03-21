@@ -32,11 +32,11 @@ class HotkeyCheatsheetParser {
         
         const href = card.getAttribute('href');
         if (!href) continue;
-        const id = href.split('/').pop().split('?')[0];
+        const id = href.split('/').filter(p => !!p).pop().split('?')[0];
 
         // NEW: Extract inline SVG
         let icon = null;
-        const svgEl = card.querySelector('svg');
+        const svgEl = card.querySelector('svg') || card.parentElement.querySelector('svg');
         if (svgEl) {
           icon = this.svgToBase64(svgEl.outerHTML);
         }
@@ -107,7 +107,9 @@ class HotkeyCheatsheetParser {
       if (!svgString.includes('xmlns="http://www.w3.org/2000/svg"')) {
         svgString = svgString.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
       }
-      const base64 = btoa(unescape(encodeURIComponent(svgString)));
+      const base64 = (typeof Buffer !== 'undefined') 
+        ? Buffer.from(svgString).toString('base64')
+        : btoa(unescape(encodeURIComponent(svgString)));
       return `data:image/svg+xml;base64,${base64}`;
     } catch (e) {
       console.error('Failed to convert SVG to base64', e);
@@ -143,7 +145,7 @@ class HotkeyDataLoader {
   }
 
   getLang() {
-    const locale = utools.getNativeId().toLowerCase();
+    const locale = (typeof navigator !== 'undefined' && navigator.language) ? navigator.language.toLowerCase() : '';
     return locale.includes('zh') ? 'zh' : '';
   }
 
@@ -207,7 +209,9 @@ class HotkeyDataLoader {
     }
   }
 
-  async fetchAndProcessAppHotkeys(id, callbackSetList) {
+  async fetchAndProcessAppHotkeys(id, callbackSetList, passedIcon = null) {
+    // Normalize ID
+    id = id.replace(/\/+$/, '');
     const lang = this.getLang();
     const baseUrl = lang ? `https://hotkeycheatsheet.com/${lang}/hotkey-cheatsheet/${id}` : `https://hotkeycheatsheet.com/hotkey-cheatsheet/${id}`;
     
@@ -252,6 +256,25 @@ class HotkeyDataLoader {
       let compiledShortcuts = [];
       const appName = (appData && (appData.name || appData.title)) ? (appData.name || appData.title) : id;
 
+      let appIcon = passedIcon;
+      if (!appIcon) {
+        const storageId = `hotkey_app_list_${lang || 'default'}`;
+        const cachedAppList = utools.db.get(storageId);
+        if (cachedAppList && cachedAppList.data) {
+            const matchedApp = cachedAppList.data.find(a => a.id === id);
+            if (matchedApp && matchedApp.icon) {
+                appIcon = matchedApp.icon;
+            }
+        }
+      }
+      if (!appIcon) {
+          const fallbackList = utools.db.get('hotkey_app_list_default');
+          if (fallbackList && fallbackList.data) {
+              const matchedApp = fallbackList.data.find(a => a.id === id);
+              if (matchedApp && matchedApp.icon) appIcon = matchedApp.icon;
+          }
+      }
+
       const normalizeKey = (k) => {
           let keyStr = String(k).toLowerCase().trim();
           if (keyStr === 'cmd' || keyStr === '⌘' || keyStr === 'command') return 'command';
@@ -281,7 +304,8 @@ class HotkeyDataLoader {
                   description: '',
                   keys,
                   keyword,
-                  category: categoryName
+                  category: categoryName,
+                  icon: appIcon
               });
           }
       } else if (appData && appData.categories) {
@@ -305,7 +329,8 @@ class HotkeyDataLoader {
                           description,
                           keys,
                           keyword,
-                          category: categoryName
+                          category: categoryName,
+                          icon: appIcon
                       });
                   }
               }

@@ -30,6 +30,7 @@
 
 ## 4. Git Commit 规范
 所有项目提交必须遵循 [.antigravity/git_commit_specification.md](file:///c:/Users/Banny/code/utools_hotkeys/.antigravity/git_commit_specification.md) 中的规范：
+- **禁止私自提交**: 在编码调试过程当中，AI 不要使用 `git commit` 或相关命令自动提交代码。只有在阶段性完成任务后，由用户主动发出指令要求提交时，才允许执行 `git commit` 操作。
 - **全文英文**: commit 信息必须采用英文。
 - **标题**: `<Category>: <Summary>`
 - **正文**: 详细说明实施步骤和最终效果。

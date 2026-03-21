@@ -69,10 +69,11 @@ function loadAllShortcuts() {
     // 步骤 2: 优先查阅 DB 内已下载的快捷方式
     try {
         const dbDocs = utools.db.allDocs('hotkeys_app_');
-        for (const doc of dbDocs) {
-            if (doc.value && doc.value.shortcuts) {
-                downloadedSet.add(doc.value.appId);
-                shortcuts = shortcuts.concat(doc.value.shortcuts);
+        for (const rawDoc of dbDocs) {
+            const doc = rawDoc.value && rawDoc.value.shortcuts ? rawDoc.value : rawDoc;
+            if (doc.shortcuts) {
+                downloadedSet.add(doc.appId);
+                shortcuts = shortcuts.concat(doc.shortcuts);
             }
         }
     } catch (e) {

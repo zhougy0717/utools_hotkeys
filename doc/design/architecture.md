@@ -1,76 +1,116 @@
 # 软件系统架构设计文档 (Software Architecture Design)
 
-## 1. 核心设计原则
+## 1. 核心架构设计理念
 
-本项目旨在为 uTools 快捷键搜索插件提供一个可扩展、易维护的底层架构。目前遵循以下核心原则：
+本项目采用了“外壳与内核”相隔离的架构模式。
 
-- **DIP (Dependency Inversion Principle - 依赖倒置原则)**：UI 层 (`preload.js`) 不直接依赖于具体的业务命令逻辑。相反，它通过 `SlashCommandManager` (抽象接口) 进行指令的注册与分发。
-- **DDD (Domain-Driven Design - 领域驱动设计)**：将项目的核心逻辑拆分为独立领域（如 Hotkey Cheatsheet 数据解析、持久化服务），并通过 `Service` 层的封装保持领域逻辑的纯净。
-- **关注点分离 (Separation of Concerns)**：确保 UI 解析、指令匹配、数据抓取和数据存储各司其职。
+- **uTools 宿主外壳 (Host Shell)**：由 uTools API、`preload.js`、`common_method.js` 等构成，负责与原生桌面系统环境集成。
+- **业务逻辑内核 (Business Logic Core)**：由 `SlashCommandManager` 驱动，包含命令逻辑和领域模型，尽可能与宿主环境解耦以保持逻辑纯净。
 
-## 2. 软件分层架构 (Layered Architecture)
+## 2. 软件顶层架构 (Top-Level Component Diagram)
 
-| 层级 | 职责说明 | 对应模块/文件 |
-| :--- | :--- | :--- |
-| **UI 适配层 (uTools API)** | 处理 uTools 提供的 `enter`, `search`, `select` 回调，负责与用户界面的交互。 | `preload.js`, `app_shortcuts.js` |
-| **指令分发层 (Command Layer)** | 管理所有斜杠指令 (Slash Commands)，负责路由分发与指令匹配。实现 UI 与逻辑解耦。 | `slash_command_manager.js`, `DownloadCommand` |
-| **领域/应用服务层 (Service Layer)** | 核心业务单元。负责 HTML 解析、SVG 提取、跨域数据加载及持久化逻辑封装。 | `hotkey_service.js` (Parser, DataLoader) |
-| **基础设施层 (Infrastructure)** | 提供底层支持，如 `utools.db` 持久化接口、全局配置及公共工具方法。 | `common_method.js`, `utools.db`, `shortcuts.js` |
+该图展示了框架、UI、业务核心及基础设施层之间的依赖边界。
 
-## 3. 组件依赖关系 (Component Relationship)
+```plantuml
+@startuml
+title uTools Hotkeys - 顶层软件架构图 (Top-Level Architecture)
 
-```mermaid
-graph TD
-    UI[uTools Preload] -->|调用| SCM[SlashCommandManager]
-    SCM -->|持有/分发| DC[DownloadCommand]
-    DC -->|核心逻辑依赖| HDLoader[HotkeyDataLoader]
-    HDLoader -->|使用| HCParser[HotkeyCheatsheetParser]
-    HDLoader -->|读写| DB[(utools.db)]
-    HCParser -->|抓取| WEB[hotkeycheatsheet.com]
+' 样式设置
+skinparam componentStyle rectangle
+skinparam packageStyle frame
+
+' --- 宿主框架与底层基础设施 ---
+package "uTools API / 宿主框架 (Infrastructure Host)" #F5F5F5 {
+    [utools.db] as DB <<存储设备>>
+    [utools API] as API <<环境引擎>>
+}
+
+' --- UI 适配层 ---
+package "UI 适配层 (uTools Preload Adapter)" #E3F2FD {
+    [preload.js] as Preload <<主入口>>
+    [app_shortcuts.js] as AppFilter <<逻辑适配>>
+}
+
+' --- 核心业务逻辑内核 ---
+package "业务逻辑层 (Business Logic Core)" #FFFDE7 {
+    [SlashCommandManager] as SCM <<调度中心>>
+    
+    package "Commands" {
+        [DownloadCommand] as DC <<具体指令解析>>
+    }
+    
+    package "Domain Services" {
+        [HotkeyDataLoader] as Loader <<领域数据加载>>
+        [HotkeyCheatsheetParser] as Parser <<网页萃取/解析>>
+    }
+}
+
+' --- 公共服务与静态资源层 ---
+package "公共基础设施层 (Common Utils)" #F1F8E9 {
+    [common_method.js] as Common <<中间件/通用方法>>
+    [shortcuts.js] as StaticData <<预置 JSON 配置>>
+    [shortcut_template.js] as Template <<图标/模板映射>>
+}
+
+' 依赖/调用关系
+Preload --> SCM : 1. 派发指令需求
+SCM --> DC : 2. 匹配并分发
+DC --> Loader : 3. 执行业务同步
+Loader --> Parser : 4. 解析网页数据
+Parser ..> [hotkeycheatsheet.com] : HTTP 抓取
+
+Preload --> Common : 5. 使用通用处理逻辑
+Common --> StaticData : 6. 数据读取映射
+Common --> DB : 7. 离线缓存与频次管理
+AppFilter --> Common : 共同执行过滤
+
+@enduml
 ```
 
-## 4. 指令执行流程 (Command Execution Flow)
+## 3. 分层职责矩阵 (Layer Responsibility Matrix)
 
-当用户在搜索框中输入斜杠指令（如 `/download`）并确认执行时，系统按以下流程运行：
+| 层级 (Layer) | 关键组件 (Key Components) | 职责 (Responsibility) | 边界定义 |
+| :--- | :--- | :--- | :--- |
+| **uTools 宿主环境层** | `utools.*` API, `utools.db` | 提供文件系统、多语言环境、本地数据库存储等能力。 | 宿主系统原生接口。 |
+| **UI 适配层** | `preload.js`, `app_shortcuts.js` | 响应 uTools 的回调（`enter`, `search`, `select`），桥接业务逻辑。 | 处理所有 `utools` 直接调用的生命周期。 |
+| **业务逻辑层 (内层)** | `SlashCommandManager`, `DownloadCommand`, `HotkeyService` | 管理斜杠指令的解析与分发。执行抓取、SVG 转换、领域模型更新。 | **DIP 核心层**，独立于具体 UI，通过回调向外通信。 |
+| **基础设施层 (底层)** | `common_method.js`, `shortcuts.js`, `template.js` | 提供工具函数、本地静态快捷键配置模板、UI 图标映射等复用能力。 | 同时服务于 Preload 层与业务层。 |
 
-```mermaid
-sequenceDiagram
-    participant User as 用户
-    participant Preload as UI Adaptor (Preload)
-    participant SCManager as SlashCommandManager
-    participant Cmd as DownloadCommand
-    participant Loader as HotkeyDataLoader
-    participant DB as utools.db
+## 4. 业务执行流 (Sequence Diagram)
 
-    User->>Preload: 输入 "/download"
-    Preload->>SCManager: match("/download")
-    SCManager-->>Preload: 返回 DownloadCommand 类实例
-    
-    User->>Preload: 确认执行 (Select)
-    Preload->>Cmd: execute(...)
-    
-    activate Cmd
-    Cmd->>Loader: fetchAndProcess(callbackSetList)
-    activate Loader
-    Loader->>Loader: 抓取分析 HTML / __NEXT_DATA__
-    Loader->>Loader: 提取内联 SVG 并转为 Base64
-    Loader->>DB: 持久化 AppList (ID: hotkey_app_list_*)
-    Loader-->>Cmd: 返回应用列表
-    deactivate Loader
-    
-    Cmd-->>Preload: 通过回调动态更新渲染列表
-    deactivate Cmd
-    
-    Preload-->>User: 用户查看到最新的快捷键配置
+```plantuml
+@startuml
+title 斜杠指令 (/download) 跨层级执行流
+
+actor User as "用户"
+participant "uTools (preload.js)" as UI
+participant "SlashCommandManager" as SCM
+participant "DownloadCommand" as DC
+participant "HotkeyDataLoader" as Loader
+database "utools.db" as DB
+
+User -> UI : 输入 "/download"
+UI -> SCM : match("/download")
+SCM --> UI : 返回指令匹配实例
+User -> UI : 确认并点击 (Select)
+
+UI -> DC : execute(callbackSetList)
+activate DC
+DC -> Loader : fetchAndProcess()
+activate Loader
+Loader -> Loader : 抓取 / 解析 / SVG 转 Base64
+Loader -> DB : 保存到热加载缓存
+Loader --> DC : 返回新 App 列表
+deactivate Loader
+
+DC --> UI : 动态列表回传 (Callback UI)
+deactivate DC
+UI -> User : 向用户展示同步完成列表
+@enduml
 ```
 
-## 5. 架构优势与隔离设计
+## 5. 设计隔离优势 (Isolation Design Benefits)
 
-1. **指令热插拔**：通过 `slashCommandManager.register()` 注册模式，新增功能只需实现 Command 接口并注册，无需改动 `preload.js` 主逻辑。
-2. **数据离线可读**：图标以 Base64 形式存入 `utools.db`，确保在断网或 API 失效时，插件首页仍能渲染已同步的应用图标。
-3. **环境无关性**：`HotkeyCheatsheetParser` 独立于 uTools API，依赖于标准 DOM 操作，可轻松进行单元测试。
-
-## 6. 相关技术文档
-- [SVG 图标抓取与转换方案](svg-icon-extraction-scheme.md)
-- [支持下载应用列表规范](../spec/spec-00001-support-download-applist.md)
-- [支持下载应用快捷键规范](../spec/spec-00002-support-download-app-hotkeys.md)
+1. **框架/业务分离**：`preload.js` 只负责监听 uTools 消息。一旦匹配到 `/` 开头的指令，其控制权即移交给 `SlashCommandManager`，有效防止主入口文件逻辑爆炸。
+2. **逻辑可移植性**：核心指令逻辑（如抓取和 Parser）理论上可以在 Node.js 或其他外框环境下运行，因为它依赖的是传进来的 `callbackSetList` 抽象。
+3. **数据冗余管理**：通过 `common_method.js` 将静态 `shortcuts.js` 与动态拉取的 `utools.db` 缓存统一管理，确保基础功能离线可用，扩展功能实时同步。

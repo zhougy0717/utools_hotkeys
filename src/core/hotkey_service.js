@@ -54,7 +54,7 @@ class HotkeyCheatsheetParser {
         apps.push({
           id,
           name,
-          description: '', 
+          description: '(hotkeycheatsheet)', 
           iconUrl,
           icon: icon && icon.startsWith('data:') ? icon : null, // If it's a URL, we'll fetch it later
           platforms: [] 
@@ -89,7 +89,7 @@ class HotkeyCheatsheetParser {
             return rawApps.map(app => ({
               id: app.id || app.slug,
               name: app.name || app.title,
-              description: app.description || `${app.hotkeysCount || 0} hotkeys`,
+              description: (app.description || `${app.hotkeysCount || 0} hotkeys`) + ' (hotkeycheatsheet)',
               iconUrl: null,
               icon: app.icon || null,
               platforms: app.platforms || []
@@ -480,7 +480,7 @@ class HotkeyDataLoader {
                               // Req 3: Data Enrichment - Title and Description
                               compiledShortcuts.push({
                                   title: `${name} (${keys.join(' + ')})`,
-                                  description: appName,
+                                  description: `${appName} (hotkeycheatsheet)`,
                                   keys,
                                   keyword,
                                   category: categoryName,
@@ -505,7 +505,7 @@ class HotkeyDataLoader {
                               // Req 3: Data Enrichment
                               compiledShortcuts.push({
                                   title: `${itemTitle} (${keys.join(' + ')})`,
-                                  description: appName,
+                                  description: `${appName} (hotkeycheatsheet)`,
                                   keys,
                                   keyword,
                                   category: categoryName,
@@ -524,7 +524,7 @@ class HotkeyDataLoader {
                                   // Req 3: Data Enrichment
                                   compiledShortcuts.push({
                                       title: `${name} (${keys.join(' + ')})`,
-                                      description: appName,
+                                      description: `${appName} (hotkeycheatsheet)`,
                                       keys,
                                       keyword,
                                       category: categoryName,
@@ -557,7 +557,7 @@ class HotkeyDataLoader {
                       // Req 3: Data Enrichment
                       compiledShortcuts.push({
                           title: `${title} (${keys.join(' + ')})`,
-                          description: appName,
+                          description: `${appName} (hotkeycheatsheet)`,
                           keys,
                           keyword,
                           category: categoryName,

@@ -31,6 +31,16 @@ class HotkeyCheatsheetParser {
         if (!href) continue;
         const id = href.split('/').filter(p => !!p).pop().split('?')[0];
 
+        // Extract hotkeys count
+        const countEl = card.querySelector('p');
+        let hotkeysCount = 0;
+        let countText = '';
+        if (countEl && countEl !== nameEl) {
+          countText = countEl.textContent.trim();
+          const match = countText.match(/(\d+)/);
+          if (match) hotkeysCount = parseInt(match[1]);
+        }
+
         // Extract Icon
         let icon = null;
         // Check for SVG
@@ -56,7 +66,8 @@ class HotkeyCheatsheetParser {
         apps.push({
           id,
           name,
-          description: '(hotkeycheatsheet)', 
+          hotkeysCount,
+          description: (countText ? `${countText} ` : '') + '(hotkeycheatsheet)', 
           iconUrl,
           icon: icon && icon.startsWith('data:') ? icon : null, // If it's a URL, we'll fetch it later
           platforms: [] 
@@ -88,14 +99,19 @@ class HotkeyCheatsheetParser {
           
           const rawApps = findApps(pageProps);
           if (rawApps) {
-            return rawApps.map(app => ({
-              id: app.id || app.slug,
-              name: app.name || app.title,
-              description: (app.description || `${app.hotkeysCount || 0} hotkeys`) + ' (hotkeycheatsheet)',
-              iconUrl: null,
-              icon: app.icon || null,
-              platforms: app.platforms || []
-            }));
+            return rawApps.map(app => {
+              const count = app.hotkeysCount || app.hotkeys_count || 0;
+              const countStr = count > 0 ? `${count} hotkeys ` : '';
+              return {
+                id: app.id || app.slug,
+                name: app.name || app.title,
+                hotkeysCount: count,
+                description: (app.description || countStr) + '(hotkeycheatsheet)',
+                iconUrl: null,
+                icon: app.icon || null,
+                platforms: app.platforms || []
+              };
+            });
           }
         }
       }
@@ -675,17 +691,33 @@ class DownloadCommand {
         ? this.cachedApps.filter(app => app.name.toLowerCase().includes(query))
         : this.cachedApps;
 
-      const displayList = filteredApps.map(app => ({
-        title: app.name,
-        description: app.description || `${app.id}`,
-        icon: app.icon || 'logo.png',
-        id: app.id,
-        action: 'download_app_hotkeys'
-      }));
+      const displayList = filteredApps.map(app => {
+        let description = app.description || `${app.id}`;
+        // If hotkeysCount is available but not already in description (for legacy cache support)
+        if (app.hotkeysCount && !description.includes('hotkey') && !description.includes('快捷键')) {
+           const isZh = dataLoader.getLang() === 'zh';
+           const countText = isZh ? `${app.hotkeysCount} 条快捷键` : `${app.hotkeysCount} hotkeys`;
+           description = `${countText} (hotkeycheatsheet)`;
+        }
+
+        return {
+          title: app.name,
+          description: description,
+          icon: app.icon || 'logo.png',
+          id: app.id,
+          action: 'download_app_hotkeys'
+        };
+      });
 
       // Add a "Back" option at the top if we are in specialized mode (no command prefix)
       // and not currently filtering, or just to provide a way out.
       if (!searchWord.toLowerCase().startsWith(this.keyword)) {
+        displayList.unshift({
+          title: '🔄 强制刷新列表',
+          description: '从服务器重新获取最新的应用列表（跳过缓存）',
+          icon: 'logo.png',
+          action: 'refresh_app_list'
+        });
         displayList.unshift({
           title: '↩ 返回主搜索',
           description: '退出下载模式，搜索本地已有的快捷键',
@@ -696,6 +728,11 @@ class DownloadCommand {
 
       callbackSetList(displayList);
     }
+  }
+
+  async refresh(callbackSetList) {
+    this.cachedApps = await dataLoader.fetchAndProcess(callbackSetList, true);
+    this.execute('', callbackSetList);
   }
 }
 

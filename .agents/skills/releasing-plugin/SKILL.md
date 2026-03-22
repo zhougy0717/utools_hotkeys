@@ -1,77 +1,86 @@
+---
 name: releasing-plugin
-description: Use when building and preparing a uTools plugin for publication. Ensures a clean, production-only package by pruning devDependencies and removing binary/temporary data.
+description: 用于构建和准备发布 uTools 插件。确保通过精简 devDependencies 并删除二进制/临时数据来生成一个纯净的、仅限生产环境的包。
 ---
 
-# Releasing Plugin
+# 发布插件 (Releasing Plugin)
 
-## Overview
-A uTools plugin release MUST be clean and lightweight. This skill ensures that the final package contains ONLY essential production files and dependencies, specifically excluding tests, dev-dependencies, source maps, and temporary binary files.
+## 目标
+将代码和插件发布需要的资源、文档等数据拷贝到 `release/` 目录（若不存在该目录则创建）。
 
-## When to Use
-- When asked to "package", "release", "build", or "publish" the uTools plugin.
-- When preparing the software for end-users where speed and package size are critical.
+## 概述
+uTools 插件的发布必须保持纯净且轻量。此 Skill 确保最终的安装包仅包含必要的生产文件和依赖项，特别是排除测试、开发环境依赖（dev-dependencies）、源码映射（source maps）以及临时二进制文件。
 
-## Mandatory Release Workflow (Follow Precisely)
+## 何时使用
+- 当被要求“打包”、“发布”、“构建生产版本”或“发布 uTools 插件”时。
+- 在为终端用户准备软件时，因为此时运行速度和安装包大小至关重要。
+
+## 强制发布工作流 (必须严格遵守)
 
 > [!CAUTION]
-> The user's specific requirement is to clean dependencies **BEFORE** copying. To avoid breaking your development environment, you MUST use a temporary clone or ensure you restore dependencies immediately after.
+> 用户明确要求在**拷贝前**清理依赖。为了避免永久性破坏您的本地开发环境，您必须在精简前告知风险，或者在完成拷贝后立即恢复依赖。
 
-### 1. Pre-Copy Cleanup
-Before copying to the final release folder, perform these actions in the project root:
-- **Prune devDependencies**: Run `npm prune --production` to remove all development-only packages.
-- **Delete Binary/Temp Data**: Remove all `.map` files and `.tar.gz` files (recursive).
-  - *Example (PowerShell)*: `Get-ChildItem -Path . -Include "*.map","*.tar.gz" -Recurse | Remove-Item -Force`
+### 1. 拷贝前清理 (Pre-Copy Cleanup)
+在向最终发布文件夹拷贝文件之前，请在项目根目录执行以下操作：
+- **清理发布目录 (Clear Release Directory)**: 彻底清空或删除旧的 `release/` 文件夹，以防旧文件残留污染新版本。
+  - *示例 (PowerShell)*: `Remove-Item -Path release -Recurse -Force -ErrorAction SilentlyContinue; New-Item -ItemType Directory -Path release`
+- **精简开发依赖 (Prune devDependencies)**: 运行 `npm prune --production` 来移除所有仅限开发使用的包。
+- **删除二进制/临时数据**: 递归删除所有 `.map` 文件和 `.tar.gz` 文件。
+  - *示例 (PowerShell)*: `Get-ChildItem -Path . -Include "*.map","*.tar.gz" -Recurse | Remove-Item -Force`
 
-### 2. Selective Copying (Software Code)
-Copy only the necessary software components to the `release/` folder.
-- **Include**:
-    - `src/` directory (core logic)
+### 2. 选择性拷贝 (Selective Copying)
+仅将必要的软件组件拷贝到 `release/` 文件夹中。
+- **必需包含**:
+    - `src/` 目录 (核心逻辑)
     - `package.json`
     - `logo.png`
     - `plugin.json`
-    - Any other assets referenced in `plugin.json` (e.g., `icons/`).
-- **Exclude**:
-    - `test/` (All test code)
+    - `plugin.json` 中引用的任何其他资源 (例如 `icons/`)。
+- **严禁包含**:
+    - `test/` (所有测试代码)
     - `.git/` / `.agents/` / `.antigravity/` / `docs/`
-    - Any development configuration files.
+    - 任何开发环境专用的配置文件。
 
-### 3. Cleanup Verification
-Double-check the `release/` folder to ensure NO source maps or archives were missed.
+### 3. 清理验证
+二次检查 `release/` 文件夹，确保没有遗漏任何源码映射或压缩包。
 
-### 4. Restoration (Crucial)
-After copying, run `npm install` in your development root to restore the `devDependencies` needed for work.
+### 4. 环境恢复 (至关重要)
+拷贝完成后，**必须**在您的开发根目录运行 `npm install`，以恢复后续开发工作所需的 `devDependencies`。
 
-## Implementation Example (PowerShell)
+## 实现示例 (PowerShell)
 
 ```powershell
-# 1. Clean root (Caution: temporary pruning)
+# 1. 清理环境 (注意：这是临时精简)
 npm prune --production
 Get-ChildItem -Include "*.map", "*.tar.gz" -Recurse | Remove-Item -Force
+# 清理旧的发布目录
+Remove-Item -Path release -Recurse -Force -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Path release
 
-# 2. Package
-mkdir release
+# 2. 打包
 Copy-Item -Path "src", "package.json", "plugin.json", "logo.png" -Destination "release" -Recurse
 
-# 3. Restore Dev Environment
+# 3. 恢复开发环境
 npm install
 ```
 
-## Common Mistakes
-- **Shipping Node.js heavyweights**: Including `electron` or `mocha` in the production package.
-- **Leaking source maps**: Forgetting to delete `.map` files, which bloats the plugin and exposes internals.
-- **Forgetting to restore**: Leaving the current environment in a "pruned" state.
+## 常见错误
+- **携带开发重负**: 在生产包中错误地包含了 `electron` 或 `mocha`。
+- **泄露源码映射**: 忘记删除 `.map` 文件，这会显著增加插件体积并暴露内部逻辑。
+- **忘记恢复依赖**: 打包结束后让当前开发环境处于“pruned”精简状态。
 
-## Rationalization Table
+## 辩解对比表 (Rationalization Table)
 
-| Excuse | Reality |
-|--------|---------|
-| "Copying then pruning is the same" | It requires more time/disk space for the copy. Pruning at source (with restoration) is cleaner for the *result*. |
-| "I'll just manually delete mocha" | Highly error-prone. You WILL miss sub-dependencies (like `chai` or `electron` internals). Use `npm prune`. |
-| "Users might want sourcemaps" | Production releases should NEVER include sourcemaps unless explicitly asked for debugging. They bloat the plugin and expose internals. |
-| "The archive is small" | No trash allowed. Cleanliness is a hard requirement. |
+| 常见的辩解 | 事实依据 |
+|-----------|---------|
+| “先拷贝再精简效果是一样的” | 先拷贝会增加拷贝过程的时间和磁盘占用。在源头精简（并配合恢复）得到的发布结果更纯净。 |
+| “我手动删除 mocha 就行了” | 极其容易出错。你一定会遗漏某些子依赖（如 `chai` 或 `electron` 内部包）。必须使用 `npm prune`。 |
+| “用户可能需要源码映射来调试” | 除非特别要求，否则生产发布版本绝不应包含 sourcemaps。这会增大体积并泄露代码。 |
+| “压缩包体积很小，留着没事” | 规则是：不留垃圾。纯净度是一种硬性要求。 |
 
-## Red Flags - STOP and Correct
-- Shipping the entire `node_modules` folder without pruning.
-- Including the `test/` directory.
-- Not following the "prune before copy" sequence if specifically requested by the user.
-- Forgetting to restore `devDependencies` in the root after finishing.
+## 红牌警报 (Red Flags) - 立即停止并纠正
+- 发布包中包含旧版本的残留文件（未执行 `release/` 目录清理）。
+- 发布包中包含整个未精简的 `node_modules` 文件夹。
+- 发布包中包含 `test/` 文件夹。
+- 未遵循用户要求的“拷贝前精简”顺序。
+- 任务结束时忘记在根目录恢复 `devDependencies`。

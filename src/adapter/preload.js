@@ -67,6 +67,12 @@ window.exports = {
             .catch(e => { if (lastCallbackSetList) lastCallbackSetList([{ title: '下载失败', description: e.message, icon: itemData.icon || 'logo.png', action: 'noop' }]); });
           return;
         }
+        if (itemData.action === 'refresh_app_list') {
+          if (g_activeCommand && g_activeCommand.refresh) {
+            return g_activeCommand.refresh(lastCallbackSetList);
+          }
+          return;
+        }
         if (itemData.action === 'noop') {
           g_activeCommand = null;
           window.utools.setSubInputValue('')
@@ -118,6 +124,12 @@ window.exports = {
           require('../core/hotkey_service.js').dataLoader.fetchAndProcessAppHotkeys(itemData.id, lastCallbackSetList, itemData.icon)
             .then(() => { if (lastCallbackSetList) lastCallbackSetList([{ title: '下载成功！', description: `[${itemData.title}] 下载完成，按回车返回或直接开始搜索。`, icon: itemData.icon || 'logo.png', action: 'noop' }]); })
             .catch(e => { if (lastCallbackSetList) lastCallbackSetList([{ title: '下载失败', description: e.message, icon: itemData.icon || 'logo.png', action: 'noop' }]); });
+          return;
+        }
+        if (itemData.action === 'refresh_app_list') {
+          if (g_activeCommand && g_activeCommand.refresh) {
+            return g_activeCommand.refresh(lastCallbackSetList);
+          }
           return;
         }
         if (itemData.action === 'noop') {

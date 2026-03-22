@@ -1,7 +1,7 @@
 class ShortcutTemplate {
     constructor (file) {
         this._shortcutData = require(file)
-        handleTemplate(this._shortcutData)
+        this.handleTemplate(this._shortcutData)
     }
 
     get() {
@@ -10,12 +10,12 @@ class ShortcutTemplate {
 
     handleTemplate (arr) {
         arr.forEach(x => {
-            for (key in x) {
+            for (let key in x) {
                 if (Array.isArray(x[key])) {
-                    handleArr(x[key])
+                    this.handleArr(x[key])
                 }
                 else {
-                    x[key] = updatePlaceHolder(x[key])
+                    x[key] = this.updatePlaceHolder(x[key])
                 }
             }
         })
@@ -24,10 +24,10 @@ class ShortcutTemplate {
     handleArr(arr) {
         for (let i = 0; i < arr.length; i++) {
             if (Array.isArray(arr[i])) {
-                handleArr(arr[i]);
+                this.handleArr(arr[i]);
             } else {
                 let val = arr[i]
-                arr[i] = updatePlaceHolder(val)
+                arr[i] = this.updatePlaceHolder(val)
             }
         }
     }

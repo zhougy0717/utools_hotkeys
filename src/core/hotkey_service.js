@@ -2,6 +2,8 @@
  * Hotkey Service - Handles data fetching and parsing from hotkeycheatsheet.com
  */
 
+const fs = require('fs');
+const path = require('path');
 const slashCommandManager = require('./slash_command_manager.js');
 const sqliteService = require('../infrastructure/sqlite_service.js');
 
@@ -769,6 +771,26 @@ class PathCommand {
       const success = await sqliteService.init(selectedPath);
       
       if (success) {
+        // Create json_hotkeys directory and template if not exists
+        try {
+          const jsonDir = path.join(selectedPath, 'json_hotkeys');
+          if (!fs.existsSync(jsonDir)) {
+            fs.mkdirSync(jsonDir, { recursive: true });
+            const template = [
+              {
+                "title": "示例：浏览器刷新 (自定义 JSON)",
+                "keys": ["{cmd_or_ctrl}", "r"],
+                "keyword": "refresh 刷新",
+                "description": "这是一个通过自定义 JSON 加载的示例快捷键"
+              }
+            ];
+            fs.writeFileSync(path.join(jsonDir, 'template.json'), JSON.stringify(template, null, 2), 'utf8');
+            console.log('[PathCommand] Created json_hotkeys/template.json');
+          }
+        } catch (e) {
+          console.warn('[PathCommand] Failed to initialize json_hotkeys folder', e);
+        }
+
         // Migration logic: Move existing records from utools.db to the newly set SQLite
         try {
           const dbDocs = utools.db.allDocs('hotkeys_app_');

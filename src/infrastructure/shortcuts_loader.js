@@ -61,12 +61,30 @@ const APP_ID_ALIASES = {
 
 const fs = require('fs');
 const path = require('path');
+const sqliteService = require('./sqlite_service.js');
 
 function loadAllShortcuts() {
     let shortcuts = [];
     const downloadedSet = new Set();
     
-    // 步骤 2: 优先查阅 DB 内已下载的快捷方式
+    // 步骤 1: 从 SQLite 加载已下载的快捷方式 (新方案)
+    try {
+        const sqliteShortcuts = sqliteService.getAllShortcuts();
+        if (sqliteShortcuts && sqliteShortcuts.length > 0) {
+            console.log(`[ShortcutsLoader] Loaded ${sqliteShortcuts.length} shortcuts from SQLite`);
+            shortcuts = shortcuts.concat(sqliteShortcuts);
+            
+            // Mark apps as downloaded to avoid showing static duplicates
+            const apps = sqliteService.getDownloadedApps();
+            for (const app of apps) {
+                downloadedSet.add(app.id);
+            }
+        }
+    } catch (e) {
+        console.error('[ShortcutsLoader] Failed to load SQLite shortcuts', e);
+    }
+
+    // 步骤 2: 查阅 DB 内已下载的快捷方式 (旧方案 / 兼容性)
     try {
         const dbDocs = utools.db.allDocs('hotkeys_app_');
         console.log(`[ShortcutsLoader] Found ${dbDocs.length} custom docs using prefix 'hotkeys_app_'`);

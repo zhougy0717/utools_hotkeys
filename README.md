@@ -15,6 +15,8 @@
   - XYPlorer（Win）
   - PDF Expert（Mac）
   - JetBrains IDE (Mac & Win)
+- **在线库同步**: 支持从 `hotkeycheatsheet.com` 动态下载更多应用的快捷键。
+- **SQLite 存储**: 下载的数据存储于本地 SQLite (sql.js) 数据库，支持自定义路径，方便跨设备通过同步盘同步。
 
 ![](https://github.com/zhougy0717/utools_hotkeys/blob/main/icons/supported%20apps.png)
 # 项目地址

@@ -1,3 +1,7 @@
 node_modules/
 package-lock.json
 docs/
+*.db
+快捷键数据/
+tmp/
+.temp/

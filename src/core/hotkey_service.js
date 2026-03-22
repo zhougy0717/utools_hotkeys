@@ -3,6 +3,8 @@
  */
 
 const slashCommandManager = require('./slash_command_manager.js');
+const sqliteService = require('../infrastructure/sqlite_service.js');
+
 
 class HotkeyCheatsheetParser {
   /**
@@ -580,22 +582,36 @@ class HotkeyDataLoader {
           updatedAt: Date.now()
       };
 
-      console.log(`[HotkeyService] Saving ${compiledShortcuts.length} shortcuts for ${appName} (ID: ${id}) to DB`);
+      console.log(`[HotkeyService] Saving ${compiledShortcuts.length} shortcuts for ${appName} (ID: ${id}) to storage`);
       
-      const existing = utools.db.get(docToSave._id);
-      let res;
-      if (existing) {
-          res = utools.db.put({ ...docToSave, _rev: existing._rev });
+      // Save to SQLite (Primary)
+      const savedToSqlite = await sqliteService.saveAppHotkeys(id, appName, appIcon, compiledShortcuts);
+
+      if (savedToSqlite) {
+          console.log(`[HotkeyService] Successfully saved ${id} to SQLite`);
+          // If successfully saved to SQLite, we should CLEAN UP any existing data in utools.db for this app to free up space (1MB limit)
+          const existing = utools.db.get(docToSave._id);
+          if (existing) {
+              utools.db.remove(existing);
+              console.log(`[HotkeyService] Removed legacy utools.db record for ${id}`);
+          }
       } else {
-          res = utools.db.put(docToSave);
-      }
+          // Fallback to utools.db ONLY if SQLite is not available/configured
+          console.warn(`[HotkeyService] SQLite not active. Saving to utools.db (subject to 1MB limit)`);
+          const existing = utools.db.get(docToSave._id);
+          let res;
+          if (existing) {
+              res = utools.db.put({ ...docToSave, _rev: existing._rev });
+          } else {
+              res = utools.db.put(docToSave);
+          }
 
-      if (res && res.error) {
-          console.error('[HotkeyService] DB Save failed:', res);
-          throw new Error(`数据库保存失败: ${res.message || '未知错误'}`);
+          if (res && res.error) {
+              console.error('[HotkeyService] utools.db Save failed:', res);
+              throw new Error(`数据库保存失败: ${res.message || '未知错误'}`);
+          }
+          console.log('[HotkeyService] utools.db Save successful (Fallback mode)');
       }
-
-      console.log('[HotkeyService] DB Save successful');
 
       // Refresh global state
       if (typeof enter === 'function') {
@@ -685,5 +701,93 @@ class DownloadCommand {
 
 // Register self
 slashCommandManager.register(new DownloadCommand());
+
+/**
+ * The /path command implementation
+ */
+class PathCommand {
+  constructor() {
+    this.keyword = '/path';
+  }
+
+  description() {
+    const savedPath = utools.dbStorage.getItem('sqlite_db_path');
+    return `设置 SQLite 数据库存放路径。当前路径：${savedPath || '未设置'}`;
+  }
+
+  match(searchWord) {
+    return searchWord.toLowerCase().startsWith(this.keyword);
+  }
+
+  async execute(searchWord, callbackSetList) {
+    const paths = utools.showOpenDialog({
+      title: '选择 SQLite 数据库存放目录',
+      properties: ['openDirectory', 'createDirectory']
+    });
+
+    if (paths && paths.length > 0) {
+      const selectedPath = paths[0];
+      utools.dbStorage.setItem('sqlite_db_path', selectedPath);
+      
+      const success = await sqliteService.init(selectedPath);
+      
+      if (success) {
+        // Migration logic: Move existing records from utools.db to the newly set SQLite
+        try {
+          const dbDocs = utools.db.allDocs('hotkeys_app_');
+          if (dbDocs.length > 0) {
+            console.log(`[PathCommand] Found ${dbDocs.length} legacy apps in utools.db. Starting migration...`);
+            let migratedCount = 0;
+            for (const rawDoc of dbDocs) {
+              const doc = rawDoc.doc || rawDoc.value || rawDoc;
+              if (!doc) continue;
+              
+              const appId = doc.appId || (doc._id ? doc._id.replace('hotkeys_app_', '') : 'unknown');
+              const appName = doc.name || appId;
+              const shortcuts = doc.shortcuts || doc.data || [];
+              const appIcon = doc.icon || (shortcuts.length > 0 ? shortcuts[0].icon : null);
+              
+              const ok = await sqliteService.saveAppHotkeys(appId, appName, appIcon, shortcuts);
+              if (ok) {
+                utools.db.remove(doc);
+                migratedCount++;
+              }
+            }
+            console.log(`[PathCommand] Migration complete. Moved ${migratedCount} apps to SQLite.`);
+          }
+        } catch (e) {
+          console.error('[PathCommand] Migration failed', e);
+        }
+
+        callbackSetList([{
+          title: '路径设置成功',
+          description: `数据库已初始化在: ${selectedPath}。已将旧数据迁入。`,
+          icon: 'logo.png',
+          action: 'noop'
+        }]);
+        // Refresh to apply new data if any
+        try {
+          require('../infrastructure/common_method.js').enter();
+        } catch(e){}
+      } else {
+        callbackSetList([{
+          title: '路径设置失败',
+          description: '无法在选定目录初始化数据库，请检查权限。',
+          icon: 'logo.png',
+          action: 'noop'
+        }]);
+      }
+    } else {
+      callbackSetList([{
+        title: '已取消',
+        description: '未更改数据库路径。',
+        icon: 'logo.png',
+        action: 'noop'
+      }]);
+    }
+  }
+}
+
+slashCommandManager.register(new PathCommand());
 
 module.exports = { dataLoader };

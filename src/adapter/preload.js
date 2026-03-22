@@ -1,6 +1,7 @@
 let g_shortcuts = []
 let g_appShortcts = []
 let g_hitTimeStamps = window.utools.dbStorage.getItem('hitTimeStamp') ?? {}
+let g_activeCommand = null;
 
 const appShortcutMethod = require('./app_filter.js')
 const {enter, search, select} = require('../infrastructure/common_method.js')
@@ -19,12 +20,26 @@ window.exports = {
       },
       search: (action, searchWord, callbackSetList) => {
         lastCallbackSetList = callbackSetList
+        
+        // If there's an active command, let it handle the search
+        if (g_activeCommand) {
+          // If the user types a NEW slash command, exit the current mode
+          if (searchWord.startsWith('/') && !searchWord.startsWith(g_activeCommand.keyword)) {
+            g_activeCommand = null;
+          } else {
+            g_activeCommand.execute(searchWord, callbackSetList);
+            return;
+          }
+        }
+
         const selected = search(searchWord, g_shortcuts, callbackSetList)
-        return callbackSetList(selected)
+        if (selected !== null) return callbackSetList(selected)
       },
       select: (action, itemData) => {
         if (itemData.action === 'slash_command') {
-          return itemData.command.execute(itemData.keyword, lastCallbackSetList)
+          g_activeCommand = itemData.command;
+          window.utools.setSubInputValue('');
+          return itemData.command.execute('', lastCallbackSetList)
         }
         if (itemData.action === 'download_app_hotkeys') {
           if (lastCallbackSetList) lastCallbackSetList([{ title: '正在获取数据...', description: `正在获取 [${itemData.title}] 的快捷键...`, icon: itemData.icon || 'logo.png' }]);
@@ -34,6 +49,7 @@ window.exports = {
           return;
         }
         if (itemData.action === 'noop') {
+          g_activeCommand = null;
           window.utools.setSubInputValue('')
           let result = enter()
           g_shortcuts = result[0]
@@ -59,12 +75,24 @@ window.exports = {
       },
       search: (action, searchWord, callbackSetList) => {
         lastCallbackSetList = callbackSetList
+        
+        if (g_activeCommand) {
+          if (searchWord.startsWith('/') && !searchWord.startsWith(g_activeCommand.keyword)) {
+            g_activeCommand = null;
+          } else {
+            g_activeCommand.execute(searchWord, callbackSetList);
+            return;
+          }
+        }
+
         const selected = search(searchWord, g_appShortcts, callbackSetList)
-        return callbackSetList(selected)
+        if (selected !== null) return callbackSetList(selected)
       },
       select: (action, itemData) => {
         if (itemData.action === 'slash_command') {
-          return itemData.command.execute(itemData.keyword, lastCallbackSetList)
+          g_activeCommand = itemData.command;
+          window.utools.setSubInputValue('');
+          return itemData.command.execute('', lastCallbackSetList)
         }
         if (itemData.action === 'download_app_hotkeys') {
           if (lastCallbackSetList) lastCallbackSetList([{ title: '正在获取数据...', description: `正在获取 [${itemData.title}] 的快捷键...`, icon: itemData.icon || 'logo.png' }]);
@@ -74,6 +102,7 @@ window.exports = {
           return;
         }
         if (itemData.action === 'noop') {
+          g_activeCommand = null;
           window.utools.setSubInputValue('')
           let result = enter()
           g_shortcuts = result[0]

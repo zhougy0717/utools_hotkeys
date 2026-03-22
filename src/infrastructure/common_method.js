@@ -1,12 +1,26 @@
 const slashCommandManager = require('../core/slash_command_manager.js')
 
-search = (searchWord, shortcuts) => {
+search = (searchWord, shortcuts, callbackSetList) => {
     // 优先处理斜线命令
     if (searchWord.startsWith('/')) {
-        const matchedItems = slashCommandManager.getCommandItems()
-            .filter(item => item.keyword.startsWith(searchWord.toLowerCase()));
-        if (matchedItems.length > 0) {
-            return matchedItems;
+        // Find if any command matches this prefix
+        const commandItems = slashCommandManager.getCommandItems();
+        
+        // Exact match or partial command matching (to show the command itself)
+        const matchedCommands = commandItems.filter(item => 
+            item.keyword.startsWith(searchWord.toLowerCase())
+        );
+
+        if (matchedCommands.length > 0) {
+            // If there's extra text after the keyword (e.g. "/download vs"), 
+            // trigger the command's real-time execution automatically.
+            const subQueryCommand = matchedCommands.find(c => searchWord.toLowerCase().startsWith(c.keyword + ' '));
+            if (subQueryCommand && subQueryCommand.command && typeof subQueryCommand.command.execute === 'function') {
+                // Return null and let the command's own execute handle the callbackSetList (async)
+                subQueryCommand.command.execute(searchWord, callbackSetList);
+                return null;
+            }
+            return matchedCommands;
         }
     }
 

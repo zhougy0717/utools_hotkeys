@@ -157,12 +157,29 @@ class HotkeyDataLoader {
     return locale.includes('zh') ? 'zh' : '';
   }
 
-  async fetchAndProcess(callbackSetList) {
+  getPlatformUrl() {
     const lang = this.getLang();
-    const baseUrl = lang ? `https://hotkeycheatsheet.com/${lang}` : 'https://hotkeycheatsheet.com';
+    const isMac = utools.isMacOs();
+    const platform = isMac ? 'macos' : 'windows';
+    return lang 
+      ? `https://hotkeycheatsheet.com/${lang}/os/${platform}` 
+      : `https://hotkeycheatsheet.com/os/${platform}`;
+  }
+
+  async fetchAndProcess(callbackSetList, force = false) {
+    const lang = this.getLang();
+    const storageId = `hotkey_app_list_${lang || 'default'}`;
+    const baseUrl = this.getPlatformUrl();
     
     try {
-      callbackSetList([{ title: '获取列表中...', description: '正在从 hotkeycheatsheet.com 拉取最新的应用列表', icon: 'icons/loading.gif' }]);
+      // Check cache first (24h)
+      const cached = utools.db.get(storageId);
+      if (!force && cached && cached.data && (Date.now() - cached.updatedAt < 24 * 60 * 60 * 1000)) {
+        console.log('[HotkeyDataLoader] Using cached app list from', new Date(cached.updatedAt).toLocaleString());
+        return cached.data;
+      }
+
+      callbackSetList([{ title: '获取列表中...', description: `正在从 hotkeycheatsheet.com 拉取最新的应用列表 (${utools.isMacOs() ? 'Mac' : 'Windows'})`, icon: 'icons/loading.gif' }]);
       
       const response = await fetch(baseUrl);
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -170,6 +187,9 @@ class HotkeyDataLoader {
       
       let apps = await this.parser.parseAppList(html);
       
+      // Sort alphabetically by name (Req 1)
+      apps.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+
       callbackSetList([{ title: '转换图标中...', description: `已找到 ${apps.length} 个应用，正在转换本地图标...`, icon: 'icons/loading.gif' }]);
 
       // Process icons in batches 
@@ -457,9 +477,10 @@ class HotkeyDataLoader {
                               }
                               
                               const keyword = `${appName} ${id} ${categoryName} ${name}`.toLowerCase();
+                              // Req 3: Data Enrichment - Title and Description
                               compiledShortcuts.push({
-                                  title: name,
-                                  description: item.description || '',
+                                  title: `${name} (${keys.join(' + ')})`,
+                                  description: appName,
                                   keys,
                                   keyword,
                                   category: categoryName,
@@ -481,9 +502,10 @@ class HotkeyDataLoader {
                               
                               const itemTitle = hk.name || hk.title || hk.action || name || '';
                               const keyword = `${appName} ${id} ${categoryName} ${itemTitle}`.toLowerCase();
+                              // Req 3: Data Enrichment
                               compiledShortcuts.push({
-                                  title: itemTitle,
-                                  description: hk.description || item.description || '',
+                                  title: `${itemTitle} (${keys.join(' + ')})`,
+                                  description: appName,
                                   keys,
                                   keyword,
                                   category: categoryName,
@@ -498,10 +520,11 @@ class HotkeyDataLoader {
                                   const keys = processBinding(binding);
                                   if (!keys || keys.length === 0) continue;
                                   
-                                  const keyword = `${appName} ${id} ${categoryName} ${name}`.toLowerCase();
+                                   const keyword = `${appName} ${id} ${categoryName} ${name}`.toLowerCase();
+                                  // Req 3: Data Enrichment
                                   compiledShortcuts.push({
-                                      title: name,
-                                      description: item.description || '',
+                                      title: `${name} (${keys.join(' + ')})`,
+                                      description: appName,
                                       keys,
                                       keyword,
                                       category: categoryName,
@@ -531,9 +554,10 @@ class HotkeyDataLoader {
                       const description = hk.description || '';
                       const keyword = `${appName} ${id} ${categoryName} ${title} ${description}`.toLowerCase();
                       
+                      // Req 3: Data Enrichment
                       compiledShortcuts.push({
-                          title,
-                          description,
+                          title: `${title} (${keys.join(' + ')})`,
+                          description: appName,
                           keys,
                           keyword,
                           category: categoryName,
@@ -619,15 +643,41 @@ class DownloadCommand {
   }
 
   async execute(searchWord, callbackSetList) {
-    const apps = await dataLoader.fetchAndProcess(callbackSetList);
-    if (apps) {
-      const displayList = apps.map(app => ({
+    if (!this.cachedApps) {
+      this.cachedApps = await dataLoader.fetchAndProcess(callbackSetList);
+    }
+    
+    if (this.cachedApps) {
+      // Handle both cases: 
+      // 1. Full command: "/download vs"
+      // 2. Cleared input: "vs" (after selecting /download)
+      const query = searchWord.toLowerCase().startsWith(this.keyword)
+        ? searchWord.replace(this.keyword, '').trim().toLowerCase()
+        : searchWord.trim().toLowerCase();
+
+      const filteredApps = query 
+        ? this.cachedApps.filter(app => app.name.toLowerCase().includes(query))
+        : this.cachedApps;
+
+      const displayList = filteredApps.map(app => ({
         title: app.name,
-        description: app.description,
+        description: app.description || `${app.id}`,
         icon: app.icon || 'logo.png',
         id: app.id,
         action: 'download_app_hotkeys'
       }));
+
+      // Add a "Back" option at the top if we are in specialized mode (no command prefix)
+      // and not currently filtering, or just to provide a way out.
+      if (!searchWord.toLowerCase().startsWith(this.keyword)) {
+        displayList.unshift({
+          title: '↩ 返回主搜索',
+          description: '退出下载模式，搜索本地已有的快捷键',
+          icon: 'logo.png',
+          action: 'noop'
+        });
+      }
+
       callbackSetList(displayList);
     }
   }

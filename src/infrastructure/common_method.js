@@ -44,8 +44,29 @@ doAction = (action, data) => {
 }
 
 hitKeys = (keys) => {
+    // List of keys that must not be at the first position
+    const modifiers = ['command', 'control', 'ctrl', 'shift', 'option', 'alt', 'meta'];
+
+    // If the first element is a modifier, find the first non-modifier (the "main" key) and move it to the front
+    if (keys.length > 1 && modifiers.includes(keys[0].toLowerCase())) {
+        const mainKeyIndex = keys.findIndex(k => !modifiers.includes(k.toLowerCase()));
+        
+        if (mainKeyIndex !== -1) {
+            const mainKey = keys[mainKeyIndex];
+            // Get all other keys (excluding the identified main key)
+            const remainingKeys = keys.filter((_, index) => index !== mainKeyIndex);
+            // Construct normalization: mainKey followed by all modifiers
+            const normalizedKeys = [mainKey, ...remainingKeys];
+            
+            utools.simulateKeyboardTap(...normalizedKeys);
+            return;
+        }
+    }
+
+    // Default to original sequence if already normalized or if no main key is found
     utools.simulateKeyboardTap(...keys)
 }
+
 
 handleShortcut = (keys) => {
     if (Array.isArray(keys[0])) {

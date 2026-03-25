@@ -199,7 +199,13 @@ class HotkeyDataLoader {
         return cached.data;
       }
 
-      callbackSetList([{ title: '获取列表中...', description: `正在从 hotkeycheatsheet.com 拉取最新的应用列表 (${utools.isMacOs() ? 'Mac' : 'Windows'})`, icon: 'icons/loading.gif' }]);
+      const statusCb = (list) => {
+        if (typeof callbackSetList === 'function') {
+           callbackSetList(list);
+        }
+      };
+
+      statusCb([{ title: '获取列表中...', description: `正在从 hotkeycheatsheet.com 拉取最新的应用列表 (${utools.isMacOs() ? 'Mac' : 'Windows'})`, icon: 'icons/loading.gif' }]);
       
       const response = await fetch(baseUrl);
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -210,7 +216,7 @@ class HotkeyDataLoader {
       // Sort alphabetically by name (Req 1)
       apps.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
 
-      callbackSetList([{ title: '转换图标中...', description: `已找到 ${apps.length} 个应用，正在转换本地图标...`, icon: 'icons/loading.gif' }]);
+      statusCb([{ title: '转换图标中...', description: `已找到 ${apps.length} 个应用，正在转换本地图标...`, icon: 'icons/loading.gif' }]);
 
       // Process icons in batches 
       const batchSize = 10;
@@ -239,7 +245,7 @@ class HotkeyDataLoader {
       return apps;
     } catch (e) {
       console.error('Failed to fetch app list', e);
-      callbackSetList([{ 
+      statusCb([{ 
         title: '拉取失败', 
         description: '请检查网络连接或稍后再试: ' + e.message, 
         action: 'noop'
@@ -659,6 +665,8 @@ const dataLoader = new HotkeyDataLoader();
 class DownloadCommand {
   constructor() {
     this.keyword = '/download';
+    this.fetchPromise = null;
+    this.cachedApps = null;
   }
 
   description() {
@@ -667,6 +675,7 @@ class DownloadCommand {
     const existing = utools.db.get(storageId);
     let timeStr = '从未同步';
     if (existing && existing.updatedAt) {
+      existing.updatedAt = Number(existing.updatedAt);
       timeStr = new Date(existing.updatedAt).toLocaleDateString();
     }
     return `下载快捷键配置。上次同步：${timeStr}`;
@@ -678,15 +687,20 @@ class DownloadCommand {
 
   async execute(searchWord, callbackSetList) {
     if (!this.cachedApps) {
-      this.cachedApps = await dataLoader.fetchAndProcess(callbackSetList);
+      if (!this.fetchPromise) {
+        this.fetchPromise = dataLoader.fetchAndProcess(callbackSetList);
+      }
+      try {
+        const apps = await this.fetchPromise;
+        if (apps) this.cachedApps = apps;
+      } finally {
+        this.fetchPromise = null;
+      }
     }
     
     if (this.cachedApps) {
-      // Handle both cases: 
-      // 1. Full command: "/download vs"
-      // 2. Cleared input: "vs" (after selecting /download)
       const query = searchWord.toLowerCase().startsWith(this.keyword)
-        ? searchWord.replace(this.keyword, '').trim().toLowerCase()
+        ? searchWord.substring(this.keyword.length).trim().toLowerCase()
         : searchWord.trim().toLowerCase();
 
       const filteredApps = query 
@@ -728,7 +742,9 @@ class DownloadCommand {
         });
       }
 
-      callbackSetList(displayList);
+      if (typeof callbackSetList === 'function') {
+        callbackSetList(displayList);
+      }
     }
   }
 

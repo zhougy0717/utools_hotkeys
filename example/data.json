@@ -1,0 +1,9 @@
+{
+    "app": "test app",
+    "shortcuts":[{
+    "title": "显示音频面板 command + shift + A",
+    "description": "显示音频面板",
+    "keyword": "show audio panel xian shi yin pin mian ban",
+    "keys": ["a", "shift", "command"]
+}]
+}

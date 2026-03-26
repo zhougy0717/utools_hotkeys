@@ -6,32 +6,43 @@
   "homepage": "https://u.tools",
   "preload": "src/adapter/preload.js",
   "logo": "logo.png",
-  "platform": ["darwin", "win32"],
-  "features": [{
-    "platform": ["darwin", "win32"],
-    "code": "shortcuts",
-    "explain": "查找快捷键",
-    "cmds": [
-      "快捷键",
-      "hk",
-      "hotkey"
-    ]
-  },
-  {
-    "platform": ["darwin", "win32"],
-    "code": "app_shortcuts",
-    "explain": "查找应用快捷键",
-    "cmds": [{
-        "type": "window",
-        "label": "查找应用快捷键",
-        "match": {
+  "platform": [
+    "darwin",
+    "win32"
+  ],
+  "features": [
+    {
+      "platform": [
+        "darwin",
+        "win32"
+      ],
+      "code": "shortcuts",
+      "explain": "查找快捷键",
+      "cmds": [
+        "快捷键",
+        "hk",
+        "hotkey"
+      ]
+    },
+    {
+      "platform": [
+        "darwin",
+        "win32"
+      ],
+      "code": "app_shortcuts",
+      "explain": "查找应用快捷键",
+      "cmds": [
+        {
+          "type": "window",
+          "label": "查找应用快捷键",
+          "match": {
             "app": [
               "Microsoft Word.app",
               "Microsoft Excel.app",
               "Microsoft PowerPoint.app",
               "Microsoft OneNote.app",
               "PDF Expert.app",
-              "Follow.app",
+              "Folo.app",
               "UPDF.app",
               "Visual Studio Code.app",
               "Magnet.app",
@@ -90,8 +101,11 @@
               "snipaste.exe",
               "ONENOTE.EXE",
               "PotPlayerMini64.exe",
-              "VSCode-huawei.exe"]
+              "VSCode-huawei.exe"
+            ]
+          }
         }
-    }]
-  }]
+      ]
+    }
+  ]
 }

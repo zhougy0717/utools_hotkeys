@@ -24,7 +24,8 @@ if (savedPath) {
   });
 }
 
-require('../core/hotkey_service.js') // Load and register commands
+require('../core/hotkeycheatsheet.js') // Load data loader logic
+require('../core/slash_commands/index.js') // Load and register commands
 
 let lastCallbackSetList = null
 window.exports = {
@@ -62,7 +63,7 @@ window.exports = {
         }
         if (itemData.action === 'download_app_hotkeys') {
           if (lastCallbackSetList) lastCallbackSetList([{ title: '正在获取数据...', description: `正在获取 [${itemData.title}] 的快捷键...`, icon: itemData.icon || 'logo.png' }]);
-          require('../core/hotkey_service.js').dataLoader.fetchAndProcessAppHotkeys(itemData.id, lastCallbackSetList, itemData.icon)
+          require('../core/hotkeycheatsheet.js').dataLoader.fetchAndProcessAppHotkeys(itemData.id, lastCallbackSetList, itemData.icon)
             .then(() => { if (lastCallbackSetList) lastCallbackSetList([{ title: '下载成功！', description: `[${itemData.title}] 下载完成，按回车返回或直接开始搜索。`, icon: itemData.icon || 'logo.png', action: 'noop' }]); })
             .catch(e => { if (lastCallbackSetList) lastCallbackSetList([{ title: '下载失败', description: e.message, icon: itemData.icon || 'logo.png', action: 'noop' }]); });
           return;
@@ -121,7 +122,7 @@ window.exports = {
         }
         if (itemData.action === 'download_app_hotkeys') {
           if (lastCallbackSetList) lastCallbackSetList([{ title: '正在获取数据...', description: `正在获取 [${itemData.title}] 的快捷键...`, icon: itemData.icon || 'logo.png' }]);
-          require('../core/hotkey_service.js').dataLoader.fetchAndProcessAppHotkeys(itemData.id, lastCallbackSetList, itemData.icon)
+          require('../core/hotkeycheatsheet.js').dataLoader.fetchAndProcessAppHotkeys(itemData.id, lastCallbackSetList, itemData.icon)
             .then(() => { if (lastCallbackSetList) lastCallbackSetList([{ title: '下载成功！', description: `[${itemData.title}] 下载完成，按回车返回或直接开始搜索。`, icon: itemData.icon || 'logo.png', action: 'noop' }]); })
             .catch(e => { if (lastCallbackSetList) lastCallbackSetList([{ title: '下载失败', description: e.message, icon: itemData.icon || 'logo.png', action: 'noop' }]); });
           return;

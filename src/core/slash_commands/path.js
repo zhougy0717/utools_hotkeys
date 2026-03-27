@@ -37,17 +37,24 @@ class PathCommand {
           const jsonDir = path.join(selectedPath, 'json_hotkeys');
           if (!fs.existsSync(jsonDir)) {
             fs.mkdirSync(jsonDir, { recursive: true });
-            const template = [
+          }
+          
+          const templatePath = path.join(jsonDir, 'template.json');
+          const template = {
+            "appId": "custom_hotkeys_template",
+            "appName": "自定义快捷键模板",
+            "updatedAt": Date.now(),
+            "shortcuts": [
               {
                 "title": "示例：浏览器刷新 (自定义 JSON)",
                 "keys": ["{cmd_or_ctrl}", "r"],
                 "keyword": "refresh 刷新",
                 "description": "这是一个通过自定义 JSON 加载的示例快捷键"
               }
-            ];
-            fs.writeFileSync(path.join(jsonDir, 'template.json'), JSON.stringify(template, null, 2), 'utf8');
-            console.log('[PathCommand] Created json_hotkeys/template.json');
-          }
+            ]
+          };
+          fs.writeFileSync(templatePath, JSON.stringify(template, null, 2), 'utf8');
+          console.log('[PathCommand] Updated json_hotkeys/template.json');
         } catch (e) {
           console.warn('[PathCommand] Failed to initialize json_hotkeys folder', e);
         }

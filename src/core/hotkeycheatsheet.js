@@ -598,60 +598,74 @@ class HotkeyDataLoader {
       }
 
       const docToSave = {
-          _id: `hotkeys_app_${id}`,
           appId: id,
-          name: appName,
+          appName: appName,
+          icon: appIcon,
           shortcuts: compiledShortcuts,
           updatedAt: Date.now()
       };
 
-      console.log(`[HotkeyService] Saving ${compiledShortcuts.length} shortcuts for ${appName} (ID: ${id}) to storage`);
+      console.log(`[HotkeyService] Saving ${compiledShortcuts.length} shortcuts for ${appName} (ID: ${id}) to JSON`);
       
-      // Save to SQLite (Primary)
-      const savedToSqlite = await sqliteService.saveAppHotkeys(id, appName, appIcon, compiledShortcuts);
+      const savedToJson = await this.saveToJson(id, appName, appIcon, compiledShortcuts);
 
-      if (savedToSqlite) {
-          console.log(`[HotkeyService] Successfully saved ${id} to SQLite`);
-          // If successfully saved to SQLite, we should CLEAN UP any existing data in utools.db for this app to free up space (1MB limit)
-          const existing = utools.db.get(docToSave._id);
+      if (savedToJson) {
+          console.log(`[HotkeyService] Successfully saved ${id} to JSON file`);
+          // Clean up legacy records if they exist to prevent confusion
+          const legacyId = `hotkeys_app_${id}`;
+          const existing = utools.db.get(legacyId);
           if (existing) {
               utools.db.remove(existing);
-              console.log(`[HotkeyService] Removed legacy utools.db record for ${id}`);
+              console.log(`[HotkeyService] Removed legacy PouchDB record for ${id}`);
           }
       } else {
-          // Fallback to utools.db ONLY if SQLite is not available/configured
-          console.warn(`[HotkeyService] SQLite not active. Saving to utools.db (subject to 1MB limit)`);
-          const existing = utools.db.get(docToSave._id);
-          let res;
-          if (existing) {
-              res = utools.db.put({ ...docToSave, _rev: existing._rev });
-          } else {
-              res = utools.db.put(docToSave);
-          }
-
-          if (res && res.error) {
-              console.error('[HotkeyService] utools.db Save failed:', res);
-              throw new Error(`数据库保存失败: ${res.message || '未知错误'}`);
-          }
-          console.log('[HotkeyService] utools.db Save successful (Fallback mode)');
+          throw new Error('无法保存快捷键数据到本地文件，请检查存储路径设置。');
       }
 
       // Refresh global state
-      if (typeof enter === 'function') {
-          enter();
-      } else {
-          try {
-              require('../infrastructure/common_method.js').enter();
-          } catch (e) {
-              console.warn('[HotkeyService] Failed to call enter() for refresh', e);
-          }
+      try {
+          require('../infrastructure/common_method.js').enter();
+      } catch (e) {
+          console.warn('[HotkeyService] Failed to call enter() for refresh', e);
       }
       
       return true;
-
     } catch (e) {
       console.error('Failed to fetch and process app hotkeys', e);
       throw e;
+    }
+  }
+
+  /**
+   * Saves shortcut data to a local JSON file per Spec-00010
+   */
+  async saveToJson(appId, appName, appIcon, shortcuts) {
+    try {
+        const configPath = utools.dbStorage.getItem('sqlite_db_path');
+        if (!configPath) {
+            console.error('[HotkeyService] sqlite_db_path not set');
+            return false;
+        }
+
+        const targetDir = path.join(configPath, 'hotkeycheatsheet');
+        if (!fs.existsSync(targetDir)) {
+            fs.mkdirSync(targetDir, { recursive: true });
+        }
+
+        const filePath = path.join(targetDir, `${appId}.json`);
+        const data = {
+            appId,
+            appName,
+            icon: appIcon,
+            updatedAt: Date.now(),
+            shortcuts
+        };
+
+        fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+        return true;
+    } catch (e) {
+        console.error('[HotkeyService] Failed to save JSON file', e);
+        return false;
     }
   }
 }

@@ -10,34 +10,67 @@ class JsonHotkeysLoader {
      * @param {string} basePath The user configured storage path
      */
     load(basePath) {
-        if (!basePath) return [];
+        if (!basePath) return { shortcuts: [], downloadedApps: [] };
 
-        const jsonDir = path.join(basePath, 'json_hotkeys');
-        if (!fs.existsSync(jsonDir)) {
-            return [];
-        }
+        const allCustomShortcuts = [];
+        const downloadedApps = [];
 
-        let allCustomShortcuts = [];
         try {
-            const files = fs.readdirSync(jsonDir).filter(f => f.endsWith('.json'));
-            for (const file of files) {
-                const filePath = path.join(jsonDir, file);
+            const files = this.scanRecursive(basePath);
+            for (const filePath of files) {
                 try {
                     const content = fs.readFileSync(filePath, 'utf8');
                     const data = JSON.parse(content);
-                    if (Array.isArray(data)) {
-                        const processed = data.map(item => this.processItem(item));
-                        allCustomShortcuts = allCustomShortcuts.concat(processed);
+                    
+                    // Unified Schema: { appId, appName, shortcuts: [...] }
+                    if (data && Array.isArray(data.shortcuts)) {
+                        const appId = data.appId || path.basename(filePath, '.json');
+                        downloadedApps.push(appId);
+                        
+                        const processed = data.shortcuts.map(item => {
+                            const processedItem = this.processItem(item);
+                            // Ensure each shortcut carries its appId for global tracking
+                            processedItem.appId = appId;
+                            processedItem.appName = data.appName || appId;
+                            return processedItem;
+                        });
+                        allCustomShortcuts.push(...processed);
+                    } 
+                    // Legacy support removed per SPEC-00010, but we can log non-compliant files
+                    else if (Array.isArray(data)) {
+                        console.warn(`[JsonHotkeysLoader] Skipping legacy array format in ${filePath}. Please migrate to object schema.`);
                     }
                 } catch (e) {
-                    console.error(`[JsonHotkeysLoader] Failed to parse ${file}:`, e);
+                    console.error(`[JsonHotkeysLoader] Failed to parse ${filePath}:`, e);
                 }
             }
         } catch (e) {
-            console.error(`[JsonHotkeysLoader] Failed to read directory ${jsonDir}:`, e);
+            console.error(`[JsonHotkeysLoader] Failed to process basePath ${basePath}:`, e);
         }
 
-        return allCustomShortcuts;
+        return { shortcuts: allCustomShortcuts, downloadedApps };
+    }
+
+    /**
+     * Recursively scans a directory for .json files.
+     * @param {string} dir Directory to scan
+     * @returns {string[]} List of absolute file paths
+     */
+    scanRecursive(dir) {
+        let results = [];
+        if (!fs.existsSync(dir)) return results;
+        
+        const list = fs.readdirSync(dir);
+        for (const file of list) {
+            const filePath = path.join(dir, file);
+            const stat = fs.statSync(filePath);
+            if (stat && stat.isDirectory()) {
+                results = results.concat(this.scanRecursive(filePath));
+            } else if (file.endsWith('.json')) {
+                results.push(filePath);
+            }
+        }
+        return results;
     }
 
     /**

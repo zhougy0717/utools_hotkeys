@@ -52,7 +52,10 @@ function loadAllShortcuts() {
 
     // Phase 1: Custom JSON
     results.filter(r => getLoaderName(r.loader) === 'JsonHotkeysLoader')
-           .forEach(r => allShortcuts = allShortcuts.concat(r.data));
+           .forEach(r => {
+               const data = r.data.shortcuts || (Array.isArray(r.data) ? r.data : []);
+               allShortcuts = allShortcuts.concat(data);
+           });
 
     // Phase 2: SQLite / DB
     results.filter(r => getLoaderName(r.loader) === 'SqliteLoader')
@@ -70,8 +73,9 @@ function loadAllShortcuts() {
 
     // Final Feedback for Custom Hotkeys
     const customJSON = results.find(r => getLoaderName(r.loader) === 'JsonHotkeysLoader');
-    if (customJSON && customJSON.data.length > 0) {
-        utools.showNotification(`已成功加载 ${customJSON.data.length} 个用户自定义快捷键`);
+    const customCount = customJSON ? (customJSON.data.shortcuts ? customJSON.data.shortcuts.length : (Array.isArray(customJSON.data) ? customJSON.data.length : 0)) : 0;
+    if (customCount > 0) {
+        utools.showNotification(`已成功加载 ${customCount} 个用户自定义快捷键`);
     }
 
     console.log(`[ShortcutsLoader] Total shortcuts aggregated: ${allShortcuts.length}`);

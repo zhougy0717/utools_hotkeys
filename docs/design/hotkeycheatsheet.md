@@ -2,14 +2,13 @@
 
 ## 1. 模块上下文与外部接口 (Module Context & External Interfaces)
 
-`hotkeycheatsheet` 是负责从外部源同步快捷键数据，并将其持久化到本地的数据服务层。与之配合的斜线命令已解耦至独立目录。
+`hotkeycheatsheet` 是负责从外部源同步快捷键数据，并将其持久化到本地的数据服务层。与之配合的斜线命令机制已解耦。该服务通过动作注册表（Action Registry）进行事件分发，与页面 UI 层（Adapter）交互。
 
 ### 1.1 外部依赖 (External Contacts)
 *   **hotkeycheatsheet.com**: 数据来源。服务通过 HTTP 抓取该站点的 HTML 和 RSC (React Server Components) 流。
 *   **uTools API**:
-    *   `utools.db`: 用于存储轻量级的应用列表信息和同步元数据。
+    *   `utools.db`: 用于存储轻量级的应用列表信息和同步元数据，以及无 SQLite 时的降级存储方案。
     *   `utools.dbStorage`: 用于存储用户配置（如 SQLite 路径）。
-    *   `utools.showOpenDialog`: 选择本地存储路径。
 
 ### 1.2 外部模块交互关系 (External Interaction Diagram)
 
@@ -25,40 +24,41 @@ package "uTools Adapter Layer" #E3F2FD {
 }
 
 package "Core Business Logic" #FFFDE7 {
-    [hotkeycheatsheet.js] as HCS <<数据服务>>
-    [SlashCommandManager] as SCM <<调度中心>>
-    folder "slash_commands" {
-        [index.js] as SCI <<指令初始化>>
+    [ActionRegistry] as Registry <<动作分发>>
+    [UI - Adapter/Interface] as UI <<UI抽象/服务>>
+    [CommonMethod] as CM <<通用方法/逻辑>>
+    package "Action Handlers" {
+        [DownloadAppHandler]
     }
+    [hotkeycheatsheet.js] as HCS <<数据服务>>
 }
 
 package "Infrastructure" #F1F8E9 {
     [SqliteService] as SQLite <<存储引擎>>
-    [CommonMethod] as CM <<状态/通用方法>>
 }
 
 database "External / System" #F5F5F5 {
-    [uTools API / DB] as UAPI
+    [uTools DB / Storage] as UAPI
     [hotkeycheatsheet.com] as Web
 }
 
-' 交互定义
-Preload --> HCS : 1. 加载数据处理逻辑
-Preload --> SCI : 2. 加载并注册斜线指令
-SCI --> SCM : 注册 (/download, /path)
-Preload --> SCM : 3. 匹配并分发用户输入
-Preload --> HCS : 4. 点击列表项调用同步逻辑
+' 依赖关系定义 (A ..> B 表示 A 依赖 B)
+Preload ..> Registry : <<use>>
+Preload ..> UI : <<use>> 构造 UI 实例
+Preload ..> CM : <<call>>
+Preload ..> SQLite : <<call>> 初始化数据库
 
-HCS --> SQLite : 5. 存储详情
-HCS --> CM : 6. 状态刷新
-HCS --> UAPI : 调用本地接口
-HCS --> Web : 抓取数据
+Registry ..> DownloadAppHandler : <<dispatch>>
+
+DownloadAppHandler ..> HCS : <<use>>
+DownloadAppHandler ..> UI : <<context>> 调用 UI 反馈接口
+
+HCS ..> SQLite : <<use>>
+HCS ..> CM : <<call>> 列表刷新
+HCS ..> UAPI : <<use>>
+HCS ..> Web : <<access>>
 @enduml
 ```
-
-### 1.3 暴露的指令接口 (Slash Command Interfaces)
-*   **`/download`**: 开启应用列表获取流程。抽离至 `src/core/slash_commands/download.js`。
-*   **`/path`**: 设置 SQLite 数据库存储路径。抽离至 `src/core/slash_commands/path.js`。
 
 ---
 
@@ -70,8 +70,9 @@ HCS --> Web : 抓取数据
 | :--- | :--- | :--- |
 | **HotkeyCheatsheetParser** | 网页内容萃取 | 支持 DOM、`__NEXT_DATA__` 及 `__next_f` RSC 流解析。 |
 | **HotkeyDataLoader** | 数据生命周期管理 | 处理异步加载、24h 过期检查、图标转码及多平台路由。 |
-| **DownloadCommand** | `/download` 交互 | 实现 `SlashCommand` 接口，动态更新应用列表。 |
-| **PathCommand** | `/path` 配置管理 | 处理存储初始化、目录管理及核心数据迁移。 |
+| **ActionRegistry** | 动作路由分发 | 解耦 `preload.js` 内 UI 交互调用，映射 `action` 到具体处理中心。 |
+| **Action Handlers** | 业务逻辑执行 (例: `download_app`) | 承接具体意图，调度服务层，编排用户反馈，清理界面上下文。 |
+| **UIAdapter** | 前端交互隔离与提供 | 封装基于 `utools` 的通知 (`showNotification`) 和列表回调刷新。 |
 
 ### 2.2 数据同步与解析流程 (Data Sync Workflow)
 
@@ -80,23 +81,29 @@ HCS --> Web : 抓取数据
 title Hotkey Service - 数据同步与解析流程 (Data Sync Workflow)
 
 actor User
-participant DC as "DownloadCommand"
+participant Preload
+participant UIAdapter as UI
+participant Registry
+participant Handler as "DownloadAppHandler"
 participant Loader as "HotkeyDataLoader"
 participant Parser as "HotkeyCheatsheetParser"
 participant SQLite as "SqliteService"
 participant Web as "Web Source"
 
-User -> DC : 输入命令搜索
-DC -> Loader : fetchAndProcess()
-Loader -> Web : 获取数据
-Loader -> Parser : 解析内容
-Loader -> User : 展示列表
-
-User -> DC : 点击下载
-DC -> Loader : fetchAndProcessAppHotkeys()
-Loader -> Web : 获取详情
-Loader -> Parser : 提取 allHotkeys
-Loader -> SQLite : 持久化存储
+User -> Preload : 点击列表项（如"下载快捷键配置"）
+Preload -> Registry : handle('download_app_hotkeys', data, ui, context)
+Registry -> Handler : 执行 handle()
+Handler -> UI : setLoading / showNotification (获取数据中)
+Handler -> Loader : fetchAndProcessAppHotkeys()
+Loader -> Web : HTTP Fetch(HTML + Next.js RSC)
+Web --> Loader : 返回原生流数据
+Loader -> Parser : 解析提取全量快捷键字典
+Parser --> Loader : 返回结构化快捷键及标题等信息
+Loader -> SQLite : 持久化快捷键数据集
+Loader -> Loader : 自动清理旧的 utools.db 同步缓存
+Loader --> Handler : 返回成功 (true)
+Handler -> UI : 关闭加载反馈、清除输入并退出模式
+Handler -> UI : 渲染主页列表展示最新结果
 @enduml
 ```
 

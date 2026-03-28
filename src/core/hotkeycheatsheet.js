@@ -4,7 +4,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const sqliteService = require('../infrastructure/sqlite_service.js');
 
 
 class HotkeyCheatsheetParser {
@@ -643,7 +642,7 @@ class HotkeyDataLoader {
     try {
         const configPath = utools.dbStorage.getItem('sqlite_db_path');
         if (!configPath) {
-            console.error('[HotkeyService] sqlite_db_path not set');
+            console.error('[HotkeyService] data path not set');
             return false;
         }
 

@@ -4,3 +4,4 @@ package-lock.json
 快捷键数据/
 tmp/
 .temp/
+.DS_Store

@@ -35,12 +35,18 @@ class JsonHotkeysLoader {
                                 const processedItem = this.processItem(item);
                                 
                                 // Resolve relative icon paths against the JSON file's directory
+                                // Standardize absolute paths to file:// protocol for uTools rendering
                                 // Skip data URIs (base64) and URLs
                                 if (processedItem.icon 
-                                    && !path.isAbsolute(processedItem.icon)
                                     && !processedItem.icon.startsWith('data:')
-                                    && !processedItem.icon.startsWith('http')) {
-                                    processedItem.icon = path.join(path.dirname(filePath), processedItem.icon);
+                                    && !processedItem.icon.startsWith('http')
+                                    && !processedItem.icon.startsWith('file://')) {
+                                    
+                                    const absPath = path.isAbsolute(processedItem.icon)
+                                        ? processedItem.icon
+                                        : path.join(path.dirname(filePath), processedItem.icon);
+                                        
+                                    processedItem.icon = require('url').pathToFileURL(absPath).href;
                                 }
 
                                 // Ensure each shortcut carries its appId for global tracking

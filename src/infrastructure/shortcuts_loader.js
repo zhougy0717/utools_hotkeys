@@ -13,7 +13,7 @@ function loadAllShortcuts() {
         return [];
     }
 
-    // Get current storage path for custom JSON (shared with SQLite)
+    // Get current storage path for custom JSON
     const configPath = utools.db.get('sqlite_db_path');
     const basePath = configPath ? configPath.value : null;
 
@@ -41,7 +41,6 @@ function loadAllShortcuts() {
      * 1. json_hotkeys (User Custom JSON)  — highest priority
      * 2. builtin (Plugin built-in data)   — secondary
      * 3. hotkeycheatsheet (Downloaded)    — lowest
-     * 4. SQLite (Legacy fallback)         — filtered by all above
      *
      * When the same app (by normalized ID) exists in multiple sources,
      * only the highest-priority source's data is kept.
@@ -92,15 +91,6 @@ function loadAllShortcuts() {
                allShortcuts = allShortcuts.concat(hotkeycheatsheetOnly);
            });
 
-    // Phase 4: SQLite fallback (legacy, filtered by all claimed)
-    results.filter(r => getLoaderName(r.loader) === 'SqliteLoader')
-           .forEach(r => {
-               const data = r.data.shortcuts || r.data;
-               const filtered = Array.isArray(data)
-                   ? data.filter(s => !claimedApps.has(normalizeAppId(s.appId)))
-                   : data;
-               allShortcuts = allShortcuts.concat(filtered);
-           });
 
     // Final Feedback for Custom Hotkeys
     const customJSON = results.find(r => getLoaderName(r.loader) === 'JsonHotkeysLoader');

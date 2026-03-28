@@ -10,7 +10,7 @@ class ExecuteExportHandler {
   async handle(itemData, ui, context) {
     const savedPath = utools.dbStorage.getItem('sqlite_db_path');
     if (!savedPath) {
-      utools.showNotification('未设置数据库路径，请先使用 /path 设置');
+      utools.showNotification('未设置数据路径，请先使用 /path 设置');
       return;
     }
 

@@ -25,7 +25,7 @@ class ExportCommand {
     if (!savedPath) {
       return callbackSetList([{
         title: '路径未设置',
-        description: '导出之前请先使用 /path 设置 SQLite 数据库存放路径',
+        description: '导出之前请先使用 /path 设置快捷键数据存放目录',
         icon: 'logo.png',
         action: 'noop'
       }]);

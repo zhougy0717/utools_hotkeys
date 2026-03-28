@@ -52,11 +52,44 @@ function test3() {
     }
 }
 
-function test4() {
-    console.log('Test 4: 应该聚合自定义 JSON 快捷键');
-    const shortcuts = loadAllShortcuts();
-    const hasCustom = shortcuts.some(s => s.title && s.title.includes('自定义 JSON'));
-    assert(hasCustom, '应包含来自 template.json 的自定义快捷键');
+function test5() {
+    console.log('Test 5: json_hotkeys 应覆盖 builtin 中的同名应用 (优先级去重)');
+    const { normalizeAppId } = require('../src/infrastructure/app_id_normalizer.js');
+    
+    // Setup: 在 mock_config/json_hotkeys/ 放一个 vscode.json
+    const mockBasePath = path.join(__dirname, 'mock_config');
+    const jsonDir = path.join(mockBasePath, 'json_hotkeys');
+    if (!fs.existsSync(jsonDir)) fs.mkdirSync(jsonDir, { recursive: true });
+    
+    const customVscode = {
+        appId: 'vscode',
+        appName: 'VS Code (Custom)',
+        shortcuts: [
+            { title: 'Custom Shortcut (ctrl+k)', keys: ['ctrl', 'k'], keyword: 'vscode custom' }
+        ]
+    };
+    fs.writeFileSync(path.join(jsonDir, 'vscode.json'), JSON.stringify(customVscode));
+    
+    // Clear require cache so shortcuts_loader re-discovers files
+    delete require.cache[require.resolve('../src/infrastructure/shortcuts_loader.js')];
+    delete require.cache[require.resolve('../src/infrastructure/loaders/json_hotkeys_loader.js')];
+    const loadAll = require('../src/infrastructure/shortcuts_loader.js');
+    const shortcuts = loadAll();
+    
+    // vscode shortcuts should come from json_hotkeys (Custom), NOT builtin
+    const vscodeShortcuts = shortcuts.filter(s =>
+        normalizeAppId(s.appId) === normalizeAppId('vscode')
+    );
+    
+    const hasCustom = vscodeShortcuts.some(s => s.title && s.title.includes('Custom Shortcut'));
+    assert(hasCustom, 'json_hotkeys 中的 vscode 应被加载');
+    
+    // All vscode shortcuts should be from json_hotkeys source
+    const hasBuiltin = vscodeShortcuts.some(s => s._source === undefined);
+    assert(!hasBuiltin, 'builtin 中的 vscode 应被过滤掉');
+    
+    // Cleanup
+    fs.unlinkSync(path.join(jsonDir, 'vscode.json'));
     console.log('  Passed.');
 }
 
@@ -64,7 +97,7 @@ try {
     test1();
     test2();
     test3();
-    test4();
+    test5();
     console.log('\nFinal Integration tests passed!');
 } catch (e) {
     console.error('\nTest failed:', e);

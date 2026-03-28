@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { normalizeAppId } = require('./app_id_normalizer.js');
 
 /**
  * Main dispatcher for all shortcut loaders.
@@ -17,7 +18,6 @@ function loadAllShortcuts() {
     const basePath = configPath ? configPath.value : null;
 
     let allShortcuts = [];
-    const downloadedSet = new Set();
     
     // Dynamically discover all loader plugins
     const loaderFiles = fs.readdirSync(loadersDir).filter(f => f.endsWith('.js'));
@@ -30,11 +30,6 @@ function loadAllShortcuts() {
             if (typeof loader.load === 'function') {
                 const data = loader.load(basePath);
                 results.push({ loader, data });
-                
-                // Identify downloaded apps to avoid duplicate builtin entries
-                if (data && data.downloadedApps) {
-                    data.downloadedApps.forEach(appId => downloadedSet.add(appId));
-                }
             }
         } catch (e) {
             console.error(`[ShortcutsLoader] Failed to execute plugin ${file}:`, e);
@@ -42,32 +37,68 @@ function loadAllShortcuts() {
     }
 
     /**
-     * Aggregation Logic:
-     * 1. JsonHotkeysLoader (User Custom): Highest priority, added first.
-     * 2. SqliteLoader (Downloaded Apps): Secondary priority.
-     * 3. BuiltinLoader (Default): Filtered by downloadedSet to prevent duplicates.
+     * Aggregation Logic (priority order):
+     * 1. json_hotkeys (User Custom JSON)  — highest priority
+     * 2. builtin (Plugin built-in data)   — secondary
+     * 3. hotkeycheatsheet (Downloaded)    — lowest
+     * 4. SQLite (Legacy fallback)         — filtered by all above
+     *
+     * When the same app (by normalized ID) exists in multiple sources,
+     * only the highest-priority source's data is kept.
      */
 
     const getLoaderName = (inst) => inst.constructor.name;
 
-    // Phase 1: Custom JSON
+    // Track which normalized app IDs have been claimed by higher-priority sources
+    const claimedApps = new Set();
+
+    // Phase 1: json_hotkeys (highest priority)
     results.filter(r => getLoaderName(r.loader) === 'JsonHotkeysLoader')
            .forEach(r => {
                const data = r.data.shortcuts || (Array.isArray(r.data) ? r.data : []);
-               allShortcuts = allShortcuts.concat(data);
+               const jsonHotkeysOnly = data.filter(s => s._source === 'json_hotkeys');
+               jsonHotkeysOnly.forEach(s => claimedApps.add(normalizeAppId(s.appId)));
+               allShortcuts = allShortcuts.concat(jsonHotkeysOnly);
            });
 
-    // Phase 2: SQLite / DB
+    // Phase 2: builtin (secondary priority, filtered by claimed)
+    // 2a: Exported builtin/ JSON files take precedence over hardcoded BuiltinLoader
+    results.filter(r => getLoaderName(r.loader) === 'JsonHotkeysLoader')
+           .forEach(r => {
+               const data = r.data.shortcuts || (Array.isArray(r.data) ? r.data : []);
+               const builtinExported = data.filter(s =>
+                   s._source === 'builtin' && !claimedApps.has(normalizeAppId(s.appId))
+               );
+               builtinExported.forEach(s => claimedApps.add(normalizeAppId(s.appId)));
+               allShortcuts = allShortcuts.concat(builtinExported);
+           });
+    // 2b: Hardcoded BuiltinLoader (skipped for apps already covered by exported builtin/)
+    results.filter(r => getLoaderName(r.loader) === 'BuiltinLoader')
+           .forEach(r => {
+               const filtered = r.data.filter(s => !claimedApps.has(normalizeAppId(s.appId)));
+               // Register builtin app IDs so hotkeycheatsheet won't duplicate
+               filtered.forEach(s => claimedApps.add(normalizeAppId(s.appId)));
+               allShortcuts = allShortcuts.concat(filtered);
+           });
+
+    // Phase 3: hotkeycheatsheet (lowest priority, filtered by claimed)
+    results.filter(r => getLoaderName(r.loader) === 'JsonHotkeysLoader')
+           .forEach(r => {
+               const data = r.data.shortcuts || (Array.isArray(r.data) ? r.data : []);
+               const hotkeycheatsheetOnly = data.filter(s =>
+                   s._source === 'hotkeycheatsheet' && !claimedApps.has(normalizeAppId(s.appId))
+               );
+               hotkeycheatsheetOnly.forEach(s => claimedApps.add(normalizeAppId(s.appId)));
+               allShortcuts = allShortcuts.concat(hotkeycheatsheetOnly);
+           });
+
+    // Phase 4: SQLite fallback (legacy, filtered by all claimed)
     results.filter(r => getLoaderName(r.loader) === 'SqliteLoader')
            .forEach(r => {
                const data = r.data.shortcuts || r.data;
-               allShortcuts = allShortcuts.concat(data);
-           });
-
-    // Phase 3: Builtin (Filtered)
-    results.filter(r => getLoaderName(r.loader) === 'BuiltinLoader')
-           .forEach(r => {
-               const filtered = r.data.filter(s => !downloadedSet.has(s.appId));
+               const filtered = Array.isArray(data)
+                   ? data.filter(s => !claimedApps.has(normalizeAppId(s.appId)))
+                   : data;
                allShortcuts = allShortcuts.concat(filtered);
            });
 

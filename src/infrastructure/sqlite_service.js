@@ -201,7 +201,8 @@ class SqliteService {
                     keys: JSON.parse(item.keys_json),
                     keyword: item.keyword,
                     category: item.category,
-                    icon: item.icon
+                    icon: item.icon,
+                    appId: item.app_id
                 };
             });
             return results;

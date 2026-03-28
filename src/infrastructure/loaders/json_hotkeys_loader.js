@@ -16,32 +16,49 @@ class JsonHotkeysLoader {
         const downloadedApps = [];
 
         try {
-            const files = this.scanRecursive(basePath);
-            for (const filePath of files) {
-                try {
-                    const content = fs.readFileSync(filePath, 'utf8');
-                    const data = JSON.parse(content);
-                    
-                    // Unified Schema: { appId, appName, shortcuts: [...] }
-                    if (data && Array.isArray(data.shortcuts)) {
-                        const appId = data.appId || path.basename(filePath, '.json');
-                        downloadedApps.push(appId);
+            // Scan subdirectories: user custom, exported builtin, and downloaded
+            const scanDirs = ['json_hotkeys', 'builtin', 'hotkeycheatsheet'];
+            for (const subDir of scanDirs) {
+                const dirPath = path.join(basePath, subDir);
+                const files = this.scanRecursive(dirPath);
+                for (const filePath of files) {
+                    try {
+                        const content = fs.readFileSync(filePath, 'utf8');
+                        const data = JSON.parse(content);
                         
-                        const processed = data.shortcuts.map(item => {
-                            const processedItem = this.processItem(item);
-                            // Ensure each shortcut carries its appId for global tracking
-                            processedItem.appId = appId;
-                            processedItem.appName = data.appName || appId;
-                            return processedItem;
-                        });
-                        allCustomShortcuts.push(...processed);
-                    } 
-                    // Legacy support removed per SPEC-00010, but we can log non-compliant files
-                    else if (Array.isArray(data)) {
-                        console.warn(`[JsonHotkeysLoader] Skipping legacy array format in ${filePath}. Please migrate to object schema.`);
+                        // Unified Schema: { appId, appName, shortcuts: [...] }
+                        if (data && Array.isArray(data.shortcuts)) {
+                            const appId = data.appId || path.basename(filePath, '.json');
+                            downloadedApps.push(appId);
+                            
+                            const processed = data.shortcuts.map(item => {
+                                const processedItem = this.processItem(item);
+                                
+                                // Resolve relative icon paths against the JSON file's directory
+                                // Skip data URIs (base64) and URLs
+                                if (processedItem.icon 
+                                    && !path.isAbsolute(processedItem.icon)
+                                    && !processedItem.icon.startsWith('data:')
+                                    && !processedItem.icon.startsWith('http')) {
+                                    processedItem.icon = path.join(path.dirname(filePath), processedItem.icon);
+                                }
+
+                                // Ensure each shortcut carries its appId for global tracking
+                                processedItem.appId = appId;
+                                processedItem.appName = data.appName || appId;
+                                // Tag source subdirectory for priority-based deduplication
+                                processedItem._source = subDir;
+                                return processedItem;
+                            });
+                            allCustomShortcuts.push(...processed);
+                        } 
+                        // Legacy support removed per SPEC-00010, but we can log non-compliant files
+                        else if (Array.isArray(data)) {
+                            console.warn(`[JsonHotkeysLoader] Skipping legacy array format in ${filePath}. Please migrate to object schema.`);
+                        }
+                    } catch (e) {
+                        console.error(`[JsonHotkeysLoader] Failed to parse ${filePath}:`, e);
                     }
-                } catch (e) {
-                    console.error(`[JsonHotkeysLoader] Failed to parse ${filePath}:`, e);
                 }
             }
         } catch (e) {

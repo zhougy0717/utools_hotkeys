@@ -1,0 +1,772 @@
+{
+  "appId": "windows",
+  "appName": "Windows",
+  "updatedAt": 1774743623041,
+  "shortcuts": [
+    {
+      "title": "打开\"开始\"菜单 Ctrl+Esc",
+      "description": "打开\"开始\"菜单 (cheatsheet)",
+      "keys": [
+        "escape",
+        "ctrl"
+      ],
+      "keyword": "windows 前往 打开\"开始\"菜单",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开任务管理器 Ctrl+Shift+Esc",
+      "description": "打开任务管理器 (cheatsheet)",
+      "keys": [
+        "escape",
+        "ctrl",
+        "shift"
+      ],
+      "keyword": "windows 前往 打开任务管理器",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开操作中心 Win+A",
+      "description": "打开操作中心 (cheatsheet)",
+      "keys": [
+        "a",
+        "win"
+      ],
+      "keyword": "windows 前往 打开操作中心",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开文件管理器 Win+E",
+      "description": "打开文件管理器 (cheatsheet)",
+      "keys": [
+        "e",
+        "win"
+      ],
+      "keyword": "windows 前往 打开文件管理器",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "反馈中心 Win+F",
+      "description": "反馈中心 (cheatsheet)",
+      "keys": [
+        "f",
+        "win"
+      ],
+      "keyword": "windows 前往 反馈中心",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "Xbox菜单 Win+G",
+      "description": "Xbox菜单 (cheatsheet)",
+      "keys": [
+        "g",
+        "win"
+      ],
+      "keyword": "windows 前往 xbox菜单",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开听写 Win+H",
+      "description": "打开听写 (cheatsheet)",
+      "keys": [
+        "h",
+        "win"
+      ],
+      "keyword": "windows 前往 打开听写",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开\"设置\" Win+I",
+      "description": "打开\"设置\" (cheatsheet)",
+      "keys": [
+        "i",
+        "win"
+      ],
+      "keyword": "windows 前往 打开\"设置\"",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开\"连接\"快速操作 Win+K",
+      "description": "打开\"连接\"快速操作 (cheatsheet)",
+      "keys": [
+        "k",
+        "win"
+      ],
+      "keyword": "windows 前往 打开\"连接\"快速操作",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开快速助手 Ctrl+Win+Q",
+      "description": "打开快速助手 (cheatsheet)",
+      "keys": [
+        "q",
+        "ctrl",
+        "win"
+      ],
+      "keyword": "windows 前往 打开快速助手",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开\"运行\"对话框 Win+R",
+      "description": "打开\"运行\"对话框 (cheatsheet)",
+      "keys": [
+        "r",
+        "win"
+      ],
+      "keyword": "windows 前往 打开\"运行\"对话框",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开搜索 Win+S",
+      "description": "打开搜索 (cheatsheet)",
+      "keys": [
+        "s",
+        "win"
+      ],
+      "keyword": "windows 前往 打开搜索",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开辅助工具管理器 Win+U",
+      "description": "打开辅助工具管理器 (cheatsheet)",
+      "keys": [
+        "u",
+        "win"
+      ],
+      "keyword": "windows 前往 打开辅助工具管理器",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开剪贴板 Win+V",
+      "description": "打开剪贴板 (cheatsheet)",
+      "keys": [
+        "v",
+        "win"
+      ],
+      "keyword": "windows 前往 打开剪贴板",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开\"快速连接\"菜单 Win+X",
+      "description": "打开\"快速连接\"菜单 (cheatsheet)",
+      "keys": [
+        "x",
+        "win"
+      ],
+      "keyword": "windows 前往 打开\"快速连接\"菜单",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开表情符号面板 Win+.",
+      "description": "打开表情符号面板 (cheatsheet)",
+      "keys": [
+        ".",
+        "win"
+      ],
+      "keyword": "windows 前往 打开表情符号面板",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "显示\"帮助\" Win+F1",
+      "description": "显示\"帮助\" (cheatsheet)",
+      "keys": [
+        "f1",
+        "win"
+      ],
+      "keyword": "windows 前往 显示\"帮助\"",
+      "category": "前往",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "切换当前程序 Alt+Tab",
+      "description": "切换当前程序 (cheatsheet)",
+      "keys": [
+        "tab",
+        "alt"
+      ],
+      "keyword": "windows 窗口 切换当前程序",
+      "category": "窗口",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "最小化活动窗口 Alt+N+Space",
+      "description": "最小化活动窗口 (cheatsheet)",
+      "keys": [
+        "n",
+        "space",
+        "alt"
+      ],
+      "keyword": "windows 窗口 最小化活动窗口",
+      "category": "窗口",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "关闭活动项 Alt+F4",
+      "description": "关闭活动项 (cheatsheet)",
+      "keys": [
+        "f4",
+        "alt"
+      ],
+      "keyword": "windows 窗口 关闭活动项",
+      "category": "窗口",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "刷新活动窗口 Ctrl+R",
+      "description": "刷新活动窗口 (cheatsheet)",
+      "keys": [
+        "r",
+        "ctrl"
+      ],
+      "keyword": "windows 窗口 刷新活动窗口",
+      "category": "窗口",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "关闭活动文档 Ctrl+F4",
+      "description": "关闭活动文档 (cheatsheet)",
+      "keys": [
+        "f4",
+        "ctrl"
+      ],
+      "keyword": "windows 窗口 关闭活动文档",
+      "category": "窗口",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "显示应用缩略图 Win+Tab",
+      "description": "显示应用缩略图 (cheatsheet)",
+      "keys": [
+        "tab",
+        "win"
+      ],
+      "keyword": "windows 窗口 显示应用缩略图",
+      "category": "窗口",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "将焦点中的窗口贴靠到屏幕的上半部分 Win+Up",
+      "description": "将焦点中的窗口贴靠到屏幕的上半部分 (cheatsheet)",
+      "keys": [
+        "up",
+        "win"
+      ],
+      "keyword": "windows 窗口 将焦点中的窗口贴靠到屏幕的上半部分",
+      "category": "窗口",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "将焦点中的窗口贴靠到屏幕的下半部分 Win+Down",
+      "description": "将焦点中的窗口贴靠到屏幕的下半部分 (cheatsheet)",
+      "keys": [
+        "down",
+        "win"
+      ],
+      "keyword": "windows 窗口 将焦点中的窗口贴靠到屏幕的下半部分",
+      "category": "窗口",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "将焦点中的窗口贴靠到屏幕的左半部分 Win+Left",
+      "description": "将焦点中的窗口贴靠到屏幕的左半部分 (cheatsheet)",
+      "keys": [
+        "left",
+        "win"
+      ],
+      "keyword": "windows 窗口 将焦点中的窗口贴靠到屏幕的左半部分",
+      "category": "窗口",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "将焦点中的窗口贴靠到屏幕的右半部分 Win+Right",
+      "description": "将焦点中的窗口贴靠到屏幕的右半部分 (cheatsheet)",
+      "keys": [
+        "right",
+        "win"
+      ],
+      "keyword": "windows 窗口 将焦点中的窗口贴靠到屏幕的右半部分",
+      "category": "窗口",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "查看所有桌面 Win+Tab",
+      "description": "查看所有桌面 (cheatsheet)",
+      "keys": [
+        "tab",
+        "win"
+      ],
+      "keyword": "windows 桌面 查看所有桌面",
+      "category": "桌面",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "切换到上一个桌面 Ctrl+Win+Left",
+      "description": "切换到上一个桌面 (cheatsheet)",
+      "keys": [
+        "left",
+        "ctrl",
+        "win"
+      ],
+      "keyword": "windows 桌面 切换到上一个桌面",
+      "category": "桌面",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "切换到下一个桌面 Ctrl+Win+Right",
+      "description": "切换到下一个桌面 (cheatsheet)",
+      "keys": [
+        "right",
+        "ctrl",
+        "win"
+      ],
+      "keyword": "windows 桌面 切换到下一个桌面",
+      "category": "桌面",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "新建一个桌面 Ctrl+Win+D",
+      "description": "新建一个桌面 (cheatsheet)",
+      "keys": [
+        "d",
+        "ctrl",
+        "win"
+      ],
+      "keyword": "windows 桌面 新建一个桌面",
+      "category": "桌面",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "删除一个桌面 Ctrl+Win+F4",
+      "description": "删除一个桌面 (cheatsheet)",
+      "keys": [
+        "f4",
+        "ctrl",
+        "win"
+      ],
+      "keyword": "windows 桌面 删除一个桌面",
+      "category": "桌面",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "显示桌面 Win+D",
+      "description": "显示桌面 (cheatsheet)",
+      "keys": [
+        "d",
+        "win"
+      ],
+      "keyword": "windows 徽标键 显示桌面",
+      "category": "徽标键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "锁定计算机 Win+L",
+      "description": "锁定计算机 (cheatsheet)",
+      "keys": [
+        "l",
+        "win"
+      ],
+      "keyword": "windows 徽标键 锁定计算机",
+      "category": "徽标键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "最小化所有窗口 Win+M",
+      "description": "最小化所有窗口 (cheatsheet)",
+      "keys": [
+        "m",
+        "win"
+      ],
+      "keyword": "windows 徽标键 最小化所有窗口",
+      "category": "徽标键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "将最小化的窗口还原到桌面 Win+Shift+M",
+      "description": "将最小化的窗口还原到桌面 (cheatsheet)",
+      "keys": [
+        "m",
+        "win",
+        "shift"
+      ],
+      "keyword": "windows 徽标键 将最小化的窗口还原到桌面",
+      "category": "徽标键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "选择演示显示模式 Win+P",
+      "description": "选择演示显示模式 (cheatsheet)",
+      "keys": [
+        "p",
+        "win"
+      ],
+      "keyword": "windows 徽标键 选择演示显示模式",
+      "category": "徽标键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "临时速览桌面 Win+,",
+      "description": "临时速览桌面 (cheatsheet)",
+      "keys": [
+        ",",
+        "win"
+      ],
+      "keyword": "windows 徽标键 临时速览桌面",
+      "category": "徽标键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "搜索电脑 Ctrl+Win+F",
+      "description": "搜索电脑 (cheatsheet)",
+      "keys": [
+        "f",
+        "ctrl",
+        "win"
+      ],
+      "keyword": "windows 徽标键 搜索电脑",
+      "category": "徽标键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "切换到任务栏中的由该数字所表示位置处的程序 Win+Num",
+      "description": "切换到任务栏中的由该数字所表示位置处的程序 (cheatsheet)",
+      "keys": [
+        "num",
+        "win"
+      ],
+      "keyword": "windows 徽标键 切换到任务栏中的由该数字所表示位置处的程序",
+      "category": "徽标键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "全选 Ctrl+A",
+      "description": "全选 (cheatsheet)",
+      "keys": [
+        "a",
+        "ctrl"
+      ],
+      "keyword": "windows 编辑 全选",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "拷贝 Ctrl+C",
+      "description": "拷贝 (cheatsheet)",
+      "keys": [
+        "c",
+        "ctrl"
+      ],
+      "keyword": "windows 编辑 拷贝",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "粘贴 Ctrl+V",
+      "description": "粘贴 (cheatsheet)",
+      "keys": [
+        "v",
+        "ctrl"
+      ],
+      "keyword": "windows 编辑 粘贴",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "保存 Ctrl+S",
+      "description": "保存 (cheatsheet)",
+      "keys": [
+        "s",
+        "ctrl"
+      ],
+      "keyword": "windows 编辑 保存",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "剪切 Ctrl+X",
+      "description": "剪切 (cheatsheet)",
+      "keys": [
+        "x",
+        "ctrl"
+      ],
+      "keyword": "windows 编辑 剪切",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "撤销 Ctrl+Z",
+      "description": "撤销 (cheatsheet)",
+      "keys": [
+        "z",
+        "ctrl"
+      ],
+      "keyword": "windows 编辑 撤销",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "恢复 Ctrl+Y",
+      "description": "恢复 (cheatsheet)",
+      "keys": [
+        "y",
+        "ctrl"
+      ],
+      "keyword": "windows 编辑 恢复",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "将光标移动到下一个字词的起始处 Ctrl+Right",
+      "description": "将光标移动到下一个字词的起始处 (cheatsheet)",
+      "keys": [
+        "right",
+        "ctrl"
+      ],
+      "keyword": "windows 编辑 将光标移动到下一个字词的起始处",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "将光标移动到上一个字词的起始处 Ctrl+Left",
+      "description": "将光标移动到上一个字词的起始处 (cheatsheet)",
+      "keys": [
+        "left",
+        "ctrl"
+      ],
+      "keyword": "windows 编辑 将光标移动到上一个字词的起始处",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "将光标移动到下一段落的起始处 Ctrl+Down",
+      "description": "将光标移动到下一段落的起始处 (cheatsheet)",
+      "keys": [
+        "down",
+        "ctrl"
+      ],
+      "keyword": "windows 编辑 将光标移动到下一段落的起始处",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "将光标移动到上一段落的起始处 Ctrl+Up",
+      "description": "将光标移动到上一段落的起始处 (cheatsheet)",
+      "keys": [
+        "up",
+        "ctrl"
+      ],
+      "keyword": "windows 编辑 将光标移动到上一段落的起始处",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开搜索 Ctrl+E",
+      "description": "打开搜索 (cheatsheet)",
+      "keys": [
+        "e",
+        "ctrl"
+      ],
+      "keyword": "windows 文件 打开搜索",
+      "category": "文件",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "查找 Ctrl+F",
+      "description": "查找 (cheatsheet)",
+      "keys": [
+        "f",
+        "ctrl"
+      ],
+      "keyword": "windows 文件 查找",
+      "category": "文件",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "保存 Ctrl+S",
+      "description": "保存 (cheatsheet)",
+      "keys": [
+        "s",
+        "ctrl"
+      ],
+      "keyword": "windows 文件 保存",
+      "category": "文件",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "永久删除 Shift+Del",
+      "description": "永久删除 (cheatsheet)",
+      "keys": [
+        "delete",
+        "shift"
+      ],
+      "keyword": "windows 文件 永久删除",
+      "category": "文件",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "截图 PrtSc",
+      "description": "截图 (cheatsheet)",
+      "keys": [
+        "prtsc"
+      ],
+      "keyword": "windows 截图 截图",
+      "category": "截图",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "将全屏屏幕截图保存到文件 Win+PrtSc",
+      "description": "将全屏屏幕截图保存到文件 (cheatsheet)",
+      "keys": [
+        "prtsc",
+        "win"
+      ],
+      "keyword": "windows 截图 将全屏屏幕截图保存到文件",
+      "category": "截图",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "将焦点中的游戏窗口的屏幕截图保存到文件 Win+Alt+PrtSc",
+      "description": "将焦点中的游戏窗口的屏幕截图保存到文件 (cheatsheet)",
+      "keys": [
+        "prtsc",
+        "win",
+        "alt"
+      ],
+      "keyword": "windows 截图 将焦点中的游戏窗口的屏幕截图保存到文件",
+      "category": "截图",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "自定义截图 Win+Shift+S",
+      "description": "自定义截图 (cheatsheet)",
+      "keys": [
+        "s",
+        "win",
+        "shift"
+      ],
+      "keyword": "windows 截图 自定义截图",
+      "category": "截图",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "截取当前屏幕到剪贴板 Win+PrtSc",
+      "description": "截取当前屏幕到剪贴板 (cheatsheet)",
+      "keys": [
+        "prtsc",
+        "win"
+      ],
+      "keyword": "windows 截图 截取当前屏幕到剪贴板",
+      "category": "截图",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "重命名所选项目 F2",
+      "description": "重命名所选项目 (cheatsheet)",
+      "keys": [
+        "f2"
+      ],
+      "keyword": "windows 顶部快捷键 重命名所选项目",
+      "category": "顶部快捷键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "在文件资源管理器中搜索文件或文件夹 F3",
+      "description": "在文件资源管理器中搜索文件或文件夹 (cheatsheet)",
+      "keys": [
+        "f3"
+      ],
+      "keyword": "windows 顶部快捷键 在文件资源管理器中搜索文件或文件夹",
+      "category": "顶部快捷键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "在文件资源管理器中显示地址栏列表 F4",
+      "description": "在文件资源管理器中显示地址栏列表 (cheatsheet)",
+      "keys": [
+        "f4"
+      ],
+      "keyword": "windows 顶部快捷键 在文件资源管理器中显示地址栏列表",
+      "category": "顶部快捷键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "刷新活动窗口 F5",
+      "description": "刷新活动窗口 (cheatsheet)",
+      "keys": [
+        "f5"
+      ],
+      "keyword": "windows 顶部快捷键 刷新活动窗口",
+      "category": "顶部快捷键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "循环浏览窗口中或桌面上的屏幕元素 F6",
+      "description": "循环浏览窗口中或桌面上的屏幕元素 (cheatsheet)",
+      "keys": [
+        "f6"
+      ],
+      "keyword": "windows 顶部快捷键 循环浏览窗口中或桌面上的屏幕元素",
+      "category": "顶部快捷键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "激活活动应用中的菜单栏 F10",
+      "description": "激活活动应用中的菜单栏 (cheatsheet)",
+      "keys": [
+        "f10"
+      ],
+      "keyword": "windows 顶部快捷键 激活活动应用中的菜单栏",
+      "category": "顶部快捷键",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "在语言和键盘布局中向后循环 Win+Shift+Space",
+      "description": "在语言和键盘布局中向后循环 (cheatsheet)",
+      "keys": [
+        "space",
+        "win",
+        "shift"
+      ],
+      "keyword": "windows 输入法 在语言和键盘布局中向后循环",
+      "category": "输入法",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "切换输入语言和键盘布局 Win+Space",
+      "description": "切换输入语言和键盘布局 (cheatsheet)",
+      "keys": [
+        "space",
+        "win"
+      ],
+      "keyword": "windows 输入法 切换输入语言和键盘布局",
+      "category": "输入法",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "对之前选择的输入所做的更改 Win+Ctrl+Space",
+      "description": "对之前选择的输入所做的更改 (cheatsheet)",
+      "keys": [
+        "space",
+        "win",
+        "ctrl"
+      ],
+      "keyword": "windows 输入法 对之前选择的输入所做的更改",
+      "category": "输入法",
+      "icon": "icons/windows.png"
+    }
+  ]
+}

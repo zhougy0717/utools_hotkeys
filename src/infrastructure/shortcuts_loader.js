@@ -60,8 +60,16 @@ function loadAllShortcuts() {
                allShortcuts = allShortcuts.concat(jsonHotkeysOnly);
            });
 
-    // Phase 2: builtin (secondary priority, filtered by claimed)
-    // 2a: Exported builtin/ JSON files take precedence over hardcoded BuiltinLoader
+    // Phase 2: cheatsheet_builtin (secondary priority, NEW)
+    results.filter(r => getLoaderName(r.loader) === 'CheatsheetBuiltinLoader')
+           .forEach(r => {
+               const filtered = r.data.filter(s => !claimedApps.has(normalizeAppId(s.appId)));
+               filtered.forEach(s => claimedApps.add(normalizeAppId(s.appId)));
+               allShortcuts = allShortcuts.concat(filtered);
+           });
+
+    // Phase 3: builtin (tertiary priority, filtered by claimed)
+    // 3a: Exported builtin/ JSON files take precedence over hardcoded BuiltinLoader
     results.filter(r => getLoaderName(r.loader) === 'JsonHotkeysLoader')
            .forEach(r => {
                const data = r.data.shortcuts || (Array.isArray(r.data) ? r.data : []);
@@ -71,7 +79,7 @@ function loadAllShortcuts() {
                builtinExported.forEach(s => claimedApps.add(normalizeAppId(s.appId)));
                allShortcuts = allShortcuts.concat(builtinExported);
            });
-    // 2b: Hardcoded BuiltinLoader (skipped for apps already covered by exported builtin/)
+    // 3b: Hardcoded BuiltinLoader (skipped for apps already covered by exported builtin/ or cheatsheet)
     results.filter(r => getLoaderName(r.loader) === 'BuiltinLoader')
            .forEach(r => {
                const filtered = r.data.filter(s => !claimedApps.has(normalizeAppId(s.appId)));
@@ -80,7 +88,7 @@ function loadAllShortcuts() {
                allShortcuts = allShortcuts.concat(filtered);
            });
 
-    // Phase 3: hotkeycheatsheet (lowest priority, filtered by claimed)
+    // Phase 4: hotkeycheatsheet (lowest priority, filtered by claimed)
     results.filter(r => getLoaderName(r.loader) === 'JsonHotkeysLoader')
            .forEach(r => {
                const data = r.data.shortcuts || (Array.isArray(r.data) ? r.data : []);

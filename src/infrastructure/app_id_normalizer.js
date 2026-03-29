@@ -8,6 +8,16 @@
 const ALIAS_GROUPS = [
     ['vscode', 'visual-studio-code', 'visualstudiocode'],
     ['jet_brains', 'intellij-idea', 'jetbrains'],
+    ['google-chrome', 'googlechrome', 'chrome'],
+    ['microsoft-excel', 'microsoftexcel', 'excel', 'office_excel'],
+    ['microsoft-word', 'microsoftword', 'word', 'office_word'],
+    ['microsoft-powerpoint', 'microsoftpowerpoint', 'powerpoint', 'office_ppt'],
+    ['sublime-text', 'sublimetext'],
+    ['navicat-premium', 'navicatpremium'],
+    ['phpstorm', 'php-storm'],
+    ['pycharm', 'py-charm'],
+    ['webstorm', 'web-storm'],
+    ['microsoft-visual-studio', 'microsoftvisualstudio', 'visualstudio'],
 ];
 
 // Build lookup: variant -> canonical (first element in group, normalized)

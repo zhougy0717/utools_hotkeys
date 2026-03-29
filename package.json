@@ -8,6 +8,7 @@
     "mocha": "^10.8.2"
   },
   "scripts": {
+    "build:cheatsheet": "node scripts/build_cheatsheet_builtin.js",
     "test": "mocha"
   }
 }

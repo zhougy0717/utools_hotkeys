@@ -1,0 +1,1156 @@
+{
+  "appId": "microsoft-visual-studio",
+  "appName": "Microsoft Visual Studio",
+  "updatedAt": 1774743623041,
+  "shortcuts": [
+    {
+      "title": "生成解决方案 Command+Shift+B",
+      "description": "生成解决方案 (cheatsheet)",
+      "keys": [
+        "b",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 生成 生成解决方案",
+      "category": "生成",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "取消 Command+Backspace",
+      "description": "取消 (cheatsheet)",
+      "keys": [
+        "backspace",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 生成 取消",
+      "category": "生成",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "编译 Command+F7",
+      "description": "编译 (cheatsheet)",
+      "keys": [
+        "f7",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 生成 编译",
+      "category": "生成",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "对解决方案运行代码分析 Option+F11",
+      "description": "对解决方案运行代码分析 (cheatsheet)",
+      "keys": [
+        "f11",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 生成 对解决方案运行代码分析",
+      "category": "生成",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "遇到函数时断开 Command+B",
+      "description": "遇到函数时断开 (cheatsheet)",
+      "keys": [
+        "b",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 调试 遇到函数时断开",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "全部中断 Command+Option+Backspace",
+      "description": "全部中断 (cheatsheet)",
+      "keys": [
+        "backspace",
+        "command",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 调试 全部中断",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "删除所有断点 Command+Shift+F9",
+      "description": "删除所有断点 (cheatsheet)",
+      "keys": [
+        "f9",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 调试 删除所有断点",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "异常 Command+Option+E",
+      "description": "异常 (cheatsheet)",
+      "keys": [
+        "e",
+        "command",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 调试 异常",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "快速监视 Command+Option+Q",
+      "description": "快速监视 (cheatsheet)",
+      "keys": [
+        "q",
+        "command",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 调试 快速监视",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "快速监视 Shift+F9",
+      "description": "快速监视 (cheatsheet)",
+      "keys": [
+        "f9",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 调试 快速监视",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "重启 Command+Shift+F5",
+      "description": "重启 (cheatsheet)",
+      "keys": [
+        "f5",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 调试 重启",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "运行到光标处 Command+F10",
+      "description": "运行到光标处 (cheatsheet)",
+      "keys": [
+        "f10",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 调试 运行到光标处",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "设置下一语句 Command+Shift+F10",
+      "description": "设置下一语句 (cheatsheet)",
+      "keys": [
+        "f10",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 调试 设置下一语句",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "开始 F5",
+      "description": "开始 (cheatsheet)",
+      "keys": [
+        "f5"
+      ],
+      "keyword": "microsoft visual studio 调试 开始",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "启动时不调试 Command+F5",
+      "description": "启动时不调试 (cheatsheet)",
+      "keys": [
+        "f5",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 调试 启动时不调试",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "单步执行 F11",
+      "description": "单步执行 (cheatsheet)",
+      "keys": [
+        "f11"
+      ],
+      "keyword": "microsoft visual studio 调试 单步执行",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "单步跳出 Shift+F11",
+      "description": "单步跳出 (cheatsheet)",
+      "keys": [
+        "f11",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 调试 单步跳出",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "逐过程 F10",
+      "description": "逐过程 (cheatsheet)",
+      "keys": [
+        "f10"
+      ],
+      "keyword": "microsoft visual studio 调试 逐过程",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "停止调试 Shift+F5",
+      "description": "停止调试 (cheatsheet)",
+      "keys": [
+        "f5",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 调试 停止调试",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "切换断点 F9",
+      "description": "切换断点 (cheatsheet)",
+      "keys": [
+        "f9"
+      ],
+      "keyword": "microsoft visual studio 调试 切换断点",
+      "category": "调试",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "复制 Command+C",
+      "description": "复制 (cheatsheet)",
+      "keys": [
+        "c",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 基本 复制",
+      "category": "基本",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "剪切 Command+X",
+      "description": "剪切 (cheatsheet)",
+      "keys": [
+        "x",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 基本 剪切",
+      "category": "基本",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "查找 Command+F",
+      "description": "查找 (cheatsheet)",
+      "keys": [
+        "f",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 基本 查找",
+      "category": "基本",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "粘贴 Command+V",
+      "description": "粘贴 (cheatsheet)",
+      "keys": [
+        "v",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 基本 粘贴",
+      "category": "基本",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "重做 Command+Y",
+      "description": "重做 (cheatsheet)",
+      "keys": [
+        "y",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 基本 重做",
+      "category": "基本",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "替换 Command+H",
+      "description": "替换 (cheatsheet)",
+      "keys": [
+        "h",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 基本 替换",
+      "category": "基本",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "全选 Command+A",
+      "description": "全选 (cheatsheet)",
+      "keys": [
+        "a",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 基本 全选",
+      "category": "基本",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "折叠到定义 Command+M & Command+O",
+      "description": "折叠到定义 (cheatsheet)",
+      "keys": [
+        [
+          "m",
+          "command"
+        ],
+        [
+          "o",
+          "command"
+        ]
+      ],
+      "keyword": "microsoft visual studio 编辑 折叠到定义",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "注释选定内容 Command+K & Command+C",
+      "description": "注释选定内容 (cheatsheet)",
+      "keys": [
+        [
+          "k",
+          "command"
+        ],
+        [
+          "c",
+          "command"
+        ]
+      ],
+      "keyword": "microsoft visual studio 编辑 注释选定内容",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "完成单词 Option+Right ",
+      "description": "完成单词 (cheatsheet)",
+      "keys": [
+        "right",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 编辑 完成单词",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "查找所有引用 Shift+F12",
+      "description": "查找所有引用 (cheatsheet)",
+      "keys": [
+        "f12",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 编辑 查找所有引用",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "在文件中查找 Command+Shift+F",
+      "description": "在文件中查找 (cheatsheet)",
+      "keys": [
+        "f",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 编辑 在文件中查找",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "查找下一个 F3",
+      "description": "查找下一个 (cheatsheet)",
+      "keys": [
+        "f3"
+      ],
+      "keyword": "microsoft visual studio 编辑 查找下一个",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "查找下一个选择 Command+F3",
+      "description": "查找下一个选择 (cheatsheet)",
+      "keys": [
+        "f3",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 编辑 查找下一个选择",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "设置文档格式 Command+K & Command+D",
+      "description": "设置文档格式 (cheatsheet)",
+      "keys": [
+        [
+          "k",
+          "command"
+        ],
+        [
+          "d",
+          "command"
+        ]
+      ],
+      "keyword": "microsoft visual studio 编辑 设置文档格式",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "设置选定内容的格式 Command+K & Command+F",
+      "description": "设置选定内容的格式 (cheatsheet)",
+      "keys": [
+        [
+          "k",
+          "command"
+        ],
+        [
+          "f",
+          "command"
+        ]
+      ],
+      "keyword": "microsoft visual studio 编辑 设置选定内容的格式",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "插入代码片段 Command+K & Command+X",
+      "description": "插入代码片段 (cheatsheet)",
+      "keys": [
+        [
+          "k",
+          "command"
+        ],
+        [
+          "x",
+          "command"
+        ]
+      ],
+      "keyword": "microsoft visual studio 编辑 插入代码片段",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "行 - 剪切 Command+L",
+      "description": "行 - 剪切 (cheatsheet)",
+      "keys": [
+        "l",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 编辑 行 - 剪切",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "行 - 向下扩展列 Shift+Option+Down",
+      "description": "行 - 向下扩展列 (cheatsheet)",
+      "keys": [
+        "down",
+        "shift",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 编辑 行 - 向下扩展列",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "行 - 打开上面的内容 Command+Enter",
+      "description": "行 - 打开上面的内容 (cheatsheet)",
+      "keys": [
+        "enter",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 编辑 行 - 打开上面的内容",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "列出成员 Command+J",
+      "description": "列出成员 (cheatsheet)",
+      "keys": [
+        "j",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 编辑 列出成员",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "导航到 Command+,",
+      "description": "导航到 (cheatsheet)",
+      "keys": [
+        ",",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 编辑 导航到",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "打开文件 Command+Shift+G",
+      "description": "打开文件 (cheatsheet)",
+      "keys": [
+        "g",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 编辑 打开文件",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "参数信息 Command+Shift+Space",
+      "description": "参数信息 (cheatsheet)",
+      "keys": [
+        "space",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 编辑 参数信息",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "查看定义 Option+F12",
+      "description": "查看定义 (cheatsheet)",
+      "keys": [
+        "f12",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 编辑 查看定义",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "选择当前字词 Command+W",
+      "description": "选择当前字词 (cheatsheet)",
+      "keys": [
+        "w",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 编辑 选择当前字词",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "环绕 Command+K & Command+S",
+      "description": "环绕 (cheatsheet)",
+      "keys": [
+        [
+          "k",
+          "command"
+        ],
+        [
+          "s",
+          "command"
+        ]
+      ],
+      "keyword": "microsoft visual studio 编辑 环绕",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "选项卡左侧 Shift+Tab",
+      "description": "选项卡左侧 (cheatsheet)",
+      "keys": [
+        "tab",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 编辑 选项卡左侧",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "取消注释选定内容 Command+K & Command+U",
+      "description": "取消注释选定内容 (cheatsheet)",
+      "keys": [
+        [
+          "k",
+          "command"
+        ],
+        [
+          "u",
+          "command"
+        ]
+      ],
+      "keyword": "microsoft visual studio 编辑 取消注释选定内容",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "撤消 Command+Z",
+      "description": "撤消 (cheatsheet)",
+      "keys": [
+        "z",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 编辑 撤消",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "字词 - 删除至结尾 Command+Del",
+      "description": "字词 - 删除至结尾 (cheatsheet)",
+      "keys": [
+        "delete",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 编辑 字词 - 删除至结尾",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "字词 - 删除至开头 Command+Backspace",
+      "description": "字词 - 删除至开头 (cheatsheet)",
+      "keys": [
+        "backspace",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 编辑 字词 - 删除至开头",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "转到 Command+G",
+      "description": "转到 (cheatsheet)",
+      "keys": [
+        "g",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 转到/切换 转到",
+      "category": "转到/切换",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "转到声明 Command+F12",
+      "description": "转到声明 (cheatsheet)",
+      "keys": [
+        "f12",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 转到/切换 转到声明",
+      "category": "转到/切换",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "转到定义 F12",
+      "description": "转到定义 (cheatsheet)",
+      "keys": [
+        "f12"
+      ],
+      "keyword": "microsoft visual studio 转到/切换 转到定义",
+      "category": "转到/切换",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "转到查找组合 Command+D",
+      "description": "转到查找组合 (cheatsheet)",
+      "keys": [
+        "d",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 转到/切换 转到查找组合",
+      "category": "转到/切换",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "转到下一个位置 F8",
+      "description": "转到下一个位置 (cheatsheet)",
+      "keys": [
+        "f8"
+      ],
+      "keyword": "microsoft visual studio 转到/切换 转到下一个位置",
+      "category": "转到/切换",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "切换所有大纲显示 Command+M & Command+L",
+      "description": "切换所有大纲显示 (cheatsheet)",
+      "keys": [
+        [
+          "m",
+          "command"
+        ],
+        [
+          "l",
+          "command"
+        ]
+      ],
+      "keyword": "microsoft visual studio 转到/切换 切换所有大纲显示",
+      "category": "转到/切换",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "切换书签 Command+K & Command+K",
+      "description": "切换书签 (cheatsheet)",
+      "keys": [
+        [
+          "k",
+          "command"
+        ],
+        [
+          "k",
+          "command"
+        ]
+      ],
+      "keyword": "microsoft visual studio 转到/切换 切换书签",
+      "category": "转到/切换",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "切换完成模式 Command+Option+Space",
+      "description": "切换完成模式 (cheatsheet)",
+      "keys": [
+        "space",
+        "command",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 转到/切换 切换完成模式",
+      "category": "转到/切换",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "切换大纲显示展开 Command+M & Command+M",
+      "description": "切换大纲显示展开 (cheatsheet)",
+      "keys": [
+        [
+          "m",
+          "command"
+        ],
+        [
+          "m",
+          "command"
+        ]
+      ],
+      "keyword": "microsoft visual studio 转到/切换 切换大纲显示展开",
+      "category": "转到/切换",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "退出 Option+F4",
+      "description": "退出 (cheatsheet)",
+      "keys": [
+        "f4",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 文件 退出",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "新建文件 Command+N",
+      "description": "新建文件 (cheatsheet)",
+      "keys": [
+        "n",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 文件 新建文件",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "新建项目 Command+Shift+N",
+      "description": "新建项目 (cheatsheet)",
+      "keys": [
+        "n",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 文件 新建项目",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "新建网站 Shift+Option+N",
+      "description": "新建网站 (cheatsheet)",
+      "keys": [
+        "n",
+        "shift",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 文件 新建网站",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "打开文件 Command+O",
+      "description": "打开文件 (cheatsheet)",
+      "keys": [
+        "o",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 文件 打开文件",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "打开项目 Command+Shift+O",
+      "description": "打开项目 (cheatsheet)",
+      "keys": [
+        "o",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 文件 打开项目",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "打开网站 Shift+Option+O",
+      "description": "打开网站 (cheatsheet)",
+      "keys": [
+        "o",
+        "shift",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 文件 打开网站",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "重命名 F2",
+      "description": "重命名 (cheatsheet)",
+      "keys": [
+        "f2"
+      ],
+      "keyword": "microsoft visual studio 文件 重命名",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "全部保存 Command+Shift+S",
+      "description": "全部保存 (cheatsheet)",
+      "keys": [
+        "s",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 文件 全部保存",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "保存选定项 Command+S",
+      "description": "保存选定项 (cheatsheet)",
+      "keys": [
+        "s",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 文件 保存选定项",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "在浏览器中查看 Command+Shift+W",
+      "description": "在浏览器中查看 (cheatsheet)",
+      "keys": [
+        "w",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 文件 在浏览器中查看",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "添加现有项 Shift+Option+A",
+      "description": "添加现有项 (cheatsheet)",
+      "keys": [
+        "a",
+        "shift",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 项目 添加现有项",
+      "category": "项目",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "添加新项 Command+Shift+A",
+      "description": "添加新项 (cheatsheet)",
+      "keys": [
+        "a",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 项目 添加新项",
+      "category": "项目",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "提取方法 Command+R & Command+M",
+      "description": "提取方法 (cheatsheet)",
+      "keys": [
+        [
+          "r",
+          "command"
+        ],
+        [
+          "m",
+          "command"
+        ]
+      ],
+      "keyword": "microsoft visual studio 重构 提取方法",
+      "category": "重构",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "附加到进程 Command+Option+P",
+      "description": "附加到进程 (cheatsheet)",
+      "keys": [
+        "p",
+        "command",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 工具 附加到进程",
+      "category": "工具",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "类视图 Command+Shift+C",
+      "description": "类视图 (cheatsheet)",
+      "keys": [
+        "c",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 视图 类视图",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "编辑标签 F2",
+      "description": "编辑标签 (cheatsheet)",
+      "keys": [
+        "f2"
+      ],
+      "keyword": "microsoft visual studio 视图 编辑标签",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "错误列表 Command+\\ & Command+E",
+      "description": "错误列表 (cheatsheet)",
+      "keys": [
+        [
+          "\\",
+          "command"
+        ],
+        [
+          "e",
+          "command"
+        ]
+      ],
+      "keyword": "microsoft visual studio 视图 错误列表",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "向后导航 Command+Minus",
+      "description": "向后导航 (cheatsheet)",
+      "keys": [
+        "minus",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 视图 向后导航",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "向前导航 Command+Shift+Minus",
+      "description": "向前导航 (cheatsheet)",
+      "keys": [
+        "minus",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 视图 向前导航",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "对象浏览器 Command+Option+J",
+      "description": "对象浏览器 (cheatsheet)",
+      "keys": [
+        "j",
+        "command",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 视图 对象浏览器",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "输出 Command+Option+O",
+      "description": "输出 (cheatsheet)",
+      "keys": [
+        "o",
+        "command",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 视图 输出",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "“属性”窗口 F4",
+      "description": "“属性”窗口 (cheatsheet)",
+      "keys": [
+        "f4"
+      ],
+      "keyword": "microsoft visual studio 视图 “属性”窗口",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "刷新 F5",
+      "description": "刷新 (cheatsheet)",
+      "keys": [
+        "f5"
+      ],
+      "keyword": "microsoft visual studio 视图 刷新",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "服务器资源管理器 Command+Option+S",
+      "description": "服务器资源管理器 (cheatsheet)",
+      "keys": [
+        "s",
+        "command",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 视图 服务器资源管理器",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "显示智能标记 Command+.",
+      "description": "显示智能标记 (cheatsheet)",
+      "keys": [
+        ".",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 视图 显示智能标记",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "解决方案资源管理器 Command+Option+L",
+      "description": "解决方案资源管理器 (cheatsheet)",
+      "keys": [
+        "l",
+        "command",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 视图 解决方案资源管理器",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "TFS 团队资源管理器 Command+\\ & Command+M",
+      "description": "TFS 团队资源管理器 (cheatsheet)",
+      "keys": [
+        [
+          "\\",
+          "command"
+        ],
+        [
+          "m",
+          "command"
+        ]
+      ],
+      "keyword": "microsoft visual studio 视图 tfs 团队资源管理器",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "工具箱 Command+Option+X",
+      "description": "工具箱 (cheatsheet)",
+      "keys": [
+        "x",
+        "command",
+        "option"
+      ],
+      "keyword": "microsoft visual studio 视图 工具箱",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "视图设计器 Shift+F7",
+      "description": "视图设计器 (cheatsheet)",
+      "keys": [
+        "f7",
+        "shift"
+      ],
+      "keyword": "microsoft visual studio 视图 视图设计器",
+      "category": "视图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "激活文档窗口 Esc",
+      "description": "激活文档窗口 (cheatsheet)",
+      "keys": [
+        "escape"
+      ],
+      "keyword": "microsoft visual studio 窗口 激活文档窗口",
+      "category": "窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "关闭文档窗口 Command+F4",
+      "description": "关闭文档窗口 (cheatsheet)",
+      "keys": [
+        "f4",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 窗口 关闭文档窗口",
+      "category": "窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "下一个文档窗口 Command+F6",
+      "description": "下一个文档窗口 (cheatsheet)",
+      "keys": [
+        "f6",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 窗口 下一个文档窗口",
+      "category": "窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "下一个文档窗口导航 Command+Tab",
+      "description": "下一个文档窗口导航 (cheatsheet)",
+      "keys": [
+        "tab",
+        "command"
+      ],
+      "keyword": "microsoft visual studio 窗口 下一个文档窗口导航",
+      "category": "窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "下一个拆分窗格 F6",
+      "description": "下一个拆分窗格 (cheatsheet)",
+      "keys": [
+        "f6"
+      ],
+      "keyword": "microsoft visual studio 窗口 下一个拆分窗格",
+      "category": "窗口",
+      "icon": "icons/macos.png"
+    }
+  ]
+}

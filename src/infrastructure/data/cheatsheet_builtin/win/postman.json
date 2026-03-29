@@ -1,0 +1,249 @@
+{
+  "appId": "postman",
+  "appName": "Postman",
+  "updatedAt": 1774743623041,
+  "shortcuts": [
+    {
+      "title": "保存 Ctrl+S",
+      "description": "保存 (cheatsheet)",
+      "keys": [
+        "s",
+        "ctrl"
+      ],
+      "keyword": "postman 通用 保存",
+      "category": "通用",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "另存为 Ctrl+Shift+S",
+      "description": "另存为 (cheatsheet)",
+      "keys": [
+        "s",
+        "ctrl",
+        "shift"
+      ],
+      "keyword": "postman 通用 另存为",
+      "category": "通用",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "发送请求 Ctrl+Enter",
+      "description": "发送请求 (cheatsheet)",
+      "keys": [
+        "enter",
+        "ctrl"
+      ],
+      "keyword": "postman 通用 发送请求",
+      "category": "通用",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "切换侧边栏 Ctrl+\\",
+      "description": "切换侧边栏 (cheatsheet)",
+      "keys": [
+        "\\",
+        "ctrl"
+      ],
+      "keyword": "postman 通用 切换侧边栏",
+      "category": "通用",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "跳转到URL栏 Ctrl+L",
+      "description": "跳转到URL栏 (cheatsheet)",
+      "keys": [
+        "l",
+        "ctrl"
+      ],
+      "keyword": "postman 通用 跳转到url栏",
+      "category": "通用",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "打开控制台 Ctrl+Alt+C",
+      "description": "打开控制台 (cheatsheet)",
+      "keys": [
+        "c",
+        "ctrl",
+        "alt"
+      ],
+      "keyword": "postman 通用 打开控制台",
+      "category": "通用",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "侧边栏 Ctrl+Alt+1",
+      "description": "侧边栏 (cheatsheet)",
+      "keys": [
+        "1",
+        "ctrl",
+        "alt"
+      ],
+      "keyword": "postman 导航 侧边栏",
+      "category": "导航",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "生成器 Ctrl+Alt+2",
+      "description": "生成器 (cheatsheet)",
+      "keys": [
+        "2",
+        "ctrl",
+        "alt"
+      ],
+      "keyword": "postman 导航 生成器",
+      "category": "导航",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "切换第 n 个选项卡 Ctrl+NumPad",
+      "description": "切换第 n 个选项卡 (cheatsheet)",
+      "keys": [
+        "numpad",
+        "ctrl"
+      ],
+      "keyword": "postman 导航 切换第 n 个选项卡",
+      "category": "导航",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "在选项卡之间切换 Ctrl+Shift+/",
+      "description": "在选项卡之间切换 (cheatsheet)",
+      "keys": [
+        "/",
+        "ctrl",
+        "shift"
+      ],
+      "keyword": "postman 导航 在选项卡之间切换",
+      "category": "导航",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "移至下一项 Down",
+      "description": "移至下一项 (cheatsheet)",
+      "keys": [
+        "down"
+      ],
+      "keyword": "postman 侧边栏 移至下一项",
+      "category": "侧边栏",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "移至上一项 Up",
+      "description": "移至上一项 (cheatsheet)",
+      "keys": [
+        "up"
+      ],
+      "keyword": "postman 侧边栏 移至上一项",
+      "category": "侧边栏",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "收起收藏夹/文件夹 Left",
+      "description": "收起收藏夹/文件夹 (cheatsheet)",
+      "keys": [
+        "left"
+      ],
+      "keyword": "postman 侧边栏 收起收藏夹/文件夹",
+      "category": "侧边栏",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "展开收藏夹/文件夹 Right",
+      "description": "展开收藏夹/文件夹 (cheatsheet)",
+      "keys": [
+        "right"
+      ],
+      "keyword": "postman 侧边栏 展开收藏夹/文件夹",
+      "category": "侧边栏",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "选择当前和下一个项目 Shift+Down",
+      "description": "选择当前和下一个项目 (cheatsheet)",
+      "keys": [
+        "down",
+        "shift"
+      ],
+      "keyword": "postman 侧边栏 选择当前和下一个项目",
+      "category": "侧边栏",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "选择当前和上一个项目 Shift+Up",
+      "description": "选择当前和上一个项目 (cheatsheet)",
+      "keys": [
+        "up",
+        "shift"
+      ],
+      "keyword": "postman 侧边栏 选择当前和上一个项目",
+      "category": "侧边栏",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "搜索边栏 Ctrl+F",
+      "description": "搜索边栏 (cheatsheet)",
+      "keys": [
+        "f",
+        "ctrl"
+      ],
+      "keyword": "postman 侧边栏 搜索边栏",
+      "category": "侧边栏",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "在选项卡中打开请求 Enter",
+      "description": "在选项卡中打开请求 (cheatsheet)",
+      "keys": [
+        "enter"
+      ],
+      "keyword": "postman 侧边栏 在选项卡中打开请求",
+      "category": "侧边栏",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "复制 Ctrl+C",
+      "description": "复制 (cheatsheet)",
+      "keys": [
+        "c",
+        "ctrl"
+      ],
+      "keyword": "postman 编辑 复制",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "粘贴 Ctrl+V",
+      "description": "粘贴 (cheatsheet)",
+      "keys": [
+        "v",
+        "ctrl"
+      ],
+      "keyword": "postman 编辑 粘贴",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "复制 Ctrl+D",
+      "description": "复制 (cheatsheet)",
+      "keys": [
+        "d",
+        "ctrl"
+      ],
+      "keyword": "postman 编辑 复制",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    },
+    {
+      "title": "编辑/重命名 Ctrl+E",
+      "description": "编辑/重命名 (cheatsheet)",
+      "keys": [
+        "e",
+        "ctrl"
+      ],
+      "keyword": "postman 编辑 编辑/重命名",
+      "category": "编辑",
+      "icon": "icons/windows.png"
+    }
+  ]
+}

@@ -1,0 +1,736 @@
+{
+  "appId": "mac",
+  "appName": "Mac",
+  "updatedAt": 1774743623041,
+  "shortcuts": [
+    {
+      "title": "设置... Command+,",
+      "description": "设置... (cheatsheet)",
+      "keys": [
+        ",",
+        "command"
+      ],
+      "keyword": "mac 访达 设置...",
+      "category": "访达",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "清倒废纸篓... Shift+Command+Backspace",
+      "description": "清倒废纸篓... (cheatsheet)",
+      "keys": [
+        "backspace",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 访达 清倒废纸篓...",
+      "category": "访达",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "清倒废纸篓 Option+Shift+Command+Backspace",
+      "description": "清倒废纸篓 (cheatsheet)",
+      "keys": [
+        "backspace",
+        "option",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 访达 清倒废纸篓",
+      "category": "访达",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "隐藏访达 Command+H",
+      "description": "隐藏访达 (cheatsheet)",
+      "keys": [
+        "h",
+        "command"
+      ],
+      "keyword": "mac 访达 隐藏访达",
+      "category": "访达",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "隐藏其他 Option+Command+H",
+      "description": "隐藏其他 (cheatsheet)",
+      "keys": [
+        "h",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 访达 隐藏其他",
+      "category": "访达",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "退出访达 Command+Q",
+      "description": "退出访达 (cheatsheet)",
+      "keys": [
+        "q",
+        "command"
+      ],
+      "keyword": "mac 访达 退出访达",
+      "category": "访达",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "退出并保留窗口 Option+Command+Q",
+      "description": "退出并保留窗口 (cheatsheet)",
+      "keys": [
+        "q",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 访达 退出并保留窗口",
+      "category": "访达",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "复制 Command+C",
+      "description": "复制 (cheatsheet)",
+      "keys": [
+        "c",
+        "command"
+      ],
+      "keyword": "mac 编辑 复制",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "将\"桌面\"拷贝为路径名称 Option+Command+C",
+      "description": "将\"桌面\"拷贝为路径名称 (cheatsheet)",
+      "keys": [
+        "c",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 编辑 将\"桌面\"拷贝为路径名称",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "粘贴 Command+V",
+      "description": "粘贴 (cheatsheet)",
+      "keys": [
+        "v",
+        "command"
+      ],
+      "keyword": "mac 编辑 粘贴",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "撤销 Command+Z",
+      "description": "撤销 (cheatsheet)",
+      "keys": [
+        "z",
+        "command"
+      ],
+      "keyword": "mac 编辑 撤销",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "全选 Command+A",
+      "description": "全选 (cheatsheet)",
+      "keys": [
+        "a",
+        "command"
+      ],
+      "keyword": "mac 编辑 全选",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "上层文件夹 Command+Up",
+      "description": "上层文件夹 (cheatsheet)",
+      "keys": [
+        "up",
+        "command"
+      ],
+      "keyword": "mac 前往 上层文件夹",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "上层文件夹 Option+Command+Up",
+      "description": "上层文件夹 (cheatsheet)",
+      "keys": [
+        "up",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 前往 上层文件夹",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "新窗口中的上层文件夹 Alt+Command+Up",
+      "description": "新窗口中的上层文件夹 (cheatsheet)",
+      "keys": [
+        "up",
+        "alt",
+        "command"
+      ],
+      "keyword": "mac 前往 新窗口中的上层文件夹",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "选择启动磁盘 Shift+Command+Up",
+      "description": "选择启动磁盘 (cheatsheet)",
+      "keys": [
+        "up",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 选择启动磁盘",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "打开所选项 Option+Command+Down",
+      "description": "打开所选项 (cheatsheet)",
+      "keys": [
+        "down",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 前往 打开所选项",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "最近使用 Shift+Command+F",
+      "description": "最近使用 (cheatsheet)",
+      "keys": [
+        "f",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 最近使用",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "文稿 Shift+Command+O",
+      "description": "文稿 (cheatsheet)",
+      "keys": [
+        "o",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 文稿",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "桌面 Shift+Command+D",
+      "description": "桌面 (cheatsheet)",
+      "keys": [
+        "d",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 桌面",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "下载 Option+Command+L",
+      "description": "下载 (cheatsheet)",
+      "keys": [
+        "l",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 前往 下载",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "个人 Shift+Command+H",
+      "description": "个人 (cheatsheet)",
+      "keys": [
+        "h",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 个人",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "资源库 Shift+Command+L",
+      "description": "资源库 (cheatsheet)",
+      "keys": [
+        "l",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 资源库",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "电脑 Shift+Command+C",
+      "description": "电脑 (cheatsheet)",
+      "keys": [
+        "c",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 电脑",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "隔空投送 Shift+Command+R",
+      "description": "隔空投送 (cheatsheet)",
+      "keys": [
+        "r",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 隔空投送",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "网络 Shift+Command+K",
+      "description": "网络 (cheatsheet)",
+      "keys": [
+        "k",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 网络",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "iCloud云盘 Shift+Command+I",
+      "description": "iCloud云盘 (cheatsheet)",
+      "keys": [
+        "i",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 icloud云盘",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "共享 Shift+Command+S",
+      "description": "共享 (cheatsheet)",
+      "keys": [
+        "s",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 共享",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "应用程序 Shift+Command+A",
+      "description": "应用程序 (cheatsheet)",
+      "keys": [
+        "a",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 应用程序",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "实用工具 Shift+Command+U",
+      "description": "实用工具 (cheatsheet)",
+      "keys": [
+        "u",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 实用工具",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "前往文件夹... Shift+Command+G",
+      "description": "前往文件夹... (cheatsheet)",
+      "keys": [
+        "g",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 前往 前往文件夹...",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "连接服务器... Command+K",
+      "description": "连接服务器... (cheatsheet)",
+      "keys": [
+        "k",
+        "command"
+      ],
+      "keyword": "mac 前往 连接服务器...",
+      "category": "前往",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "全部最小化 Option+Command+M",
+      "description": "全部最小化 (cheatsheet)",
+      "keys": [
+        "m",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 窗口 全部最小化",
+      "category": "窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "新建\"访达\"窗口 Command+N",
+      "description": "新建\"访达\"窗口 (cheatsheet)",
+      "keys": [
+        "n",
+        "command"
+      ],
+      "keyword": "mac 文件 新建\"访达\"窗口",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "新建\"访达\"窗口 Option+Command+N",
+      "description": "新建\"访达\"窗口 (cheatsheet)",
+      "keys": [
+        "n",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 文件 新建\"访达\"窗口",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "新建文件夹 Shift+Command+N",
+      "description": "新建文件夹 (cheatsheet)",
+      "keys": [
+        "n",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 文件 新建文件夹",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "新建标签页 Command+T",
+      "description": "新建标签页 (cheatsheet)",
+      "keys": [
+        "t",
+        "command"
+      ],
+      "keyword": "mac 文件 新建标签页",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "在新标签页中打开 Option+Command+O",
+      "description": "在新标签页中打开 (cheatsheet)",
+      "keys": [
+        "o",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 文件 在新标签页中打开",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "全部关闭 Option+Command+W",
+      "description": "全部关闭 (cheatsheet)",
+      "keys": [
+        "w",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 文件 全部关闭",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "显示简介 Command+I",
+      "description": "显示简介 (cheatsheet)",
+      "keys": [
+        "i",
+        "command"
+      ],
+      "keyword": "mac 文件 显示简介",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "显示检查器 Option+Command+I",
+      "description": "显示检查器 (cheatsheet)",
+      "keys": [
+        "i",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 文件 显示检查器",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "显示摘要信息 Control+Command+I",
+      "description": "显示摘要信息 (cheatsheet)",
+      "keys": [
+        "i",
+        "control",
+        "command"
+      ],
+      "keyword": "mac 文件 显示摘要信息",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "查找 Command+F",
+      "description": "查找 (cheatsheet)",
+      "keys": [
+        "f",
+        "command"
+      ],
+      "keyword": "mac 文件 查找",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "查找 Command+F",
+      "description": "查找 (cheatsheet)",
+      "keys": [
+        "f",
+        "command"
+      ],
+      "keyword": "mac 文件 查找",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "按名称查找... Control+Shift+Command+F",
+      "description": "按名称查找... (cheatsheet)",
+      "keys": [
+        "f",
+        "control",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 文件 按名称查找...",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "将焦点设定到搜索栏 Option+Command+F",
+      "description": "将焦点设定到搜索栏 (cheatsheet)",
+      "keys": [
+        "f",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 文件 将焦点设定到搜索栏",
+      "category": "文件",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "使用叠放 Control+Command+0",
+      "description": "使用叠放 (cheatsheet)",
+      "keys": [
+        "0",
+        "control",
+        "command"
+      ],
+      "keyword": "mac 显示 使用叠放",
+      "category": "显示",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "无 Control+Option+Command+0",
+      "description": "无 (cheatsheet)",
+      "keys": [
+        "0",
+        "control",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 显示 无",
+      "category": "显示",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "名称 Control+Option+Command+1",
+      "description": "名称 (cheatsheet)",
+      "keys": [
+        "1",
+        "control",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 显示 名称",
+      "category": "显示",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "种类 Control+Option+Command+2",
+      "description": "种类 (cheatsheet)",
+      "keys": [
+        "2",
+        "control",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 显示 种类",
+      "category": "显示",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "上次打开日期 Control+Option+Command+3",
+      "description": "上次打开日期 (cheatsheet)",
+      "keys": [
+        "3",
+        "control",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 显示 上次打开日期",
+      "category": "显示",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "添加日期 Control+Option+Command+4",
+      "description": "添加日期 (cheatsheet)",
+      "keys": [
+        "4",
+        "control",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 显示 添加日期",
+      "category": "显示",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "修改日期 Control+Option+Command+5",
+      "description": "修改日期 (cheatsheet)",
+      "keys": [
+        "5",
+        "control",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 显示 修改日期",
+      "category": "显示",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "大小 Control+Option+Command+6",
+      "description": "大小 (cheatsheet)",
+      "keys": [
+        "6",
+        "control",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 显示 大小",
+      "category": "显示",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "标签 Control+Option+Command+7",
+      "description": "标签 (cheatsheet)",
+      "keys": [
+        "7",
+        "control",
+        "option",
+        "command"
+      ],
+      "keyword": "mac 显示 标签",
+      "category": "显示",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "查看显示选项 Command+J",
+      "description": "查看显示选项 (cheatsheet)",
+      "keys": [
+        "j",
+        "command"
+      ],
+      "keyword": "mac 显示 查看显示选项",
+      "category": "显示",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "截图 Shift+Command+5",
+      "description": "截图 (cheatsheet)",
+      "keys": [
+        "5",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 截图 截图",
+      "category": "截图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "保存截图 Shift+Command+3",
+      "description": "保存截图 (cheatsheet)",
+      "keys": [
+        "3",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 截图 保存截图",
+      "category": "截图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "复制截图 Control+Shift+Command+3",
+      "description": "复制截图 (cheatsheet)",
+      "keys": [
+        "3",
+        "control",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 截图 复制截图",
+      "category": "截图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "保存截图(选中) Shift+Command+4",
+      "description": "保存截图(选中) (cheatsheet)",
+      "keys": [
+        "4",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 截图 保存截图(选中)",
+      "category": "截图",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "复制截图(选中) Control+Shift+Command+4",
+      "description": "复制截图(选中) (cheatsheet)",
+      "keys": [
+        "4",
+        "control",
+        "shift",
+        "command"
+      ],
+      "keyword": "mac 截图 复制截图(选中)",
+      "category": "截图",
+      "icon": "icons/macos.png"
+    }
+  ]
+}

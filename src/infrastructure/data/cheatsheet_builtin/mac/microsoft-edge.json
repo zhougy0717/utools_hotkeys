@@ -1,0 +1,451 @@
+{
+  "appId": "microsoft-edge",
+  "appName": "Microsoft Edge",
+  "updatedAt": 1774743623041,
+  "shortcuts": [
+    {
+      "title": "显示或隐藏收藏夹栏 Command+Shift+B",
+      "description": "显示或隐藏收藏夹栏 (cheatsheet)",
+      "keys": [
+        "b",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft edge 选项卡操作 显示或隐藏收藏夹栏",
+      "category": "选项卡操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "将当前选项卡另存为收藏夹 Command+D",
+      "description": "将当前选项卡另存为收藏夹 (cheatsheet)",
+      "keys": [
+        "d",
+        "command"
+      ],
+      "keyword": "microsoft edge 选项卡操作 将当前选项卡另存为收藏夹",
+      "category": "选项卡操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "打开开发人员工具 Command+Shift+C",
+      "description": "打开开发人员工具 (cheatsheet)",
+      "keys": [
+        "c",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft edge 选项卡操作 打开开发人员工具",
+      "category": "选项卡操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "打开“下载”文件夹 Command+Option+L",
+      "description": "打开“下载”文件夹 (cheatsheet)",
+      "keys": [
+        "l",
+        "command",
+        "option"
+      ],
+      "keyword": "microsoft edge 选项卡操作 打开“下载”文件夹",
+      "category": "选项卡操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "在边栏中打开搜索 Command+Shift+E",
+      "description": "在边栏中打开搜索 (cheatsheet)",
+      "keys": [
+        "e",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft edge 搜索操作 在边栏中打开搜索",
+      "category": "搜索操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "在页面上打开查找 Command+F",
+      "description": "在页面上打开查找 (cheatsheet)",
+      "keys": [
+        "f",
+        "command"
+      ],
+      "keyword": "microsoft edge 搜索操作 在页面上打开查找",
+      "category": "搜索操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "跳转到下一个结果以在页面上查找 Command+G",
+      "description": "跳转到下一个结果以在页面上查找 (cheatsheet)",
+      "keys": [
+        "g",
+        "command"
+      ],
+      "keyword": "microsoft edge 搜索操作 跳转到下一个结果以在页面上查找",
+      "category": "搜索操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "跳转到上一个结果以在页面上查找 Command+Shift+G",
+      "description": "跳转到上一个结果以在页面上查找 (cheatsheet)",
+      "keys": [
+        "g",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft edge 搜索操作 跳转到上一个结果以在页面上查找",
+      "category": "搜索操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "选择地址栏中的 URL 以进行编辑 Command+L",
+      "description": "选择地址栏中的 URL 以进行编辑 (cheatsheet)",
+      "keys": [
+        "l",
+        "command"
+      ],
+      "keyword": "microsoft edge url及操作 选择地址栏中的 url 以进行编辑",
+      "category": "url及操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "以其他用户身份登录或以来宾身份浏览 Command+Shift+M",
+      "description": "以其他用户身份登录或以来宾身份浏览 (cheatsheet)",
+      "keys": [
+        "m",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft edge url及操作 以其他用户身份登录或以来宾身份浏览",
+      "category": "url及操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "在 Microsoft Edge 中打开计算机中的文件 Command+O",
+      "description": "在 Microsoft Edge 中打开计算机中的文件 (cheatsheet)",
+      "keys": [
+        "o",
+        "command"
+      ],
+      "keyword": "microsoft edge url及操作 在 microsoft edge 中打开计算机中的文件",
+      "category": "url及操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "打印当前页 Command+P",
+      "description": "打印当前页 (cheatsheet)",
+      "keys": [
+        "p",
+        "command"
+      ],
+      "keyword": "microsoft edge url及操作 打印当前页",
+      "category": "url及操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "重新加载当前页 Command+R",
+      "description": "重新加载当前页 (cheatsheet)",
+      "keys": [
+        "r",
+        "command"
+      ],
+      "keyword": "microsoft edge url及操作 重新加载当前页",
+      "category": "url及操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "重新加载当前页，忽略缓存内容 Command+Shift+R",
+      "description": "重新加载当前页，忽略缓存内容 (cheatsheet)",
+      "keys": [
+        "r",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft edge url及操作 重新加载当前页，忽略缓存内容",
+      "category": "url及操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "保存当前页 Command+S",
+      "description": "保存当前页 (cheatsheet)",
+      "keys": [
+        "s",
+        "command"
+      ],
+      "keyword": "microsoft edge url及操作 保存当前页",
+      "category": "url及操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "开始或停止“大声朗读” Command+Shift+U",
+      "description": "开始或停止“大声朗读” (cheatsheet)",
+      "keys": [
+        "u",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft edge url及操作 开始或停止“大声朗读”",
+      "category": "url及操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "在PDF中在“根据页面调整”与“根据宽度调整”之间切换 PDF Ctrl+\\",
+      "description": "在PDF中在“根据页面调整”与“根据宽度调整”之间切换 PDF (cheatsheet)",
+      "keys": [
+        "\\",
+        "ctrl"
+      ],
+      "keyword": "microsoft edge url及操作 在pdf中在“根据页面调整”与“根据宽度调整”之间切换 pdf",
+      "category": "url及操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "打开清除浏览数据选项 Command+Shift+Del",
+      "description": "打开清除浏览数据选项 (cheatsheet)",
+      "keys": [
+        "delete",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft edge url及操作 打开清除浏览数据选项",
+      "category": "url及操作",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "打开新窗口 Command+N",
+      "description": "打开新窗口 (cheatsheet)",
+      "keys": [
+        "n",
+        "command"
+      ],
+      "keyword": "microsoft edge 标签页及窗口 打开新窗口",
+      "category": "标签页及窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "打开新标签页并切换到该标签页 Command+T",
+      "description": "打开新标签页并切换到该标签页 (cheatsheet)",
+      "keys": [
+        "t",
+        "command"
+      ],
+      "keyword": "microsoft edge 标签页及窗口 打开新标签页并切换到该标签页",
+      "category": "标签页及窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "重新打开上一个关闭的标签页并切换到该标签页 Command+Shift+T",
+      "description": "重新打开上一个关闭的标签页并切换到该标签页 (cheatsheet)",
+      "keys": [
+        "t",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft edge 标签页及窗口 重新打开上一个关闭的标签页并切换到该标签页",
+      "category": "标签页及窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "关闭当前标签页 Command+W",
+      "description": "关闭当前标签页 (cheatsheet)",
+      "keys": [
+        "w",
+        "command"
+      ],
+      "keyword": "microsoft edge 标签页及窗口 关闭当前标签页",
+      "category": "标签页及窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "关闭当前窗口 Command+Shift+W",
+      "description": "关闭当前窗口 (cheatsheet)",
+      "keys": [
+        "w",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft edge 标签页及窗口 关闭当前窗口",
+      "category": "标签页及窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "切换到下一个标签页 Control+Fn+Down",
+      "description": "切换到下一个标签页 (cheatsheet)",
+      "keys": [
+        "fn",
+        "down",
+        "control"
+      ],
+      "keyword": "microsoft edge 标签页及窗口 切换到下一个标签页",
+      "category": "标签页及窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "切换到上一个标签页 Ctrl+Fn+Up",
+      "description": "切换到上一个标签页 (cheatsheet)",
+      "keys": [
+        "fn",
+        "up",
+        "ctrl"
+      ],
+      "keyword": "microsoft edge 标签页及窗口 切换到上一个标签页",
+      "category": "标签页及窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "在PDF中将 PDF 逆时针旋转 90 度 Control+[",
+      "description": "在PDF中将 PDF 逆时针旋转 90 度 (cheatsheet)",
+      "keys": [
+        "[",
+        "control"
+      ],
+      "keyword": "microsoft edge 标签页及窗口 在pdf中将 pdf 逆时针旋转 90 度",
+      "category": "标签页及窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "在PDF中将 PDF 顺时针旋转 90 度 Ctrl+]",
+      "description": "在PDF中将 PDF 顺时针旋转 90 度 (cheatsheet)",
+      "keys": [
+        "]",
+        "ctrl"
+      ],
+      "keyword": "microsoft edge 标签页及窗口 在pdf中将 pdf 顺时针旋转 90 度",
+      "category": "标签页及窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "在当前标签页中打开主页 Command+Shift+H",
+      "description": "在当前标签页中打开主页 (cheatsheet)",
+      "keys": [
+        "h",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft edge 标签页及窗口 在当前标签页中打开主页",
+      "category": "标签页及窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "关闭当前窗口 Command+Shift+W",
+      "description": "关闭当前窗口 (cheatsheet)",
+      "keys": [
+        "w",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft edge 标签页及窗口 关闭当前窗口",
+      "category": "标签页及窗口",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "选择地址栏中的 URL Command+L",
+      "description": "选择地址栏中的 URL (cheatsheet)",
+      "keys": [
+        "l",
+        "command"
+      ],
+      "keyword": "microsoft edge 功能键 选择地址栏中的 url",
+      "category": "功能键",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "重新加载当前标签页 Command+R",
+      "description": "重新加载当前标签页 (cheatsheet)",
+      "keys": [
+        "r",
+        "command"
+      ],
+      "keyword": "microsoft edge 功能键 重新加载当前标签页",
+      "category": "功能键",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "进入或退出沉浸式阅读器 F9",
+      "description": "进入或退出沉浸式阅读器 (cheatsheet)",
+      "keys": [
+        "f9"
+      ],
+      "keyword": "microsoft edge 功能键 进入或退出沉浸式阅读器",
+      "category": "功能键",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "打开开发人员工具 F12",
+      "description": "打开开发人员工具 (cheatsheet)",
+      "keys": [
+        "f12"
+      ],
+      "keyword": "microsoft edge 功能键 打开开发人员工具",
+      "category": "功能键",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "关闭当前标签页 Command+W",
+      "description": "关闭当前标签页 (cheatsheet)",
+      "keys": [
+        "w",
+        "command"
+      ],
+      "keyword": "microsoft edge 功能键 关闭当前标签页",
+      "category": "功能键",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "重新加载当前标签页，忽略缓存内容 Command+Shift+R",
+      "description": "重新加载当前标签页，忽略缓存内容 (cheatsheet)",
+      "keys": [
+        "r",
+        "command",
+        "shift"
+      ],
+      "keyword": "microsoft edge 功能键 重新加载当前标签页，忽略缓存内容",
+      "category": "功能键",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "向下滚动网页，一次滚动一个屏幕 Space",
+      "description": "向下滚动网页，一次滚动一个屏幕 (cheatsheet)",
+      "keys": [
+        "space"
+      ],
+      "keyword": "microsoft edge 常见 向下滚动网页，一次滚动一个屏幕",
+      "category": "常见",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "向上滚动网页，一次滚动一个屏幕 Shift+Space | Shift+PgUp",
+      "description": "向上滚动网页，一次滚动一个屏幕 (cheatsheet)",
+      "keys": [
+        "space",
+        "shift"
+      ],
+      "keyword": "microsoft edge 常见 向上滚动网页，一次滚动一个屏幕",
+      "category": "常见",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "切换到下一个标签页 Ctrl+Fn+Down",
+      "description": "切换到下一个标签页 (cheatsheet)",
+      "keys": [
+        "fn",
+        "down",
+        "ctrl"
+      ],
+      "keyword": "microsoft edge 常见 切换到下一个标签页",
+      "category": "常见",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "切换到上一个标签页 Ctrl+Fn+Up",
+      "description": "切换到上一个标签页 (cheatsheet)",
+      "keys": [
+        "fn",
+        "up",
+        "ctrl"
+      ],
+      "keyword": "microsoft edge 常见 切换到上一个标签页",
+      "category": "常见",
+      "icon": "icons/macos.png"
+    }
+  ]
+}

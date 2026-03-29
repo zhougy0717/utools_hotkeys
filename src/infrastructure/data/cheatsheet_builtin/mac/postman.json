@@ -1,0 +1,249 @@
+{
+  "appId": "postman",
+  "appName": "Postman",
+  "updatedAt": 1774743623041,
+  "shortcuts": [
+    {
+      "title": "保存 Command+S",
+      "description": "保存 (cheatsheet)",
+      "keys": [
+        "s",
+        "command"
+      ],
+      "keyword": "postman 通用 保存",
+      "category": "通用",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "另存为 Command+Shift+S",
+      "description": "另存为 (cheatsheet)",
+      "keys": [
+        "s",
+        "command",
+        "shift"
+      ],
+      "keyword": "postman 通用 另存为",
+      "category": "通用",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "发送请求 Command+Enter",
+      "description": "发送请求 (cheatsheet)",
+      "keys": [
+        "enter",
+        "command"
+      ],
+      "keyword": "postman 通用 发送请求",
+      "category": "通用",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "切换侧边栏 Command+\\",
+      "description": "切换侧边栏 (cheatsheet)",
+      "keys": [
+        "\\",
+        "command"
+      ],
+      "keyword": "postman 通用 切换侧边栏",
+      "category": "通用",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "跳转到URL栏 Command+L",
+      "description": "跳转到URL栏 (cheatsheet)",
+      "keys": [
+        "l",
+        "command"
+      ],
+      "keyword": "postman 通用 跳转到url栏",
+      "category": "通用",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "打开控制台 Command+Option+C",
+      "description": "打开控制台 (cheatsheet)",
+      "keys": [
+        "c",
+        "command",
+        "option"
+      ],
+      "keyword": "postman 通用 打开控制台",
+      "category": "通用",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "侧边栏 Command+Option+1",
+      "description": "侧边栏 (cheatsheet)",
+      "keys": [
+        "1",
+        "command",
+        "option"
+      ],
+      "keyword": "postman 导航 侧边栏",
+      "category": "导航",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "生成器 Command+Option+2",
+      "description": "生成器 (cheatsheet)",
+      "keys": [
+        "2",
+        "command",
+        "option"
+      ],
+      "keyword": "postman 导航 生成器",
+      "category": "导航",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "切换第 n 个选项卡 Command+NumPad",
+      "description": "切换第 n 个选项卡 (cheatsheet)",
+      "keys": [
+        "numpad",
+        "command"
+      ],
+      "keyword": "postman 导航 切换第 n 个选项卡",
+      "category": "导航",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "在选项卡之间切换 Command+Shift+/",
+      "description": "在选项卡之间切换 (cheatsheet)",
+      "keys": [
+        "/",
+        "command",
+        "shift"
+      ],
+      "keyword": "postman 导航 在选项卡之间切换",
+      "category": "导航",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "移至下一项 Down",
+      "description": "移至下一项 (cheatsheet)",
+      "keys": [
+        "down"
+      ],
+      "keyword": "postman 侧边栏 移至下一项",
+      "category": "侧边栏",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "移至上一项 Up",
+      "description": "移至上一项 (cheatsheet)",
+      "keys": [
+        "up"
+      ],
+      "keyword": "postman 侧边栏 移至上一项",
+      "category": "侧边栏",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "收起收藏夹/文件夹 Left",
+      "description": "收起收藏夹/文件夹 (cheatsheet)",
+      "keys": [
+        "left"
+      ],
+      "keyword": "postman 侧边栏 收起收藏夹/文件夹",
+      "category": "侧边栏",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "展开收藏夹/文件夹 Right",
+      "description": "展开收藏夹/文件夹 (cheatsheet)",
+      "keys": [
+        "right"
+      ],
+      "keyword": "postman 侧边栏 展开收藏夹/文件夹",
+      "category": "侧边栏",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "选择当前和下一个项目 Shift+Down",
+      "description": "选择当前和下一个项目 (cheatsheet)",
+      "keys": [
+        "down",
+        "shift"
+      ],
+      "keyword": "postman 侧边栏 选择当前和下一个项目",
+      "category": "侧边栏",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "选择当前和上一个项目 Shift+Up",
+      "description": "选择当前和上一个项目 (cheatsheet)",
+      "keys": [
+        "up",
+        "shift"
+      ],
+      "keyword": "postman 侧边栏 选择当前和上一个项目",
+      "category": "侧边栏",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "搜索边栏 Command+F",
+      "description": "搜索边栏 (cheatsheet)",
+      "keys": [
+        "f",
+        "command"
+      ],
+      "keyword": "postman 侧边栏 搜索边栏",
+      "category": "侧边栏",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "在选项卡中打开请求 Enter",
+      "description": "在选项卡中打开请求 (cheatsheet)",
+      "keys": [
+        "enter"
+      ],
+      "keyword": "postman 侧边栏 在选项卡中打开请求",
+      "category": "侧边栏",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "复制 Command+C",
+      "description": "复制 (cheatsheet)",
+      "keys": [
+        "c",
+        "command"
+      ],
+      "keyword": "postman 编辑 复制",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "粘贴 Command+V",
+      "description": "粘贴 (cheatsheet)",
+      "keys": [
+        "v",
+        "command"
+      ],
+      "keyword": "postman 编辑 粘贴",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "复制 Command+D",
+      "description": "复制 (cheatsheet)",
+      "keys": [
+        "d",
+        "command"
+      ],
+      "keyword": "postman 编辑 复制",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    },
+    {
+      "title": "编辑/重命名 Command+E",
+      "description": "编辑/重命名 (cheatsheet)",
+      "keys": [
+        "e",
+        "command"
+      ],
+      "keyword": "postman 编辑 编辑/重命名",
+      "category": "编辑",
+      "icon": "icons/macos.png"
+    }
+  ]
+}

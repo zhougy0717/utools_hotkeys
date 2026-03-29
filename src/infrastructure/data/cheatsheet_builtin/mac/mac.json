@@ -1,7 +1,8 @@
 {
   "appId": "mac",
   "appName": "Mac",
-  "updatedAt": 1774743623041,
+  "icon": "icons/macos.png",
+  "updatedAt": 1774780000000,
   "shortcuts": [
     {
       "title": "设置... Command+,",

@@ -4,8 +4,8 @@
 - [x] 支持自定义json的快捷键输入
 
 # 功能
-- [ ] 支持对接[JinSooo/CheatSheet: 一个跨平台显示应用快捷键的软件](https://github.com/JinSooo/CheatSheet)的数据
-- [ ] 提供斜线命令将内置的快捷键数据，导出用json文件保存
+- [x] 支持对接[JinSooo/CheatSheet: 一个跨平台显示应用快捷键的软件](https://github.com/JinSooo/CheatSheet)的数据
+- [x] 提供斜线命令将内置的快捷键数据，导出用json文件保存
 
 # 问题
 - [X] photoshop的快捷键无法获取

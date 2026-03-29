@@ -1,7 +1,8 @@
 {
   "appId": "windows",
   "appName": "Windows",
-  "updatedAt": 1774743623041,
+  "icon": "icons/windows.png",
+  "updatedAt": 1774780000000,
   "shortcuts": [
     {
       "title": "打开\"开始\"菜单 Ctrl+Esc",

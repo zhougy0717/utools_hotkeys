@@ -1,7 +1,8 @@
 {
   "appId": "microsoft-visual-studio",
   "appName": "Microsoft Visual Studio",
-  "updatedAt": 1774743623041,
+  "icon": "icons/microsoft-visual-studio.png",
+  "updatedAt": 1774780000000,
   "shortcuts": [
     {
       "title": "生成解决方案 Ctrl+Shift+B",
@@ -12,8 +13,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 生成 生成解决方案",
-      "category": "生成",
-      "icon": "icons/windows.png"
+      "category": "生成"
     },
     {
       "title": "取消 Ctrl+Backspace",
@@ -23,8 +23,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 生成 取消",
-      "category": "生成",
-      "icon": "icons/windows.png"
+      "category": "生成"
     },
     {
       "title": "编译 Ctrl+F7",
@@ -34,8 +33,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 生成 编译",
-      "category": "生成",
-      "icon": "icons/windows.png"
+      "category": "生成"
     },
     {
       "title": "对解决方案运行代码分析 Alt+F11",
@@ -45,8 +43,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 生成 对解决方案运行代码分析",
-      "category": "生成",
-      "icon": "icons/windows.png"
+      "category": "生成"
     },
     {
       "title": "遇到函数时断开 Ctrl+B",
@@ -56,8 +53,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 调试 遇到函数时断开",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "全部中断 Ctrl+Alt+Backspace",
@@ -68,8 +64,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 调试 全部中断",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "删除所有断点 Ctrl+Shift+F9",
@@ -80,8 +75,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 调试 删除所有断点",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "异常 Ctrl+Alt+E",
@@ -92,8 +86,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 调试 异常",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "快速监视 Ctrl+Alt+Q",
@@ -104,8 +97,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 调试 快速监视",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "快速监视 Shift+F9",
@@ -115,8 +107,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 调试 快速监视",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "重启 Ctrl+Shift+F5",
@@ -127,8 +118,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 调试 重启",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "运行到光标处 Ctrl+F10",
@@ -138,8 +128,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 调试 运行到光标处",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "设置下一语句 Ctrl+Shift+F10",
@@ -150,8 +139,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 调试 设置下一语句",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "开始 F5",
@@ -160,8 +148,7 @@
         "f5"
       ],
       "keyword": "microsoft visual studio 调试 开始",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "启动时不调试 Ctrl+F5",
@@ -171,8 +158,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 调试 启动时不调试",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "单步执行 F11",
@@ -181,8 +167,7 @@
         "f11"
       ],
       "keyword": "microsoft visual studio 调试 单步执行",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "单步跳出 Shift+F11",
@@ -192,8 +177,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 调试 单步跳出",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "逐过程 F10",
@@ -202,8 +186,7 @@
         "f10"
       ],
       "keyword": "microsoft visual studio 调试 逐过程",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "停止调试 Shift+F5",
@@ -213,8 +196,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 调试 停止调试",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "切换断点 F9",
@@ -223,8 +205,7 @@
         "f9"
       ],
       "keyword": "microsoft visual studio 调试 切换断点",
-      "category": "调试",
-      "icon": "icons/windows.png"
+      "category": "调试"
     },
     {
       "title": "复制 Ctrl+C",
@@ -234,8 +215,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 基本 复制",
-      "category": "基本",
-      "icon": "icons/windows.png"
+      "category": "基本"
     },
     {
       "title": "剪切 Ctrl+X",
@@ -245,8 +225,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 基本 剪切",
-      "category": "基本",
-      "icon": "icons/windows.png"
+      "category": "基本"
     },
     {
       "title": "查找 Ctrl+F",
@@ -256,8 +235,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 基本 查找",
-      "category": "基本",
-      "icon": "icons/windows.png"
+      "category": "基本"
     },
     {
       "title": "粘贴 Ctrl+V",
@@ -267,8 +245,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 基本 粘贴",
-      "category": "基本",
-      "icon": "icons/windows.png"
+      "category": "基本"
     },
     {
       "title": "重做 Ctrl+Y",
@@ -278,8 +255,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 基本 重做",
-      "category": "基本",
-      "icon": "icons/windows.png"
+      "category": "基本"
     },
     {
       "title": "替换 Ctrl+H",
@@ -289,8 +265,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 基本 替换",
-      "category": "基本",
-      "icon": "icons/windows.png"
+      "category": "基本"
     },
     {
       "title": "全选 Ctrl+A",
@@ -300,8 +275,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 基本 全选",
-      "category": "基本",
-      "icon": "icons/windows.png"
+      "category": "基本"
     },
     {
       "title": "折叠到定义 Ctrl+M & Ctrl+O",
@@ -317,8 +291,7 @@
         ]
       ],
       "keyword": "microsoft visual studio 编辑 折叠到定义",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "注释选定内容 Ctrl+K & Ctrl+C",
@@ -334,8 +307,7 @@
         ]
       ],
       "keyword": "microsoft visual studio 编辑 注释选定内容",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "完成单词 Alt+Right ",
@@ -345,8 +317,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 编辑 完成单词",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "查找所有引用 Shift+F12",
@@ -356,8 +327,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 编辑 查找所有引用",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "在文件中查找 Ctrl+Shift+F",
@@ -368,8 +338,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 编辑 在文件中查找",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "查找下一个 F3",
@@ -378,8 +347,7 @@
         "f3"
       ],
       "keyword": "microsoft visual studio 编辑 查找下一个",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "查找下一个选择 Ctrl+F3",
@@ -389,8 +357,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 编辑 查找下一个选择",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "设置文档格式 Ctrl+K & Ctrl+D",
@@ -406,8 +373,7 @@
         ]
       ],
       "keyword": "microsoft visual studio 编辑 设置文档格式",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "设置选定内容的格式 Ctrl+K & Ctrl+F",
@@ -423,8 +389,7 @@
         ]
       ],
       "keyword": "microsoft visual studio 编辑 设置选定内容的格式",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "插入代码片段 Ctrl+K & Ctrl+X",
@@ -440,8 +405,7 @@
         ]
       ],
       "keyword": "microsoft visual studio 编辑 插入代码片段",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "行 - 剪切 Ctrl+L",
@@ -451,8 +415,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 编辑 行 - 剪切",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "行 - 向下扩展列 Shift+Alt+Down",
@@ -463,8 +426,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 编辑 行 - 向下扩展列",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "行 - 打开上面的内容 Ctrl+Enter",
@@ -474,8 +436,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 编辑 行 - 打开上面的内容",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "列出成员 Ctrl+J",
@@ -485,8 +446,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 编辑 列出成员",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "导航到 Ctrl+,",
@@ -496,8 +456,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 编辑 导航到",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "打开文件 Ctrl+Shift+G",
@@ -508,8 +467,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 编辑 打开文件",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "参数信息 Ctrl+Shift+Space",
@@ -520,8 +478,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 编辑 参数信息",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "查看定义 Alt+F12",
@@ -531,8 +488,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 编辑 查看定义",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "选择当前字词 Ctrl+W",
@@ -542,8 +498,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 编辑 选择当前字词",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "环绕 Ctrl+K & Ctrl+S",
@@ -559,8 +514,7 @@
         ]
       ],
       "keyword": "microsoft visual studio 编辑 环绕",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "选项卡左侧 Shift+Tab",
@@ -570,8 +524,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 编辑 选项卡左侧",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "取消注释选定内容 Ctrl+K & Ctrl+U",
@@ -587,8 +540,7 @@
         ]
       ],
       "keyword": "microsoft visual studio 编辑 取消注释选定内容",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "撤消 Ctrl+Z",
@@ -598,8 +550,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 编辑 撤消",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "字词 - 删除至结尾 Ctrl+Del",
@@ -609,8 +560,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 编辑 字词 - 删除至结尾",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "字词 - 删除至开头 Ctrl+Backspace",
@@ -620,8 +570,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 编辑 字词 - 删除至开头",
-      "category": "编辑",
-      "icon": "icons/windows.png"
+      "category": "编辑"
     },
     {
       "title": "转到 Ctrl+G",
@@ -631,8 +580,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 转到/切换 转到",
-      "category": "转到/切换",
-      "icon": "icons/windows.png"
+      "category": "转到/切换"
     },
     {
       "title": "转到声明 Ctrl+F12",
@@ -642,8 +590,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 转到/切换 转到声明",
-      "category": "转到/切换",
-      "icon": "icons/windows.png"
+      "category": "转到/切换"
     },
     {
       "title": "转到定义 F12",
@@ -652,8 +599,7 @@
         "f12"
       ],
       "keyword": "microsoft visual studio 转到/切换 转到定义",
-      "category": "转到/切换",
-      "icon": "icons/windows.png"
+      "category": "转到/切换"
     },
     {
       "title": "转到查找组合 Ctrl+D",
@@ -663,8 +609,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 转到/切换 转到查找组合",
-      "category": "转到/切换",
-      "icon": "icons/windows.png"
+      "category": "转到/切换"
     },
     {
       "title": "转到下一个位置 F8",
@@ -673,8 +618,7 @@
         "f8"
       ],
       "keyword": "microsoft visual studio 转到/切换 转到下一个位置",
-      "category": "转到/切换",
-      "icon": "icons/windows.png"
+      "category": "转到/切换"
     },
     {
       "title": "切换所有大纲显示 Ctrl+M & Ctrl+L",
@@ -690,8 +634,7 @@
         ]
       ],
       "keyword": "microsoft visual studio 转到/切换 切换所有大纲显示",
-      "category": "转到/切换",
-      "icon": "icons/windows.png"
+      "category": "转到/切换"
     },
     {
       "title": "切换书签 Ctrl+K & Ctrl+K",
@@ -707,8 +650,7 @@
         ]
       ],
       "keyword": "microsoft visual studio 转到/切换 切换书签",
-      "category": "转到/切换",
-      "icon": "icons/windows.png"
+      "category": "转到/切换"
     },
     {
       "title": "切换完成模式 Ctrl+Alt+Space",
@@ -719,8 +661,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 转到/切换 切换完成模式",
-      "category": "转到/切换",
-      "icon": "icons/windows.png"
+      "category": "转到/切换"
     },
     {
       "title": "切换大纲显示展开 Ctrl+M & Ctrl+M",
@@ -736,8 +677,7 @@
         ]
       ],
       "keyword": "microsoft visual studio 转到/切换 切换大纲显示展开",
-      "category": "转到/切换",
-      "icon": "icons/windows.png"
+      "category": "转到/切换"
     },
     {
       "title": "退出 Alt+F4",
@@ -747,8 +687,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 文件 退出",
-      "category": "文件",
-      "icon": "icons/windows.png"
+      "category": "文件"
     },
     {
       "title": "新建文件 Ctrl+N",
@@ -758,8 +697,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 文件 新建文件",
-      "category": "文件",
-      "icon": "icons/windows.png"
+      "category": "文件"
     },
     {
       "title": "新建项目 Ctrl+Shift+N",
@@ -770,8 +708,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 文件 新建项目",
-      "category": "文件",
-      "icon": "icons/windows.png"
+      "category": "文件"
     },
     {
       "title": "新建网站 Shift+Alt+N",
@@ -782,8 +719,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 文件 新建网站",
-      "category": "文件",
-      "icon": "icons/windows.png"
+      "category": "文件"
     },
     {
       "title": "打开文件 Ctrl+O",
@@ -793,8 +729,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 文件 打开文件",
-      "category": "文件",
-      "icon": "icons/windows.png"
+      "category": "文件"
     },
     {
       "title": "打开项目 Ctrl+Shift+O",
@@ -805,8 +740,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 文件 打开项目",
-      "category": "文件",
-      "icon": "icons/windows.png"
+      "category": "文件"
     },
     {
       "title": "打开网站 Shift+Alt+O",
@@ -817,8 +751,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 文件 打开网站",
-      "category": "文件",
-      "icon": "icons/windows.png"
+      "category": "文件"
     },
     {
       "title": "重命名 F2",
@@ -827,8 +760,7 @@
         "f2"
       ],
       "keyword": "microsoft visual studio 文件 重命名",
-      "category": "文件",
-      "icon": "icons/windows.png"
+      "category": "文件"
     },
     {
       "title": "全部保存 Ctrl+Shift+S",
@@ -839,8 +771,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 文件 全部保存",
-      "category": "文件",
-      "icon": "icons/windows.png"
+      "category": "文件"
     },
     {
       "title": "保存选定项 Ctrl+S",
@@ -850,8 +781,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 文件 保存选定项",
-      "category": "文件",
-      "icon": "icons/windows.png"
+      "category": "文件"
     },
     {
       "title": "在浏览器中查看 Ctrl+Shift+W",
@@ -862,8 +792,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 文件 在浏览器中查看",
-      "category": "文件",
-      "icon": "icons/windows.png"
+      "category": "文件"
     },
     {
       "title": "添加现有项 Shift+Alt+A",
@@ -874,8 +803,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 项目 添加现有项",
-      "category": "项目",
-      "icon": "icons/windows.png"
+      "category": "项目"
     },
     {
       "title": "添加新项 Ctrl+Shift+A",
@@ -886,8 +814,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 项目 添加新项",
-      "category": "项目",
-      "icon": "icons/windows.png"
+      "category": "项目"
     },
     {
       "title": "提取方法 Ctrl+R & Ctrl+M",
@@ -903,8 +830,7 @@
         ]
       ],
       "keyword": "microsoft visual studio 重构 提取方法",
-      "category": "重构",
-      "icon": "icons/windows.png"
+      "category": "重构"
     },
     {
       "title": "附加到进程 Ctrl+Alt+P",
@@ -915,8 +841,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 工具 附加到进程",
-      "category": "工具",
-      "icon": "icons/windows.png"
+      "category": "工具"
     },
     {
       "title": "类视图 Ctrl+Shift+C",
@@ -927,8 +852,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 视图 类视图",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "编辑标签 F2",
@@ -937,8 +861,7 @@
         "f2"
       ],
       "keyword": "microsoft visual studio 视图 编辑标签",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "错误列表 Ctrl+\\ & Ctrl+E",
@@ -954,8 +877,7 @@
         ]
       ],
       "keyword": "microsoft visual studio 视图 错误列表",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "向后导航 Ctrl+Minus",
@@ -965,8 +887,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 视图 向后导航",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "向前导航 Ctrl+Shift+Minus",
@@ -977,8 +898,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 视图 向前导航",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "对象浏览器 Ctrl+Alt+J",
@@ -989,8 +909,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 视图 对象浏览器",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "输出 Ctrl+Alt+O",
@@ -1001,8 +920,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 视图 输出",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "“属性”窗口 F4",
@@ -1011,8 +929,7 @@
         "f4"
       ],
       "keyword": "microsoft visual studio 视图 “属性”窗口",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "刷新 F5",
@@ -1021,8 +938,7 @@
         "f5"
       ],
       "keyword": "microsoft visual studio 视图 刷新",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "服务器资源管理器 Ctrl+Alt+S",
@@ -1033,8 +949,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 视图 服务器资源管理器",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "显示智能标记 Ctrl+.",
@@ -1044,8 +959,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 视图 显示智能标记",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "解决方案资源管理器 Ctrl+Alt+L",
@@ -1056,8 +970,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 视图 解决方案资源管理器",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "TFS 团队资源管理器 Ctrl+\\ & Ctrl+M",
@@ -1073,8 +986,7 @@
         ]
       ],
       "keyword": "microsoft visual studio 视图 tfs 团队资源管理器",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "工具箱 Ctrl+Alt+X",
@@ -1085,8 +997,7 @@
         "alt"
       ],
       "keyword": "microsoft visual studio 视图 工具箱",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "视图设计器 Shift+F7",
@@ -1096,8 +1007,7 @@
         "shift"
       ],
       "keyword": "microsoft visual studio 视图 视图设计器",
-      "category": "视图",
-      "icon": "icons/windows.png"
+      "category": "视图"
     },
     {
       "title": "激活文档窗口 Esc",
@@ -1106,8 +1016,7 @@
         "escape"
       ],
       "keyword": "microsoft visual studio 窗口 激活文档窗口",
-      "category": "窗口",
-      "icon": "icons/windows.png"
+      "category": "窗口"
     },
     {
       "title": "关闭文档窗口 Ctrl+F4",
@@ -1117,8 +1026,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 窗口 关闭文档窗口",
-      "category": "窗口",
-      "icon": "icons/windows.png"
+      "category": "窗口"
     },
     {
       "title": "下一个文档窗口 Ctrl+F6",
@@ -1128,8 +1036,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 窗口 下一个文档窗口",
-      "category": "窗口",
-      "icon": "icons/windows.png"
+      "category": "窗口"
     },
     {
       "title": "下一个文档窗口导航 Ctrl+Tab",
@@ -1139,8 +1046,7 @@
         "ctrl"
       ],
       "keyword": "microsoft visual studio 窗口 下一个文档窗口导航",
-      "category": "窗口",
-      "icon": "icons/windows.png"
+      "category": "窗口"
     },
     {
       "title": "下一个拆分窗格 F6",
@@ -1149,8 +1055,7 @@
         "f6"
       ],
       "keyword": "microsoft visual studio 窗口 下一个拆分窗格",
-      "category": "窗口",
-      "icon": "icons/windows.png"
+      "category": "窗口"
     }
   ]
 }

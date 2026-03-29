@@ -31,12 +31,28 @@ class CheatsheetBuiltinLoader {
                         const appId = data.appId || path.basename(file, '.json');
                         const appName = data.appName || appId;
 
-                        const processed = data.shortcuts.map(item => ({
-                            ...item,
-                            appId: appId,
-                            appName: appName,
-                            _source: 'cheatsheet_builtin'
-                        }));
+                        const processed = data.shortcuts.map(item => {
+                            const newItem = {
+                                ...item,
+                                appId: appId,
+                                appName: appName,
+                                _source: 'cheatsheet_builtin'
+                            };
+
+                            // Resolve icon path (prioritize item icon, fallback to top-level icon)
+                            let iconPath = newItem.icon || data.icon;
+                            if (iconPath && !iconPath.startsWith('data:') && !iconPath.startsWith('http') && !iconPath.startsWith('file://')) {
+                                const projectRoot = path.join(__dirname, '..', '..', '..');
+                                const absPath = path.isAbsolute(iconPath)
+                                    ? iconPath
+                                    : path.resolve(projectRoot, iconPath);
+                                newItem.icon = require('url').pathToFileURL(absPath).href;
+                            } else if (iconPath) {
+                                newItem.icon = iconPath;
+                            }
+
+                            return newItem;
+                        });
                         allShortcuts.push(...processed);
                     }
                 } catch (e) {

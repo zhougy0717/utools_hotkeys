@@ -1,7 +1,8 @@
 {
   "appId": "microsoft-edge",
   "appName": "Microsoft Edge",
-  "updatedAt": 1774743623041,
+  "icon": "data:image/svg+xml;base64,PHN2ZyB0PSIxNzE5NzQyMjM1MDEyIiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjU0MDAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHBhdGggZD0iTTkyMy42OTg4NiA3NjEuNzU4Mzc1YTMyOC4yMTI5OTcgMzI4LjIxMjk5NyAwIDAgMS00MS45ODYzMTIgMTguNzkzODczIDQwOC45MDY2OSA0MDguOTA2NjkgMCAwIDEtMTQzLjU1MzE5OSAyNS45OTE1MjZjLTE4OS4xMzgzMzggMC0zNTMuODg0NjI4LTEyOS45NTc2MzItMzUzLjg4NDYyOS0yOTcuMTAzMTRhMTI1LjQ3OTA5MiAxMjUuNDc5MDkyIDAgMCAxIDY1LjU3ODYyMS0xMDkuMTY0NDFjLTE3MS4xNDQyMDQgNy4xOTc2NTMtMjE1LjEyOTg2NCAxODUuNTM5NTExLTIxNS4xMjk4NjUgMjg5LjkwNTQ4NiAwIDI5NS41MDM2NjEgMjcyLjMxMTIyMiAzMjUuNDkzODg0IDMzMS4wOTIwNTkgMzI1LjQ5Mzg4NCAzMS41ODk3MDEgMCA3OS4xNzQxODgtOS4xOTcwMDIgMTA3Ljk2NDgwMi0xOC4zOTQwMDNsNS4xOTgzMDUtMS41OTk0NzlhNTExLjgzMzEzNCA1MTEuODMzMTM0IDAgMCAwIDI2Ni4zMTMxNzgtMjExLjEzMTE2OCAxNS45OTQ3ODUgMTUuOTk0Nzg1IDAgMCAwLTQuNzk4NDM2LTIxLjk5MjgzIDE2LjgzNDUxMiAxNi44MzQ1MTIgMCAwIDAtMTYuNzk0NTI0LTAuNzk5NzM5eiIgZmlsbD0iIzBGNTE5NyIgcC1pZD0iNTQwMSI+PC9wYXRoPjxwYXRoIGQ9Ik00MjIuNjYyMjA2IDk2NS4yOTIwMkEzMTcuODE2Mzg3IDMxNy44MTYzODcgMCAwIDEgMzMxLjg5MTc5OCA4ODAuMTE5Nzg3YTMyMi43MzQ3ODMgMzIyLjczNDc4MyAwIDAgMSAxMTcuOTYxNTQzLTQ3OS44NDM1NjMgMTMyLjQ3NjgxIDEzMi40NzY4MSAwIDAgMSA2MS45Nzk3OTMtMTUuOTk0Nzg2IDEzMC4zMTc1MTQgMTMwLjMxNzUxNCAwIDAgMSAxMDIuNzY2NDk3IDUxLjk4MzA1MyAxMjguNzk4MDEgMTI4Ljc5ODAxIDAgMCAxIDI1LjU5MTY1NyA3NC43NzU2MjJjMC0wLjc5OTczOSA5Ny45NjgwNjEtMzE4LjI5NjIzLTMxOS44OTU3MDktMzE4LjI5NjIzMS0xNzUuNTQyNzcgMC0zMTkuODk1NzA5IDE2Ni43NDU2MzgtMzE5Ljg5NTcwOSAzMTIuNjk4MDU2YTUyMS41MDk5OCA1MjEuNTA5OTggMCAwIDAgNDguMzg0MjI2IDIyMy45MjY5OTYgNTEyLjExMzA0MyA1MTIuMTEzMDQzIDAgMCAwIDYyNS4zOTYxMTEgMjY4LjMxMjUyNiAzMDMuMDIxMjEgMzAzLjAyMTIxIDAgMCAxLTI1MS41MTgwMDEtMzIuMzg5NDR6IiBmaWxsPSIjMEM4OERBIiBwLWlkPSI1NDAyIj48L3BhdGg+PHBhdGggZD0iTTYwOS4wMDE0NTYgNTk1LjQxMjYwNmMtMy4xOTg5NTcgMy45OTg2OTYtMTMuMTk1Njk4IDkuOTk2NzQxLTEzLjE5NTY5OCAyMi43OTI1NjkgMCAxMC4zOTY2MTEgNi43OTc3ODQgMjAuMzkzMzUxIDE4Ljc5Mzg3MyAyOC43OTA2MTQgNTcuNTgxMjI4IDM5Ljk4Njk2NCAxNjUuOTQ1ODk5IDM0Ljc4ODY1OCAxNjYuMzQ1NzY5IDM0Ljc4ODY1OWEyMzguOTIyMTA4IDIzOC45MjIxMDggMCAwIDAgMTIxLjE2MDQ5OS0zMy4xODkxOCAyNDUuMTIwMDg3IDI0NS4xMjAwODcgMCAwIDAgMTIxLjU2MDM3LTIxMS41MzEwMzhjMS4xOTk2MDktODkuNTcwNzk5LTMxLjk4OTU3MS0xNDkuMTUxMzc0LTQ1LjE4NTI2OS0xNzUuNTQyNzdhNDQwLjQ5NjM5MSA0NDAuNDk2MzkxIDAgMCAwLTgzLjczMjcwMi0xMTMuODQyODg2IDQ5My42MzkwNjYgNDkzLjYzOTA2NiAwIDAgMC0xNDIuNjczNDg2LTk3LjA4ODM0N0E1ODIuNTMwMDg2IDU4Mi41MzAwODYgMCAwIDAgNTExLjgzMzEzNCAwLjAwNjcxOCA1MTEuODMzMTM0IDUxMS44MzMxMzQgMCAwIDAgMCA1MDQuNjQyMTk5YzEuOTk5MzQ4LTE0NS45NTI0MTcgMTQ3LjE1MjAyNi0yNjMuOTEzOTYgMzE5Ljg5NTcwOS0yNjMuOTEzOTYgMTMuOTk1NDM3IDAgOTMuOTY5MzY1IDEuMTk5NjA5IDE2Ny45NDUyNDcgNDAuMzg2ODMzIDY1LjE3ODc1MSAzNC4zODg3ODkgOTkuNTY3NTM5IDc1LjU3NTM2MSAxMjMuMTU5ODQ4IDExNi43NjE5MzQgMjQuNzkxOTE3IDQyLjc4NjA1MSAyOS4xOTA0ODMgOTYuMzY4NTgyIDI5LjE5MDQ4NCAxMTcuOTYxNTQzcy0xMC43OTY0OCA1My4xODI2NjItMzEuMTg5ODMyIDc5LjU3NDA1N3oiIGZpbGw9IiMyQ0MzRDUiIHAtaWQ9IjU0MDMiPjwvcGF0aD48cGF0aCBkPSJNNjQ5LjU0ODIzNyAxNS4xMjE3OXMzNzIuNjM4NTE0IDM4NS4xNTQ0MzQtNDguNTQ0MTc0IDU5My4yNDY1OTJjMCAwLTI3LjIzMTEyMiA0NS4yMjUyNTYgMTAyLjg0NjQ3MSA2OC42MTc2MyAwIDAgMjE1LjQ4OTc0NyA0Ni44MjQ3MzQgMzAyLjQ2MTM5My0xNDIuNTEzNTM4IDE3LjUxNDI5LTU5LjM4MDY0MSAzMy4xMDkyMDYtMTUxLjM5MDY0NC0xMy4xOTU2OTgtMjUzLjc5NzI1OWE0MjcuODYwNTExIDQyNy44NjA1MTEgMCAwIDAtNzYuOTc0OTA1LTExMy42ODI5MzcgNTQ2LjM4MTg3MSA1NDYuMzgxODcxIDAgMCAwLTExMy4wODMxMzQtOTQuNjg5MTNjLTY4LjQ1NzY4Mi0zNC45ODg1OTMtMTUzLjUwOTk1My01Ny4xODEzNTgtMTUzLjUwOTk1My01Ny4xODEzNTh6IiBmaWxsPSIjNDlENjY4IiBwLWlkPSI1NDA0Ij48L3BhdGg+PC9zdmc+",
+  "updatedAt": 1774780000000,
   "shortcuts": [
     {
       "title": "显示或隐藏收藏夹栏 Command+Shift+B",
@@ -12,8 +13,7 @@
         "shift"
       ],
       "keyword": "microsoft edge 选项卡操作 显示或隐藏收藏夹栏",
-      "category": "选项卡操作",
-      "icon": "icons/macos.png"
+      "category": "选项卡操作"
     },
     {
       "title": "将当前选项卡另存为收藏夹 Command+D",
@@ -23,8 +23,7 @@
         "command"
       ],
       "keyword": "microsoft edge 选项卡操作 将当前选项卡另存为收藏夹",
-      "category": "选项卡操作",
-      "icon": "icons/macos.png"
+      "category": "选项卡操作"
     },
     {
       "title": "打开开发人员工具 Command+Shift+C",
@@ -35,8 +34,7 @@
         "shift"
       ],
       "keyword": "microsoft edge 选项卡操作 打开开发人员工具",
-      "category": "选项卡操作",
-      "icon": "icons/macos.png"
+      "category": "选项卡操作"
     },
     {
       "title": "打开“下载”文件夹 Command+Option+L",
@@ -47,8 +45,7 @@
         "option"
       ],
       "keyword": "microsoft edge 选项卡操作 打开“下载”文件夹",
-      "category": "选项卡操作",
-      "icon": "icons/macos.png"
+      "category": "选项卡操作"
     },
     {
       "title": "在边栏中打开搜索 Command+Shift+E",
@@ -59,8 +56,7 @@
         "shift"
       ],
       "keyword": "microsoft edge 搜索操作 在边栏中打开搜索",
-      "category": "搜索操作",
-      "icon": "icons/macos.png"
+      "category": "搜索操作"
     },
     {
       "title": "在页面上打开查找 Command+F",
@@ -70,8 +66,7 @@
         "command"
       ],
       "keyword": "microsoft edge 搜索操作 在页面上打开查找",
-      "category": "搜索操作",
-      "icon": "icons/macos.png"
+      "category": "搜索操作"
     },
     {
       "title": "跳转到下一个结果以在页面上查找 Command+G",
@@ -81,8 +76,7 @@
         "command"
       ],
       "keyword": "microsoft edge 搜索操作 跳转到下一个结果以在页面上查找",
-      "category": "搜索操作",
-      "icon": "icons/macos.png"
+      "category": "搜索操作"
     },
     {
       "title": "跳转到上一个结果以在页面上查找 Command+Shift+G",
@@ -93,8 +87,7 @@
         "shift"
       ],
       "keyword": "microsoft edge 搜索操作 跳转到上一个结果以在页面上查找",
-      "category": "搜索操作",
-      "icon": "icons/macos.png"
+      "category": "搜索操作"
     },
     {
       "title": "选择地址栏中的 URL 以进行编辑 Command+L",
@@ -104,8 +97,7 @@
         "command"
       ],
       "keyword": "microsoft edge url及操作 选择地址栏中的 url 以进行编辑",
-      "category": "url及操作",
-      "icon": "icons/macos.png"
+      "category": "url及操作"
     },
     {
       "title": "以其他用户身份登录或以来宾身份浏览 Command+Shift+M",
@@ -116,8 +108,7 @@
         "shift"
       ],
       "keyword": "microsoft edge url及操作 以其他用户身份登录或以来宾身份浏览",
-      "category": "url及操作",
-      "icon": "icons/macos.png"
+      "category": "url及操作"
     },
     {
       "title": "在 Microsoft Edge 中打开计算机中的文件 Command+O",
@@ -127,8 +118,7 @@
         "command"
       ],
       "keyword": "microsoft edge url及操作 在 microsoft edge 中打开计算机中的文件",
-      "category": "url及操作",
-      "icon": "icons/macos.png"
+      "category": "url及操作"
     },
     {
       "title": "打印当前页 Command+P",
@@ -138,8 +128,7 @@
         "command"
       ],
       "keyword": "microsoft edge url及操作 打印当前页",
-      "category": "url及操作",
-      "icon": "icons/macos.png"
+      "category": "url及操作"
     },
     {
       "title": "重新加载当前页 Command+R",
@@ -149,8 +138,7 @@
         "command"
       ],
       "keyword": "microsoft edge url及操作 重新加载当前页",
-      "category": "url及操作",
-      "icon": "icons/macos.png"
+      "category": "url及操作"
     },
     {
       "title": "重新加载当前页，忽略缓存内容 Command+Shift+R",
@@ -161,8 +149,7 @@
         "shift"
       ],
       "keyword": "microsoft edge url及操作 重新加载当前页，忽略缓存内容",
-      "category": "url及操作",
-      "icon": "icons/macos.png"
+      "category": "url及操作"
     },
     {
       "title": "保存当前页 Command+S",
@@ -172,8 +159,7 @@
         "command"
       ],
       "keyword": "microsoft edge url及操作 保存当前页",
-      "category": "url及操作",
-      "icon": "icons/macos.png"
+      "category": "url及操作"
     },
     {
       "title": "开始或停止“大声朗读” Command+Shift+U",
@@ -184,8 +170,7 @@
         "shift"
       ],
       "keyword": "microsoft edge url及操作 开始或停止“大声朗读”",
-      "category": "url及操作",
-      "icon": "icons/macos.png"
+      "category": "url及操作"
     },
     {
       "title": "在PDF中在“根据页面调整”与“根据宽度调整”之间切换 PDF Ctrl+\\",
@@ -195,8 +180,7 @@
         "ctrl"
       ],
       "keyword": "microsoft edge url及操作 在pdf中在“根据页面调整”与“根据宽度调整”之间切换 pdf",
-      "category": "url及操作",
-      "icon": "icons/macos.png"
+      "category": "url及操作"
     },
     {
       "title": "打开清除浏览数据选项 Command+Shift+Del",
@@ -207,8 +191,7 @@
         "shift"
       ],
       "keyword": "microsoft edge url及操作 打开清除浏览数据选项",
-      "category": "url及操作",
-      "icon": "icons/macos.png"
+      "category": "url及操作"
     },
     {
       "title": "打开新窗口 Command+N",
@@ -218,8 +201,7 @@
         "command"
       ],
       "keyword": "microsoft edge 标签页及窗口 打开新窗口",
-      "category": "标签页及窗口",
-      "icon": "icons/macos.png"
+      "category": "标签页及窗口"
     },
     {
       "title": "打开新标签页并切换到该标签页 Command+T",
@@ -229,8 +211,7 @@
         "command"
       ],
       "keyword": "microsoft edge 标签页及窗口 打开新标签页并切换到该标签页",
-      "category": "标签页及窗口",
-      "icon": "icons/macos.png"
+      "category": "标签页及窗口"
     },
     {
       "title": "重新打开上一个关闭的标签页并切换到该标签页 Command+Shift+T",
@@ -241,8 +222,7 @@
         "shift"
       ],
       "keyword": "microsoft edge 标签页及窗口 重新打开上一个关闭的标签页并切换到该标签页",
-      "category": "标签页及窗口",
-      "icon": "icons/macos.png"
+      "category": "标签页及窗口"
     },
     {
       "title": "关闭当前标签页 Command+W",
@@ -252,8 +232,7 @@
         "command"
       ],
       "keyword": "microsoft edge 标签页及窗口 关闭当前标签页",
-      "category": "标签页及窗口",
-      "icon": "icons/macos.png"
+      "category": "标签页及窗口"
     },
     {
       "title": "关闭当前窗口 Command+Shift+W",
@@ -264,8 +243,7 @@
         "shift"
       ],
       "keyword": "microsoft edge 标签页及窗口 关闭当前窗口",
-      "category": "标签页及窗口",
-      "icon": "icons/macos.png"
+      "category": "标签页及窗口"
     },
     {
       "title": "切换到下一个标签页 Control+Fn+Down",
@@ -276,8 +254,7 @@
         "control"
       ],
       "keyword": "microsoft edge 标签页及窗口 切换到下一个标签页",
-      "category": "标签页及窗口",
-      "icon": "icons/macos.png"
+      "category": "标签页及窗口"
     },
     {
       "title": "切换到上一个标签页 Ctrl+Fn+Up",
@@ -288,8 +265,7 @@
         "ctrl"
       ],
       "keyword": "microsoft edge 标签页及窗口 切换到上一个标签页",
-      "category": "标签页及窗口",
-      "icon": "icons/macos.png"
+      "category": "标签页及窗口"
     },
     {
       "title": "在PDF中将 PDF 逆时针旋转 90 度 Control+[",
@@ -299,8 +275,7 @@
         "control"
       ],
       "keyword": "microsoft edge 标签页及窗口 在pdf中将 pdf 逆时针旋转 90 度",
-      "category": "标签页及窗口",
-      "icon": "icons/macos.png"
+      "category": "标签页及窗口"
     },
     {
       "title": "在PDF中将 PDF 顺时针旋转 90 度 Ctrl+]",
@@ -310,8 +285,7 @@
         "ctrl"
       ],
       "keyword": "microsoft edge 标签页及窗口 在pdf中将 pdf 顺时针旋转 90 度",
-      "category": "标签页及窗口",
-      "icon": "icons/macos.png"
+      "category": "标签页及窗口"
     },
     {
       "title": "在当前标签页中打开主页 Command+Shift+H",
@@ -322,8 +296,7 @@
         "shift"
       ],
       "keyword": "microsoft edge 标签页及窗口 在当前标签页中打开主页",
-      "category": "标签页及窗口",
-      "icon": "icons/macos.png"
+      "category": "标签页及窗口"
     },
     {
       "title": "关闭当前窗口 Command+Shift+W",
@@ -334,8 +307,7 @@
         "shift"
       ],
       "keyword": "microsoft edge 标签页及窗口 关闭当前窗口",
-      "category": "标签页及窗口",
-      "icon": "icons/macos.png"
+      "category": "标签页及窗口"
     },
     {
       "title": "选择地址栏中的 URL Command+L",
@@ -345,8 +317,7 @@
         "command"
       ],
       "keyword": "microsoft edge 功能键 选择地址栏中的 url",
-      "category": "功能键",
-      "icon": "icons/macos.png"
+      "category": "功能键"
     },
     {
       "title": "重新加载当前标签页 Command+R",
@@ -356,8 +327,7 @@
         "command"
       ],
       "keyword": "microsoft edge 功能键 重新加载当前标签页",
-      "category": "功能键",
-      "icon": "icons/macos.png"
+      "category": "功能键"
     },
     {
       "title": "进入或退出沉浸式阅读器 F9",
@@ -366,8 +336,7 @@
         "f9"
       ],
       "keyword": "microsoft edge 功能键 进入或退出沉浸式阅读器",
-      "category": "功能键",
-      "icon": "icons/macos.png"
+      "category": "功能键"
     },
     {
       "title": "打开开发人员工具 F12",
@@ -376,8 +345,7 @@
         "f12"
       ],
       "keyword": "microsoft edge 功能键 打开开发人员工具",
-      "category": "功能键",
-      "icon": "icons/macos.png"
+      "category": "功能键"
     },
     {
       "title": "关闭当前标签页 Command+W",
@@ -387,8 +355,7 @@
         "command"
       ],
       "keyword": "microsoft edge 功能键 关闭当前标签页",
-      "category": "功能键",
-      "icon": "icons/macos.png"
+      "category": "功能键"
     },
     {
       "title": "重新加载当前标签页，忽略缓存内容 Command+Shift+R",
@@ -399,8 +366,7 @@
         "shift"
       ],
       "keyword": "microsoft edge 功能键 重新加载当前标签页，忽略缓存内容",
-      "category": "功能键",
-      "icon": "icons/macos.png"
+      "category": "功能键"
     },
     {
       "title": "向下滚动网页，一次滚动一个屏幕 Space",
@@ -409,8 +375,7 @@
         "space"
       ],
       "keyword": "microsoft edge 常见 向下滚动网页，一次滚动一个屏幕",
-      "category": "常见",
-      "icon": "icons/macos.png"
+      "category": "常见"
     },
     {
       "title": "向上滚动网页，一次滚动一个屏幕 Shift+Space | Shift+PgUp",
@@ -420,8 +385,7 @@
         "shift"
       ],
       "keyword": "microsoft edge 常见 向上滚动网页，一次滚动一个屏幕",
-      "category": "常见",
-      "icon": "icons/macos.png"
+      "category": "常见"
     },
     {
       "title": "切换到下一个标签页 Ctrl+Fn+Down",
@@ -432,8 +396,7 @@
         "ctrl"
       ],
       "keyword": "microsoft edge 常见 切换到下一个标签页",
-      "category": "常见",
-      "icon": "icons/macos.png"
+      "category": "常见"
     },
     {
       "title": "切换到上一个标签页 Ctrl+Fn+Up",
@@ -444,8 +407,7 @@
         "ctrl"
       ],
       "keyword": "microsoft edge 常见 切换到上一个标签页",
-      "category": "常见",
-      "icon": "icons/macos.png"
+      "category": "常见"
     }
   ]
 }

@@ -7,6 +7,7 @@ const https = require('https');
  */
 
 const BUILTIN_DIR = path.join(__dirname, '../src/infrastructure/data/cheatsheet_builtin');
+const OPENCODE_FILE = path.join(__dirname, '../src/infrastructure/data/opencode/opencode.json');
 
 const SLUG_MAP = {
     'microsoft-edge': 'edge',
@@ -233,6 +234,19 @@ async function processDirectory(dirName, iconMap) {
     }
 }
 
+async function processOpencode() {
+    if (!fs.existsSync(OPENCODE_FILE)) return;
+    console.log(`[IconFetcher] Processing OpenCode (Special Case)...`);
+    const fileContent = fs.readFileSync(OPENCODE_FILE, 'utf8');
+    const data = JSON.parse(fileContent);
+    data.icon = 'icons/opencode.png';
+    if (data.shortcuts) {
+        data.shortcuts.forEach(s => s.icon = 'icons/opencode.png');
+    }
+    fs.writeFileSync(OPENCODE_FILE, JSON.stringify(data, null, 2), 'utf8');
+    console.log(`[IconFetcher] SUCCESS: OpenCode (Set to local path)`);
+}
+
 async function main() {
     try {
         console.log('[IconFetcher] Starting fully logic-compliant crawler...');
@@ -242,6 +256,7 @@ async function main() {
         
         await processDirectory('mac', macMap);
         await processDirectory('win', winMap);
+        await processOpencode();
         
         console.log('\n' + '='.repeat(40));
         console.log('       ICON DOWNLOAD STATISTICS');

@@ -68,6 +68,14 @@ function loadAllShortcuts() {
                allShortcuts = allShortcuts.concat(filtered);
            });
 
+    // Phase 2.5: opencode (Built-in source)
+    results.filter(r => getLoaderName(r.loader) === 'OpencodeLoader')
+           .forEach(r => {
+               const filtered = r.data.filter(s => !claimedApps.has(normalizeAppId(s.appId)));
+               filtered.forEach(s => claimedApps.add(normalizeAppId(s.appId)));
+               allShortcuts = allShortcuts.concat(filtered);
+           });
+
     // Phase 3: builtin (tertiary priority, filtered by claimed)
     // 3a: Exported builtin/ JSON files take precedence over hardcoded BuiltinLoader
     results.filter(r => getLoaderName(r.loader) === 'JsonHotkeysLoader')

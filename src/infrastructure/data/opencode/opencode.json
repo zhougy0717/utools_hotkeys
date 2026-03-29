@@ -1,0 +1,931 @@
+{
+  "appId": "opencode",
+  "appName": "OpenCode",
+  "icon": "icons/opencode.png",
+  "updatedAt": 1774762133407,
+  "shortcuts": [
+    {
+      "title": "退出应用: Ctrl+C",
+      "description": "退出应用",
+      "keys": [
+        "ctrl",
+        "c"
+      ],
+      "keyword": "opencode 1. 应用级 退出应用",
+      "category": "1. 应用级",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "退出应用: Ctrl+D",
+      "description": "退出应用",
+      "keys": [
+        "ctrl",
+        "d"
+      ],
+      "keyword": "opencode 1. 应用级 退出应用",
+      "category": "1. 应用级",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "退出应用: <leader> q",
+      "description": "退出应用 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "q"
+        ]
+      ],
+      "keyword": "opencode 1. 应用级 退出应用",
+      "category": "1. 应用级",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "打开文件树（编辑器）: <leader> e",
+      "description": "打开文件树（编辑器） (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "e"
+        ]
+      ],
+      "keyword": "opencode 2. 侧边栏 / 界面 打开文件树（编辑器）",
+      "category": "2. 侧边栏 / 界面",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "切换侧边栏显隐: <leader> b",
+      "description": "切换侧边栏显隐 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "b"
+        ]
+      ],
+      "keyword": "opencode 2. 侧边栏 / 界面 切换侧边栏显隐",
+      "category": "2. 侧边栏 / 界面",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "状态视图: <leader> s",
+      "description": "状态视图 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "s"
+        ]
+      ],
+      "keyword": "opencode 2. 侧边栏 / 界面 状态视图",
+      "category": "2. 侧边栏 / 界面",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "主题列表: <leader> t",
+      "description": "主题列表 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "t"
+        ]
+      ],
+      "keyword": "opencode 2. 侧边栏 / 界面 主题列表",
+      "category": "2. 侧边栏 / 界面",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "新建会话: <leader> n",
+      "description": "新建会话 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "n"
+        ]
+      ],
+      "keyword": "opencode 3. Session（会话）管理 新建会话",
+      "category": "3. Session（会话）管理",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "会话列表: <leader> l",
+      "description": "会话列表 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "l"
+        ]
+      ],
+      "keyword": "opencode 3. Session（会话）管理 会话列表",
+      "category": "3. Session（会话）管理",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "时间线视图: <leader> g",
+      "description": "时间线视图 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "g"
+        ]
+      ],
+      "keyword": "opencode 3. Session（会话）管理 时间线视图",
+      "category": "3. Session（会话）管理",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "导出会话: <leader> x",
+      "description": "导出会话 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "x"
+        ]
+      ],
+      "keyword": "opencode 3. Session（会话）管理 导出会话",
+      "category": "3. Session（会话）管理",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "中断当前运行: Esc",
+      "description": "中断当前运行",
+      "keys": [
+        "escape"
+      ],
+      "keyword": "opencode 3. Session（会话）管理 中断当前运行",
+      "category": "3. Session（会话）管理",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "紧凑模式切换: <leader> c",
+      "description": "紧凑模式切换 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "c"
+        ]
+      ],
+      "keyword": "opencode 3. Session（会话）管理 紧凑模式切换",
+      "category": "3. Session（会话）管理",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "切换到子会话: <leader> →",
+      "description": "切换到子会话 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "right"
+        ]
+      ],
+      "keyword": "opencode 3. Session（会话）管理 切换到子会话",
+      "category": "3. Session（会话）管理",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "反向切换子会话: <leader> ←",
+      "description": "反向切换子会话 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "left"
+        ]
+      ],
+      "keyword": "opencode 3. Session（会话）管理 反向切换子会话",
+      "category": "3. Session（会话）管理",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "返回父会话: <leader> ↑",
+      "description": "返回父会话 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "up"
+        ]
+      ],
+      "keyword": "opencode 3. Session（会话）管理 返回父会话",
+      "category": "3. Session（会话）管理",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "上翻一页: PageUp",
+      "description": "上翻一页",
+      "keys": [
+        "pageup"
+      ],
+      "keyword": "opencode 4. 消息区导航 上翻一页",
+      "category": "4. 消息区导航",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "下翻一页: PageDown",
+      "description": "下翻一页",
+      "keys": [
+        "pagedown"
+      ],
+      "keyword": "opencode 4. 消息区导航 下翻一页",
+      "category": "4. 消息区导航",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "上翻半页: Ctrl+Alt+U",
+      "description": "上翻半页",
+      "keys": [
+        "ctrl",
+        "option",
+        "u"
+      ],
+      "keyword": "opencode 4. 消息区导航 上翻半页",
+      "category": "4. 消息区导航",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "下翻半页: Ctrl+Alt+D",
+      "description": "下翻半页",
+      "keys": [
+        "ctrl",
+        "option",
+        "d"
+      ],
+      "keyword": "opencode 4. 消息区导航 下翻半页",
+      "category": "4. 消息区导航",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "跳到第一条消息: Ctrl+G",
+      "description": "跳到第一条消息",
+      "keys": [
+        "ctrl",
+        "g"
+      ],
+      "keyword": "opencode 4. 消息区导航 跳到第一条消息",
+      "category": "4. 消息区导航",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "跳到第一条消息: Home",
+      "description": "跳到第一条消息",
+      "keys": [
+        "home"
+      ],
+      "keyword": "opencode 4. 消息区导航 跳到第一条消息",
+      "category": "4. 消息区导航",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "跳到最后一条消息: Ctrl+Alt+G",
+      "description": "跳到最后一条消息",
+      "keys": [
+        "ctrl",
+        "option",
+        "g"
+      ],
+      "keyword": "opencode 4. 消息区导航 跳到最后一条消息",
+      "category": "4. 消息区导航",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "跳到最后一条消息: End",
+      "description": "跳到最后一条消息",
+      "keys": [
+        "end"
+      ],
+      "keyword": "opencode 4. 消息区导航 跳到最后一条消息",
+      "category": "4. 消息区导航",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "复制选中消息: <leader> y",
+      "description": "复制选中消息 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "y"
+        ]
+      ],
+      "keyword": "opencode 4. 消息区导航 复制选中消息",
+      "category": "4. 消息区导航",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "撤销操作: <leader> u",
+      "description": "撤销操作 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "u"
+        ]
+      ],
+      "keyword": "opencode 4. 消息区导航 撤销操作",
+      "category": "4. 消息区导航",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "重做操作: <leader> r",
+      "description": "重做操作 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "r"
+        ]
+      ],
+      "keyword": "opencode 4. 消息区导航 重做操作",
+      "category": "4. 消息区导航",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "切换隐藏/���示: <leader> h",
+      "description": "切换隐藏/���示 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "h"
+        ]
+      ],
+      "keyword": "opencode 4. 消息区导航 切换隐藏/���示",
+      "category": "4. 消息区导航",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "模型列表: <leader> m",
+      "description": "模型列表 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "m"
+        ]
+      ],
+      "keyword": "opencode 5. 模型 &amp; Agent 模型列表",
+      "category": "5. 模型 &amp; Agent",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "循环最近使用模型: F2",
+      "description": "循环最近使用模型",
+      "keys": [
+        "f2"
+      ],
+      "keyword": "opencode 5. 模型 &amp; Agent 循环最近使用模型",
+      "category": "5. 模型 &amp; Agent",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "反向循环最近模型: Shift+F2",
+      "description": "反向循环最近模型",
+      "keys": [
+        "shift",
+        "f2"
+      ],
+      "keyword": "opencode 5. 模型 &amp; Agent 反向循环最近模型",
+      "category": "5. 模型 &amp; Agent",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "切换模型变体: Ctrl+T",
+      "description": "切换模型变体",
+      "keys": [
+        "ctrl",
+        "t"
+      ],
+      "keyword": "opencode 5. 模型 &amp; Agent 切换模型变体",
+      "category": "5. 模型 &amp; Agent",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "Agent 列表: <leader> a",
+      "description": "Agent 列表 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "a"
+        ]
+      ],
+      "keyword": "opencode 5. 模型 &amp; Agent Agent 列表",
+      "category": "5. 模型 &amp; Agent",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "循环下一个 Agent: Tab",
+      "description": "循环下一个 Agent",
+      "keys": [
+        "tab"
+      ],
+      "keyword": "opencode 5. 模型 &amp; Agent 循环下一个 Agent",
+      "category": "5. 模型 &amp; Agent",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "循环上一个 Agent: Shift+Tab",
+      "description": "循环上一个 Agent",
+      "keys": [
+        "shift",
+        "tab"
+      ],
+      "keyword": "opencode 5. 模型 &amp; Agent 循环上一个 Agent",
+      "category": "5. 模型 &amp; Agent",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "清空输入: Ctrl+C",
+      "description": "清空输入",
+      "keys": [
+        "ctrl",
+        "c"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 清空输入",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "粘贴: Ctrl+V",
+      "description": "粘贴",
+      "keys": [
+        "ctrl",
+        "v"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 粘贴",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "发送消息: Enter",
+      "description": "发送消息",
+      "keys": [
+        "enter"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 发送消息",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "换行（不发送）: Shift+Enter",
+      "description": "换行（不发送）",
+      "keys": [
+        "shift",
+        "enter"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 换行（不发送）",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "换行（不发送）: Ctrl+Enter",
+      "description": "换行（不发送）",
+      "keys": [
+        "ctrl",
+        "enter"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 换行（不发送）",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "换行（不发送）: Alt+Enter",
+      "description": "换行（不发送）",
+      "keys": [
+        "option",
+        "enter"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 换行（不发送）",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "换行（不发送）: Ctrl+J",
+      "description": "换行（不发送）",
+      "keys": [
+        "ctrl",
+        "j"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 换行（不发送）",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "左移: ←",
+      "description": "左移",
+      "keys": [
+        "left"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 左移",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "左移: Ctrl+B",
+      "description": "左移",
+      "keys": [
+        "ctrl",
+        "b"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 左移",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "右移: →",
+      "description": "右移",
+      "keys": [
+        "right"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 右移",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "右移: Ctrl+F",
+      "description": "右移",
+      "keys": [
+        "ctrl",
+        "f"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 右移",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "上移: ↑",
+      "description": "上移",
+      "keys": [
+        "up"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 上移",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "下移: ↓",
+      "description": "下移",
+      "keys": [
+        "down"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 下移",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "行首: Ctrl+A",
+      "description": "行首",
+      "keys": [
+        "ctrl",
+        "a"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 行首",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "行尾: Ctrl+E",
+      "description": "行尾",
+      "keys": [
+        "ctrl",
+        "e"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 行尾",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "文件首: Home",
+      "description": "文件首",
+      "keys": [
+        "home"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 文件首",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "文件尾: End",
+      "description": "文件尾",
+      "keys": [
+        "end"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 文件尾",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "删除整行: Ctrl+Shift+D",
+      "description": "删除整行",
+      "keys": [
+        "ctrl",
+        "shift",
+        "d"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 删除整行",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "删除至行尾: Ctrl+K",
+      "description": "删除至行尾",
+      "keys": [
+        "ctrl",
+        "k"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 删除至行尾",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "删除至行首: Ctrl+U",
+      "description": "删除至行首",
+      "keys": [
+        "ctrl",
+        "u"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 删除至行首",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "退格: Backspace",
+      "description": "退格",
+      "keys": [
+        "backspace"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 退格",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "删除: Delete",
+      "description": "删除",
+      "keys": [
+        "delete"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 删除",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "删除: Ctrl+D",
+      "description": "删除",
+      "keys": [
+        "ctrl",
+        "d"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 删除",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "撤销: Ctrl+-",
+      "description": "撤销",
+      "keys": [
+        "ctrl",
+        "-"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 撤销",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "撤销: Super+Z",
+      "description": "撤销",
+      "keys": [
+        "command",
+        "z"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 撤销",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "重做: Ctrl+.",
+      "description": "重做",
+      "keys": [
+        "ctrl",
+        "."
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 重做",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "重做: Super+Shift+Z",
+      "description": "重做",
+      "keys": [
+        "command",
+        "shift",
+        "z"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 重做",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "按单词前移: Alt+F",
+      "description": "按单词前移",
+      "keys": [
+        "option",
+        "f"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 按单词前移",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "按单词前移: Alt+→",
+      "description": "按单词前移",
+      "keys": [
+        "option",
+        "right"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 按单词前移",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "按单词前移: Ctrl+→",
+      "description": "按单词前移",
+      "keys": [
+        "ctrl",
+        "right"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 按单词前移",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "按单词后移: Alt+B",
+      "description": "按单词后移",
+      "keys": [
+        "option",
+        "b"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 按单词后移",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "按单词后移: Alt+←",
+      "description": "按单词后移",
+      "keys": [
+        "option",
+        "left"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 按单词后移",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "按单词后移: Ctrl+←",
+      "description": "按单词后移",
+      "keys": [
+        "ctrl",
+        "left"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 按单词后移",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "删除后一单词: Alt+D",
+      "description": "删除后一单词",
+      "keys": [
+        "option",
+        "d"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 删除后一单词",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "删除后一单词: Ctrl+Delete",
+      "description": "删除后一单词",
+      "keys": [
+        "ctrl",
+        "delete"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 删除后一单词",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "删除前一单词: Ctrl+W",
+      "description": "删除前一单词",
+      "keys": [
+        "ctrl",
+        "w"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 删除前一单词",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "删除前一单词: Ctrl+Backspace",
+      "description": "删除前一单词",
+      "keys": [
+        "ctrl",
+        "backspace"
+      ],
+      "keyword": "opencode 6. 输入框编辑（Emacs / 通用风格） 删除前一单词",
+      "category": "6. 输入框编辑（Emacs / 通用风格）",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "上一条历史: ↑",
+      "description": "上一条历史",
+      "keys": [
+        "up"
+      ],
+      "keyword": "opencode 7. 历史命令 上一条历史",
+      "category": "7. 历史命令",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "下一条历史: ↓",
+      "description": "下一条历史",
+      "keys": [
+        "down"
+      ],
+      "keyword": "opencode 7. 历史命令 下一条历史",
+      "category": "7. 历史命令",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "挂起前台进程: Ctrl+Z",
+      "description": "挂起前台进程",
+      "keys": [
+        "ctrl",
+        "z"
+      ],
+      "keyword": "opencode 8. 终端 挂起前台进程",
+      "category": "8. 终端",
+      "icon": "icons/opencode.png"
+    },
+    {
+      "title": "显示 / 隐藏提示: <leader> h",
+      "description": "显示 / 隐藏提示 (<leader>默认为Ctrl + x)",
+      "keys": [
+        [
+          "x",
+          "ctrl"
+        ],
+        [
+          "h"
+        ]
+      ],
+      "keyword": "opencode 9. 帮助 显示 / 隐藏提示",
+      "category": "9. 帮助",
+      "icon": "icons/opencode.png"
+    }
+  ]
+}

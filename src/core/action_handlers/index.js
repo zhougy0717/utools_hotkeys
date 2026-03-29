@@ -3,6 +3,7 @@ const downloadAppHandler = require('./download_app_handler.js');
 const noopHandler = require('./noop_handler.js');
 const refreshAppListHandler = require('./refresh_app_list_handler.js');
 const executeExportHandler = require('./execute_export_handler.js');
+const pathActionHandler = require('./path_action_handler.js');
 
 /**
  * Initialize all core action handlers
@@ -12,6 +13,8 @@ function initActionHandlers() {
   actionRegistry.register('noop', noopHandler);
   actionRegistry.register('refresh_app_list', refreshAppListHandler);
   actionRegistry.register('execute_builtin_export', executeExportHandler);
+  actionRegistry.register('pick_data_directory', pathActionHandler);
+  actionRegistry.register('open_data_directory', pathActionHandler);
   
   console.log('[ActionRegistry] Handlers initialized');
 }

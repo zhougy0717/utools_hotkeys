@@ -46,6 +46,8 @@ window.exports = {
         if (itemData.action === 'slash_command') {
           g_activeCommand = itemData.command;
           window.utools.setSubInputValue('');
+          // Reverting to always calling execute to ensure the sub-list is rendered immediately.
+          // Since we've moved blocking logic out of execute, the redundant call on search is no longer a bug.
           return itemData.command.execute('', lastCallbackSetList)
         }
 

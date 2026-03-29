@@ -334,6 +334,12 @@ class ShortcutList {
                 "description": "桌面",
                 "keyword": "desktop zhuo mian",
                 "keys": ["d", "shift", "command"]
+            },
+            {
+                "title": "切换显示隐藏文件 command + shift + .",
+                "description": "切换显示隐藏文件",
+                "keyword": "qspace yincang hide",
+                "keys": [".", "shift", "command"]
             }
         ];
     }

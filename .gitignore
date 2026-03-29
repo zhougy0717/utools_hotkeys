@@ -5,3 +5,5 @@ package-lock.json
 tmp/
 .temp/
 .DS_Store
+CheatSheet/
+release

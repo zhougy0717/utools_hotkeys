@@ -51,6 +51,13 @@
 - **设计阅读**: PDF Expert, XYPlorer, UPDF, MarginNote...
 - **系统辅助**: Snipaste, Magnet, Directory Opus...
 
+## 🙏 致谢
+
+本项目深受以下优秀项目的启发与支持，特此致谢：
+
+- **[JinSooo/CheatSheet](https://github.com/JinSooo/CheatSheet)**: 一个跨平台显示应用快捷键的软件。本项目参考了其内置的丰富快捷键数据。
+- **[Hotkey Cheatsheet](https://hotkeycheatsheet.com)**: 提供了海量的应用快捷键在线库（如 [Finder 快捷键备忘录](https://hotkeycheatsheet.com/zh/hotkey-cheatsheet/finder)），使得插件能够支持下载并更新数千个应用的快捷键。
+
 ## 🤝 参与贡献
 
 我们非常欢迎 Pull Request！如果你发现某个应用的快捷键缺失，欢迎提交 PR 或在 `json_hotkeys` 中补充并分享。

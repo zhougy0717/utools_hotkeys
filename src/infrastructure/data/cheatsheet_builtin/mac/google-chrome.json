@@ -176,13 +176,9 @@
       "title": "最小化当前窗口 Option+Space & N",
       "description": "最小化当前窗口 (cheatsheet)",
       "keys": [
-        [
-          "space",
-          "option"
-        ],
-        [
-          "n"
-        ]
+        "space",
+        "option",
+        "n"
       ],
       "keyword": "google chrome 窗口 最小化当前窗口",
       "category": "窗口",
@@ -192,13 +188,9 @@
       "title": "最大化当前窗口 Option+Space & X",
       "description": "最大化当前窗口 (cheatsheet)",
       "keys": [
-        [
-          "space",
-          "option"
-        ],
-        [
-          "x"
-        ]
+        "space",
+        "option",
+        "x"
       ],
       "keyword": "google chrome 窗口 最大化当前窗口",
       "category": "窗口",

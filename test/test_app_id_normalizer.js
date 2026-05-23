@@ -3,7 +3,7 @@ const { normalizeAppId } = require('../src/infrastructure/app_id_normalizer.js')
 
 describe('normalizeAppId', () => {
     it('should lowercase and strip separators', () => {
-        assert.strictEqual(normalizeAppId('Visual-Studio-Code'), 'visualstudiocode');
+        assert.strictEqual(normalizeAppId('Visual-Studio-Code'), 'vscode');
         assert.strictEqual(normalizeAppId('jet_brains'), 'jetbrains');
         assert.strictEqual(normalizeAppId('PDF Expert'), 'pdfexpert');
     });

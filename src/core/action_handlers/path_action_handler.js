@@ -18,37 +18,40 @@ const pathActionHandler = {
 
     if (itemData.action !== 'pick_data_directory') return;
 
-    const paths = utools.showOpenDialog({
-      title: '选择快捷键数据存放目录',
-      properties: ['openDirectory', 'createDirectory']
-    });
+    // 使用 setTimeout 异步打开对话框，避免同步阻塞事件循环导致 uTools 重新获得焦点时重复触发选择事件
+    setTimeout(() => {
+      const paths = utools.showOpenDialog({
+        title: '选择快捷键数据存放目录',
+        properties: ['openDirectory', 'createDirectory']
+      });
 
-    if (paths && paths.length > 0) {
-      const selectedPath = paths[0];
-      utools.dbStorage.setItem('sqlite_db_path', selectedPath);
-      
-      this.initDataDirectory(selectedPath);
+      if (paths && paths.length > 0) {
+        const selectedPath = paths[0];
+        utools.dbStorage.setItem('sqlite_db_path', selectedPath);
+        
+        this.initDataDirectory(selectedPath);
 
-      ui.callbackSetList([{
-        title: '路径设置成功',
-        description: `数据关联目录已设置在: ${selectedPath}`,
-        icon: 'logo.png',
-        action: 'noop'
-      }]);
+        ui.callbackSetList([{
+          title: '路径设置成功',
+          description: `数据关联目录已设置在: ${selectedPath}`,
+          icon: 'logo.png',
+          action: 'noop'
+        }]);
 
-      try {
-        require('../../infrastructure/common_method.js').enter();
-      } catch(e) {
-        console.error('[PathActionHandler] Refresh failed', e);
+        try {
+          require('../../infrastructure/common_method.js').enter();
+        } catch(e) {
+          console.error('[PathActionHandler] Refresh failed', e);
+        }
+      } else {
+        ui.callbackSetList([{
+          title: '已取消',
+          description: '未更改数据存放目录。',
+          icon: 'logo.png',
+          action: 'noop'
+        }]);
       }
-    } else {
-      ui.callbackSetList([{
-        title: '已取消',
-        description: '未更改数据存放目录。',
-        icon: 'logo.png',
-        action: 'noop'
-      }]);
-    }
+    }, 100);
   },
 
   /**

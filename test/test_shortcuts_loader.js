@@ -13,14 +13,16 @@ global.utools = {
             return { value: null };
         }
     },
+    dbStorage: {
+        getItem: (key) => {
+            if (key === 'sqlite_db_path') return path.join(__dirname, 'mock_config');
+            return null;
+        }
+    },
     showNotification: (msg) => console.log('Notification:', msg),
     getUserDataPath: () => __dirname
 };
 
-// Mock sqliteService
-const sqliteService = require('../src/infrastructure/sqlite_service.js');
-sqliteService.getAllShortcuts = () => [];
-sqliteService.getDownloadedApps = () => [];
 
 const loadAllShortcuts = require('../src/infrastructure/shortcuts_loader.js');
 

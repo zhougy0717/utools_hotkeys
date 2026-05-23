@@ -26,9 +26,13 @@ function setupMockDir(mockBasePath) {
     fs.mkdirSync(jsonDir, { recursive: true });
     
     // Valid JSON
-    const validJSON = [
-        { "title": "Test 1", "keys": ["{cmd_or_ctrl}", "t"] }
-    ];
+    const validJSON = {
+        appId: 'test_app',
+        appName: 'Test App',
+        shortcuts: [
+            { "title": "Test 1", "keys": ["{cmd_or_ctrl}", "t"] }
+        ]
+    };
     fs.writeFileSync(path.join(jsonDir, 'test_valid.json'), JSON.stringify(validJSON));
 
     // Invalid JSON
@@ -44,7 +48,7 @@ function runTests() {
         // Test 1: Load valid JSON
         console.log('- Test 1: 载入存在的 JSON 文件');
         setupMockDir(mockBasePath);
-        const results = loader.load(mockBasePath);
+        const results = loader.load(mockBasePath).shortcuts;
         assert(Array.isArray(results), '结果应为数组');
         const item = results.find(r => r.title === 'Test 1');
         assert(item, '应找到 Test 1');
@@ -54,7 +58,7 @@ function runTests() {
         console.log('- Test 2: 占位符转换 (Windows)');
         global.utools.isWindows = () => true;
         global.utools.isMacOs = () => false;
-        const resultsWin = loader.load(mockBasePath);
+        const resultsWin = loader.load(mockBasePath).shortcuts;
         const itemWin = resultsWin.find(r => r.title === 'Test 1');
         assert(itemWin.keys.includes('ctrl'), 'Windows 下应包含 ctrl');
         console.log('  Passed.');
@@ -63,14 +67,14 @@ function runTests() {
         console.log('- Test 3: 占位符转换 (Mac)');
         global.utools.isWindows = () => false;
         global.utools.isMacOs = () => true;
-        const resultsMac = loader.load(mockBasePath);
+        const resultsMac = loader.load(mockBasePath).shortcuts;
         const itemMac = resultsMac.find(r => r.title === 'Test 1');
         assert(itemMac.keys.includes('command'), 'Mac 下应包含 command');
         console.log('  Passed.');
 
         // Test 4: Handle invalid JSON
         console.log('- Test 4: 非法 JSON 处理 (不溢出)');
-        const resultsErr = loader.load(mockBasePath);
+        const resultsErr = loader.load(mockBasePath).shortcuts;
         assert(resultsErr.length > 0, '应成功加载其他正常文件');
         console.log('  Passed.');
 

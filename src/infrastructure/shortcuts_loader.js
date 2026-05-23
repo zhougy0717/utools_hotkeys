@@ -14,8 +14,7 @@ function loadAllShortcuts() {
     }
 
     // Get current storage path for custom JSON
-    const configPath = utools.db.get('sqlite_db_path');
-    const basePath = configPath ? configPath.value : null;
+    const basePath = utools.dbStorage.getItem('sqlite_db_path');
 
     let allShortcuts = [];
     

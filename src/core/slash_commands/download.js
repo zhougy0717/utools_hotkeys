@@ -26,7 +26,27 @@ class DownloadCommand {
     return searchWord.toLowerCase().startsWith(this.keyword);
   }
 
+  buildDefkeyCandidate(query) {
+    const target = (query || '').trim();
+    const defkeyUrl = target
+      ? `https://defkey.com/search?q=${encodeURIComponent(target)}`
+      : 'https://defkey.com/';
+    return {
+      title: `🌐 前往 Defkey 搜索 ${target ? `[${target}] ` : ''}快捷键`,
+      description: '前往 defkey.com 导出 .txt 文本后使用 /import 命令一键导入',
+      icon: 'logo.png',
+      action: 'open_external_url',
+      url: defkeyUrl
+    };
+  }
+
   async execute(searchWord, callbackSetList) {
+    const query = searchWord.toLowerCase().startsWith(this.keyword)
+      ? searchWord.substring(this.keyword.length).trim().toLowerCase()
+      : searchWord.trim().toLowerCase();
+
+    const defkeyItem = this.buildDefkeyCandidate(query);
+
     if (!this.cachedApps) {
       if (!this.fetchPromise) {
         this.fetchPromise = dataLoader.fetchAndProcess(callbackSetList);
@@ -34,16 +54,26 @@ class DownloadCommand {
       try {
         const apps = await this.fetchPromise;
         if (apps) this.cachedApps = apps;
+      } catch (err) {
+        const isTimeout = err && (err.name === 'AbortError' || (err.message && (err.message.includes('超时') || err.message.includes('timeout') || err.message.includes('aborted'))));
+        const errorMsg = isTimeout ? '连接 hotkeycheatsheet.com 超时 (30s)' : `拉取失败: ${err.message}`;
+        const errorItem = {
+          title: `❌ ${errorMsg}`,
+          description: '在线数据源连接异常，建议稍后重试或使用下方 Defkey 选项',
+          icon: 'logo.png',
+          action: 'noop'
+        };
+
+        if (typeof callbackSetList === 'function') {
+          callbackSetList([errorItem, defkeyItem]);
+        }
+        return;
       } finally {
         this.fetchPromise = null;
       }
     }
     
     if (this.cachedApps) {
-      const query = searchWord.toLowerCase().startsWith(this.keyword)
-        ? searchWord.substring(this.keyword.length).trim().toLowerCase()
-        : searchWord.trim().toLowerCase();
-
       const filteredApps = query 
         ? this.cachedApps.filter(app => app.name.toLowerCase().includes(query))
         : this.cachedApps;
@@ -65,6 +95,9 @@ class DownloadCommand {
           action: 'download_app_hotkeys'
         };
       });
+
+      // Parallel Defkey item
+      displayList.push(defkeyItem);
 
       // Add a "Back" option at the top if we are in specialized mode (no command prefix)
       // and not currently filtering, or just to provide a way out.

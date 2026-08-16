@@ -184,6 +184,33 @@ class HotkeyDataLoader {
       : `https://hotkeycheatsheet.com/os/${platform}`;
   }
 
+  /**
+   * Fetch with timeout controller (default 30s)
+   */
+  async fetchWithTimeout(url, options = {}, timeoutMs = 30000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      controller.abort();
+    }, timeoutMs);
+
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      return response;
+    } catch (err) {
+      clearTimeout(timeoutId);
+      if (err.name === 'AbortError' || (err.message && err.message.includes('aborted'))) {
+        const timeoutErr = new Error('连接 hotkeycheatsheet.com 超时 (30s)');
+        timeoutErr.name = 'AbortError';
+        throw timeoutErr;
+      }
+      throw err;
+    }
+  }
+
   async fetchAndProcess(callbackSetList, force = false) {
     const lang = this.getLang();
     const storageId = `hotkey_app_list_${lang || 'default'}`;
@@ -205,7 +232,7 @@ class HotkeyDataLoader {
 
       statusCb([{ title: '获取列表中...', description: `正在从 hotkeycheatsheet.com 拉取最新的应用列表 (${utools.isMacOs() ? 'Mac' : 'Windows'})`, icon: 'icons/loading.gif' }]);
       
-      const response = await fetch(baseUrl);
+      const response = await this.fetchWithTimeout(baseUrl, {}, 30000);
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       const html = await response.text();
       
@@ -243,12 +270,7 @@ class HotkeyDataLoader {
       return apps;
     } catch (e) {
       console.error('Failed to fetch app list', e);
-      statusCb([{ 
-        title: '拉取失败', 
-        description: '请检查网络连接或稍后再试: ' + e.message, 
-        action: 'noop'
-      }]);
-      return null;
+      throw e;
     }
   }
 

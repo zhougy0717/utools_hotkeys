@@ -36,6 +36,8 @@ class TextParserRegistry {
 }
 
 const defaultParserRegistry = new TextParserRegistry();
+const { DefkeyParser } = require('./defkey_parser.js');
+defaultParserRegistry.register(new DefkeyParser());
 
 module.exports = {
   TextParserRegistry,

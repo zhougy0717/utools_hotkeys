@@ -93,13 +93,25 @@ class DefkeyParser {
         if (rawKey.toLowerCase() === 'shortcut' || rawKey.toLowerCase() === 'key') continue;
 
         const normalizedKeys = this.normalizeKeyCombination(rawKey);
-        const { title, description } = this.parseTitleAndDescription(rawTitle);
+        const { title: actionTitle, description: noteDesc } = this.parseTitleAndDescription(rawTitle);
+
+        const fullTitle = `${actionTitle}: ${rawKey}`;
+        const description = noteDesc ? `${noteDesc} (${currentSection})` : currentSection;
+        const keyword = [
+          appName,
+          appId,
+          currentSection,
+          actionTitle,
+          noteDesc,
+          rawKey
+        ].filter(Boolean).join(' ').toLowerCase();
 
         shortcuts.push({
-          title,
+          title: fullTitle,
           keys: normalizedKeys,
+          keyword,
           section: currentSection,
-          description: description || ''
+          description
         });
       }
     }

@@ -75,7 +75,7 @@ Alt + Left arrow                 Go back
     const importedShortcuts = allShortcuts.filter(s => s.appName === 'One Commander 3' || s.appId === 'one-commander-3');
 
     assert.ok(importedShortcuts.length >= 2, 'Should load at least 2 imported shortcuts');
-    const closeTabs = importedShortcuts.find(s => s.title === 'Close all tabs');
+    const closeTabs = importedShortcuts.find(s => s.title === 'Close all tabs: Ctrl + Shift + W');
     assert.ok(closeTabs);
     // On Mac, placeholder {cmd_or_ctrl} is resolved to 'command'
     assert.deepStrictEqual(closeTabs.keys, ['command', 'shift', 'w']);

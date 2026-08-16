@@ -73,10 +73,10 @@ function pickGradient(name) {
 }
 
 /**
- * Generate a high-resolution SVG letter avatar data URL
+ * Generate a high-resolution SVG letter avatar XML string
  * @param {string} appName Application name
- * @param {Object} options Optional size and radius options
- * @returns {string} Base64 data URL (data:image/svg+xml;base64,...)
+ * @param {Object} [options] Optional size, radius, asDataUrl options
+ * @returns {string} Raw SVG XML string or Base64 data URL
  */
 function generateAvatarSvg(appName, options = {}) {
   const initials = extractInitials(appName);
@@ -100,8 +100,13 @@ function generateAvatarSvg(appName, options = {}) {
   <text x="50%" y="54%" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="${fontSize}" font-weight="700" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" filter="url(#shadow)">${initials}</text>
 </svg>`;
 
-  return 'data:image/svg+xml;base64,' + Buffer.from(svg).toString('base64');
+  if (options.asDataUrl) {
+    return 'data:image/svg+xml;base64,' + Buffer.from(svg).toString('base64');
+  }
+
+  return svg;
 }
+
 
 /**
  * Converts a local image file (png, jpg, svg, webp, ico) to a Base64 Data URL

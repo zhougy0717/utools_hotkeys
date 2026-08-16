@@ -43,37 +43,42 @@ Ctrl + W                         Close tab
     assert.strictEqual(result.updatedAt, '2023-01-05 10:00:00');
   });
 
-  it('UT-04: should parse sections and shortcuts with key combination', () => {
+  it('UT-04: should parse sections and shortcuts with key combination and keyword', () => {
     const result = parser.parse(validDefkeySample);
-    const settingsItem = result.shortcuts.find(s => s.title === 'Open settings');
+    const settingsItem = result.shortcuts.find(s => s.title === 'Open settings: Ctrl + Shift + F12');
     assert.ok(settingsItem, 'Settings item should exist');
     assert.strictEqual(settingsItem.section, 'Program operations');
     assert.deepStrictEqual(settingsItem.keys, ['{cmd_or_ctrl}', 'shift', 'f12']);
+    assert(settingsItem.keyword.includes('open settings'));
+    assert(settingsItem.keyword.includes('ctrl + shift + f12'));
   });
 
   it('UT-05: should normalize special keys (arrow keys, del, etc.)', () => {
     const result = parser.parse(validDefkeySample);
-    const navUp = result.shortcuts.find(s => s.title === 'Navigate up');
+    const navUp = result.shortcuts.find(s => s.title === 'Navigate up: Alt + Up arrow');
+    assert.ok(navUp);
     assert.deepStrictEqual(navUp.keys, ['{opt_or_alt}', 'up']);
 
-    const delItem = result.shortcuts.find(s => s.title === 'Delete selected');
+    const delItem = result.shortcuts.find(s => s.title === 'Delete selected: Del');
+    assert.ok(delItem);
     assert.deepStrictEqual(delItem.keys, ['delete']);
 
-    const contextItem = result.shortcuts.find(s => s.title === 'Context menu');
+    const contextItem = result.shortcuts.find(s => s.title === 'Context menu: Shift + F10');
+    assert.ok(contextItem);
     assert.deepStrictEqual(contextItem.keys, ['shift', 'f10']);
   });
 
   it('UT-06: should normalize sequence keys (e.g. \\ then Ctrl + C)', () => {
     const result = parser.parse(validDefkeySample);
-    const seqItem = result.shortcuts.find(s => s.title === 'Copy current path');
+    const seqItem = result.shortcuts.find(s => s.title === 'Copy current path: \\ then Ctrl + C');
     assert.ok(seqItem);
     assert.deepStrictEqual(seqItem.keys, ['\\', 'then', '{cmd_or_ctrl}', 'c']);
   });
 
   it('UT-07: should split title and description if paren notes present', () => {
     const result = parser.parse(validDefkeySample);
-    const seqItem = result.shortcuts.find(s => s.title === 'Copy current path');
-    assert.strictEqual(seqItem.description, 'if no file is selected');
+    const seqItem = result.shortcuts.find(s => s.title === 'Copy current path: \\ then Ctrl + C');
+    assert.strictEqual(seqItem.description, 'if no file is selected (Program operations)');
   });
 
   it('UT-08: should handle invalid or short text gracefully', () => {

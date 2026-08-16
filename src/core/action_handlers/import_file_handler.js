@@ -10,13 +10,54 @@ function getUtools() {
 }
 
 /**
+ * Look for a sibling image with the same base name as the selected text file.
+ * e.g., 'One Commander 3.txt' -> 'One Commander 3.png', 'One Commander 3.svg', etc.
+ * @param {string} filePath Absolute path to the text file
+ * @returns {string|null} Sibling image absolute path or null
+ */
+function findSiblingImage(filePath) {
+  if (!filePath || !fs.existsSync(filePath)) return null;
+  const dir = path.dirname(filePath);
+  const baseName = path.basename(filePath, path.extname(filePath));
+  const candidateExtensions = ['.png', '.svg', '.jpg', '.jpeg', '.webp', '.ico', '.gif'];
+
+  // 1. Direct match check
+  for (const ext of candidateExtensions) {
+    const candidatePath = path.join(dir, `${baseName}${ext}`);
+    if (fs.existsSync(candidatePath)) {
+      return candidatePath;
+    }
+  }
+
+  // 2. Case-insensitive directory scan check
+  try {
+    const files = fs.readdirSync(dir);
+    const targetPrefix = baseName.toLowerCase() + '.';
+    for (const f of files) {
+      if (f.toLowerCase().startsWith(targetPrefix)) {
+        const ext = path.extname(f).toLowerCase();
+        if (candidateExtensions.includes(ext)) {
+          return path.join(dir, f);
+        }
+      }
+    }
+  } catch (e) {
+    // ignore
+  }
+
+  return null;
+}
+
+/**
  * Action Handler for 'import_defkey_file'
  */
 const importFileHandler = {
   handle(itemData, ui, context) {
     const uTools = getUtools();
     if (!uTools || typeof uTools.showOpenDialog !== 'function') {
-      console.warn('[importFileHandler] utools.showOpenDialog is not available');
+      const msg = '当前环境不支持选择文件对话框';
+      console.warn(`[ImportFileHandler] ${msg}`);
+      if (uTools && uTools.showNotification) uTools.showNotification(msg);
       return;
     }
 
@@ -66,25 +107,49 @@ const importFileHandler = {
 
         const parsedDoc = parser.parse(content);
 
-        // Auto-generate dynamic gradient letter avatar if no icon is set
-        if (!parsedDoc.icon) {
-          parsedDoc.icon = generateAvatarSvg(parsedDoc.appName);
-        }
-
-        if (Array.isArray(parsedDoc.shortcuts)) {
-          parsedDoc.shortcuts.forEach(s => {
-            if (!s.icon) {
-              s.icon = parsedDoc.icon;
-            }
-          });
-        }
-
         const savedPath = (uTools.dbStorage && uTools.dbStorage.getItem('sqlite_db_path')) ||
           (typeof uTools.getPath === 'function' ? path.join(uTools.getPath('userData'), 'utools_shortcut_keys') : './');
 
         const targetDir = path.join(savedPath, 'json_hotkeys');
         if (!fs.existsSync(targetDir)) {
           fs.mkdirSync(targetDir, { recursive: true });
+        }
+
+        const iconsDir = path.join(savedPath, 'icons');
+        if (!fs.existsSync(iconsDir)) {
+          fs.mkdirSync(iconsDir, { recursive: true });
+        }
+
+        // Check if there is a sibling image file with same name as txt file (e.g. app.png / app.svg)
+        const siblingImg = findSiblingImage(selectedPath);
+        let displayIcon = 'logo.png';
+
+        if (siblingImg) {
+          const ext = path.extname(siblingImg).toLowerCase() || '.png';
+          const iconFileName = `${parsedDoc.appId}${ext}`;
+          const targetIconPath = path.join(iconsDir, iconFileName);
+          fs.copyFileSync(siblingImg, targetIconPath);
+          parsedDoc.icon = `../icons/${iconFileName}`;
+          displayIcon = require('url').pathToFileURL(targetIconPath).href;
+        } else if (!parsedDoc.icon) {
+          const svgAvatar = generateAvatarSvg(parsedDoc.appName);
+          const iconFileName = `${parsedDoc.appId}.svg`;
+          const targetIconPath = path.join(iconsDir, iconFileName);
+          fs.writeFileSync(targetIconPath, svgAvatar, 'utf-8');
+          parsedDoc.icon = `../icons/${iconFileName}`;
+          displayIcon = require('url').pathToFileURL(targetIconPath).href;
+        } else {
+          const absIcon = path.isAbsolute(parsedDoc.icon) ? parsedDoc.icon : path.join(targetDir, parsedDoc.icon);
+          if (fs.existsSync(absIcon)) {
+            displayIcon = require('url').pathToFileURL(absIcon).href;
+          }
+        }
+
+        // Clean up redundant icons from individual shortcuts
+        if (Array.isArray(parsedDoc.shortcuts)) {
+          parsedDoc.shortcuts.forEach(s => {
+            delete s.icon;
+          });
         }
 
         const targetFile = path.join(targetDir, `${parsedDoc.appId}.json`);
@@ -109,7 +174,7 @@ const importFileHandler = {
           ui.callbackSetList([{
             title: `✅ 已成功导入 ${parsedDoc.appName}`,
             description: `共 ${parsedDoc.shortcuts.length} 条快捷键，已保存至 json_hotkeys/${parsedDoc.appId}.json`,
-            icon: parsedDoc.icon || 'logo.png',
+            icon: displayIcon,
             action: 'noop'
           }]);
         }

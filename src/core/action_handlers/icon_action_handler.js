@@ -10,13 +10,14 @@ function getUtools() {
 
 /**
  * Ensures the target JSON file exists in user custom json_hotkeys directory,
- * copying it from source if necessary, and updates its icon.
+ * saves/copies icon to icons/ directory, and updates JSON with relative icon path.
  * @param {string} appId
  * @param {string} appName
- * @param {string} newIconBase64
+ * @param {{type: 'file'|'svg_content'|'path', sourcePath?: string, content?: string, path?: string}|string} iconOption
  * @param {string} [originalFilePath]
+ * @returns {{customFilePath: string, iconPath: string, fileUrl: string}}
  */
-function updateAppIcon(appId, appName, newIconBase64, originalFilePath) {
+function updateAppIcon(appId, appName, iconOption, originalFilePath) {
   const uTools = getUtools();
   const storagePath = (uTools && uTools.dbStorage && uTools.dbStorage.getItem('sqlite_db_path')) ||
     (uTools && typeof uTools.getPath === 'function' ? path.join(uTools.getPath('userData'), 'utools_shortcut_keys') : './');
@@ -24,6 +25,48 @@ function updateAppIcon(appId, appName, newIconBase64, originalFilePath) {
   const customDir = path.join(storagePath, 'json_hotkeys');
   if (!fs.existsSync(customDir)) {
     fs.mkdirSync(customDir, { recursive: true });
+  }
+
+  const iconsDir = path.join(storagePath, 'icons');
+  if (!fs.existsSync(iconsDir)) {
+    fs.mkdirSync(iconsDir, { recursive: true });
+  }
+
+  let relativeIconPath = '';
+  let absoluteIconPath = '';
+
+  if (typeof iconOption === 'string') {
+    // Backward compatibility if raw string passed
+    if (iconOption.startsWith('data:image/svg')) {
+      const destFile = path.join(iconsDir, `${appId}.svg`);
+      fs.writeFileSync(destFile, iconOption, 'utf-8');
+      relativeIconPath = `../icons/${appId}.svg`;
+      absoluteIconPath = destFile;
+    } else if (iconOption.startsWith('data:image/')) {
+      const destFile = path.join(iconsDir, `${appId}.png`);
+      const base64Data = iconOption.replace(/^data:image\/\w+;base64,/, '');
+      fs.writeFileSync(destFile, Buffer.from(base64Data, 'base64'));
+      relativeIconPath = `../icons/${appId}.png`;
+      absoluteIconPath = destFile;
+    } else {
+      relativeIconPath = iconOption;
+      absoluteIconPath = path.isAbsolute(iconOption) ? iconOption : path.join(customDir, iconOption);
+    }
+  } else if (iconOption && iconOption.type === 'file') {
+    const srcFile = iconOption.sourcePath;
+    const ext = path.extname(srcFile) || '.png';
+    const destFile = path.join(iconsDir, `${appId}${ext}`);
+    fs.copyFileSync(srcFile, destFile);
+    relativeIconPath = `../icons/${appId}${ext}`;
+    absoluteIconPath = destFile;
+  } else if (iconOption && iconOption.type === 'svg_content') {
+    const destFile = path.join(iconsDir, `${appId}.svg`);
+    fs.writeFileSync(destFile, iconOption.content, 'utf-8');
+    relativeIconPath = `../icons/${appId}.svg`;
+    absoluteIconPath = destFile;
+  } else if (iconOption && iconOption.type === 'path') {
+    relativeIconPath = iconOption.path;
+    absoluteIconPath = path.isAbsolute(iconOption.path) ? iconOption.path : path.join(customDir, iconOption.path);
   }
 
   const customFilePath = path.join(customDir, `${appId}.json`);
@@ -44,17 +87,22 @@ function updateAppIcon(appId, appName, newIconBase64, originalFilePath) {
     };
   }
 
-  // Update top-level icon
-  docData.icon = newIconBase64;
+  // Construct clean formatted doc with icon placed near the top
+  const cleanDoc = {
+    appId: docData.appId || appId,
+    appName: docData.appName || appName,
+    icon: relativeIconPath,
+    platform: docData.platform || 'windows',
+    source: docData.source || 'defkey',
+    sourceUrl: docData.sourceUrl || undefined,
+    updatedAt: docData.updatedAt || new Date().toISOString().split('T')[0],
+    shortcuts: Array.isArray(docData.shortcuts) ? docData.shortcuts.map(s => {
+      const { icon, ...rest } = s;
+      return rest;
+    }) : []
+  };
 
-  // Also update shortcuts icon if present
-  if (Array.isArray(docData.shortcuts)) {
-    docData.shortcuts.forEach(s => {
-      s.icon = newIconBase64;
-    });
-  }
-
-  fs.writeFileSync(customFilePath, JSON.stringify(docData, null, 2), 'utf-8');
+  fs.writeFileSync(customFilePath, JSON.stringify(cleanDoc, null, 2), 'utf-8');
 
   // Trigger reload of global shortcuts cache
   try {
@@ -66,8 +114,13 @@ function updateAppIcon(appId, appName, newIconBase64, originalFilePath) {
     console.warn('[IconActionHandler] Failed to re-enter common_method:', e);
   }
 
-  return customFilePath;
+  const fileUrl = fs.existsSync(absoluteIconPath)
+    ? require('url').pathToFileURL(absoluteIconPath).href
+    : relativeIconPath;
+
+  return { customFilePath, iconPath: relativeIconPath, fileUrl, absoluteIconPath };
 }
+
 
 /**
  * IconActionHandler - Handles icon customization workflows
@@ -79,11 +132,11 @@ const iconActionHandler = {
 
     // 1. Show sub-menu options for chosen application
     if (action === 'manage_app_icon') {
-      const currentIcon = itemData.currentIcon || generateAvatarSvg(itemData.appName);
+      const currentIcon = itemData.currentIcon || generateAvatarSvg(itemData.appName, { asDataUrl: true });
       const subOptions = [
         {
           title: `📁 为 [${itemData.appName}] 选择本地图标文件...`,
-          description: '支持 .png, .jpg, .svg, .ico, .webp 文件，自动转换为高清 Base64 图标',
+          description: '支持 .png, .jpg, .svg, .ico, .webp 文件，自动复制到 icons/ 目录',
           icon: currentIcon,
           appId: itemData.appId,
           appName: itemData.appName,
@@ -92,8 +145,8 @@ const iconActionHandler = {
         },
         {
           title: `🎨 一键生成 [${itemData.appName}] 渐变字母徽标`,
-          description: '根据应用名称生成现代 Squircle 质感矢量渐变头像',
-          icon: generateAvatarSvg(itemData.appName),
+          description: '生成现代 Squircle 矢量徽标并保存至 icons/ 目录',
+          icon: generateAvatarSvg(itemData.appName, { asDataUrl: true }),
           appId: itemData.appId,
           appName: itemData.appName,
           filePath: itemData.filePath,
@@ -133,16 +186,16 @@ const iconActionHandler = {
           if (!filePaths || filePaths.length === 0) {
             // Fallback: If user cancelled and app has no icon, auto-generate letter avatar
             const generatedAvatar = generateAvatarSvg(itemData.appName);
-            updateAppIcon(itemData.appId, itemData.appName, generatedAvatar, itemData.filePath);
+            const { fileUrl } = updateAppIcon(itemData.appId, itemData.appName, { type: 'svg_content', content: generatedAvatar }, itemData.filePath);
             
             if (uTools.showNotification) {
-              uTools.showNotification(`未选择文件，已为 [${itemData.appName}] 自动生成渐变字母徽标`);
+              uTools.showNotification(`未选择文件，已为 [${itemData.appName}] 自动生成渐变字母徽标并保存至 icons/`);
             }
             if (ui && typeof ui.callbackSetList === 'function') {
               ui.callbackSetList([{
                 title: `🎨 已自动生成 [${itemData.appName}] 渐变徽标`,
-                description: '未选择本地文件，已采用动态渐变字母徽标',
-                icon: generatedAvatar,
+                description: '未选择本地文件，已保存至 icons/ 并在配置中引用',
+                icon: fileUrl,
                 action: 'noop'
               }]);
             }
@@ -150,12 +203,11 @@ const iconActionHandler = {
           }
 
           const selectedPath = filePaths[0];
-          const iconBase64 = fileToBase64(selectedPath);
-          if (!iconBase64) {
-            throw new Error('未能成功读取所选图片文件');
+          if (!fs.existsSync(selectedPath)) {
+            throw new Error('所选图片文件不存在');
           }
 
-          updateAppIcon(itemData.appId, itemData.appName, iconBase64, itemData.filePath);
+          const { fileUrl, iconPath } = updateAppIcon(itemData.appId, itemData.appName, { type: 'file', sourcePath: selectedPath }, itemData.filePath);
 
           if (uTools.showNotification) {
             uTools.showNotification(`成功更新 [${itemData.appName}] 图标`);
@@ -164,8 +216,8 @@ const iconActionHandler = {
           if (ui && typeof ui.callbackSetList === 'function') {
             ui.callbackSetList([{
               title: `✅ 已成功更新 [${itemData.appName}] 图标`,
-              description: `图标已写入配置并生效，来源文件: ${path.basename(selectedPath)}`,
-              icon: iconBase64,
+              description: `图标文件已复制至 icons/ 目录，JSON 引用: ${iconPath}`,
+              icon: fileUrl,
               action: 'noop'
             }]);
           }
@@ -182,22 +234,23 @@ const iconActionHandler = {
     // 3. Generate letter avatar directly
     if (action === 'generate_app_avatar') {
       const generatedAvatar = generateAvatarSvg(itemData.appName);
-      updateAppIcon(itemData.appId, itemData.appName, generatedAvatar, itemData.filePath);
+      const { fileUrl, iconPath } = updateAppIcon(itemData.appId, itemData.appName, { type: 'svg_content', content: generatedAvatar }, itemData.filePath);
 
       if (uTools && uTools.showNotification) {
-        uTools.showNotification(`已为 [${itemData.appName}] 生成渐变字母徽标`);
+        uTools.showNotification(`已为 [${itemData.appName}] 生成渐变字母徽标并保存至 icons/`);
       }
 
       if (ui && typeof ui.callbackSetList === 'function') {
         ui.callbackSetList([{
           title: `🎨 已成功生成 [${itemData.appName}] 渐变徽标`,
-          description: '现代 Squircle 矢量字母徽标已生效',
-          icon: generatedAvatar,
+          description: `矢量徽标已保存至 icons/ 目录，JSON 引用: ${iconPath}`,
+          icon: fileUrl,
           action: 'noop'
         }]);
       }
       return;
     }
+
 
     // 4. Return to icon command list
     if (action === 'return_to_icon_list') {

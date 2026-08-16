@@ -34,7 +34,14 @@ function getLoadedAppList() {
             const appId = data.appId || path.basename(file, '.json');
             const appName = data.appName || appId;
             const count = Array.isArray(data.shortcuts) ? data.shortcuts.length : 0;
-            const icon = data.icon || (data.shortcuts && data.shortcuts[0] && data.shortcuts[0].icon) || null;
+            let icon = data.icon || (data.shortcuts && data.shortcuts[0] && data.shortcuts[0].icon) || null;
+
+            if (icon && !icon.startsWith('data:') && !icon.startsWith('http') && !icon.startsWith('file://')) {
+              const absPath = path.isAbsolute(icon) ? icon : path.join(dir, icon);
+              if (fs.existsSync(absPath)) {
+                icon = require('url').pathToFileURL(absPath).href;
+              }
+            }
 
             if (!appMap.has(appId)) {
               appMap.set(appId, {
@@ -71,7 +78,14 @@ function getLoadedAppList() {
             if (!appMap.has(appId)) {
               const appName = data.appName || appId;
               const count = Array.isArray(data.shortcuts) ? data.shortcuts.length : 0;
-              const icon = data.icon || (data.shortcuts && data.shortcuts[0] && data.shortcuts[0].icon) || null;
+              let icon = data.icon || (data.shortcuts && data.shortcuts[0] && data.shortcuts[0].icon) || null;
+              if (icon && !icon.startsWith('data:') && !icon.startsWith('http') && !icon.startsWith('file://')) {
+                const absPath = path.isAbsolute(icon) ? icon : path.join(builtinDataDir, icon);
+                if (fs.existsSync(absPath)) {
+                  icon = require('url').pathToFileURL(absPath).href;
+                }
+              }
+
               appMap.set(appId, {
                 appId,
                 appName,
@@ -138,7 +152,7 @@ class IconCommand {
     }
 
     const displayList = filtered.map(app => {
-      const displayIcon = app.icon || generateAvatarSvg(app.appName);
+      const displayIcon = app.icon || generateAvatarSvg(app.appName, { asDataUrl: true });
       return {
         title: app.appName,
         description: `ID: ${app.appId} · 来源: ${app.source} · 共 ${app.count} 条快捷键 · 点击配置图标`,

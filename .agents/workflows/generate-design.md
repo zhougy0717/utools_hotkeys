@@ -3,9 +3,9 @@ description: 输入需求描述文档，生成软件设计并写入原文档的�
 ---
 
 // turbo
-这个工作流会自动分析需求并在指定的 `doc/spec/` 文件中填充详细的技术方案与任务拆分。
+这个工作流会自动分析需求并在指定的 `docs/spec/` 文件中填充详细的技术方案与任务拆分。
 
-1. **输入文件**: 接收一个位于 `doc/spec/` 目录下的 `.md` 文件路径（例如 `doc/spec/spec-00002-support-download-app-hotkeys.md`）。
+1. **输入文件**: 接收一个位于 `docs/spec/` 目录下的 `.md` 文件路径（例如 `docs/spec/spec-00002-support-download-app-hotkeys.md`）。
 2. **读取需求**: 读取该文件及其关联的所有上下文。
 3. **技术调研**:
     - 检查现有的 `preload.js`, `common_method.js`, `shortcuts.js` 等核心逻辑。

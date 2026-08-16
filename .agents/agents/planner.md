@@ -28,7 +28,7 @@ skills:
 ## 📋 核心工作流 (Planning Workflow)
 
 ### 1. 深入研读输入契约与设计文档
-- 解析 `【契约: Designer ➡️ Planner】` 与关联的 `doc/spec/*.md`。
+- 解析 `【契约: Designer ➡️ Planner】` 与关联的 `docs/spec/*.md`。
 - 梳理关键数据结构、PlantUML 时序流程、类与接口契约、边界用例及存储设计。
 - 检索相关现有代码，确认涉及的文件清单及现有测试用例。
 

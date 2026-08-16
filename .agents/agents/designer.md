@@ -19,13 +19,13 @@ skills:
 ### 1. 需求交互与意图澄清 (Clarify & Explore with `grill-with-docs`)
 - **使用 `grill-with-docs` 深度对齐**:
   - 主动运用 `grill-with-docs` 技能对需求进行系统化的交互式盘问（Interactive Interview）。
-  - 结合项目既有文档（`docs/`、`doc/spec/`、`.antigravity/`）与代码库，提出高价值的澄清问题，逐一剖析需求盲区、核心假设、数据流转、边界条件与异常场景。
+  - 结合项目既有文档（`docs/`、`docs/spec/`、`.antigravity/`）与代码库，提出高价值的澄清问题，逐一剖析需求盲区、核心假设、数据流转、边界条件与异常场景。
   - 不要对模糊需求做任何假设，直到所有关键技术决策和产品边界达成一致。
 - **头脑风暴 (`brainstorming`)**: 针对关键交互和架构选型，提供 2~3 种备选方案并对比权衡优缺点。
 - **协同 UI 设计师**: 若需求涉及新界面或交互调整，主动与 `ui-designer` 配合，确定视觉布局与交互流。
 
 ### 2. 编写详细设计文档 (Specification Generation)
-严格遵循项目规范（参考 `.antigravity/development_standards.md`），在 `doc/spec/` 或指定路径生成 Markdown 规格文档。文档必须包含以下板块：
+严格遵循项目规范（参考 `.antigravity/development_standards.md`），在 `docs/spec/` 或指定路径生成 Markdown 规格文档（例如 `docs/spec/spec-xxxxx-feature-name.md`）。文档必须包含以下板块：
 
 ```markdown
 # [功能名称] 详细设计文档

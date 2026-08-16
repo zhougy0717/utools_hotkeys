@@ -32,13 +32,13 @@ tools:
 
 ### 2. 界面导出与资产存储
 - 使用 `export_nodes` 或导出能力将最终画板/组件导出为 PNG。
-- 图像保存至项目标准资源目录（例如 `docs/assets/ui/` 或 `doc/spec/assets/`）。
+- 图像保存至项目标准资源目录（例如 `docs/assets/ui/` 或 `docs/spec/assets/`）。
 - 图像命名规范：`ui-<feature-name>-<state/page>.png`（如 `ui-hotkey-manager-main.png`）。
 
 ### 3. 嵌入设计文档
-- 在 `designer` 输出的设计文档（如 `doc/spec/spec-xxx.md`）中的相应 UI 板块，使用 Markdown 格式嵌入导出的图片：
+- 在 `designer` 输出的设计文档（如 `docs/spec/spec-xxx.md`）中的相应 UI 板块，使用 Markdown 格式嵌入导出的图片：
   ```markdown
   ### 界面原型
-  ![主界面设计稿](file:///Users/guangyu/Projects/utools/utools_shortcut_keys/doc/spec/assets/ui-feature-main.png)
+  ![主界面设计稿](file:///Users/guangyu/Projects/utools/utools_shortcut_keys/docs/spec/assets/ui-feature-main.png)
   ```
 - 附带文字标注说明关键交互元素、触发行为与快捷键映射。

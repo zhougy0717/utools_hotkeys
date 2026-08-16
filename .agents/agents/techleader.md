@@ -57,7 +57,7 @@ skills:
 
 ### 阶段 1: 需求与详细设计 (Requirement & Design)
 1. 调度 `designer`（使用 `grill-with-docs` skill）深入挖掘用户需求，若涉及 UI 则协同 `ui-designer` 生成 PNG 原型并嵌入设计文档。
-2. 产出规范的详细设计文档（`doc/spec/*.md`）。
+2. 产出规范的详细设计文档（`docs/spec/*.md`）。
 3. **编写交接契约 1 (Designer ➡️ Planner)**: 明确包含设计文档路径、UI 资源路径、核心架构设计说明（遵守 SOLID 原则与 PlantUML 表达）。
 4. **门禁 1 (User Sign-off)**: 设计文档与契约必须获得用户明确确认后，方可进入规划阶段。
 
@@ -88,6 +88,6 @@ skills:
    - 测试通过后，编写测试验收报告，并生成 **交接契约 5 (Tester ➡️ Tech Leader)**。
 
 ### 阶段 6: 最终交付与状态汇报 (Final Delivery)
-1. `techleader` 汇总全链条的交接契约与产出物（设计文档、实施计划、代码变更、Git Commit 历史、Review 记录、测试报告）。
-2. 向用户提供清晰的交付总结。
-3. **交付与推送**: 确认研发期间已形成良好、规范的增量 commit 历史，向用户汇报最终成果与 Commit 记录，等待用户进一步指示。
+1. **归档设计文档 (Spec Archive)**: 将本次开发完成并通过测试验收的详细设计文档（`docs/spec/spec-xxxxx-xxx.md`）移动归档至 `docs/spec/archive/`。
+2. **汇总与核对**: `techleader` 汇总全链条的交接契约与产出物（归档设计文档、实施计划、代码变更、Git Commit 历史、Review 记录、测试报告）。
+3. **向用户汇报**: 向用户提供清晰的交付总结，确认研发期间已形成良好、规范的增量 commit 历史，汇报最终成果与 Commit 记录，等待用户进一步指示。

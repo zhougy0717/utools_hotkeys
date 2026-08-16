@@ -3,6 +3,10 @@ const path = require('path');
 const fs = require('fs');
 const ImportCommand = require('../src/core/slash_commands/import.js');
 const importFileHandler = require('../src/core/action_handlers/import_file_handler.js');
+const actionRegistry = require('../src/core/action_registry.js');
+require('../src/core/action_handlers/index.js');
+
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
 describe('ImportCommand and importFileHandler', () => {
   const tempDir = path.join(__dirname, 'temp_import_test');
@@ -52,7 +56,7 @@ describe('ImportCommand and importFileHandler', () => {
     assert.strictEqual(candidates[0].action, 'import_defkey_file');
   });
 
-  it('importFileHandler should parse valid txt and write to json_hotkeys directory', async () => {
+  it('actionRegistry should dispatch import_defkey_file and persist json', async () => {
     const sampleTxt = `================================================================================
 Sample Tool keyboard shortcuts
 ================================================================================
@@ -66,7 +70,8 @@ Ctrl + S                         Save project
     const samplePath = path.join(tempDir, 'sample_defkey.txt');
     fs.writeFileSync(samplePath, sampleTxt, 'utf-8');
 
-    await importFileHandler({ action: 'import_defkey_file' });
+    actionRegistry.handle('import_defkey_file', { action: 'import_defkey_file' }, { callbackSetList: () => {} });
+    await sleep(150);
 
     const expectedJsonPath = path.join(tempDir, 'json_hotkeys', 'sample-tool.json');
     assert.strictEqual(fs.existsSync(expectedJsonPath), true);
@@ -83,7 +88,8 @@ Ctrl + S                         Save project
     const badPath = path.join(tempDir, 'sample_defkey.txt');
     fs.writeFileSync(badPath, 'bad content', 'utf-8');
 
-    await importFileHandler({ action: 'import_defkey_file' });
+    actionRegistry.handle('import_defkey_file', { action: 'import_defkey_file' }, { callbackSetList: () => {} });
+    await sleep(150);
     assert.ok(global.lastNotification.includes('导入失败'));
   });
 });

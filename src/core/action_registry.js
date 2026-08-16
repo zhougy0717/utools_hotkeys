@@ -34,10 +34,13 @@ class ActionRegistry {
    */
   handle(action, itemData, ui, context) {
     const handler = this.handlers.get(action);
+    if (typeof handler === 'function') {
+      return handler(itemData, ui, context);
+    }
     if (handler && typeof handler.handle === 'function') {
       return handler.handle(itemData, ui, context);
     }
-    console.warn(`[ActionRegistry] No handler found for action: ${action}`);
+    console.warn(`[ActionRegistry] No valid handler found for action: ${action}`);
     return null;
   }
 }

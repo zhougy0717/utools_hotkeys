@@ -1,6 +1,7 @@
 const assert = require('assert');
 const DownloadCommand = require('../src/core/slash_commands/download.js');
-const openUrlHandler = require('../src/core/action_handlers/open_url_handler.js');
+const actionRegistry = require('../src/core/action_registry.js');
+require('../src/core/action_handlers/index.js');
 
 describe('DownloadCommand - Parallel Defkey Source & Timeout Handling (UT-09, UT-10)', () => {
   let originalUtools;
@@ -86,8 +87,8 @@ describe('DownloadCommand - Parallel Defkey Source & Timeout Handling (UT-09, UT
     }
   });
 
-  it('openUrlHandler should invoke utools.shellOpenExternal', () => {
-    openUrlHandler({ action: 'open_external_url', url: 'https://defkey.com/search?q=test' });
+  it('actionRegistry dispatching open_external_url should invoke utools.shellOpenExternal', () => {
+    actionRegistry.handle('open_external_url', { action: 'open_external_url', url: 'https://defkey.com/search?q=test' });
     assert.strictEqual(global.openedUrl, 'https://defkey.com/search?q=test');
   });
 });

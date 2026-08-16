@@ -1,9 +1,12 @@
 const assert = require('assert');
 const path = require('path');
 const fs = require('fs');
-const importFileHandler = require('../src/core/action_handlers/import_file_handler.js');
+const actionRegistry = require('../src/core/action_registry.js');
+require('../src/core/action_handlers/index.js');
 const loadAllShortcuts = require('../src/infrastructure/shortcuts_loader.js');
 const DownloadCommand = require('../src/core/slash_commands/download.js');
+
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
 describe('Defkey End-to-End Integration & Priority Verification', () => {
   const tempDir = path.join(__dirname, 'mock_integration_env');
@@ -60,8 +63,9 @@ Alt + Left arrow                 Go back
   });
 
   it('E2E: import txt -> persist json -> ShortcutsLoader loads with highest priority', async () => {
-    // 1. Execute import
-    await importFileHandler({ action: 'import_defkey_file' });
+    // 1. Execute import via ActionRegistry
+    actionRegistry.handle('import_defkey_file', { action: 'import_defkey_file' }, { callbackSetList: () => {} });
+    await sleep(150);
 
     const jsonPath = path.join(tempDir, 'json_hotkeys', 'one-commander-3.json');
     assert.strictEqual(fs.existsSync(jsonPath), true);
@@ -89,5 +93,8 @@ Alt + Left arrow                 Go back
     const defkeyOption = candidateList.find(item => item.action === 'open_external_url');
     assert.ok(defkeyOption, 'Defkey parallel option should be present');
     assert.ok(defkeyOption.url.includes('defkey.com/search?q=obsidian'));
+
+    actionRegistry.handle('open_external_url', defkeyOption);
+    assert.strictEqual(global.openedUrl, defkeyOption.url);
   });
 });

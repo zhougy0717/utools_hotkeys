@@ -1,0 +1,166 @@
+==================================
+One Commander 3 keyboard shortcuts
+==================================
+
+First published at 11/29/2024 on
+https://defkey.com/one-commander-3-shortcuts
+
+One Commander 3 is a powerful and flexible dual-pane file manager for
+Windows. It features folder columns, tabs, and customizable themes, making
+file navigation fast and intuitive. It's free for home use and offers a Pro
+version for commercial use.
+
+One Commander 3 has 85 shortcuts and we have listed all of them below.
+
+
+
+Program operations
+------------------
+
+Ctrl + Shift + F12      Restert, running as Administrator
+
+
+File opening
+------------
+
+Enter                   Open file/folder
+Ctrl + Enter            Open with
+Ctrl + Enter            Run .exe as Administrator
+Ctrl + Shift + Enter    Run .exe with parameters
+
+
+Columns navigation
+------------------
+
+Backspace               Open parent folder
+Alt + Up arrow          Open parent folder
+`                       Toggle columns on/off in standart layout
+Alt + Left arrow        Open previous path
+mousebutton4            Open previous path
+Alt + Right arrow       Open next path
+mousebutton5            Open next path
+\                       Edit path
+Alt + D                 Edit path
+Ctrl + L                Edit path
+Ctrl + Shift + C        (if no file is selected) Copy current path to clipboard
+\ then Ctrl + C         (\ to edit Path and then regular copy) Copy current path to clipboard
+Right click             Context menu
+Context menu key        Context menu
+Shift + F10             Context menu
+Shift + Right click     Context menu with additional options
+
+
+File operations
+---------------
+
+F2                      Rename
+Alt + C                 Copy file to other Browser
+Alt + M                 Copy file to other Browser
+Ctrl + D                Duplicate single file
+Ctrl + C then Ctrl + V  Duplicate one or many files
+Del                     Delete file
+Shift + Del             (not available yet) Delete file without sending it to Recycle Bin
+Ctrl + Shift + Del      (not available yet) Delete permanently (unrecoverable)
+Ctrl + I                File information/properties
+Alt + Enter             File information/properties
+Ctrl + Alt + T          Tag files (color)
+F7                      View long file names (toggle)
+
+
+New
+---
+
+Ctrl + N                New File
+Ctrl + V                New File containing Clipboard contents
+
+A new .txt file will be created if Clipboard contains text, .png if it
+contains bitmap image.
+
+Ctrl + Shift + N        New Folder
+Ctrl + Enter            ... create and open
+Shift + Enter           ... create and move selected files inside (files need to be selected first)
+Alt + N                 New Note
+
+
+Tabs
+----
+
+Ctrl + T                New Tab (duplicate of Current Tab)
+Ctrl + Shift + T        New Tab from path in Clipboard
+Middle click            Open Folder in new Tab
+Ctrl + W                Close Tab
+Middle click            Close Tab
+Ctrl + Tab              Next Tab
+Ctrl + Shift + Tab      Previous Tab
+Alt + Middle click      Move Tab to other Browser Pane
+
+
+Browsers
+--------
+
+Alt + F                 Change focus between Browsers
+Alt + C                 Copy file or folder to other Browser
+Alt + M                 Move file or folder to other Browser
+
+
+Clipboard
+---------
+
+Ctrl + C                Copy Files
+Ctrl + X                Cut Files
+Ctrl + V                Paste Files
+Ctrl + Shift + C        Copy Files as Paths
+Alt + C                 Copy Files to other Browser Pane
+Alt + M                 Move Files to other Browser Pane
+
+
+Preview
+-------
+
+Space                   Preview File
+Esc                     Close Preview
+Up arrow / Down arrow   Preview previous/next File
+Left arrow / Right arrow PDF Preview previous/next page
+Wheel up and wheel down Image zoom around cursor
+
+
+Selection
+---------
+
+Ctrl + A                Select all
+Ctrl + Left click       Select additional Files
+Ctrl + Space            Select additional Files
+Shift + Left click      Select range
+Middle click + Left click + Move the mouse (drag) Window selection
+
+
+Window
+------
+
+Win + Alt + O           Call One Commander (system shortcut)
+Ctrl + `                Call One Commander and dock to bottom of screen
+Shift + F1              Center on main display
+Win + Down arrow        Minimize or restore from Maximized
+Win + Up arrow          Maximize or restore from Minimized
+
+
+Other
+-----
+
+~                       Show Notification Pane
+Shift + `               Show Notification Pane
+F5                      Reload/Refresh Columns
+Ctrl + R                Reload/Refresh Columns
+Ctrl + H                Show/hide hidden files and folders
+F8                      Toggle columns resizing/not resizing in Columns Layout
+Ctrl + Shift + F5       Reload Theme
+F3                      Search
+Ctrl + F                Search
+[A - Z]                 Quick Filter
+[0 - 9]                 Quick Filter
+Esc                     Clear Quick Filter
+F10                     Open Terminal (CMD/Powershell) in Current Folder
+Ctrl + F10              Open Terminal (CMD/Powershell) as Administrator
+
+Last modified on (UTC): Saturday, November 30, 2024
+Defkey © All rights reserved.

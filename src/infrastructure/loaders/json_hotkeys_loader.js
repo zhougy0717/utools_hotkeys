@@ -34,19 +34,20 @@ class JsonHotkeysLoader {
                             const processed = data.shortcuts.map(item => {
                                 const processedItem = this.processItem(item);
                                 
-                                // Resolve relative icon paths against the JSON file's directory
-                                // Standardize absolute paths to file:// protocol for uTools rendering
-                                // Skip data URIs (base64) and URLs
-                                if (processedItem.icon 
-                                    && !processedItem.icon.startsWith('data:')
-                                    && !processedItem.icon.startsWith('http')
-                                    && !processedItem.icon.startsWith('file://')) {
+                                // Resolve icon (prioritize item icon, fallback to top-level data.icon)
+                                let iconPath = processedItem.icon || data.icon;
+                                if (iconPath 
+                                    && !iconPath.startsWith('data:')
+                                    && !iconPath.startsWith('http')
+                                    && !iconPath.startsWith('file://')) {
                                     
-                                    const absPath = path.isAbsolute(processedItem.icon)
-                                        ? processedItem.icon
-                                        : path.join(path.dirname(filePath), processedItem.icon);
+                                    const absPath = path.isAbsolute(iconPath)
+                                        ? iconPath
+                                        : path.join(path.dirname(filePath), iconPath);
                                         
                                     processedItem.icon = require('url').pathToFileURL(absPath).href;
+                                } else if (iconPath) {
+                                    processedItem.icon = iconPath;
                                 }
 
                                 // Ensure each shortcut carries its appId for global tracking

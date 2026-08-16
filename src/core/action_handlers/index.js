@@ -6,6 +6,7 @@ const executeExportHandler = require('./execute_export_handler.js');
 const pathActionHandler = require('./path_action_handler.js');
 const importFileHandler = require('./import_file_handler.js');
 const openUrlHandler = require('./open_url_handler.js');
+const iconActionHandler = require('./icon_action_handler.js');
 
 /**
  * Initialize all core action handlers
@@ -20,6 +21,12 @@ function initActionHandlers() {
   actionRegistry.register('import_defkey_file', importFileHandler);
   actionRegistry.register('open_external_url', openUrlHandler);
   
+  // Icon customization actions
+  actionRegistry.register('manage_app_icon', iconActionHandler);
+  actionRegistry.register('pick_app_icon_file', iconActionHandler);
+  actionRegistry.register('generate_app_avatar', iconActionHandler);
+  actionRegistry.register('return_to_icon_list', iconActionHandler);
+  
   console.log('[ActionRegistry] Handlers initialized');
 }
 
@@ -27,3 +34,4 @@ function initActionHandlers() {
 initActionHandlers();
 
 module.exports = { initActionHandlers };
+

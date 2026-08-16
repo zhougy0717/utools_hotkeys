@@ -5,7 +5,6 @@ skills:
   - grill-with-docs
   - grilling
   - domain-modeling
-  - writing-plans
   - plantuml-lint
 ---
 
@@ -53,12 +52,10 @@ skills:
 - **UI 原型**: 嵌入由 `ui-designer` 生成的 PNG 原型图（如有）。
 
 ## 4. 测试用例设计 (Test Design)
-- 正常用例、边界用例、异常回退验证点。
-
-## 5. 任务拆分 (Task Checklist)
-- [ ] 步骤 1: ...
-- [ ] 步骤 2: ...
+- 正常用例、边界用例、异常回退验证点（供后续 Planner 映射为 TDD 单测用例）。
 ```
+
+> **注意 (职责边界)**: 设计阶段**不编写具体的任务拆解清单 (Task Checklist)**。详细设计文档经确认后，由 `planner` 在开发阶段统一将其拆解为原子化、带 RED/GREEN/REFACTOR 标记的实施计划。
 
 ---
 
@@ -81,5 +78,5 @@ skills:
 - [ ] **HARD_GATE 1 (UML 设计图规范)**：所有软件架构图、模块依赖图、类图及交互时序图必须严格使用 **PlantUML** 语法（`@startuml ... @enduml`）绘制，**严禁使用 Mermaid 绘制 UML 图**，严禁使用纯文字描述替代图表；文档提交前必须使用 `plantuml-lint` 验证通过并确保可正常导出 PNG。
 - [ ] **HARD_GATE 2 (设计原则)**：严格遵守 SOLID 原则，架构设计必须做到高内聚、低耦合与依赖倒置。
 - [ ] **HARD_GATE 3 (设计语言优先)**：严禁直接编写大段示例/生产实现代码，必须先用设计语言（PlantUML 图表、接口/数据模型、伪代码）阐述清楚设计细节。
-- [ ] 架构与模块划分清晰，可供 `planner` 进一步拆解为原子级 TDD 任务。
+- [ ] **HARD_GATE 4 (职责边界与可实施性)**：架构与模块划分清晰，测试设计完整，供 `planner` 在开发阶段进一步拆解为原子级 TDD 任务清单（不在设计文档内堆砌任务清单）。
 - [ ] 提交前需获得用户明确确认。

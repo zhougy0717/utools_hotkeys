@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { defaultParserRegistry } = require('../parsers/text_parser_registry.js');
+const { generateAvatarSvg } = require('../utils/icon_generator.js');
 
 function getUtools() {
   if (typeof utools !== 'undefined') return utools;
@@ -65,6 +66,19 @@ const importFileHandler = {
 
         const parsedDoc = parser.parse(content);
 
+        // Auto-generate dynamic gradient letter avatar if no icon is set
+        if (!parsedDoc.icon) {
+          parsedDoc.icon = generateAvatarSvg(parsedDoc.appName);
+        }
+
+        if (Array.isArray(parsedDoc.shortcuts)) {
+          parsedDoc.shortcuts.forEach(s => {
+            if (!s.icon) {
+              s.icon = parsedDoc.icon;
+            }
+          });
+        }
+
         const savedPath = (uTools.dbStorage && uTools.dbStorage.getItem('sqlite_db_path')) ||
           (typeof uTools.getPath === 'function' ? path.join(uTools.getPath('userData'), 'utools_shortcut_keys') : './');
 
@@ -76,6 +90,16 @@ const importFileHandler = {
         const targetFile = path.join(targetDir, `${parsedDoc.appId}.json`);
         fs.writeFileSync(targetFile, JSON.stringify(parsedDoc, null, 2), 'utf-8');
 
+        // Trigger cache refresh
+        try {
+          const { enter } = require('../../infrastructure/common_method.js');
+          if (typeof enter === 'function') {
+            enter();
+          }
+        } catch (e) {
+          // ignore
+        }
+
         const successMsg = `成功导入 ${parsedDoc.appName} 快捷键 (共 ${parsedDoc.shortcuts.length} 条)`;
         if (uTools.showNotification) {
           uTools.showNotification(successMsg);
@@ -85,7 +109,7 @@ const importFileHandler = {
           ui.callbackSetList([{
             title: `✅ 已成功导入 ${parsedDoc.appName}`,
             description: `共 ${parsedDoc.shortcuts.length} 条快捷键，已保存至 json_hotkeys/${parsedDoc.appId}.json`,
-            icon: 'logo.png',
+            icon: parsedDoc.icon || 'logo.png',
             action: 'noop'
           }]);
         }

@@ -96,7 +96,8 @@ enter = () => {
     const loadAllShortcuts = require('./shortcuts_loader.js');
     const shortcuts = loadAllShortcuts() ?? [];
 
-    hitTimeStamps = window.utools.dbStorage.getItem('hitTimeStamp') ?? {}
+    const uTools = typeof utools !== 'undefined' ? utools : (typeof window !== 'undefined' ? window.utools : null);
+    const hitTimeStamps = (uTools && uTools.dbStorage ? uTools.dbStorage.getItem('hitTimeStamp') : {}) ?? {};
     shortcuts.forEach(x => {
         x.keyword += x.title.toLowerCase()
         x.hitTimeStamp = hitTimeStamps[x.title] ?? 0

@@ -6,6 +6,7 @@
   },
   "scripts": {
     "build:cheatsheet": "node scripts/build_cheatsheet_builtin.js",
+    "optimize:icons": "node scripts/extract_builtin_icons.js",
     "test": "mocha",
     "release": "python3 scripts/release.py"
   }

@@ -14,12 +14,29 @@ require('../core/action_handlers/index.js')
 require('../core/hotkeycheatsheet.js') // Load data loader logic
 require('../core/slash_commands/index.js') // Load and register commands
 
+const getUTools = () => typeof utools !== 'undefined' ? utools : (typeof window !== 'undefined' ? window.utools : null);
+
+const uToolsInstance = getUTools();
+if (uToolsInstance) {
+  if (typeof uToolsInstance.onPluginEnter === 'function') {
+    uToolsInstance.onPluginEnter(() => {
+      g_activeCommand = null;
+    });
+  }
+  if (typeof uToolsInstance.onPluginOut === 'function') {
+    uToolsInstance.onPluginOut(() => {
+      g_activeCommand = null;
+    });
+  }
+}
+
 let lastCallbackSetList = null
 window.exports = {
   'shortcuts': {
     mode: 'list',
     args: {
       enter: (action, callbackSetList) => {
+        g_activeCommand = null;
         let result = enter()
         g_shortcuts = result[0]
         g_hitTimeStamps = result[1]
@@ -72,6 +89,7 @@ window.exports = {
     mode: 'list',
     args: {
       enter: (action, callbackSetList) => {
+        g_activeCommand = null;
         let result = enter()
         g_shortcuts = result[0]
         g_hitTimeStamps = result[1]

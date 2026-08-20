@@ -1,12 +1,15 @@
 const path = require('path');
-const fs = require('fs');
-const BuiltinLoader = require('../../infrastructure/loaders/builtin_loader.js');
+const BuiltinExportService = require('../services/builtin_export_service.js');
 
 /**
  * ExecuteExportHandler - Handles the 'execute_builtin_export' action.
- * Performs the actual export of builtin shortcuts to the configured path.
+ * Performs the actual export of all builtin shortcuts to the configured path.
  */
 class ExecuteExportHandler {
+  constructor(exportService = null) {
+    this.exportService = exportService || new BuiltinExportService();
+  }
+
   async handle(itemData, ui, context) {
     const savedPath = utools.dbStorage.getItem('sqlite_db_path');
     if (!savedPath) {
@@ -14,89 +17,15 @@ class ExecuteExportHandler {
       return;
     }
 
-    const exportDir = path.join(savedPath, 'builtin');
-    const iconsDir = path.join(exportDir, 'icons');
-
     try {
-      // 1. Create directories
-      if (!fs.existsSync(exportDir)) {
-        fs.mkdirSync(exportDir, { recursive: true });
-      }
-      if (!fs.existsSync(iconsDir)) {
-        fs.mkdirSync(iconsDir, { recursive: true });
-      }
+      const result = this.exportService.exportToDirectory(savedPath);
 
-      // 2. Load and group data
-      const loader = new BuiltinLoader();
-      const allShortcuts = loader.load();
-      
-      const groups = allShortcuts.reduce((acc, shortcut) => {
-        const appId = shortcut.appId || 'unknown';
-        if (!acc[appId]) acc[appId] = [];
-        acc[appId].push(shortcut);
-        return acc;
-      }, {});
+      utools.showNotification(`成功导出 ${result.appCount} 个应用分类至: ${result.exportDir}`);
 
-      const appIds = Object.keys(groups);
-      let successCount = 0;
-
-      // 3. Process each group
-      for (const appId of appIds) {
-        const shortcuts = groups[appId];
-        if (shortcuts.length === 0) continue;
-
-        // Icon handling
-        let localIconPath = '';
-        const firstShortcut = shortcuts[0];
-        if (firstShortcut.icon) {
-          try {
-            // Resolve internal icon path against the plugin root
-            // Note: In search logic, __dirname is src/core/action_handlers/
-            // Root is ../../../
-            const sourceIconPath = path.isAbsolute(firstShortcut.icon) 
-              ? firstShortcut.icon 
-              : path.join(__dirname, '../../../', firstShortcut.icon);
-            
-            if (fs.existsSync(sourceIconPath)) {
-              const iconExt = path.extname(sourceIconPath) || '.png';
-              const iconFileName = `${appId}${iconExt}`;
-              const destIconPath = path.join(iconsDir, iconFileName);
-              
-              fs.copyFileSync(sourceIconPath, destIconPath);
-              localIconPath = path.join('icons', iconFileName);
-            }
-          } catch (err) {
-            console.warn(`[ExecuteExportHandler] Failed to copy icon for ${appId}:`, err);
-          }
-        }
-
-        // Prepare JSON
-        const appName = firstShortcut.appName || appId;
-        const processedShortcuts = shortcuts.map(s => ({
-          ...s,
-          icon: localIconPath || s.icon,
-          description: s.description ? `${s.description} (builtin)` : '(builtin)'
-        }));
-
-        const content = {
-          appId: appId,
-          appName: appName,
-          updatedAt: Date.now(),
-          shortcuts: processedShortcuts
-        };
-
-        // Write file
-        const jsonPath = path.join(exportDir, `${appId}.json`);
-        fs.writeFileSync(jsonPath, JSON.stringify(content, null, 2), 'utf8');
-        successCount++;
-      }
-
-      utools.showNotification(`成功导出 ${successCount} 个应用分类至: ${exportDir}`);
-      
       // Update UI to show completion
       ui.update([{
         title: '导出成功',
-        description: `已保存 ${successCount} 个文件至: ${exportDir}`,
+        description: `已保存 ${result.appCount} 个应用（共 ${result.shortcutCount} 条快捷键）至: ${result.exportDir}`,
         icon: 'logo.png',
         action: 'noop'
       }]);
@@ -109,3 +38,5 @@ class ExecuteExportHandler {
 }
 
 module.exports = new ExecuteExportHandler();
+module.exports.ExecuteExportHandler = ExecuteExportHandler;
+

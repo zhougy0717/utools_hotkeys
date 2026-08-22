@@ -155,6 +155,16 @@ const importFileHandler = {
         const targetFile = path.join(targetDir, `${parsedDoc.appId}.json`);
         fs.writeFileSync(targetFile, JSON.stringify(parsedDoc, null, 2), 'utf-8');
 
+        // Dynamically sync window match pattern to uTools feature
+        try {
+          const { defaultSyncService } = require('../../infrastructure/app_feature_sync_service.js');
+          if (defaultSyncService) {
+            defaultSyncService.syncApp(parsedDoc.appId, parsedDoc.appName);
+          }
+        } catch (syncErr) {
+          console.warn('[importFileHandler] Dynamic feature sync failed:', syncErr);
+        }
+
         // Trigger cache refresh
         try {
           const { enter } = require('../../infrastructure/common_method.js');

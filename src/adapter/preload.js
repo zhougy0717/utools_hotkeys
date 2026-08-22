@@ -13,6 +13,15 @@ require('../core/action_handlers/index.js')
 
 require('../core/hotkeycheatsheet.js') // Load data loader logic
 require('../core/slash_commands/index.js') // Load and register commands
+const { defaultSyncService } = require('../infrastructure/app_feature_sync_service.js');
+
+try {
+  if (defaultSyncService) {
+    defaultSyncService.syncAll();
+  }
+} catch (e) {
+  console.warn('[Preload] Initial feature syncAll failed:', e);
+}
 
 const getUTools = () => typeof utools !== 'undefined' ? utools : (typeof window !== 'undefined' ? window.utools : null);
 

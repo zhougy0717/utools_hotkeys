@@ -1,4 +1,5 @@
 const { dataLoader } = require('../hotkeycheatsheet.js');
+const { defaultSyncService } = require('../../infrastructure/app_feature_sync_service.js');
 
 /**
  * DownloadAppHandler - Handles the 'download_app_hotkeys' action.
@@ -28,7 +29,14 @@ class DownloadAppHandler {
           itemData.icon
       );
 
-      // 3. Show final success message
+      // 3. Dynamically sync window match pattern to uTools feature
+      try {
+        await defaultSyncService.syncApp(itemData.id, itemData.title || itemData.name);
+      } catch (syncErr) {
+        console.warn('[DownloadAppHandler] Dynamic feature sync failed:', syncErr);
+      }
+
+      // 4. Show final success message
       ui.showSuccess(
           '下载成功！', 
           `[${itemData.title}] 下载完成，按回车返回或直接开始搜索。`, 

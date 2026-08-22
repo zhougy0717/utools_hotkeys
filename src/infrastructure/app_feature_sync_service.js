@@ -1,5 +1,6 @@
 const AppPatternInferer = require('./app_pattern_inferer.js');
 const UToolsFeatureAdapter = require('./utools_feature_adapter.js');
+const AppMappingStorage = require('./app_mapping_storage.js');
 
 /**
  * AppFeatureSyncService - Manages dynamic registration and aggregation synchronization
@@ -9,6 +10,7 @@ class AppFeatureSyncService {
     constructor(options = {}) {
         this.inferer = options.inferer || new AppPatternInferer();
         this.storageAdapter = options.storageAdapter || new UToolsFeatureAdapter();
+        this.mappingStorage = options.mappingStorage || AppMappingStorage.defaultMappingStorage;
     }
 
     /**
@@ -50,7 +52,12 @@ class AppFeatureSyncService {
      */
     async syncApp(appId, appName) {
         try {
-            const patterns = this.inferer.inferPatterns(appId, appName);
+            const inferred = this.inferer.inferPatterns(appId, appName) || [];
+            const custom = this.mappingStorage && typeof this.mappingStorage.getCustomMappingsForApp === 'function'
+                ? this.mappingStorage.getCustomMappingsForApp(appId)
+                : [];
+            const patterns = Array.from(new Set([...inferred, ...custom]));
+
             if (!patterns || patterns.length === 0) {
                 return true;
             }
@@ -84,7 +91,7 @@ class AppFeatureSyncService {
     }
 
     /**
-     * Cold start synchronization: Aggregates base plugin.json apps and all installed apps.
+     * Cold start synchronization: Aggregates base plugin.json apps, all installed apps, and custom mappings.
      * @returns {Promise<boolean>}
      */
     async syncAll() {
@@ -94,8 +101,11 @@ class AppFeatureSyncService {
 
             const installedApps = this.storageAdapter.getInstalledApps();
             const inferredPatterns = this.inferer.inferPatternsForList(installedApps);
+            const customPatterns = this.mappingStorage && typeof this.mappingStorage.getAllMappedProcessNames === 'function'
+                ? this.mappingStorage.getAllMappedProcessNames()
+                : [];
 
-            const mergedSet = new Set([...baseApps, ...inferredPatterns]);
+            const mergedSet = new Set([...baseApps, ...inferredPatterns, ...customPatterns]);
             baseFeature.cmds[0].match.app = Array.from(mergedSet);
 
             this.storageAdapter.setUToolsFeature(baseFeature);
@@ -116,3 +126,4 @@ const defaultSyncService = new AppFeatureSyncService();
 
 module.exports = AppFeatureSyncService;
 module.exports.defaultSyncService = defaultSyncService;
+

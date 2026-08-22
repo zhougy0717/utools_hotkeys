@@ -105,4 +105,44 @@ describe('AppFeatureSyncService - Dynamic Feature Injection & Sync (SPEC-00018)'
         assert.strictEqual(result, true);
         assert.strictEqual(initialCount, afterCount);
     });
+
+    it('TC-008: should merge custom mappings when syncing a single app (SPEC-00019)', async () => {
+        const mockMappingStorage = {
+            getCustomMappingsForApp: (appId) => appId === 'one-commander' ? ['OneCommanderCustom.exe'] : [],
+            getAllMappedProcessNames: () => ['OneCommanderCustom.exe']
+        };
+
+        const customSyncService = new AppFeatureSyncService({
+            storageAdapter: adapter,
+            mappingStorage: mockMappingStorage
+        });
+
+        const success = await customSyncService.syncApp('one-commander', 'One Commander');
+        assert.strictEqual(success, true);
+
+        const currentApps = customSyncService.getCurrentMatchApps();
+        assert.ok(currentApps.includes('OneCommanderCustom.exe'), 'Should include custom mapped process name');
+        assert.ok(currentApps.includes('One Commander.app'), 'Should also include auto inferred pattern');
+    });
+
+    it('TC-009: should merge all custom mappings when executing syncAll (SPEC-00019)', async () => {
+        const mockMappingStorage = {
+            getCustomMappingsForApp: () => [],
+            getAllMappedProcessNames: () => ['CustomToolA.exe', 'CustomToolB.app']
+        };
+
+        const customSyncService = new AppFeatureSyncService({
+            storageAdapter: adapter,
+            mappingStorage: mockMappingStorage
+        });
+
+        const success = await customSyncService.syncAll();
+        assert.strictEqual(success, true);
+
+        const currentApps = customSyncService.getCurrentMatchApps();
+        assert.ok(currentApps.includes('CustomToolA.exe'));
+        assert.ok(currentApps.includes('CustomToolB.app'));
+        assert.ok(currentApps.includes('Google Chrome.app'));
+    });
 });
+

@@ -86,4 +86,29 @@ describe('AppCommand - Application Process Mapping Slash Command (SPEC-00019)', 
         assert.ok(renderedList[0].title.includes('未找到匹配'));
         assert.strictEqual(renderedList[0].action, 'noop');
     });
+
+    it('TC-005: should render editable state with prefilled process name when editingApp is set', async () => {
+        command.setEditingApp({
+            appId: 'google-chrome',
+            appName: 'Google Chrome',
+            icon: 'logo.png'
+        });
+
+        let renderedList = null;
+        // User typed / modified input to "chrome_dev.exe"
+        await command.execute('chrome_dev.exe', (list) => {
+            renderedList = list;
+        });
+
+        assert.ok(Array.isArray(renderedList));
+        const saveItem = renderedList.find(x => x.action === 'confirm_add_app_mapping');
+        assert.ok(saveItem);
+        assert.strictEqual(saveItem.processName, 'chrome_dev.exe');
+        assert.ok(saveItem.title.includes('chrome_dev.exe'));
+
+        // Return button should exist
+        const returnItem = renderedList.find(x => x.action === 'select_app_for_mapping');
+        assert.ok(returnItem);
+    });
 });
+

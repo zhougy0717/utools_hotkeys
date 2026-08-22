@@ -8,6 +8,16 @@ class AppActionHandler {
     constructor(options = {}) {
         this.mappingStorage = options.mappingStorage || AppMappingStorage.defaultMappingStorage;
         this.syncService = options.syncService || AppFeatureSyncService.defaultSyncService;
+        this.appCommand = options.appCommand || null;
+    }
+
+    _getAppCommand() {
+        if (this.appCommand) return this.appCommand;
+        try {
+            return require('../slash_commands/app.js').defaultAppCommand;
+        } catch (e) {
+            return null;
+        }
     }
 
     /**
@@ -44,6 +54,16 @@ class AppActionHandler {
         const customMappings = this.mappingStorage.getCustomMappingsForApp(appId);
         const icon = itemData.icon || 'logo.png';
 
+        const cmd = this._getAppCommand();
+        if (cmd && typeof cmd.clearEditingApp === 'function') {
+            cmd.clearEditingApp();
+        }
+
+        const uTools = typeof window !== 'undefined' && window.utools ? window.utools : (typeof utools !== 'undefined' ? utools : null);
+        if (uTools && typeof uTools.setSubInputValue === 'function') {
+            uTools.setSubInputValue('');
+        }
+
         const customDesc = customMappings.length > 0
             ? `已手动添加 ${customMappings.length} 个: ${customMappings.join(', ')}`
             : '当前无手动添加的进程名（使用默认规则）';
@@ -72,6 +92,13 @@ class AppActionHandler {
                 appId: appId,
                 appName: appName,
                 action: 'reset_app_mappings'
+            },
+            {
+                title: `↩️ 返回应用列表`,
+                description: '返回 /app 快捷键应用管理主列表',
+                icon: 'logo.png',
+                action: 'slash_command',
+                command: cmd
             }
         ];
 
@@ -89,59 +116,23 @@ class AppActionHandler {
         const uTools = typeof window !== 'undefined' && window.utools ? window.utools : (typeof utools !== 'undefined' ? utools : null);
         const isMac = uTools && typeof uTools.isMacOs === 'function' ? uTools.isMacOs() : process.platform === 'darwin';
 
-        const cleanNoSpace = appName.replace(/\s+/g, '');
         const defaultVal = isMac ? `${appName}.app` : `${appName}.exe`;
 
-        // Prefill uTools search/sub-input box for the user to edit directly
+        // 1. Enable editing mode in AppCommand so search events render real-time editing view
+        const cmd = this._getAppCommand();
+        if (cmd && typeof cmd.setEditingApp === 'function') {
+            cmd.setEditingApp({ appId, appName, icon });
+        }
+
+        // 2. Prefill uTools search/sub-input box for the user to edit directly
         if (uTools && typeof uTools.setSubInputValue === 'function') {
             uTools.setSubInputValue(defaultVal);
         }
 
-        const suggestions = [
-            `${appName}.exe`,
-            `${cleanNoSpace}.exe`,
-            `${appName}.app`,
-            `${cleanNoSpace}.app`,
-            `${appId}.exe`
-        ];
-        const otherSuggestions = Array.from(new Set(suggestions)).filter(s => s !== defaultVal);
-
-        const list = [
-            {
-                title: `💾 确认保存: ${defaultVal}`,
-                description: `上方文本框已预置默认值，您可在输入框中直接修改，回车或点击立即保存`,
-                icon: icon,
-                appId: appId,
-                appName: appName,
-                processName: defaultVal,
-                action: 'confirm_add_app_mapping'
-            }
-        ];
-
-        otherSuggestions.forEach(sug => {
-            list.push({
-                title: `➕ 或选择预设: ${sug}`,
-                description: `点击快速绑定 [${sug}] 至 [${appName}]`,
-                icon: icon,
-                appId: appId,
-                appName: appName,
-                processName: sug,
-                action: 'confirm_add_app_mapping'
-            });
-        });
-
-        list.push({
-            title: `↩️ 返回 [${appName}] 配置菜单`,
-            description: '取消添加并返回',
-            icon: icon,
-            appId: appId,
-            appName: appName,
-            action: 'select_app_for_mapping'
-        });
-
-        ui.callbackSetList(list);
+        if (cmd && typeof cmd.execute === 'function') {
+            cmd.execute(defaultVal, ui.callbackSetList);
+        }
     }
-
 
     /**
      * Confirm adding a process name mapping
@@ -151,9 +142,22 @@ class AppActionHandler {
         const appName = itemData.appName || appId;
         const processName = itemData.processName;
 
-        if (processName) {
-            this.mappingStorage.addMapping(appId, processName);
+        const cmd = this._getAppCommand();
+        if (cmd && typeof cmd.clearEditingApp === 'function') {
+            cmd.clearEditingApp();
+        }
+
+        const uTools = typeof window !== 'undefined' && window.utools ? window.utools : (typeof utools !== 'undefined' ? utools : null);
+        if (uTools && typeof uTools.setSubInputValue === 'function') {
+            uTools.setSubInputValue('');
+        }
+
+        if (processName && processName.trim()) {
+            this.mappingStorage.addMapping(appId, processName.trim());
             await this.syncService.syncApp(appId, appName);
+            if (uTools && typeof uTools.showNotification === 'function') {
+                uTools.showNotification(`已成功绑定进程 [${processName.trim()}] 至 [${appName}]`);
+            }
         }
 
         // Re-render submenu
@@ -168,6 +172,16 @@ class AppActionHandler {
         const appName = itemData.appName || appId;
         const customMappings = this.mappingStorage.getCustomMappingsForApp(appId);
         const icon = itemData.icon || 'logo.png';
+
+        const cmd = this._getAppCommand();
+        if (cmd && typeof cmd.clearEditingApp === 'function') {
+            cmd.clearEditingApp();
+        }
+
+        const uTools = typeof window !== 'undefined' && window.utools ? window.utools : (typeof utools !== 'undefined' ? utools : null);
+        if (uTools && typeof uTools.setSubInputValue === 'function') {
+            uTools.setSubInputValue('');
+        }
 
         if (customMappings.length === 0) {
             ui.callbackSetList([
@@ -239,3 +253,4 @@ const defaultAppActionHandler = new AppActionHandler();
 
 module.exports = AppActionHandler;
 module.exports.defaultAppActionHandler = defaultAppActionHandler;
+

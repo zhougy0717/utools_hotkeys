@@ -36,6 +36,15 @@ describe('AppActionHandler - Application Process Mapping Actions (SPEC-00019)', 
             }
         };
 
+        let editingApp = null;
+        const mockAppCommand = {
+            setEditingApp: (app) => { editingApp = app; },
+            clearEditingApp: () => { editingApp = null; },
+            execute: (word, cb) => {
+                cb([{ title: `💾 确认保存: ${word}`, action: 'confirm_add_app_mapping' }]);
+            }
+        };
+
         uiCalls = [];
         mockUi = {
             callbackSetList: (list) => {
@@ -45,7 +54,8 @@ describe('AppActionHandler - Application Process Mapping Actions (SPEC-00019)', 
 
         handler = new AppActionHandler({
             mappingStorage: mockStorage,
-            syncService: mockSyncService
+            syncService: mockSyncService,
+            appCommand: mockAppCommand
         });
     });
 
@@ -122,4 +132,16 @@ describe('AppActionHandler - Application Process Mapping Actions (SPEC-00019)', 
         assert.deepStrictEqual(mockStorage.getCustomMappingsForApp('one-commander'), []);
         assert.strictEqual(syncedApps.length, 1);
     });
+
+    it('TC-006: should set editing mode on prompt_add_app_mapping', async () => {
+        await handler.handle({
+            action: 'prompt_add_app_mapping',
+            appId: 'one-commander',
+            appName: 'One Commander'
+        }, mockUi);
+
+        assert.strictEqual(uiCalls.length, 1);
+        assert.ok(uiCalls[0].some(item => item.action === 'confirm_add_app_mapping'));
+    });
 });
+

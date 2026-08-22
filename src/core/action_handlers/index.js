@@ -7,6 +7,7 @@ const pathActionHandler = require('./path_action_handler.js');
 const importFileHandler = require('./import_file_handler.js');
 const openUrlHandler = require('./open_url_handler.js');
 const iconActionHandler = require('./icon_action_handler.js');
+const appActionHandler = require('./app_action_handler.js').defaultAppActionHandler;
 
 /**
  * Initialize all core action handlers
@@ -26,6 +27,14 @@ function initActionHandlers() {
   actionRegistry.register('pick_app_icon_file', iconActionHandler);
   actionRegistry.register('generate_app_avatar', iconActionHandler);
   actionRegistry.register('return_to_icon_list', iconActionHandler);
+
+  // App Process Mapping customization actions (SPEC-00019)
+  actionRegistry.register('select_app_for_mapping', appActionHandler);
+  actionRegistry.register('prompt_add_app_mapping', appActionHandler);
+  actionRegistry.register('confirm_add_app_mapping', appActionHandler);
+  actionRegistry.register('list_custom_app_mappings', appActionHandler);
+  actionRegistry.register('delete_single_app_mapping', appActionHandler);
+  actionRegistry.register('reset_app_mappings', appActionHandler);
   
   console.log('[ActionRegistry] Handlers initialized');
 }
@@ -34,4 +43,5 @@ function initActionHandlers() {
 initActionHandlers();
 
 module.exports = { initActionHandlers };
+
 

@@ -36,14 +36,44 @@ describe('AppActionHandler - Application Process Mapping Actions (SPEC-00019)', 
             }
         };
 
-        let editingApp = null;
+        let currentCommandState = 'LIST';
         const mockAppCommand = {
-            setEditingApp: (app) => { editingApp = app; },
-            clearEditingApp: () => { editingApp = null; },
+            state: 'LIST',
+            setAppMenuState: (app) => { currentCommandState = 'APP_MENU'; },
+            setEditProcessState: (app) => { currentCommandState = 'EDIT_PROCESS'; },
+            setListCustomState: (app) => { currentCommandState = 'LIST_CUSTOM'; },
+            reset: () => { currentCommandState = 'LIST'; },
             execute: (word, cb) => {
-                cb([{ title: `💾 确认保存: ${word}`, action: 'confirm_add_app_mapping' }]);
+                if (currentCommandState === 'EDIT_PROCESS') {
+                    cb([
+                        { title: `💾 确认保存: ${word}`, action: 'confirm_add_app_mapping', processName: word },
+                        { title: `➕ 【预设项】OneCommander.exe (无空格版)`, action: 'confirm_add_app_mapping' },
+                        { title: `➕ 【预设项】One Commander.app (Mac 兼容版)`, action: 'confirm_add_app_mapping' },
+                        { title: `↩️ 返回 [One Commander] 配置菜单`, action: 'select_app_for_mapping' }
+                    ]);
+                } else if (currentCommandState === 'APP_MENU') {
+                    cb([
+                        { title: `➕ 添加/追加自定义进程名`, action: 'prompt_add_app_mapping' },
+                        { title: `📋 管理/删除自定义进程名`, action: 'list_custom_app_mappings' },
+                        { title: `🔄 重置为默认推导规则`, action: 'reset_app_mappings' },
+                        { title: `↩️ 返回应用列表`, action: 'return_to_app_list' }
+                    ]);
+                } else if (currentCommandState === 'LIST_CUSTOM') {
+                    const mappings = mockStorage.getCustomMappingsForApp('one-commander');
+                    const items = mappings.map(p => ({
+                        title: `❌ 删除: ${p}`,
+                        action: 'delete_single_app_mapping',
+                        processName: p
+                    }));
+                    items.push({ title: `↩️ 返回 [One Commander] 配置菜单`, action: 'select_app_for_mapping' });
+                    cb(items);
+                } else {
+
+                    cb([{ title: 'One Commander', action: 'select_app_for_mapping' }]);
+                }
             }
         };
+
 
         uiCalls = [];
         mockUi = {

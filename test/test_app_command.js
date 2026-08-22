@@ -99,6 +99,67 @@ describe('AppCommand - Application Process Mapping Slash Command (SPEC-00019)', 
         assert.strictEqual(directBindItem.appId, 'google-chrome');
         assert.strictEqual(directBindItem.processName, 'chrome_custom.exe');
     });
+
+    it('TC-006: should render editable process state in EDIT_PROCESS state with default and presets', async () => {
+        command.setEditProcessState({
+            appId: 'one-commander',
+            appName: 'One Commander',
+            icon: 'logo.png'
+        });
+
+        let renderedList = null;
+        await command.execute('One Commander.exe', (list) => {
+            renderedList = list;
+        });
+
+        assert.ok(Array.isArray(renderedList));
+        assert.strictEqual(renderedList.length, 4);
+        assert.strictEqual(renderedList[0].title, '💾 确认保存: One Commander.exe');
+        assert.strictEqual(renderedList[0].processName, 'One Commander.exe');
+        assert.strictEqual(renderedList[1].title, '➕ 【预设项】OneCommander.exe (无空格版)');
+        assert.strictEqual(renderedList[2].title, '➕ 【预设项】One Commander.app (Mac 兼容版)');
+        assert.strictEqual(renderedList[3].title, '↩️ 返回 [One Commander] 配置菜单');
+    });
+
+    it('TC-007: should render app submenu in APP_MENU state', async () => {
+        command.setAppMenuState({
+            appId: 'one-commander',
+            appName: 'One Commander',
+            icon: 'logo.png'
+        });
+
+        let renderedList = null;
+        await command.execute('', (list) => {
+            renderedList = list;
+        });
+
+        assert.ok(Array.isArray(renderedList));
+        assert.strictEqual(renderedList.length, 4);
+        assert.strictEqual(renderedList[0].action, 'prompt_add_app_mapping');
+        assert.strictEqual(renderedList[1].action, 'list_custom_app_mappings');
+        assert.strictEqual(renderedList[2].action, 'reset_app_mappings');
+        assert.strictEqual(renderedList[3].action, 'return_to_app_list');
+    });
+
+    it('TC-008: should render custom process list in LIST_CUSTOM state', async () => {
+        command.setListCustomState({
+            appId: 'one-commander',
+            appName: 'One Commander',
+            icon: 'logo.png'
+        });
+
+        let renderedList = null;
+        await command.execute('', (list) => {
+            renderedList = list;
+        });
+
+        assert.ok(Array.isArray(renderedList));
+        assert.strictEqual(renderedList.length, 2); // 1 delete item + 1 back item
+        assert.strictEqual(renderedList[0].action, 'delete_single_app_mapping');
+        assert.strictEqual(renderedList[0].processName, 'OneCommanderCustom.exe');
+        assert.strictEqual(renderedList[1].action, 'select_app_for_mapping');
+    });
 });
+
 
 

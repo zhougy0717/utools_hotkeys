@@ -27,11 +27,6 @@ class AppActionHandler {
         const action = itemData.action;
         if (!action) return;
 
-        // Clear active command in preload if context allows, so search events don't wipe submenus
-        if (context && typeof context.clearActiveCommand === 'function') {
-            context.clearActiveCommand();
-        }
-
         switch (action) {
             case 'select_app_for_mapping':
                 return this.handleSelectApp(itemData, ui);
@@ -58,88 +53,49 @@ class AppActionHandler {
     handleSelectApp(itemData, ui) {
         const appId = itemData.appId;
         const appName = itemData.appName || appId;
-        const customMappings = this.mappingStorage.getCustomMappingsForApp(appId);
         const icon = itemData.icon || 'logo.png';
 
-        const customDesc = customMappings.length > 0
-            ? `已手动添加 ${customMappings.length} 个: ${customMappings.join(', ')}`
-            : '当前无手动添加的进程名（使用默认推导规则）';
+        const cmd = this._getAppCommand();
+        if (cmd) {
+            cmd.setAppMenuState({ appId, appName, icon, filePath: itemData.filePath });
+        }
 
-        const menuItems = [
-            {
-                title: `➕ 添加/追加自定义进程名`,
-                description: `为 [${appName}] 添加操作系统进程名 (如 ${appName}.exe, ${appName}.app 等)`,
-                icon: icon,
-                appId: appId,
-                appName: appName,
-                action: 'prompt_add_app_mapping'
-            },
-            {
-                title: `📋 管理/删除自定义进程名 (${customMappings.length})`,
-                description: customDesc,
-                icon: icon,
-                appId: appId,
-                appName: appName,
-                action: 'list_custom_app_mappings'
-            },
-            {
-                title: `🔄 重置为默认推导规则`,
-                description: `清除 [${appName}] 的所有手动配置项，恢复默认自动推导`,
-                icon: icon,
-                appId: appId,
-                appName: appName,
-                action: 'reset_app_mappings'
-            },
-            {
-                title: `↩️ 返回应用列表`,
-                description: '返回 /app 快捷键应用管理主列表',
-                icon: 'logo.png',
-                action: 'return_to_app_list'
-            }
-        ];
+        const uTools = typeof window !== 'undefined' && window.utools ? window.utools : (typeof utools !== 'undefined' ? utools : null);
+        if (uTools && typeof uTools.setSubInputValue === 'function') {
+            uTools.setSubInputValue('');
+        }
 
-        ui.callbackSetList(menuItems);
+        if (cmd) {
+            cmd.execute('', ui ? ui.callbackSetList : null);
+        }
     }
 
     /**
-     * Prompt user to add process name with preset suggestions
+     * Prompt user to add process name with editable text input prefilled
      */
     handlePromptAdd(itemData, ui) {
         const appId = itemData.appId;
         const appName = itemData.appName || appId;
         const icon = itemData.icon || 'logo.png';
 
-        const cleanNoSpace = appName.replace(/\s+/g, '');
-        const suggestions = [
-            `${appName}.app`,
-            `${cleanNoSpace}.app`,
-            `${appName}.exe`,
-            `${cleanNoSpace}.exe`,
-            `${appId}.exe`,
-            `${appId}.app`
-        ];
-        const uniqueSuggestions = Array.from(new Set(suggestions));
+        const uTools = typeof window !== 'undefined' && window.utools ? window.utools : (typeof utools !== 'undefined' ? utools : null);
+        const isMac = uTools && typeof uTools.isMacOs === 'function' ? uTools.isMacOs() : process.platform === 'darwin';
 
-        const list = uniqueSuggestions.map(sug => ({
-            title: `➕ 绑定: ${sug}`,
-            description: `点击立即将 [${sug}] 绑定至 [${appName}]`,
-            icon: icon,
-            appId: appId,
-            appName: appName,
-            processName: sug,
-            action: 'confirm_add_app_mapping'
-        }));
+        const defaultVal = isMac ? `${appName}.app` : `${appName}.exe`;
 
-        list.push({
-            title: `↩️ 返回 [${appName}] 配置菜单`,
-            description: '取消添加并返回',
-            icon: icon,
-            appId: appId,
-            appName: appName,
-            action: 'select_app_for_mapping'
-        });
+        const cmd = this._getAppCommand();
+        if (cmd) {
+            cmd.setEditProcessState({ appId, appName, icon, filePath: itemData.filePath });
+        }
 
-        ui.callbackSetList(list);
+        // Prefill uTools search/sub-input box for the user to edit directly
+        if (uTools && typeof uTools.setSubInputValue === 'function') {
+            uTools.setSubInputValue(defaultVal);
+        }
+
+        if (cmd) {
+            cmd.execute(defaultVal, ui ? ui.callbackSetList : null);
+        }
     }
 
     /**
@@ -150,16 +106,17 @@ class AppActionHandler {
         const appName = itemData.appName || appId;
         const processName = itemData.processName;
 
+        const uTools = typeof window !== 'undefined' && window.utools ? window.utools : (typeof utools !== 'undefined' ? utools : null);
+
         if (processName && processName.trim()) {
             this.mappingStorage.addMapping(appId, processName.trim());
             await this.syncService.syncApp(appId, appName);
-            const uTools = typeof window !== 'undefined' && window.utools ? window.utools : (typeof utools !== 'undefined' ? utools : null);
             if (uTools && typeof uTools.showNotification === 'function') {
                 uTools.showNotification(`已成功绑定进程 [${processName.trim()}] 至 [${appName}]`);
             }
         }
 
-        // Re-render submenu
+        // Return to app menu state
         this.handleSelectApp(itemData, ui);
     }
 
@@ -169,43 +126,21 @@ class AppActionHandler {
     handleListCustom(itemData, ui) {
         const appId = itemData.appId;
         const appName = itemData.appName || appId;
-        const customMappings = this.mappingStorage.getCustomMappingsForApp(appId);
         const icon = itemData.icon || 'logo.png';
 
-        if (customMappings.length === 0) {
-            ui.callbackSetList([
-                {
-                    title: `[${appName}] 暂无手动添加的自定义进程名`,
-                    description: '点击返回配置菜单添加新进程名',
-                    icon: icon,
-                    appId: appId,
-                    appName: appName,
-                    action: 'select_app_for_mapping'
-                }
-            ]);
-            return;
+        const cmd = this._getAppCommand();
+        if (cmd) {
+            cmd.setListCustomState({ appId, appName, icon, filePath: itemData.filePath });
         }
 
-        const items = customMappings.map(p => ({
-            title: `❌ 删除: ${p}`,
-            description: `点击移除该自定义进程匹配规则`,
-            icon: icon,
-            appId: appId,
-            appName: appName,
-            processName: p,
-            action: 'delete_single_app_mapping'
-        }));
+        const uTools = typeof window !== 'undefined' && window.utools ? window.utools : (typeof utools !== 'undefined' ? utools : null);
+        if (uTools && typeof uTools.setSubInputValue === 'function') {
+            uTools.setSubInputValue('');
+        }
 
-        items.push({
-            title: `↩️ 返回 [${appName}] 配置菜单`,
-            description: '返回上级操作',
-            icon: icon,
-            appId: appId,
-            appName: appName,
-            action: 'select_app_for_mapping'
-        });
-
-        ui.callbackSetList(items);
+        if (cmd) {
+            cmd.execute('', ui ? ui.callbackSetList : null);
+        }
     }
 
     /**
@@ -247,7 +182,16 @@ class AppActionHandler {
      */
     handleReturnToList(ui) {
         const cmd = this._getAppCommand();
-        if (cmd && typeof cmd.execute === 'function') {
+        if (cmd) {
+            cmd.reset();
+        }
+
+        const uTools = typeof window !== 'undefined' && window.utools ? window.utools : (typeof utools !== 'undefined' ? utools : null);
+        if (uTools && typeof uTools.setSubInputValue === 'function') {
+            uTools.setSubInputValue('');
+        }
+
+        if (cmd) {
             cmd.execute('', ui ? ui.callbackSetList : null);
         }
     }

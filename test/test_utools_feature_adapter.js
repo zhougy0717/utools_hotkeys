@@ -8,10 +8,17 @@ describe('UToolsFeatureAdapter - Environment & Persistence Adapter (SPEC-00018)'
     let adapter;
     let tempDir;
 
+    let originalUtools;
+
     beforeEach(() => {
+        originalUtools = global.utools;
         tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'adapter-test-'));
+        const originalPluginJson = path.resolve(__dirname, '../plugin.json');
+        if (fs.existsSync(originalPluginJson)) {
+            fs.copyFileSync(originalPluginJson, path.join(tempDir, 'plugin.json'));
+        }
         adapter = new UToolsFeatureAdapter({
-            rootDir: path.resolve(__dirname, '..'),
+            rootDir: tempDir,
             dataDir: tempDir
         });
     });
@@ -21,7 +28,9 @@ describe('UToolsFeatureAdapter - Environment & Persistence Adapter (SPEC-00018)'
             fs.rmSync(tempDir, { recursive: true, force: true });
         } catch (e) {}
         delete global.window;
-        delete global.utools;
+        if (originalUtools) {
+            global.utools = originalUtools;
+        }
     });
 
     it('TC-001: should load base plugin.json and extract app_shortcuts feature', () => {

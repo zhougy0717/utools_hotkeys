@@ -23,6 +23,8 @@ try {
   console.warn('[Preload] Initial feature syncAll failed:', e);
 }
 
+const { defaultAppCommand } = require('../core/slash_commands/app.js');
+
 const getUTools = () => typeof utools !== 'undefined' ? utools : (typeof window !== 'undefined' ? window.utools : null);
 
 const uToolsInstance = getUTools();
@@ -30,14 +32,21 @@ if (uToolsInstance) {
   if (typeof uToolsInstance.onPluginEnter === 'function') {
     uToolsInstance.onPluginEnter(() => {
       g_activeCommand = null;
+      if (defaultAppCommand && typeof defaultAppCommand.reset === 'function') {
+        defaultAppCommand.reset();
+      }
     });
   }
   if (typeof uToolsInstance.onPluginOut === 'function') {
     uToolsInstance.onPluginOut(() => {
       g_activeCommand = null;
+      if (defaultAppCommand && typeof defaultAppCommand.reset === 'function') {
+        defaultAppCommand.reset();
+      }
     });
   }
 }
+
 
 let lastCallbackSetList = null
 window.exports = {

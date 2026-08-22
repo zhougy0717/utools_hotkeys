@@ -14,15 +14,6 @@ class AppCommand {
     this.getAppList = options.getAppList || getLoadedAppList;
     this.mappingStorage = options.mappingStorage || AppMappingStorage.defaultMappingStorage;
     this.inferer = options.inferer || new AppPatternInferer();
-    this.editingApp = null;
-  }
-
-  setEditingApp(app) {
-    this.editingApp = app;
-  }
-
-  clearEditingApp() {
-    this.editingApp = null;
   }
 
   description() {
@@ -55,27 +46,46 @@ class AppCommand {
   async execute(searchWord, callbackSetList) {
     if (typeof callbackSetList !== 'function') return;
 
-    // 1. If currently in editing mode for a specific app
-    if (this.editingApp) {
-      this._renderEditingState(searchWord, callbackSetList);
-      return;
-    }
-
-    // 2. Normal application list & search mode
-    const query = this._extractQuery(searchWord);
-    const queryLower = query.toLowerCase();
+    const rawQuery = this._extractQuery(searchWord);
+    const queryLower = rawQuery.toLowerCase().trim();
     const apps = this.getAppList();
 
-    const filtered = queryLower
+    const displayList = [];
+
+    // Support quick direct command syntax: /app <appId|appName> <customProcessName>
+    const parts = rawQuery.split(/\s+/);
+    if (parts.length >= 2) {
+      const targetQuery = parts[0].toLowerCase();
+      const customProcess = parts.slice(1).join(' ').trim();
+      const matchedApp = apps.find(a => 
+        a.appId.toLowerCase() === targetQuery || 
+        a.appName.toLowerCase() === targetQuery ||
+        a.appName.toLowerCase().includes(targetQuery)
+      );
+
+      if (matchedApp && customProcess) {
+        displayList.push({
+          title: `💾 快捷绑定: "${customProcess}" 至 [${matchedApp.appName}]`,
+          description: `点击或回车立即将进程名 "${customProcess}" 绑定至 [${matchedApp.appName}]`,
+          icon: matchedApp.icon || generateAvatarSvg(matchedApp.appName, { asDataUrl: true }),
+          appId: matchedApp.appId,
+          appName: matchedApp.appName,
+          processName: customProcess,
+          action: 'confirm_add_app_mapping'
+        });
+      }
+    }
+
+    const filtered = queryLower && parts.length === 1
       ? apps.filter(app =>
           app.appName.toLowerCase().includes(queryLower) ||
           app.appId.toLowerCase().includes(queryLower)
         )
       : apps;
 
-    if (filtered.length === 0) {
+    if (displayList.length === 0 && filtered.length === 0) {
       callbackSetList([{
-        title: query ? `未找到匹配 [${query}] 的应用` : '暂无已加载的应用',
+        title: rawQuery ? `未找到匹配 [${rawQuery}] 的应用` : '暂无已加载的应用',
         description: '请先使用 /import 导入或 /download 下载快捷键数据',
         icon: 'logo.png',
         action: 'noop'
@@ -83,7 +93,7 @@ class AppCommand {
       return;
     }
 
-    const displayList = filtered.map(app => {
+    const appItems = filtered.map(app => {
       const displayIcon = app.icon || generateAvatarSvg(app.appName, { asDataUrl: true });
       const customMappings = this.mappingStorage.getCustomMappingsForApp(app.appId);
       const inferredPatterns = this.inferer.inferPatterns(app.appId, app.appName);
@@ -106,74 +116,8 @@ class AppCommand {
       };
     });
 
+    displayList.push(...appItems);
     callbackSetList(displayList);
-  }
-
-  /**
-   * Render real-time editable state when user is modifying a process name
-   */
-  _renderEditingState(searchWord, callbackSetList) {
-    const { appId, appName, icon } = this.editingApp;
-    const cleanInput = this._extractQuery(searchWord).trim();
-    const cleanNoSpace = appName.replace(/\s+/g, '');
-
-    const suggestions = [
-      `${appName}.exe`,
-      `${cleanNoSpace}.exe`,
-      `${appName}.app`,
-      `${cleanNoSpace}.app`,
-      `${appId}.exe`
-    ];
-    const otherSuggestions = Array.from(new Set(suggestions)).filter(s => s !== cleanInput);
-
-    const list = [];
-
-    // Primary action: save currently typed value
-    if (cleanInput) {
-      list.push({
-        title: `💾 确认保存: ${cleanInput}`,
-        description: `点击或回车立即将 [${cleanInput}] 绑定至 [${appName}]`,
-        icon: icon || 'logo.png',
-        appId: appId,
-        appName: appName,
-        processName: cleanInput,
-        action: 'confirm_add_app_mapping'
-      });
-    } else {
-      list.push({
-        title: `💾 请在上方输入框输入进程名...`,
-        description: `您可直接在上方输入如 "${appName}.exe" 后回车保存`,
-        icon: icon || 'logo.png',
-        appId: appId,
-        appName: appName,
-        action: 'noop'
-      });
-    }
-
-    // Alternative suggestions
-    otherSuggestions.forEach(sug => {
-      list.push({
-        title: `➕ 或选择预设: ${sug}`,
-        description: `点击快速将预设 [${sug}] 绑定至 [${appName}]`,
-        icon: icon || 'logo.png',
-        appId: appId,
-        appName: appName,
-        processName: sug,
-        action: 'confirm_add_app_mapping'
-      });
-    });
-
-    // Return to menu
-    list.push({
-      title: `↩️ 返回 [${appName}] 配置菜单`,
-      description: '取消添加并返回',
-      icon: icon || 'logo.png',
-      appId: appId,
-      appName: appName,
-      action: 'select_app_for_mapping'
-    });
-
-    callbackSetList(list);
   }
 }
 
@@ -181,4 +125,3 @@ const defaultAppCommand = new AppCommand();
 
 module.exports = AppCommand;
 module.exports.defaultAppCommand = defaultAppCommand;
-

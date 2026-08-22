@@ -1,12 +1,18 @@
+const path = require('path');
 const { normalizeAppId } = require('../infrastructure/app_id_normalizer.js');
 const AppMappingStorage = require('../infrastructure/app_mapping_storage.js');
 
 const getAppName = (fullName) => {
-    if (!fullName) return '';
-    const parts = fullName.split('.');
-    const nameBeforeExtension = parts[0];
-    return nameBeforeExtension.toLowerCase();
+    if (!fullName || typeof fullName !== 'string') return '';
+    const normalized = fullName.trim().replace(/\\/g, '/');
+    let base = path.basename(normalized);
+    const lastDot = base.lastIndexOf('.');
+    if (lastDot > 0) {
+        base = base.substring(0, lastDot);
+    }
+    return base.toLowerCase().trim();
 };
+
 
 const enter = (action, shortcuts = []) => {
     const uTools = typeof window !== 'undefined' && window.utools ? window.utools : (typeof utools !== 'undefined' ? utools : null);
@@ -20,7 +26,14 @@ const enter = (action, shortcuts = []) => {
         x.hitTimeStamp = hitTimeStamps[x.title] ?? 0;
     });
 
-    const fullApp = action && action.payload && action.payload.app ? action.payload.app.trim() : '';
+    let fullApp = '';
+    if (action && action.payload) {
+        if (typeof action.payload === 'string') {
+            fullApp = action.payload.trim();
+        } else if (typeof action.payload === 'object') {
+            fullApp = (action.payload.app || action.payload.name || action.payload.appPath || '').trim();
+        }
+    }
     const rawAppName = getAppName(fullApp);
     const targetNormId = normalizeAppId(rawAppName);
 
@@ -45,8 +58,8 @@ const enter = (action, shortcuts = []) => {
             });
             if (matched) return true;
         }
-        // 规则 3: Keyword 包含模糊匹配 (兜底与兼容)
-        if (rawAppName && item.keyword && item.keyword.toLowerCase().indexOf(rawAppName) !== -1) {
+        // 规则 3: 仅对无 appId 的遗留快捷键数据开放 Keyword 模糊匹配兜底，杜绝跨应用串台
+        if (!item.appId && rawAppName && item.keyword && item.keyword.toLowerCase().indexOf(rawAppName) !== -1) {
             return true;
         }
         return false;

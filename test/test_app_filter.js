@@ -149,5 +149,56 @@ describe('AppFilter - Alias Normalization and Window Matching (SPEC-00017)', () 
         assert.strictEqual(result.length, 1);
         assert.strictEqual(result[0].appId, 'one-commander');
     });
+
+    it('TC-009: should match when app is a full path on macOS or Windows', () => {
+        const macAction = { payload: { app: '/Applications/Google Chrome.app' } };
+        const macResult = appFilter(macAction, mockShortcuts);
+        assert.strictEqual(macResult.length, 1);
+        assert.strictEqual(macResult[0].appId, 'google-chrome');
+
+        const winAction = { payload: { app: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' } };
+        const winResult = appFilter(winAction, mockShortcuts);
+        assert.strictEqual(winResult.length, 1);
+        assert.strictEqual(winResult[0].appId, 'google-chrome');
+    });
+
+    it('TC-010: should match Directory Opus when front window is dopus.exe', () => {
+        const dopusShortcuts = [
+            {
+                title: 'Dopus Rename F2',
+                appId: 'directory_opus',
+                appName: 'Directory Opus',
+                keyword: 'rename'
+            }
+        ];
+        const action = { payload: { app: 'dopus.exe' } };
+        const result = appFilter(action, dopusShortcuts);
+        assert.strictEqual(result.length, 1);
+        assert.strictEqual(result[0].appId, 'directory_opus');
+    });
+
+    it('TC-011: should never leak lazynvim shortcuts when in Chrome or Directory Opus', () => {
+        const mixedShortcuts = [
+            {
+                title: 'Chrome New Tab',
+                appId: 'google-chrome',
+                appName: 'Google Chrome',
+                keyword: 'chrome tab'
+            },
+            {
+                title: 'LazyNvim Change Inside',
+                appId: 'lazynvim',
+                appName: 'LazyNvim',
+                keyword: 'lazynvim nvim c d w chrome dopus'
+            }
+        ];
+
+        const action = { payload: { app: 'Google Chrome.app' } };
+        const result = appFilter(action, mixedShortcuts);
+        assert.strictEqual(result.length, 1);
+        assert.strictEqual(result[0].appId, 'google-chrome');
+        assert.strictEqual(result[0].title, 'Chrome New Tab');
+    });
 });
+
 

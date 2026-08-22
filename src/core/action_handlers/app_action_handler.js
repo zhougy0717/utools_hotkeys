@@ -79,14 +79,24 @@ class AppActionHandler {
     }
 
     /**
-     * Prompt user to add process name with helpful suggestions
+     * Prompt user to add process name with editable text input prefilled
      */
     handlePromptAdd(itemData, ui) {
         const appId = itemData.appId;
         const appName = itemData.appName || appId;
         const icon = itemData.icon || 'logo.png';
 
+        const uTools = typeof window !== 'undefined' && window.utools ? window.utools : (typeof utools !== 'undefined' ? utools : null);
+        const isMac = uTools && typeof uTools.isMacOs === 'function' ? uTools.isMacOs() : process.platform === 'darwin';
+
         const cleanNoSpace = appName.replace(/\s+/g, '');
+        const defaultVal = isMac ? `${appName}.app` : `${appName}.exe`;
+
+        // Prefill uTools search/sub-input box for the user to edit directly
+        if (uTools && typeof uTools.setSubInputValue === 'function') {
+            uTools.setSubInputValue(defaultVal);
+        }
+
         const suggestions = [
             `${appName}.exe`,
             `${cleanNoSpace}.exe`,
@@ -94,17 +104,31 @@ class AppActionHandler {
             `${cleanNoSpace}.app`,
             `${appId}.exe`
         ];
-        const uniqueSuggestions = Array.from(new Set(suggestions));
+        const otherSuggestions = Array.from(new Set(suggestions)).filter(s => s !== defaultVal);
 
-        const list = uniqueSuggestions.map(sug => ({
-            title: `➕ 绑定: ${sug}`,
-            description: `点击立即将 [${sug}] 绑定至 [${appName}]`,
-            icon: icon,
-            appId: appId,
-            appName: appName,
-            processName: sug,
-            action: 'confirm_add_app_mapping'
-        }));
+        const list = [
+            {
+                title: `💾 确认保存: ${defaultVal}`,
+                description: `上方文本框已预置默认值，您可在输入框中直接修改，回车或点击立即保存`,
+                icon: icon,
+                appId: appId,
+                appName: appName,
+                processName: defaultVal,
+                action: 'confirm_add_app_mapping'
+            }
+        ];
+
+        otherSuggestions.forEach(sug => {
+            list.push({
+                title: `➕ 或选择预设: ${sug}`,
+                description: `点击快速绑定 [${sug}] 至 [${appName}]`,
+                icon: icon,
+                appId: appId,
+                appName: appName,
+                processName: sug,
+                action: 'confirm_add_app_mapping'
+            });
+        });
 
         list.push({
             title: `↩️ 返回 [${appName}] 配置菜单`,
@@ -117,6 +141,7 @@ class AppActionHandler {
 
         ui.callbackSetList(list);
     }
+
 
     /**
      * Confirm adding a process name mapping

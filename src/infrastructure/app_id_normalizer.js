@@ -8,7 +8,9 @@
 const ALIAS_GROUPS = [
     ['vscode', 'visual-studio-code', 'visualstudiocode', 'codearts-ide', 'codeartside', 'codearts', 'vscode-huawei', 'code'],
     ['jet_brains', 'intellij-idea', 'jetbrains', 'idea'],
-    ['google-chrome', 'googlechrome', 'chrome'],
+    ['google-chrome', 'googlechrome', 'chrome', 'chrom'],
+    ['directory-opus', 'directoryopus', 'directory_opus', 'dopus', 'dopus64'],
+    ['neovim', 'nvim', 'lazynvim', 'lazy-nvim', 'vim'],
     ['microsoft-excel', 'microsoftexcel', 'excel', 'office_excel'],
     ['microsoft-word', 'microsoftword', 'word', 'office_word'],
     ['microsoft-powerpoint', 'microsoftpowerpoint', 'powerpoint', 'office_ppt'],
@@ -23,6 +25,7 @@ const ALIAS_GROUPS = [
     ['margin-note', 'marginnote', 'marginnote3', 'marginnote4'],
     ['pdf-expert', 'pdfexpert']
 ];
+
 
 // Build lookup: variant -> canonical (first element in group, normalized)
 const _aliasLookup = new Map();

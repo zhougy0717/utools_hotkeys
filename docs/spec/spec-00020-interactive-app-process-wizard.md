@@ -26,6 +26,49 @@
 └──────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+#### 问题复现活动图 (Activity Diagram)
+
+```plantuml
+@startuml
+skinparam activity {
+    BackgroundColor LightYellow
+    BorderColor DarkSlateGray
+    ArrowColor DarkSlateGray
+}
+
+title 实例状态分裂与事件风暴导致界面重置的问题活动图
+
+|用户与宿主|
+start
+:1. 用户输入 '/app' 并回车;
+
+|Preload (宿主入口)|
+:2. g_activeCommand = 实例A (来自 SlashCommandManager);
+:3. 实例A.state = 'LIST', 渲染应用列表;
+
+|用户与宿主|
+:4. 用户点击目标应用 (如 Google Chrome);
+
+|AppActionHandler|
+:5. 触发 select_app_for_mapping 动作;
+#Pink:6. 错误修改了 实例B.state = 'APP_MENU'
+(实例A 状态仍停留在 'LIST');
+:7. 调用 utools.setSubInputValue('');
+
+|用户与宿主|
+:8. 宿主收到输入框变更，异步派发 search('') 事件;
+
+|Preload (宿主入口)|
+:9. 收到 search('')，调用 g_activeCommand.execute('');
+#Red:10. 执行的是 实例A.execute('') (依然为 'LIST' 态);
+
+|用户与宿主|
+#LightCoral:11. 界面被冲刷覆盖，闪退回 4 个应用列表 (错误现象);
+stop
+@enduml
+```
+
+
 ### 1.2 核心目标
 1. **全局唯一状态机单例 (Unified Command Singleton)**：
    - 统一 `AppCommand.defaultAppCommand` 为工程中唯一的应用匹配命令单例，彻底消除多实例状态割裂。

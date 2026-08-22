@@ -13,6 +13,12 @@ describe('normalizeAppId', () => {
         assert.strictEqual(normalizeAppId('vscode'), normalizeAppId('visual-studio-code'));
         // jet_brains ↔ intellij-idea
         assert.strictEqual(normalizeAppId('jet_brains'), normalizeAppId('intellij-idea'));
+        // SPEC-00017 新增别名
+        assert.strictEqual(normalizeAppId('CodeArts-IDE'), normalizeAppId('vscode'));
+        assert.strictEqual(normalizeAppId('codearts'), normalizeAppId('vscode'));
+        assert.strictEqual(normalizeAppId('codeartside'), normalizeAppId('vscode'));
+        assert.strictEqual(normalizeAppId('vscode-huawei'), normalizeAppId('vscode'));
+        assert.strictEqual(normalizeAppId('MarginNote 4'), normalizeAppId('margin-note'));
     });
 
     it('should return identical keys for equivalent app IDs', () => {

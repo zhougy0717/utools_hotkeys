@@ -6,18 +6,22 @@
  * Add new aliases here when new cross-source conflicts are discovered.
  */
 const ALIAS_GROUPS = [
-    ['vscode', 'visual-studio-code', 'visualstudiocode'],
-    ['jet_brains', 'intellij-idea', 'jetbrains'],
+    ['vscode', 'visual-studio-code', 'visualstudiocode', 'codearts-ide', 'codeartside', 'codearts', 'vscode-huawei', 'code'],
+    ['jet_brains', 'intellij-idea', 'jetbrains', 'idea'],
     ['google-chrome', 'googlechrome', 'chrome'],
     ['microsoft-excel', 'microsoftexcel', 'excel', 'office_excel'],
     ['microsoft-word', 'microsoftword', 'word', 'office_word'],
     ['microsoft-powerpoint', 'microsoftpowerpoint', 'powerpoint', 'office_ppt'],
+    ['microsoft-onenote', 'microsoftonenote', 'onenote', 'office_onenote'],
     ['sublime-text', 'sublimetext'],
     ['navicat-premium', 'navicatpremium'],
     ['phpstorm', 'php-storm'],
     ['pycharm', 'py-charm'],
     ['webstorm', 'web-storm'],
     ['microsoft-visual-studio', 'microsoftvisualstudio', 'visualstudio'],
+    ['foxit-reader', 'foxitpdfreader', 'foxit-pdf-reader'],
+    ['margin-note', 'marginnote', 'marginnote3', 'marginnote4'],
+    ['pdf-expert', 'pdfexpert']
 ];
 
 // Build lookup: variant -> canonical (first element in group, normalized)

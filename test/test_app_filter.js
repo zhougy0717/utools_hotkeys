@@ -118,4 +118,36 @@ describe('AppFilter - Alias Normalization and Window Matching (SPEC-00017)', () 
         assert.strictEqual(result[0].title, 'VSCode New Window');
         assert.strictEqual(result[1].title, 'VSCode Command Palette Ctrl+Shift+P');
     });
+
+    it('TC-008: should match shortcuts using custom process name from AppMappingStorage (SPEC-00019)', () => {
+        global.window.utools.dbStorage.getItem = (key) => {
+            if (key === 'custom_app_process_mappings') {
+                return {
+                    'one-commander': ['OneCommander.exe', 'OneCommanderCustom.exe']
+                };
+            }
+            return {};
+        };
+
+        const testShortcuts = [
+            {
+                title: 'One Commander New Tab',
+                appId: 'one-commander',
+                appName: 'One Commander',
+                keyword: 'one commander'
+            },
+            {
+                title: 'Chrome New Tab',
+                appId: 'google-chrome',
+                appName: 'Google Chrome',
+                keyword: 'chrome'
+            }
+        ];
+
+        const action = { payload: { app: 'OneCommanderCustom.exe' } };
+        const result = appFilter(action, testShortcuts);
+        assert.strictEqual(result.length, 1);
+        assert.strictEqual(result[0].appId, 'one-commander');
+    });
 });
+

@@ -35,8 +35,10 @@ function initActionHandlers() {
   actionRegistry.register('list_custom_app_mappings', appActionHandler);
   actionRegistry.register('delete_single_app_mapping', appActionHandler);
   actionRegistry.register('reset_app_mappings', appActionHandler);
+  actionRegistry.register('return_to_app_list', appActionHandler);
   
   console.log('[ActionRegistry] Handlers initialized');
+
 }
 
 // Auto-init

@@ -173,5 +173,15 @@ describe('AppActionHandler - Application Process Mapping Actions (SPEC-00019)', 
         assert.strictEqual(uiCalls.length, 1);
         assert.ok(uiCalls[0].some(item => item.action === 'confirm_add_app_mapping'));
     });
+
+    it('TC-007: should reset to app list on return_to_app_list', async () => {
+        await handler.handle({
+            action: 'return_to_app_list'
+        }, mockUi);
+
+        assert.strictEqual(uiCalls.length, 1);
+        assert.ok(uiCalls[0].some(item => item.action === 'select_app_for_mapping'));
+    });
 });
+
 

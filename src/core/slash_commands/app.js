@@ -307,7 +307,5 @@ class AppCommand {
   }
 }
 
-const defaultAppCommand = new AppCommand();
-
 module.exports = AppCommand;
-module.exports.defaultAppCommand = defaultAppCommand;
+

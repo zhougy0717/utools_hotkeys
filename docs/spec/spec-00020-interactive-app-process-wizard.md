@@ -12,7 +12,8 @@
 ├──────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ 1. 实例状态分裂 (Instance Split):                                                                │
 │    - slash_commands/index.js 注册了 new AppCommand() (实例 A)                                    │
-│    - app_action_handler.js 内部引用了 defaultAppCommand (实例 B)                                 │
+│    - app_action_handler.js 内部错误通过 require('./app.js') 引用了独立导出的 defaultAppCommand    │
+│      (实例 B)，未复用运行时上下文传递的当前活跃实例                                              │
 │    - 用户点击 /app 时，preload.js 的 g_activeCommand 指向 实例 A                                   │
 │    - 用户点击应用时，AppActionHandler 将状态修改到了 实例 B，实例 A 状态仍然是 LIST                │
 ├──────────────────────────────────────────────────────────────────────────────────────────────────┤
@@ -72,7 +73,6 @@ stop
 
 ```plantuml
 @startuml
-
 skinparam state {
     BackgroundColor LightYellow
     BorderColor DarkSlateGray
@@ -95,11 +95,10 @@ LIST --> [*] : 用户退出插件或切换命令
 @enduml
 ```
 
-
-
 ### 1.2 核心目标
-1. **全局唯一状态机单例 (Unified Command Singleton)**：
-   - 统一 `AppCommand.defaultAppCommand` 为工程中唯一的应用匹配命令单例，彻底消除多实例状态割裂。
+1. **统一 `new AppCommand()` 与运行时上下文传递 (Runtime Context Propagation)**：
+   - 保持所有斜线命令的标准一致性，统一在 `slash_commands/index.js` 中使用 `slashCommandManager.register(new AppCommand())`；
+   - `AppActionHandler` 统一从 `preload.js` 传递的 `context.activeCommand` 中获取当前正在运行的命令实例，彻底消除跨模块引用独立单例的状态割裂。
 2. **确定性 4 状态机架构 (Deterministic State Machine)**：
    - `LIST`（应用列表检索态）
    - `APP_MENU`（应用专属 4 项管理子菜单态）
@@ -229,11 +228,12 @@ package "Preload Adapter Layer" #F8F9FA {
 }
 
 package "Core Slash Commands & State Machine" #E8F5E9 {
-    [AppCommand.defaultAppCommand] as AppCmd <<Singleton State Machine>>
+    [AppCommand] as AppCmd <<Command & State Machine>>
+    [SlashCommandManager] as SCM
 }
 
 package "Core Action Handlers" #E3F2FD {
-    [AppActionHandler.defaultAppActionHandler] as AppHandler <<Action Dispatcher>>
+    [AppActionHandler] as AppHandler <<Action Dispatcher>>
 }
 
 package "Infrastructure Layer" #FFF3E0 {
@@ -241,12 +241,14 @@ package "Infrastructure Layer" #FFF3E0 {
     [AppFeatureSyncService] as SyncService
 }
 
-Preload --> AppCmd : 1. search(word) 派发至状态机
-Preload --> ActionRegistry : 2. select(item) 动作分发
-ActionRegistry --> AppHandler : 3. handle(action, itemData)
-AppHandler --> AppCmd : 4. setState() 驱动状态跃迁并重绘
-AppHandler --> Storage : 5. 持久化存储 (CRUD)
-AppHandler --> SyncService : 6. syncApp() 动态注入 match.app
+SCM --> AppCmd : 1. register(new AppCommand())
+Preload --> SCM : 2. 获取命令并挂载 g_activeCommand
+Preload --> AppCmd : 3. search(word) 派发至状态机
+Preload --> ActionRegistry : 4. select(item) 附带 { activeCommand: g_activeCommand }
+ActionRegistry --> AppHandler : 5. handle(action, itemData, ui, context)
+AppHandler --> AppCmd : 6. context.activeCommand.setState() 驱动状态跃迁
+AppHandler --> Storage : 7. 持久化存储 (CRUD)
+AppHandler --> SyncService : 8. syncApp() 动态注入 match.app
 @enduml
 ```
 
@@ -266,50 +268,76 @@ participant "AppFeatureSyncService" as SyncService
 == 1. 进入编辑态 ==
 User -> UTools: 点击添加自定义进程名
 UTools -> Preload: select(prompt_add_app_mapping)
-Preload -> Handler: handlePromptAdd(itemData)
-Handler -> StateMachine: setEditProcessState(app)
+Preload -> Handler: handlePromptAdd(itemData, ui, context)
+Handler -> StateMachine: context.activeCommand.setEditProcessState(app)
 Handler -> UTools: setSubInputValue('One Commander.exe')
 UTools -> Preload: search('One Commander.exe')
-Preload -> StateMachine: execute('One Commander.exe')
+Preload -> StateMachine: g_activeCommand.execute('One Commander.exe')
 StateMachine --> UTools: callbackSetList(可编辑保存项 + 预设项 + 返回项)
 
 == 2. 用户在输入框修改文本 ==
 User -> UTools: 键盘输入修改为 OneCommander_x64.exe
 UTools -> Preload: search('OneCommander_x64.exe')
-Preload -> StateMachine: execute('OneCommander_x64.exe')
+Preload -> StateMachine: g_activeCommand.execute('OneCommander_x64.exe')
 StateMachine --> UTools: callbackSetList(确认保存: OneCommander_x64.exe ...)
 
 == 3. 回车或点击保存 ==
 User -> UTools: 回车或点击首项
 UTools -> Preload: select(confirm_add_app_mapping)
-Preload -> Handler: handleConfirmAdd(itemData)
+Preload -> Handler: handleConfirmAdd(itemData, ui, context)
 Handler -> Storage: addMapping(appId, 'OneCommander_x64.exe')
 Handler -> SyncService: syncApp(appId, appName)
 SyncService -> UTools: setFeature(updatedFeature)
-Handler -> StateMachine: setAppMenuState(app)
+Handler -> StateMachine: context.activeCommand.setAppMenuState(app)
 Handler -> UTools: setSubInputValue('')
-Handler -> StateMachine: execute('')
+Handler -> StateMachine: context.activeCommand.execute('')
 StateMachine --> UTools: callbackSetList(4项管理子菜单)
 @enduml
-
-
 ```
 
 ---
 
 ## 4. 核心代码规范与实现细节
 
-### 4.1 单例保证 (`src/core/slash_commands/index.js`)
-必须直接注册 `defaultAppCommand`，严禁 `new AppCommand()` 产生分裂实例：
+### 4.1 标准命令注册 (`src/core/slash_commands/index.js`)
+所有斜线命令保持标准的 `new Command()` 注册风格，无任何单例特例：
 ```javascript
-const { defaultAppCommand } = require('./app.js');
+const DownloadCommand = require('./download.js');
+const PathCommand = require('./path.js');
+const ExportCommand = require('./export.js');
+const ImportCommand = require('./import.js');
+const IconCommand = require('./icon.js');
+const AppCommand = require('./app.js');
 
 function initCommands() {
-  slashCommandManager.register(defaultAppCommand);
+  slashCommandManager.register(new DownloadCommand());
+  slashCommandManager.register(new PathCommand());
+  slashCommandManager.register(new ExportCommand());
+  slashCommandManager.register(new ImportCommand());
+  slashCommandManager.register(new IconCommand());
+  slashCommandManager.register(new AppCommand());
 }
 ```
 
-### 4.2 状态机控制 (`src/core/slash_commands/app.js`)
+### 4.2 上下文注入与安全获取 (`src/core/action_handlers/app_action_handler.js`)
+Handler 不直接跨模块 `require` 外部单例，而是优先从 `context.activeCommand` 获取正在运行的命令实例（构造函数参数作为测试 fallback）：
+```javascript
+class AppActionHandler {
+  constructor(options = {}) {
+    this.mappingStorage = options.mappingStorage || AppMappingStorage.defaultMappingStorage;
+    this.syncService = options.syncService || AppFeatureSyncService.defaultSyncService;
+    this.appCommand = options.appCommand || null;
+  }
+
+  _getAppCommand(context = {}) {
+    if (context && context.activeCommand) return context.activeCommand;
+    if (this.appCommand) return this.appCommand;
+    return null;
+  }
+}
+```
+
+### 4.3 状态机控制 (`src/core/slash_commands/app.js`)
 ```javascript
 class AppCommand {
   constructor(options = {}) {
@@ -339,6 +367,8 @@ class AppCommand {
     this.currentApp = app;
   }
 }
+
+module.exports = AppCommand;
 ```
 
 ---

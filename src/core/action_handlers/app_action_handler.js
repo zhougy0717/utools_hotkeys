@@ -11,13 +11,10 @@ class AppActionHandler {
         this.appCommand = options.appCommand || null;
     }
 
-    _getAppCommand() {
+    _getAppCommand(context = {}) {
+        if (context && context.activeCommand) return context.activeCommand;
         if (this.appCommand) return this.appCommand;
-        try {
-            return require('../slash_commands/app.js').defaultAppCommand;
-        } catch (e) {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -29,19 +26,19 @@ class AppActionHandler {
 
         switch (action) {
             case 'select_app_for_mapping':
-                return this.handleSelectApp(itemData, ui);
+                return this.handleSelectApp(itemData, ui, context);
             case 'prompt_add_app_mapping':
-                return this.handlePromptAdd(itemData, ui);
+                return this.handlePromptAdd(itemData, ui, context);
             case 'confirm_add_app_mapping':
-                return this.handleConfirmAdd(itemData, ui);
+                return this.handleConfirmAdd(itemData, ui, context);
             case 'list_custom_app_mappings':
-                return this.handleListCustom(itemData, ui);
+                return this.handleListCustom(itemData, ui, context);
             case 'delete_single_app_mapping':
-                return this.handleDeleteSingle(itemData, ui);
+                return this.handleDeleteSingle(itemData, ui, context);
             case 'reset_app_mappings':
-                return this.handleReset(itemData, ui);
+                return this.handleReset(itemData, ui, context);
             case 'return_to_app_list':
-                return this.handleReturnToList(ui);
+                return this.handleReturnToList(ui, context);
             default:
                 break;
         }
@@ -50,12 +47,12 @@ class AppActionHandler {
     /**
      * Render management submenu for a selected application
      */
-    handleSelectApp(itemData, ui) {
+    handleSelectApp(itemData, ui, context = {}) {
         const appId = itemData.appId;
         const appName = itemData.appName || appId;
         const icon = itemData.icon || 'logo.png';
 
-        const cmd = this._getAppCommand();
+        const cmd = this._getAppCommand(context);
         if (cmd) {
             cmd.setAppMenuState({ appId, appName, icon, filePath: itemData.filePath });
         }
@@ -73,7 +70,7 @@ class AppActionHandler {
     /**
      * Prompt user to add process name with editable text input prefilled
      */
-    handlePromptAdd(itemData, ui) {
+    handlePromptAdd(itemData, ui, context = {}) {
         const appId = itemData.appId;
         const appName = itemData.appName || appId;
         const icon = itemData.icon || 'logo.png';
@@ -83,7 +80,7 @@ class AppActionHandler {
 
         const defaultVal = isMac ? `${appName}.app` : `${appName}.exe`;
 
-        const cmd = this._getAppCommand();
+        const cmd = this._getAppCommand(context);
         if (cmd) {
             cmd.setEditProcessState({ appId, appName, icon, filePath: itemData.filePath });
         }
@@ -101,7 +98,7 @@ class AppActionHandler {
     /**
      * Confirm adding a process name mapping
      */
-    async handleConfirmAdd(itemData, ui) {
+    async handleConfirmAdd(itemData, ui, context = {}) {
         const appId = itemData.appId;
         const appName = itemData.appName || appId;
         const processName = itemData.processName;
@@ -117,18 +114,18 @@ class AppActionHandler {
         }
 
         // Return to app menu state
-        this.handleSelectApp(itemData, ui);
+        this.handleSelectApp(itemData, ui, context);
     }
 
     /**
      * List all custom mappings with delete options
      */
-    handleListCustom(itemData, ui) {
+    handleListCustom(itemData, ui, context = {}) {
         const appId = itemData.appId;
         const appName = itemData.appName || appId;
         const icon = itemData.icon || 'logo.png';
 
-        const cmd = this._getAppCommand();
+        const cmd = this._getAppCommand(context);
         if (cmd) {
             cmd.setListCustomState({ appId, appName, icon, filePath: itemData.filePath });
         }
@@ -146,7 +143,7 @@ class AppActionHandler {
     /**
      * Delete a single custom mapping and re-sync
      */
-    async handleDeleteSingle(itemData, ui) {
+    async handleDeleteSingle(itemData, ui, context = {}) {
         const appId = itemData.appId;
         const appName = itemData.appName || appId;
         const processName = itemData.processName;
@@ -156,13 +153,13 @@ class AppActionHandler {
             await this.syncService.syncApp(appId, appName);
         }
 
-        this.handleListCustom(itemData, ui);
+        this.handleListCustom(itemData, ui, context);
     }
 
     /**
      * Reset mappings and re-sync
      */
-    async handleReset(itemData, ui) {
+    async handleReset(itemData, ui, context = {}) {
         const appId = itemData.appId;
         const appName = itemData.appName || appId;
 
@@ -174,14 +171,14 @@ class AppActionHandler {
             uTools.showNotification(`已重置 [${appName}] 的进程匹配规则为默认推导`);
         }
 
-        this.handleSelectApp(itemData, ui);
+        this.handleSelectApp(itemData, ui, context);
     }
 
     /**
      * Return to main /app list
      */
-    handleReturnToList(ui) {
-        const cmd = this._getAppCommand();
+    handleReturnToList(ui, context = {}) {
+        const cmd = this._getAppCommand(context);
         if (cmd) {
             cmd.reset();
         }

@@ -68,6 +68,34 @@ stop
 @enduml
 ```
 
+#### 问题复现状态机图 (State Machine Diagram for Instance 1)
+
+```plantuml
+@startuml
+
+skinparam state {
+    BackgroundColor LightYellow
+    BorderColor DarkSlateGray
+    ArrowColor DarkSlateGray
+}
+
+title 实例1 (preload.js 中持有的活跃 g_activeCommand) 异常状态变迁图
+
+[*] --> LIST : 1. 用户输入 '/app' 激活实例1\n(初始状态 state = 'LIST')
+
+state LIST : 【应用选择态】
+state LIST : execute('') 行为: 重新拉取并渲染4个应用列表
+
+state APP_MENU #Pink : 【应用管理子菜单态】
+state APP_MENU : (预期状态，但由于 Handler 错误修改了实例2，\n实例1从未接收到跃迁信号，无法进入此状态)
+
+LIST --> LIST : 2. 用户点击应用触发 select_app_for_mapping\n3. setSubInputValue('') 导致宿主触发 search('')\n4. preload.js 执行 实例1.execute('')\n5. 实例1 仍处于 LIST 态，自环重新渲染应用列表 (闪退回4应用)
+
+LIST --> [*] : 用户退出插件或切换命令
+@enduml
+```
+
+
 
 ### 1.2 核心目标
 1. **全局唯一状态机单例 (Unified Command Singleton)**：

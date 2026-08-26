@@ -77,10 +77,6 @@ class AppFeatureSyncService {
             if (hasNew) {
                 currentFeature.cmds[0].match.app = Array.from(mergedSet);
                 this.storageAdapter.setUToolsFeature(currentFeature);
-
-                if (this.storageAdapter.isDevEnvironment()) {
-                    this.storageAdapter.writeLocalPluginJson(currentFeature);
-                }
             }
 
             return true;
@@ -109,10 +105,6 @@ class AppFeatureSyncService {
             baseFeature.cmds[0].match.app = Array.from(mergedSet);
 
             this.storageAdapter.setUToolsFeature(baseFeature);
-
-            if (this.storageAdapter.isDevEnvironment()) {
-                this.storageAdapter.writeLocalPluginJson(baseFeature);
-            }
 
             return true;
         } catch (e) {

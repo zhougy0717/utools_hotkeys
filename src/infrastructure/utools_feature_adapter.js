@@ -135,38 +135,6 @@ class UToolsFeatureAdapter {
         }
         return true; // Graceful fallback in non-uTools test environments
     }
-
-    isDevEnvironment() {
-        try {
-            const pluginJsonPath = path.join(this.rootDir, 'plugin.json');
-            const nodeModulesPath = path.join(this.rootDir, 'node_modules');
-            return fs.existsSync(pluginJsonPath) && fs.existsSync(nodeModulesPath);
-        } catch (e) {
-            return false;
-        }
-    }
-
-    writeLocalPluginJson(appShortcutsFeature) {
-        if (!this.isDevEnvironment() || !appShortcutsFeature) return false;
-        try {
-            const pluginJsonPath = path.join(this.rootDir, 'plugin.json');
-            const pluginJson = this.getBasePluginJson();
-            if (!pluginJson || !Array.isArray(pluginJson.features)) return false;
-
-            const idx = pluginJson.features.findIndex(f => f.code === 'app_shortcuts');
-            if (idx !== -1) {
-                pluginJson.features[idx] = appShortcutsFeature;
-            } else {
-                pluginJson.features.push(appShortcutsFeature);
-            }
-
-            fs.writeFileSync(pluginJsonPath, JSON.stringify(pluginJson, null, 2) + '\n', 'utf8');
-            return true;
-        } catch (e) {
-            console.warn('[UToolsFeatureAdapter] Failed to write plugin.json in dev environment:', e.message);
-            return false;
-        }
-    }
 }
 
 module.exports = UToolsFeatureAdapter;

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { generateAvatarSvg } = require('../utils/icon_generator.js');
+const { defaultStoragePathService } = require('../../infrastructure/storage_path_service.js');
 
 function getUtools() {
   if (typeof utools !== 'undefined') return utools;
@@ -15,7 +16,7 @@ function getUtools() {
 function getLoadedAppList() {
   const appMap = new Map();
   const uTools = getUtools();
-  const storagePath = uTools && uTools.dbStorage ? uTools.dbStorage.getItem('sqlite_db_path') : null;
+  const storagePath = defaultStoragePathService.getDataDirectory();
 
   // 1. Scan storagePath subdirectories (json_hotkeys, hotkeycheatsheet, builtin)
   if (storagePath && fs.existsSync(storagePath)) {

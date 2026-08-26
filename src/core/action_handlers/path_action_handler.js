@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { defaultStoragePathService } = require('../../infrastructure/storage_path_service.js');
 
 const pathActionHandler = {
   /**
@@ -9,7 +10,7 @@ const pathActionHandler = {
    */
   handle(itemData, ui, context) {
     if (itemData.action === 'open_data_directory') {
-       const savedPath = utools.dbStorage.getItem('sqlite_db_path');
+       const savedPath = defaultStoragePathService.getDataDirectory();
        if (savedPath && fs.existsSync(savedPath)) {
           utools.shellOpenPath(savedPath);
           return;
@@ -27,7 +28,7 @@ const pathActionHandler = {
 
       if (paths && paths.length > 0) {
         const selectedPath = paths[0];
-        utools.dbStorage.setItem('sqlite_db_path', selectedPath);
+        defaultStoragePathService.setDataDirectory(selectedPath);
         
         this.initDataDirectory(selectedPath);
 

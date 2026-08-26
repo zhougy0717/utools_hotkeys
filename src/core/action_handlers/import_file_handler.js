@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { defaultParserRegistry } = require('../parsers/text_parser_registry.js');
 const { generateAvatarSvg } = require('../utils/icon_generator.js');
+const { defaultStoragePathService } = require('../../infrastructure/storage_path_service.js');
 
 function getUtools() {
   if (typeof utools !== 'undefined') return utools;
@@ -107,8 +108,7 @@ const importFileHandler = {
 
         const parsedDoc = parser.parse(content);
 
-        const savedPath = (uTools.dbStorage && uTools.dbStorage.getItem('sqlite_db_path')) ||
-          (typeof uTools.getPath === 'function' ? path.join(uTools.getPath('userData'), 'utools_shortcut_keys') : './');
+        const savedPath = defaultStoragePathService.getDataDirectory();
 
         const targetDir = path.join(savedPath, 'json_hotkeys');
         if (!fs.existsSync(targetDir)) {

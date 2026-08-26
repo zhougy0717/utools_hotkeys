@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { generateAvatarSvg, fileToBase64 } = require('../utils/icon_generator.js');
+const { defaultStoragePathService } = require('../../infrastructure/storage_path_service.js');
 
 function getUtools() {
   if (typeof utools !== 'undefined') return utools;
@@ -19,8 +20,7 @@ function getUtools() {
  */
 function updateAppIcon(appId, appName, iconOption, originalFilePath) {
   const uTools = getUtools();
-  const storagePath = (uTools && uTools.dbStorage && uTools.dbStorage.getItem('sqlite_db_path')) ||
-    (uTools && typeof uTools.getPath === 'function' ? path.join(uTools.getPath('userData'), 'utools_shortcut_keys') : './');
+  const storagePath = defaultStoragePathService.getDataDirectory();
 
   const customDir = path.join(storagePath, 'json_hotkeys');
   if (!fs.existsSync(customDir)) {

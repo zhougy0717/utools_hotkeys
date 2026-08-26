@@ -95,7 +95,8 @@ class StoragePathService {
     }
 
     /**
-     * Get user-configured path for the current device without fallback
+     * Get user-configured path for the current device without fallback.
+     * Automatically attempts to migrate legacy configuration if valid.
      * @returns {string|null}
      */
     getCurrentConfiguredPath() {
@@ -104,7 +105,9 @@ class StoragePathService {
         if (value && typeof value === 'string' && value.trim() !== '') {
             return value.trim();
         }
-        return null;
+
+        // Try migrating legacy global configuration if present and valid
+        return this.migrateLegacyConfig();
     }
 
     /**
@@ -118,12 +121,6 @@ class StoragePathService {
         const configured = this.getCurrentConfiguredPath();
         if (configured) {
             return configured;
-        }
-
-        // Try migrating legacy global configuration
-        const migrated = this.migrateLegacyConfig();
-        if (migrated) {
-            return migrated;
         }
 
         // Fallback to system default directory

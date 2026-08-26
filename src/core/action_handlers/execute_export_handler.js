@@ -1,5 +1,6 @@
 const path = require('path');
 const BuiltinExportService = require('../services/builtin_export_service.js');
+const { defaultStoragePathService } = require('../../infrastructure/storage_path_service.js');
 
 /**
  * ExecuteExportHandler - Handles the 'execute_builtin_export' action.
@@ -11,7 +12,7 @@ class ExecuteExportHandler {
   }
 
   async handle(itemData, ui, context) {
-    const savedPath = utools.dbStorage.getItem('sqlite_db_path');
+    const savedPath = defaultStoragePathService.getCurrentConfiguredPath();
     if (!savedPath) {
       utools.showNotification('未设置数据路径，请先使用 /path 设置');
       return;

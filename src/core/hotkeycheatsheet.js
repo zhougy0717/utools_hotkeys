@@ -4,6 +4,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { defaultStoragePathService } = require('../infrastructure/storage_path_service.js');
 
 
 class HotkeyCheatsheetParser {
@@ -662,7 +663,7 @@ class HotkeyDataLoader {
    */
   async saveToJson(appId, appName, appIcon, shortcuts) {
     try {
-        const configPath = utools.dbStorage.getItem('sqlite_db_path');
+        const configPath = defaultStoragePathService.getDataDirectory();
         if (!configPath) {
             console.error('[HotkeyService] data path not set');
             return false;

@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const BuiltinLoader = require('../../infrastructure/loaders/builtin_loader.js');
+const { defaultStoragePathService } = require('../../infrastructure/storage_path_service.js');
 
 /**
  * The /export command implementation
@@ -20,7 +21,7 @@ class ExportCommand {
   }
 
   async execute(searchWord, callbackSetList) {
-    const savedPath = utools.dbStorage.getItem('sqlite_db_path');
+    const savedPath = defaultStoragePathService.getCurrentConfiguredPath();
     
     if (!savedPath) {
       return callbackSetList([{

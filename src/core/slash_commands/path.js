@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const { defaultStoragePathService } = require('../../infrastructure/storage_path_service.js');
 
 /**
  * The /path command implementation.
@@ -11,8 +12,8 @@ class PathCommand {
   }
 
   description() {
-    const savedPath = utools.dbStorage.getItem('sqlite_db_path');
-    return `设置快捷键数据存放目录。当前目录：${savedPath || '未设置'}`;
+    const savedPath = defaultStoragePathService.getCurrentConfiguredPath();
+    return `设置快捷键数据存放目录。当前目录：${savedPath || '默认路径'}`;
   }
 
   match(searchWord) {
@@ -20,7 +21,8 @@ class PathCommand {
   }
 
   async execute(searchWord, callbackSetList) {
-    const savedPath = utools.dbStorage.getItem('sqlite_db_path');
+    const savedPath = defaultStoragePathService.getCurrentConfiguredPath();
+    const effectivePath = defaultStoragePathService.getDataDirectory();
     
     // Determine query if any (though /path doesn't need much filtering)
     const query = searchWord.toLowerCase().startsWith(this.keyword)
@@ -30,16 +32,16 @@ class PathCommand {
     const items = [
       {
         title: '选择快捷键数据存放目录',
-        description: `当前目录: ${savedPath || '未设置'}`,
+        description: `当前目录: ${savedPath || effectivePath || '未设置'}`,
         icon: 'logo.png',
         action: 'pick_data_directory'
       }
     ];
 
-    if (savedPath) {
+    if (effectivePath) {
       items.push({
         title: '打开当前数据存放目录',
-        description: savedPath,
+        description: effectivePath,
         icon: 'logo.png',
         action: 'open_data_directory'
       });

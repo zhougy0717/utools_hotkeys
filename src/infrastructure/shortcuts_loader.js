@@ -111,7 +111,7 @@ function loadAllShortcuts() {
     // Final Feedback for Custom Hotkeys
     const customJSON = results.find(r => getLoaderName(r.loader) === 'JsonHotkeysLoader');
     const customCount = customJSON ? (customJSON.data.shortcuts ? customJSON.data.shortcuts.length : (Array.isArray(customJSON.data) ? customJSON.data.length : 0)) : 0;
-    if (customCount > 0) {
+    if (customCount > 0 && typeof utools !== 'undefined' && typeof utools.showNotification === 'function') {
         utools.showNotification(`已成功加载 ${customCount} 个用户自定义快捷键`);
     }
 

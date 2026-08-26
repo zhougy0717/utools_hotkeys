@@ -12,7 +12,7 @@
 - [x] photoshop的快捷键数据太多了，无法存入utools db，限制1M数据尺寸，后续可考虑用sqlite来保存在本地
 - [x] 快捷键执行有问题，ctrl + F都无法执行了
 - [x] 快捷键描述标题过长，无法完全显示
-- [ ] 快捷键路径不应该同步，多台机器的位置可能不同
+- [x] 快捷键路径不应该同步，多台机器的位置可能不同 ([SPEC-00022](docs/spec/archive/spec-00022-device-isolated-storage-path.md))
 
 # 重构
 - [x] 对hotkey_service.js拆分

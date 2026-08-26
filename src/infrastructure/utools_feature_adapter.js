@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { defaultStoragePathService } = require('./storage_path_service.js');
 
 /**
  * UToolsFeatureAdapter - Manages interactions with uTools runtime feature APIs,
@@ -9,6 +10,7 @@ class UToolsFeatureAdapter {
     constructor(options = {}) {
         this.rootDir = options.rootDir || path.resolve(__dirname, '../../');
         this.dataDir = options.dataDir || null;
+        this.storagePathService = options.storagePathService || defaultStoragePathService;
     }
 
     getUtools() {
@@ -19,17 +21,8 @@ class UToolsFeatureAdapter {
 
     getDataDirectory() {
         if (this.dataDir) return this.dataDir;
-        const uTools = this.getUtools();
-        if (uTools) {
-            if (uTools.dbStorage && typeof uTools.dbStorage.getItem === 'function') {
-                const configPath = uTools.dbStorage.getItem('sqlite_db_path');
-                if (configPath) return configPath;
-            }
-            if (typeof uTools.getPath === 'function') {
-                try {
-                    return path.join(uTools.getPath('userData'), 'utools_shortcut_keys');
-                } catch (e) {}
-            }
+        if (this.storagePathService && typeof this.storagePathService.getDataDirectory === 'function') {
+            return this.storagePathService.getDataDirectory();
         }
         return process.cwd();
     }

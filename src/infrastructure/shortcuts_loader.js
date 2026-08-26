@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { normalizeAppId } = require('./app_id_normalizer.js');
+const { defaultStoragePathService } = require('./storage_path_service.js');
 
 /**
  * Main dispatcher for all shortcut loaders.
@@ -13,8 +14,8 @@ function loadAllShortcuts() {
         return [];
     }
 
-    // Get current storage path for custom JSON
-    const basePath = utools.dbStorage.getItem('sqlite_db_path');
+    // Get current device-isolated storage path for custom JSON
+    const basePath = defaultStoragePathService.getDataDirectory();
 
     let allShortcuts = [];
     

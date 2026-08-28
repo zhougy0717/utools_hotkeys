@@ -199,6 +199,71 @@ describe('AppFilter - Alias Normalization and Window Matching (SPEC-00017)', () 
         assert.strictEqual(result[0].appId, 'google-chrome');
         assert.strictEqual(result[0].title, 'Chrome New Tab');
     });
+
+    it('TC-012: should match Commander One when front window is Commander One PRO.app', () => {
+        const commanderShortcuts = [
+            {
+                title: 'Commander One New Tab',
+                appId: 'commander_one',
+                appName: 'Commander One',
+                keyword: 'commander one tab'
+            }
+        ];
+        const action = { payload: { app: 'Commander One PRO.app' } };
+        const result = appFilter(action, commanderShortcuts);
+        assert.strictEqual(result.length, 1);
+        assert.strictEqual(result[0].appId, 'commander_one');
+    });
+
+    it('TC-013: should match QSpace Pro when front window is QSpace Pro.app', () => {
+        const qspaceShortcuts = [
+            {
+                title: 'QSpace New Tab',
+                appId: 'qspace',
+                appName: 'QSpace',
+                keyword: 'qspace tab'
+            }
+        ];
+        const action = { payload: { app: 'QSpace Pro.app' } };
+        const result = appFilter(action, qspaceShortcuts);
+        assert.strictEqual(result.length, 1);
+        assert.strictEqual(result[0].appId, 'qspace');
+    });
+
+    it('TC-014: should match Microsoft Word when front window is WINWORD.EXE', () => {
+        const wordShortcuts = [
+            {
+                title: 'Word Save Ctrl+S',
+                appId: 'microsoft-word',
+                appName: 'Microsoft Word',
+                keyword: 'word save'
+            }
+        ];
+        const action = { payload: { app: 'WINWORD.EXE' } };
+        const result = appFilter(action, wordShortcuts);
+        assert.strictEqual(result.length, 1);
+        assert.strictEqual(result[0].appId, 'microsoft-word');
+    });
+
+    it('TC-015: should match DEVONthink when front window is DEVONthink.app or DEVONthink Pro.app', () => {
+        const devonShortcuts = [
+            {
+                title: 'DEVONthink Navigate',
+                appId: 'devonthink',
+                appName: 'DEVONthink',
+                keyword: 'navigate'
+            }
+        ];
+        const action1 = { payload: { app: 'DEVONthink.app' } };
+        const result1 = appFilter(action1, devonShortcuts);
+        assert.strictEqual(result1.length, 1);
+        assert.strictEqual(result1[0].appId, 'devonthink');
+
+        const action2 = { payload: { app: 'DEVONthink Pro.app' } };
+        const result2 = appFilter(action2, devonShortcuts);
+        assert.strictEqual(result2.length, 1);
+        assert.strictEqual(result2[0].appId, 'devonthink');
+    });
 });
 
 

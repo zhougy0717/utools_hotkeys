@@ -66,10 +66,19 @@ class UToolsFeatureAdapter {
     }
 
     getInstalledApps() {
-        const baseDir = this.getDataDirectory();
-        const subDirs = ['hotkeycheatsheet', 'json_hotkeys'];
         const apps = [];
         const seenAppIds = new Set();
+
+        const addApp = (appId, appName) => {
+            if (appId && !seenAppIds.has(appId)) {
+                seenAppIds.add(appId);
+                apps.push({ appId, appName: appName || appId });
+            }
+        };
+
+        // 1. Scan storage directories (user-configured and downloaded data)
+        const baseDir = this.getDataDirectory();
+        const subDirs = ['hotkeycheatsheet', 'json_hotkeys', 'builtin'];
 
         for (const sub of subDirs) {
             const dirPath = path.join(baseDir, sub);
@@ -84,10 +93,7 @@ class UToolsFeatureAdapter {
                         const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
                         const appId = content.appId || path.basename(file, '.json');
                         const appName = content.appName || appId;
-                        if (appId && !seenAppIds.has(appId)) {
-                            seenAppIds.add(appId);
-                            apps.push({ appId, appName });
-                        }
+                        addApp(appId, appName);
                     } catch (e) {
                         // ignore malformed files
                     }
@@ -96,6 +102,61 @@ class UToolsFeatureAdapter {
                 // ignore readdir errors
             }
         }
+
+        // 2. Scan built-in shortcuts (data/shortcuts/ directory)
+        const scanShortcutsDir = (dir) => {
+            if (!fs.existsSync(dir)) return;
+            try {
+                const items = fs.readdirSync(dir);
+                for (const item of items) {
+                    const itemPath = path.join(dir, item);
+                    try {
+                        const stat = fs.statSync(itemPath);
+                        if (stat.isDirectory()) {
+                            const scFile = path.join(itemPath, 'shortcuts.js');
+                            if (fs.existsSync(scFile)) {
+                                try {
+                                    const mod = require(scFile);
+                                    const appId = typeof mod.name === 'function' ? mod.name() : item;
+                                    const appName = mod._appName || mod._shortName || appId;
+                                    addApp(appId, appName);
+                                } catch (e) {
+                                    addApp(item, item);
+                                }
+                            }
+                            scanShortcutsDir(itemPath);
+                        }
+                    } catch (e) {}
+                }
+            } catch (e) {}
+        };
+        scanShortcutsDir(path.join(this.rootDir, 'src/infrastructure/data/shortcuts'));
+
+        // 3. Scan built-in JSON sources (cheatsheet_builtin and opencode)
+        const scanJsonDir = (dir) => {
+            if (!fs.existsSync(dir)) return;
+            try {
+                const items = fs.readdirSync(dir);
+                for (const item of items) {
+                    const itemPath = path.join(dir, item);
+                    try {
+                        const stat = fs.statSync(itemPath);
+                        if (stat.isDirectory()) {
+                            scanJsonDir(itemPath);
+                        } else if (item.endsWith('.json')) {
+                            try {
+                                const content = JSON.parse(fs.readFileSync(itemPath, 'utf8'));
+                                const appId = content.appId || path.basename(item, '.json');
+                                const appName = content.appName || appId;
+                                addApp(appId, appName);
+                            } catch (e) {}
+                        }
+                    } catch (e) {}
+                }
+            } catch (e) {}
+        };
+        scanJsonDir(path.join(this.rootDir, 'src/infrastructure/data/cheatsheet_builtin'));
+        scanJsonDir(path.join(this.rootDir, 'src/infrastructure/data/opencode'));
 
         return apps;
     }

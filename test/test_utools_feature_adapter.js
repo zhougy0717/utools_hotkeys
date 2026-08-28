@@ -94,4 +94,19 @@ describe('UToolsFeatureAdapter - Environment & Persistence Adapter (SPEC-00018)'
         const success = adapter.setUToolsFeature({ code: 'app_shortcuts' });
         assert.strictEqual(typeof success, 'boolean');
     });
+
+    it('TC-005: should scan built-in shortcut directories when present in rootDir', () => {
+        const builtinShortcutsDir = path.join(tempDir, 'src/infrastructure/data/shortcuts/test_app');
+        fs.mkdirSync(builtinShortcutsDir, { recursive: true });
+        fs.writeFileSync(path.join(builtinShortcutsDir, 'shortcuts.js'), 'module.exports = { name: () => "test_app", _appName: "Test App" };');
+
+        const builtinCheatsheetDir = path.join(tempDir, 'src/infrastructure/data/cheatsheet_builtin/mac');
+        fs.mkdirSync(builtinCheatsheetDir, { recursive: true });
+        fs.writeFileSync(path.join(builtinCheatsheetDir, 'test_cheat.json'), JSON.stringify({ appId: 'test_cheat', appName: 'Test Cheat' }));
+
+        const apps = adapter.getInstalledApps();
+        const appIds = apps.map(a => a.appId);
+        assert.ok(appIds.includes('test_app'));
+        assert.ok(appIds.includes('test_cheat'));
+    });
 });

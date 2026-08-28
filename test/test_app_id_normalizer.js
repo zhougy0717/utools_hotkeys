@@ -24,6 +24,21 @@ describe('normalizeAppId', () => {
     it('should return identical keys for equivalent app IDs', () => {
         assert.strictEqual(normalizeAppId('margin_note'), normalizeAppId('margin-note'));
         assert.strictEqual(normalizeAppId('commander_one'), normalizeAppId('commander-one'));
+        assert.strictEqual(normalizeAppId('Commander One PRO'), normalizeAppId('commander_one'));
+        assert.strictEqual(normalizeAppId('Commander One'), normalizeAppId('commander_one'));
+        assert.strictEqual(normalizeAppId('One Commander 3'), normalizeAppId('one-commander-3'));
+        assert.strictEqual(normalizeAppId('onecommander'), normalizeAppId('one-commander-3'));
+        assert.strictEqual(normalizeAppId('QSpace Pro'), normalizeAppId('qspace'));
+        assert.strictEqual(normalizeAppId('DEVONthink 3'), normalizeAppId('devonthink'));
+        assert.strictEqual(normalizeAppId('DEVONthink Pro'), normalizeAppId('devonthink'));
+        assert.strictEqual(normalizeAppId('DEVONthink Pro 3'), normalizeAppId('devonthink'));
+        assert.strictEqual(normalizeAppId('PotPlayerMini64'), normalizeAppId('potplayer'));
+        assert.strictEqual(normalizeAppId('WeLinkPC'), normalizeAppId('welink'));
+        assert.strictEqual(normalizeAppId('Magnet'), normalizeAppId('magnet_macos'));
+        assert.strictEqual(normalizeAppId('Folo'), normalizeAppId('follow'));
+        assert.strictEqual(normalizeAppId('WINWORD'), normalizeAppId('microsoft-word'));
+        assert.strictEqual(normalizeAppId('POWERPNT'), normalizeAppId('microsoft-powerpoint'));
+        assert.strictEqual(normalizeAppId('pycharm64'), normalizeAppId('pycharm'));
     });
 
     it('should handle undefined and empty string', () => {
